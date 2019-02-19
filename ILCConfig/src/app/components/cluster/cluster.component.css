@@ -9,7 +9,7 @@
 }
 
 .collapse-division{
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: 10px;
   border-style: groove;
 }
@@ -18,20 +18,13 @@
   width: 100%;
 }
 
-.icon-padding-power{
-  padding-left: 72%;
-}
-
 .icon-padding-cluster{
-  padding-left: 80%;
+  padding-left: 70%;
 }
 input[type=text]{
   width:50%;
 }
 
-input[type=checkbox]{
-  margin-top: 10px;
-}
 
 .file-input{
   margin-right: 40%;

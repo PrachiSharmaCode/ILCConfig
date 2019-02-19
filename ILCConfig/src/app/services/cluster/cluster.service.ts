@@ -5,11 +5,10 @@ import { Injectable } from '@angular/core';
 })
 export class ClusterService {
 
-  numberOfCluster = 1;
+  numberOfCluster = 0;
 
   increaseCluster() {
-    this.numberOfCluster++;
-    console.log(this.numberOfCluster + "servcie");
+    this.numberOfCluster = this.numberOfCluster + 1;
     return this.numberOfCluster;
   }
 

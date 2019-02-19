@@ -14,7 +14,6 @@ export class ClusterComponent implements OnInit {
 
   ngOnInit() {
     this.clusterNumber = this.clusterService.increaseCluster();
-    console.log(this.clusterNumber);
   }
 
 }

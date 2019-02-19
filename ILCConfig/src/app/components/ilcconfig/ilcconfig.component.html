@@ -49,46 +49,17 @@
       </div>
   </div>
 
-  <div class="division" align="left" >
+  <div class="division " align="left" >
     <div id="clusterBlock">
-      <h5>Clusters</h5>
-      <div class="collapse-division div-top-padding">
-        <label class="collapse-division-label">
-          <p  data-toggle="collapse"
-              href="#Cluster1" role="button" aria-expanded="false" aria-controls="collapseExample">
-            Cluster 1  <i class="material-icons icon-padding-cluster">
-            keyboard_arrow_down
-          </i></p>
-        </label>
-        <div class="collapse" id="Cluster1">
-          <div class="card card-body" id="clusterForm">
-            <label>Cluster Priority</label>
-            <input type="text" class="form-control" [(ngModel)]="clusterPriority"  name="clusterPtiority">
-            <label>Pairwise criteria File</label>
-            <form class="form-inline">
-              <input type="text" class="form-control file-input" [(ngModel)]="pairWiseCriteria"
-                     name="pairwiseCriteria">
-              <button type="button" class="btn btn-primary btn-sm">Open</button>
-            </form>
-            <label>Device Criteria File</label>
-            <form class="form-inline">
-              <input type="text" class="form-control file-input" [(ngModel)]="deviceCriteriaFile"
-                     name="devceCriteriaFile">
-              <button type="input" class="btn btn-primary btn-sm">Open</button>
-            </form>
-            <label>Device Curtailment file</label>
-            <form class="form-inline">
-              <input id="file"type="file"  class="form-control file-input"
-                     [(ngModel)]="deviceCurtailmentFile" name="devicecurtailment">
-              <button type="button" value="upload" class="btn btn-primary btn-sm"
-                      (click)="thisFileUpload()">Open</button>
-            </form>
-          </div>
-        </div>
-      </div>
+      <h5 style="margin-left: 8%" >Clusters</h5>
+      <ul style="list-style-type:none;">
+        <li *ngFor="let cluster of noOfCluster">
+          <app-cluster></app-cluster>
+        </li>
+      </ul>
     </div>
     <button id="addCluster" (click)="addCluster()"
-            type="button" class="btn btn-info btn-sm">Add Device Cluster</button>
+            type="button" style="margin-left: 8%" class="btn btn-info btn-sm">Add Device Cluster</button>
   </div>
 
   <div class="division" >

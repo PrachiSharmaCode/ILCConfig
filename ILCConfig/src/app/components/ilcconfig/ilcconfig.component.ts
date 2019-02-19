@@ -35,7 +35,7 @@ export class ILCConfigComponent implements OnInit {
   demandformulaAgrsArr = [];
 
   // Cluster Attributes
-  noOfCluster = 1;
+  noOfCluster = [1];
 
   clusterPriority: string;
   pairWiseCriteria: string;
@@ -56,55 +56,18 @@ constructor(private ilcService: ILCconfigService) { }
   }
 
   addCluster() {
-    let newCluterVal = this.noOfCluster + 1;
-    this.noOfCluster++;
-    console.log('newClu' + newCluterVal);
-    console.log('noofclus' + this.noOfCluster);
-    $('#clusterBlock').append('<div style="margin-top: 10px; margin-bottom: 10px; border-style: groove">\n' +
-      '      <label style="width: 100%">\n' +
-      '        <p  data-toggle="collapse"\n' +
-      '            href="#Cluster' + newCluterVal + '" role="button" aria-expanded="false" aria-controls="collapseExample">\n' +
-      '          Cluster ' + newCluterVal + '  <i style="padding-left: 80%" class="material-icons">\n' +
-      '          keyboard_arrow_down\n' +
-      '        </i></p>\n' +
-      '      </label>\n' +
-      '\n' +
-      '      <div class="collapse" id="Cluster' + newCluterVal + '">\n' +
-      '          <div class="card card-body" id="clusterForm">\n' +
-      '            <label>Cluster Priority</label>\n' +
-      '            <input type="text" class="form-control" [(ngModel)]="clusterPriority"  name="clusterPtiority">\n' +
-      '            <label>Pairwise criteria File</label>\n' +
-      '            <form class="form-inline">\n' +
-      '              <input type="text" class="form-control file-input" [(ngModel)]="pairWiseCriteria"\n' +
-      '                     name="pairwiseCriteria">\n' +
-      '              <button type="button" class="btn btn-primary btn-sm">Open</button>\n' +
-      '            </form>\n' +
-      '            <label>Device Criteria File</label>\n' +
-      '            <form  class="form-inline">\n' +
-      '              <input type="text" class="form-control file-input" [(ngModel)]="deviceCriteriaFile"\n' +
-      '                     name="devceCriteriaFile">\n' +
-      '              <button type="input" class="btn btn-primary btn-sm">Open</button>\n' +
-      '            </form>\n' +
-      '            <label>Device Curtailment file</label>\n' +
-      '            <form class="form-inline">\n' +
-      '              <input id="file"type="file"  class="form-control file-input"\n' +
-      '                     [(ngModel)]="deviceCurtailmentFile" name="devicecurtailment">\n' +
-      '              <button type="button" value="upload" class="btn btn-primary btn-sm"\n' +
-      '                      (click)="thisFileUpload()">Open</button>\n' +
-      '            </form>\n' +
-      '          </div>\n' +
-      '        </div>\n' +
-      '      </div>');
+  let newCluster = (this.noOfCluster[this.noOfCluster.length - 1]) + 1;
+  this.noOfCluster.push(newCluster);
   }
 
   onRefeshClick() {
 
-    if(this.staggerOfftime === undefined) {
-      this.staggerOfftime = 'false';
+    if (this.staggerOfftime === undefined) {
+       this.staggerOfftime = 'false';
     }
 
-    if(this.staggerRelease === undefined) {
-      this.staggerRelease = 'false';
+    if (this.staggerRelease === undefined) {
+       this.staggerRelease = 'false';
     }
 
     this.ilc = new ILCCongig(this.campus, this.building, this.device, this.point, this.demandFormula,
