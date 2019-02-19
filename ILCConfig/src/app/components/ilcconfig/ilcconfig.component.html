@@ -1,0 +1,104 @@
+<div class="row">
+  <div class="division padding-div" align="left">
+    <h5>Installation Configuration</h5>
+      <div>
+        <label>Campus</label>
+        <input type="text" class="form-control" [(ngModel)]="campus">
+        <label>Building</label>
+        <input type="text" class="form-control" [(ngModel)]="building">
+
+        <div class="collapse-division">
+          <label class="collapse-division-label">
+            <p  data-toggle="collapse" href="#collapseExample" role="button"
+                aria-expanded="false" aria-controls="collapseExample">
+              Power Meter  <i class="material-icons icon-padding-power">
+              keyboard_arrow_down
+            </i>
+            </p>
+          </label>
+          <div class="collapse" id="collapseExample">
+            <div id="powerMeter"class="card card-body">
+              <label>Device</label>
+              <input type="text" class="form-control" [(ngModel)]="device">
+              <label>Point</label>
+              <input type="text" class="form-control" [(ngModel)]="point">
+              <label>Demand Formula (Optional)</label>
+              <input type="text" class="form-control" [(ngModel)]="demandFormula">
+              <label>Demand Formula Arguments (Optional)</label>
+              <input type="text" class="form-control" [(ngModel)]="demandformulaAgrs">
+            </div>
+            <button id="addparam" (click)="addDemandFormula()"
+                    type="button" class="btn btn-info btn-sm">Add Parameter</button>
+          </div>
+
+        </div>
+        <label>AgentID</label>
+        <input type="text" class="form-control" [(ngModel)]="agentId">
+        <label>Demand Limit</label>
+        <input type="text" class="form-control" [(ngModel)]="demandLimit">
+        <label>Curtailment Time</label>
+        <input type="text" class="form-control" [(ngModel)]="curtailmentTime">
+        <label>Curtailment Confirm</label>
+        <input type="text" class="form-control" [(ngModel)]="curtailmentConfirm">
+        <label>Curtailment Break</label>
+        <input type="text" class="form-control" [(ngModel)]="curtailmentBreak">
+        <label>Building Power Window (Average)</label>
+        <input type="text" class="form-control" [(ngModel)]="buildingPowerWindow">
+        <input class="check-input" type="checkbox" [(ngModel)]="staggerRelease">Stagger release<br>
+        <input class="check-input" type="checkbox" [(ngModel)]="staggerOfftime">Stagger Off time<br>
+      </div>
+  </div>
+
+  <div class="division" align="left" >
+    <div id="clusterBlock">
+      <h5>Clusters</h5>
+      <div class="collapse-division div-top-padding">
+        <label class="collapse-division-label">
+          <p  data-toggle="collapse"
+              href="#Cluster1" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Cluster 1  <i class="material-icons icon-padding-cluster">
+            keyboard_arrow_down
+          </i></p>
+        </label>
+        <div class="collapse" id="Cluster1">
+          <div class="card card-body" id="clusterForm">
+            <label>Cluster Priority</label>
+            <input type="text" class="form-control" [(ngModel)]="clusterPriority"  name="clusterPtiority">
+            <label>Pairwise criteria File</label>
+            <form class="form-inline">
+              <input type="text" class="form-control file-input" [(ngModel)]="pairWiseCriteria"
+                     name="pairwiseCriteria">
+              <button type="button" class="btn btn-primary btn-sm">Open</button>
+            </form>
+            <label>Device Criteria File</label>
+            <form class="form-inline">
+              <input type="text" class="form-control file-input" [(ngModel)]="deviceCriteriaFile"
+                     name="devceCriteriaFile">
+              <button type="input" class="btn btn-primary btn-sm">Open</button>
+            </form>
+            <label>Device Curtailment file</label>
+            <form class="form-inline">
+              <input id="file"type="file"  class="form-control file-input"
+                     [(ngModel)]="deviceCurtailmentFile" name="devicecurtailment">
+              <button type="button" value="upload" class="btn btn-primary btn-sm"
+                      (click)="thisFileUpload()">Open</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button id="addCluster" (click)="addCluster()"
+            type="button" class="btn btn-info btn-sm">Add Device Cluster</button>
+  </div>
+
+  <div class="division" >
+    <div class="row">
+      <h5>File Preview</h5>
+      <a (click)="onRefeshClick()" class="btn btn-outline-dark  button-size" >Refresh</a>
+      <a class="btn btn-outline-dark  button-size" >Save As...</a>
+    </div>
+    <textarea>
+      {{finalCalculation}}
+    </textarea>
+  </div>
+</div>

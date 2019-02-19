@@ -1,0 +1,219 @@
+<div class="row">
+
+  <div class="division">
+    <h5>Criteria</h5>
+
+    <label>Criteria Name(One per Line)</label>
+    <div class="div-outline" >
+      <p>
+        zonetemperature-setpoint<br/>
+        stage<br/>
+        history-zonetemperature<br/>
+        rated-power<br/>
+        room-type<br/>
+      </p>
+    </div>
+
+    <button style="margin-left: 25%; border-radius: 100px" type="button" class="btn btn-outline-dark div-inbetween-padding">
+      Generate Comparisons
+    </button>
+    <h5 class="div-inbetween-padding">Pairwise Criteria</h5>
+
+    <div id="zoneTemperatureSetpoint" >
+      <div class="collapse-division">
+        <label class="collapse-division-label">
+          <p  data-toggle="collapse" href="#zoneTempPoints" role="button"
+              aria-expanded="false" aria-controls="zoneTemp">
+            zonetemperature  <i  class="material-icons icon-padding-zone">
+            keyboard_arrow_down
+          </i>
+          </p>
+        </label>
+        <div class="collapse" id="zoneTempPoints">
+          <div id="zonetemperature"class="card card-body">
+            <label>Criteria</label>
+            <div class="row" >
+              <div class="inside-division">
+                <h6>history-zonetemperature</h6>
+              </div>
+              <div class="inside-division">
+                <input type="range" id="zone" value="90" min="0" max="10" [(ngModel)]="zoneTemp"
+                       class="slider-design" (ngModelChange)="setValueZomTemp($event,this.id)" name="zone" value="0">  x{{zoneTemp}}
+              </div>
+            </div>
+            <div class="row" >
+              <div class="inside-division">
+                <h6>room-type</h6>
+              </div>
+              <div class="inside-division">
+                <input type="range" id="roomType" value="90" min="0" max="10" [(ngModel)]="zoneRoomType"
+                       class="slider-design" (ngModelChange)="setValueZomTemp($event,this.id)" name="roomType" value="0">  x{{zoneRoomType}}
+              </div>
+            </div>
+            <div class="row" >
+              <div class="inside-division">
+                <h6>rated-power</h6>
+              </div>
+              <div class="inside-division">
+                <input type="range" id="ratedPower" value="90" min="0" max="10" [(ngModel)]="zoneRatedPower"
+                       class="slider-design" (ngModelChange)="setValueZomTemp($event,this.id)" name="ratedPower" value="0">  x{{zoneRatedPower}}
+              </div>
+            </div>
+            <div class="row" >
+              <div class="inside-division">
+                <h6>stage</h6>
+              </div>
+              <div class="inside-division">
+                <input type="range" id="stage" value="90" min="0" max="10" [(ngModel)]="zoneStage"
+                       class="slider-design" (ngModelChange)="setValueZomTemp($event,this.id)" name="stage" value="0">  x{{zoneStage}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="stageSetPoints" class="div-inbetween-padding">
+      <div class="collapse-division">
+        <label class="collapse-division-label">
+          <p  data-toggle="collapse" href="#stagePoints" role="button"
+              aria-expanded="false" aria-controls="zoneTemp">
+            Stage  <i class="material-icons icon-padding-stage ">
+            keyboard_arrow_down
+          </i>
+          </p>
+        </label>
+        <div class="collapse" id="stagePoints">
+          <div class="card card-body">
+            <label>Criteria</label>
+            <div class="row" >
+              <div class="inside-division">
+                <h6>history-zonetemperature</h6>
+              </div>
+              <div class="inside-division">
+                <input type="range" id="stageZonetemp" value="90" min="0" max="10" [(ngModel)]="stageZoneTemp"
+                       class="slider-design" (ngModelChange)="setStageValue($event,this.id)" name="zone" value="0">
+                       x{{stageZoneTemp}}
+              </div>
+            </div>
+            <div class="row" >
+              <div class="inside-division">
+                <h6>room-type</h6>
+              </div>
+              <div class="inside-division">
+                <input type="range" id="stageRoomType" value="90" min="0" max="10" [(ngModel)]="stageRoomType"
+                       class="slider-design" (ngModelChange)="setStageValue($event,this.id)" name="roomType" value="0">
+                       x{{stageRoomType}}
+              </div>
+            </div>
+            <div class="row" >
+              <div class="inside-division">
+                <h6>rated-power</h6>
+              </div>
+              <div class="inside-division">
+                <input type="range" id="stageRatedPower" value="90" min="0" max="10" [(ngModel)]="stageRatedPower"
+                       class="slider-design" (ngModelChange)="setStageValue($event,this.id)" name="ratedPower" value="0">
+                       x{{stageRatedPower}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="division" >
+    <div id="historyZonePoints" class="div-top-padding">
+      <div class="collapse-division">
+        <label class="collapse-division-label">
+          <p  data-toggle="collapse" href="#historyZoneTempPoints" role="button"
+              aria-expanded="false" aria-controls="zoneTemp">
+            history-zonetemperature  <i class="material-icons icon-padding-history ">
+            keyboard_arrow_down
+          </i>
+          </p>
+        </label>
+        <div class="collapse" id="historyZoneTempPoints">
+          <div class="card card-body">
+            <label>Criteria</label>
+            <div class="row" >
+              <div class="inside-division">
+                <h6>room-type</h6>
+              </div>
+              <div class="inside-division">
+                <input type="range" id="historyRoomType" value="90" min="0" max="10" [(ngModel)]="historyRoomType"
+                       class="slider-design" (ngModelChange)="setValueHistoryZomTemp($event,this.id)" name="zone" value="0">  x{{historyRoomType}}
+              </div>
+            </div>
+            <div class="row" >
+              <div class="inside-division">
+                <h6>rated-power</h6>
+              </div>
+              <div class="inside-division">
+                <input type="range" id="historyRatedPower" value="90" min="0" max="10" [(ngModel)]="historyRatedPower"
+                       class="slider-design" (ngModelChange)="setValueHistoryZomTemp($event,this.id)" name="roomType" value="0">  x{{historyRatedPower}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="ratedPowerDiv" class="div-inbetween-padding">
+      <div class="collapse-division">
+        <label class="collapse-division-label">
+          <p  data-toggle="collapse" href="#RatedPowerPoints" role="button"
+              aria-expanded="false" aria-controls="zoneTemp">
+            rated-power  <i class="material-icons icon-padding-stage">
+            keyboard_arrow_down
+          </i>
+          </p>
+        </label>
+        <div class="collapse" id="RatedPowerPoints">
+          <div class="card card-body">
+            <label>Criteria</label>
+            <div class="row" >
+              <div class="inside-division">
+                <h6>room-type</h6>
+              </div>
+              <div class="inside-division">
+                <input type="range" id="powerRoomType" value="90" min="0" max="10" [(ngModel)]="powerRoomType"
+                       class="slider-design" (ngModelChange)="setValueRatedPower($event,this.id)" name="zone" value="0">  x{{powerRoomType}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="roomTypeDiv" class="div-inbetween-padding">
+      <div class="collapse-division">
+        <label class="collapse-division-label">
+          <p  data-toggle="collapse" href="#RoomTypePoints" role="button"
+              aria-expanded="false" aria-controls="zoneTemp">
+            room-type  <i class="material-icons icon-padding-stage">
+            keyboard_arrow_down
+          </i>
+          </p>
+        </label>
+        <div class="collapse" id="RoomTypePoints">
+          <div class="card card-body">
+            <label>All Pairs Defined</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="division">
+    <div class="row">
+      <h5 style="margin-left: 3%">File Preview</h5>
+      <a style="margin-left: 3%"class="btn btn-outline-dark  button-size" (click)="onRefreshButton()">Refresh</a>
+      <a style="margin-left: 3%"class="btn btn-outline-dark  button-size" >Save As...</a>
+    </div>
+    <textarea>
+      {{finalCalcultion}}
+    </textarea>
+  </div>
+</div>

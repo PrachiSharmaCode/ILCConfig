@@ -1,0 +1,36 @@
+
+  <div class="collapse-division">
+    <label class="collapse-division-label">
+      <a  data-toggle="collapse"
+          href="#Cluster{{clusterNumber}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Cluster 1  <i class="material-icons icon-padding-cluster">
+        keyboard_arrow_down
+      </i></a>
+    </label>
+    <div class="collapse" id="Cluster{{clusterNumber}}">
+      <div class="card card-body" id="clusterForm">
+        <label>Cluster Priority</label>
+        <input type="text" class="form-control" [(ngModel)]="clusterPriority"  name="clusterPtiority">
+        <label>Pairwise criteria File</label>
+        <form class="form-inline">
+          <input type="text" class="form-control file-input" [(ngModel)]="pairWiseCriteria"
+                 name="pairwiseCriteria">
+          <button type="button" class="btn btn-primary btn-sm">Open</button>
+        </form>
+        <label>Device Criteria File</label>
+        <form class="form-inline">
+          <input type="text" class="form-control file-input" [(ngModel)]="deviceCriteriaFile"
+                 name="devceCriteriaFile">
+          <button type="input" class="btn btn-primary btn-sm">Open</button>
+        </form>
+        <label>Device Curtailment file</label>
+        <form class="form-inline">
+          <input id="file"type="file"  class="form-control file-input"
+                 [(ngModel)]="deviceCurtailmentFile" name="devicecurtailment">
+          <button type="button" value="upload" class="btn btn-primary btn-sm"
+                  (click)="thisFileUpload()">Open</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
