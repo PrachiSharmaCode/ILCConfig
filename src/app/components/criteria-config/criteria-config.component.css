@@ -1,0 +1,53 @@
+.division{
+  float:left;
+  width: 30%;
+  margin-left: 50px;
+}
+
+.collapse-division{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-style: groove;
+}
+
+.collapse-division-label{
+  width: 100%;
+}
+
+i[id="ilcConfigIcon"]{
+  margin-left: 65%;
+}
+
+i[id="criteriaIcon"]{
+  margin-left: 70%;
+}
+
+i[id="deviceIcon"]{
+  margin-left: 70%;
+}
+
+i[id="pointNamesIcon"]{
+  margin-left: 60%;
+}
+
+.hp-icon-padding{
+  margin-left: 80%;
+}
+
+.div-inbetween-padding{
+  margin-top: 5%;
+}
+
+textarea{
+  margin-top: 2%;
+  background-color: lightgray;
+  width: 90%;
+  height: 100%;
+}
+
+.button-size{
+  width: 100px;
+  text-align: center;
+  border-radius: 100px;
+  margin-left: 10px;
+}

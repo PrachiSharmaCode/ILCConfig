@@ -1,0 +1,57 @@
+.division{
+  float:left;
+  width: 30%;
+  margin-left: 40px;
+}
+
+.padding-div{
+  padding-left: 20px;
+}
+
+.collapse-division{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-style: groove;
+}
+
+.collapse-division-label{
+  width: 100%;
+}
+
+.icon-padding-power{
+  padding-left: 72%;
+}
+
+.icon-padding-cluster{
+  padding-left: 80%;
+}
+input[type=text]{
+  width:50%;
+}
+
+input[type=checkbox]{
+  margin-top: 10px;
+}
+
+.file-input{
+  margin-right: 40%;
+}
+
+.button-size{
+  width: 100px;
+  text-align: center;
+  border-radius: 100px;
+  margin-left: 10px;
+}
+
+textarea{
+  margin-top: 5px;
+  background-color: lightgray;
+  width: 90%;
+  height: 100%;
+}
+
+.div-top-padding{
+  margin-top: 5%;
+}
+

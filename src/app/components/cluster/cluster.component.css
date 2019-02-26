@@ -1,0 +1,45 @@
+.division{
+  float:left;
+  width: 30%;
+  margin-left: 50px;
+}
+
+.padding-div{
+  padding-left: 20px;
+}
+
+.collapse-division{
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-style: groove;
+}
+
+.collapse-division-label{
+  width: 100%;
+}
+
+.icon-padding-cluster{
+  padding-left: 70%;
+}
+
+input[type=text]{
+  width:50%;
+}
+
+.file-input{
+  margin-right: 40%;
+}
+
+.button-size{
+  width: 100px;
+  text-align: center;
+  border-radius: 100px;
+  margin-left: 10px;
+}
+
+textarea{
+  margin-top: 5px;
+  background-color: lightgray;
+  width: 90%;
+  height: 100%;
+}
