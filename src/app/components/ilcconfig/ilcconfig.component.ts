@@ -3,6 +3,8 @@ import { ILCCongig} from '../../model/ILCConfig.model';
 import { Cluster} from '../../model/cluster.model';
 import { ILCconfigService} from '../../services/ILCConfigService/ilcconfig.service';
 import { ClusterService} from '../../services/cluster/cluster.service';
+import { saveAs} from 'file-saver';
+import * as FileSaver from "file-saver";
 
   @Component({
     selector: 'app-ilcconfig',
@@ -38,6 +40,12 @@ import { ClusterService} from '../../services/cluster/cluster.service';
   addDemandFormula() {
     this.demandformulaAgrsArr.push('');
     console.log(this.demandformulaAgrsArr);
+  }
+
+  saveCalculation() {
+    const file = new Blob([this.ilcService.getFinalCalculation()],
+      {type: 'json'});
+    FileSaver.saveAs(file, 'test.json');
   }
 
   onRefeshClick() {

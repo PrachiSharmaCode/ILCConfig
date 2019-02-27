@@ -62,7 +62,8 @@
     <div class="row">
       <h5>File Preview</h5>
       <a (click)="onRefeshClick()" class="btn btn-outline-dark  button-size" >Refresh</a>
-      <a href=#finalCal class="btn btn-outline-dark  button-size" download="finalCalculation">Save As...</a>
+      <a href=#finalCal class="btn btn-outline-dark  button-size"
+         download="finalCalculation" (click)="saveCalculation()">Save As...</a>
     </div>
     <textarea id="finalCal">
       {{finalCalculation}}
