@@ -1,17 +1,79 @@
 
-.pad-button{
-  padding-left: 10px;
+nav{
+  margin-bottom: 30px;
 }
-
-.button-size-nav{
-  width: 200px;
+.button-size{
+  width: 250px;
   text-align: center;
   border-radius: 100px;
 }
 
+.sidenav{
+  height: 100%;
+  width: 290px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  border-right: thick double yellowgreen;
+  overflow-x: hidden;
+  /*margin-top: 72px;*/
+}
+.left{
+  left: 0;
+}
+
+.right{
+  right: 0;
+}
+
+.navBorder{
+  border-bottom: thick double yellowgreen;
+}
+
+.centered{
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.centeredContent{
+  position: absolute;
+  top: 25%;
+  left: 40%;
+  transform: translate(-10%, -10%);
+  text-align: center;
+}
+
+.centeredButtonContent{
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-10%, -10%);
+  text-align: center;
+}
+
+.center-div
+{
+ text-align: center;
+  display: inline-block;
+}
+
+@media screen and (max-width: 600px) {
+  .division.responsive {
+    position: relative;
+  }
+}
+
+.pad-button{
+  padding-left: 10px;
+}
 
 .button-size{
-  width: 200px;
+  width: 230px;
   text-align: center;
   border-radius: 100px;
 }

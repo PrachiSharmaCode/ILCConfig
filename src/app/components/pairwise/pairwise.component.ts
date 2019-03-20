@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { PairwiseModel} from '../../model/pairwise.model';
-import { PairwiseService} from '../../services/pairwise/pairwise.service';
+import {Component, Input, OnInit} from '@angular/core';
+import * as FileSaver from 'file-saver';
+import {PairwiseModel} from '../../model/pairwise.model';
 
 
 @Component({
@@ -8,103 +8,64 @@ import { PairwiseService} from '../../services/pairwise/pairwise.service';
   templateUrl: './pairwise.component.html',
   styleUrls: ['./pairwise.component.css']
 })
+
 export class PairwiseComponent implements OnInit {
+  pairwise: PairwiseModel = new PairwiseModel();
+  pairwiseCriteriaList: string[] = [];
+  calculation = '';
+  finalCalcultion: string;
+  criteria = new  Map<any, any>();
+  generate = false;
 
-  pairwise: PairwiseModel;
+  constructor() { }
 
-  finalCalcultion = '';
-
-  // Zome Temperature Attributs
-  zoneTemp = 5;
-  zoneRoomType = 5;
-  zoneRatedPower = 5;
-  zoneStage = 5;
-
-  // Stage Attributs
-  stageZoneTemp = 5;
-  stageRoomType = 5;
-  stageRatedPower = 5;
-
-  // History Zome Temperature Attributes
-  historyRoomType = 5;
-  historyRatedPower = 5;
-
-  // Rated Power Attributes
-  powerRoomType = '';
-
-  constructor(private pairService: PairwiseService) { }
-
-  setValueZomTemp(value, id) {
-    if (id === 'zone') {
-      this.zoneTemp = value;
+  remainingList(num: number): string[] {
+    const criteriaList: string[] = [];
+    for (let i = num + 1; i < this.pairwiseCriteriaList.length ; i++ ) {
+      criteriaList.push(this.pairwiseCriteriaList[i]);
     }
-    if (id === 'zoneRoomtype') {
-      this.zoneRoomType = value;
-    }
-    if (id === 'ratedPower') {
-      this.zoneRatedPower = value;
-    }
-    if (id === 'stage') {
-      this.zoneStage = value;
-    }
+    return criteriaList;
+  }
+  // 877-943-3530
+  generateCamparisons() {
+    this.generate = true;
   }
 
-  setStageValue(value, id) {
-    if (id === 'stageZonetemp') {
-      this.stageZoneTemp = value;
-    }
-    if (id === 'stageRoomType') {
-      this.stageRoomType = value;
-    }
-    if (id === 'stageRatedPower') {
-      this.stageRatedPower = value;
-    }
+  updateValues(changeEvent, followCriteria, mainCriteria) {
+    let criteraMap: Map<string, Map<string, string>>;
+    criteraMap = this.criteria.get(mainCriteria);
+    criteraMap.set(followCriteria, changeEvent.value);
+    this.criteria.set(mainCriteria, criteraMap);
   }
 
-  setValueHistoryZomTemp(value, id) {
-
-    if (id === 'historyRoomType') {
-      this.historyRoomType = value;
-    }
-    if (id === 'historyratedPower') {
-      this.historyRatedPower = value;
-    }
-  }
-
-  setValueRatedPower(value, id) {
-
-    if (id === 'powerRoomType') {
-      this.powerRoomType = value;
-    }
+  savePairwiseCalculation() {
+    const file = new Blob([this.pairwise.pairwiaseCalculation],
+      {type: 'json'});
+    FileSaver.saveAs(file, 'pairwise.json');
   }
 
   onRefreshButton() {
-
-    this.pairwise = new PairwiseModel(this.zoneStage, this.zoneTemp, this.zoneRatedPower, this.zoneRoomType,
-                    this.stageZoneTemp, this.stageRatedPower, this.stageRoomType, this.historyRatedPower,
-                    this.historyRoomType, this.powerRoomType);
-    this.pairService.createPairwiseCalculation(this.pairwise);
-    this.finalCalcultion = this.pairService.getFinalCalculation();
+    this.pairwise.pairwiseCriteria = this.criteria;
+    this.finalCalcultion = this.pairwise.pairwiaseCalculation;
+    console.log('isnde');
+    console.log(this.finalCalcultion);
   }
 
   ngOnInit() {
-    this.pairwise = this.pairService.getPairwise();
+    this.pairwiseCriteriaList = this.pairwise.pairwiseCriteriaList;
+    let num = 0;
+    while (num < this.pairwiseCriteriaList.length) {
+      const hmap =  new Map();
+      for (let i = num + 1; i < this.pairwiseCriteriaList.length ; i++ ) {
+        hmap.set(this.pairwiseCriteriaList[i], 5);
+      }
+      this.criteria.set(this.pairwiseCriteriaList[num], hmap);
+      num++;
+    }
+    this.finalCalcultion = this.pairwise.pairwiaseCalculation;
+  }
 
-    this.zoneStage = this.pairwise.zoneStage;
-    this.zoneTemp = this.pairwise.zoneHistoryTemp;
-    this.zoneRatedPower = this.pairwise.zoneRatedPower;
-    this.zoneRoomType = this.pairwise.zoneRoomType;
-
-    console.log(this.zoneRatedPower + 'componentRp');
-    console.log(this.zoneRoomType +  'componentRt');
-
-    this.stageRoomType = this.pairwise.stageRoomType;
-    this.stageRatedPower = this.pairwise.stageRatedPower;
-    this.stageZoneTemp = this.pairwise.stageHistoryTemp;
-
-    this.historyRatedPower = this.pairwise.historyRatedPower;
-    this.historyRoomType = this.pairwise.historyRatedPower;
-
-    this.finalCalcultion = this.pairService.getFinalCalculation();
+  trackByIndex(index: number): any {
+    return index;
   }
 }

@@ -1,32 +1,35 @@
 export class PairwiseModel {
 
-  zoneStage: number;
-  zoneHistoryTemp: number;
-  zoneRatedPower: number;
-  zoneRoomType: number;
+  private _pairwiseCriteriaList = ['zonetemperature', 'stage',
+                                   'history-zonetemperature',
+                                   'rated-power', 'room-type'];
+  private _pairwiaseCalculation: string;
+  private _pairwiseCriteria: Map<any, any>;
 
-  stageHistoryTemp: number;
-  stageRatedPower: number;
-  stageRoomType: number;
-
-  historyRatedPower: number;
-  historyRoomeType: number;
-
-  ratedRoomType: number;
+  constructor() {}
 
 
-  constructor( zoneStage, zoneHistoryTemp, zoneratedPower, zoneRoomtype, stageHistoryTemp, stageRatedPower,
-               stageRoomType, historyRatedPower, historyRoomeType, ratedRoomType) {
+  get pairwiseCriteriaList(): string[] {
+    return this._pairwiseCriteriaList;
+  }
 
-    this.zoneStage = zoneStage;
-    this.zoneHistoryTemp = zoneHistoryTemp;
-    this.zoneRatedPower = zoneratedPower;
-    this.zoneRoomType = zoneRoomtype;
-    this.stageHistoryTemp = stageHistoryTemp;
-    this.stageRatedPower = stageRatedPower;
-    this.stageRoomType = stageRoomType;
-    this.historyRatedPower = historyRatedPower;
-    this.historyRoomeType = historyRoomeType;
-    this.ratedRoomType = ratedRoomType;
+  set pairwiseCriteriaList(value: string[]) {
+    this._pairwiseCriteriaList = value;
+  }
+
+  get pairwiaseCalculation(): string {
+    return this._pairwiaseCalculation;
+  }
+
+  set pairwiaseCalculation(value: string) {
+    this._pairwiaseCalculation = value;
+  }
+
+  get pairwiseCriteria(): Map<any, any> {
+    return this._pairwiseCriteria;
+  }
+
+  set pairwiseCriteria(value: Map<any, any>) {
+    this._pairwiseCriteria = value;
   }
 }

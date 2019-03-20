@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ClusterService} from '../../services/cluster/cluster.service';
-import { Cluster} from '../../model/cluster.model';
-import {element} from "protractor";
+import {Component, Input, OnInit} from '@angular/core';
+import { ILCCongig} from '../../model/ILCConfig.model';
 
 @Component({
   selector: 'app-cluster',
@@ -10,20 +8,28 @@ import {element} from "protractor";
 })
 export class ClusterComponent implements OnInit {
 
-  cluster: Cluster[] = [];
+  @Input() ilc: ILCCongig;
 
-  constructor(private clusterService: ClusterService) { }
+  clusterList: { _deviceCriteriaFile: string;
+                 _deviceCurtailmentFile: string;
+                 _pairwiseCriteriaFile: string;
+                 _clusterPriority: string }[];
+
+  constructor() {}
 
   addCluster() {
-    this.cluster.push(new Cluster('', '', '', ''));
-    this.clusterService.addNewCluster(this.cluster);
+    this.clusterList.push({_clusterPriority: '',
+                           _pairwiseCriteriaFile: '',
+                           _deviceCriteriaFile: '',
+                           _deviceCurtailmentFile: ''});
+    this.clusterList = this.ilc.clusterList;
   }
 
   ngOnInit() {
-    this.cluster = this.clusterService.getClusterArray();
+    this.clusterList = this.ilc.clusterList;
   }
 
-  trackByIndex(index: number, obj: any): any {
+  trackByIndex(index: number): any {
     return index;
   }
 }

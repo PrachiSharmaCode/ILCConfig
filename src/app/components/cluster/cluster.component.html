@@ -1,33 +1,34 @@
 <div>
   <ul style="list-style-type:none;">
-    <li *ngFor="let i of cluster;let index = index;trackBy: trackByIndex;">
-      <div class="collapse-division">
-        <label class="collapse-division-label">
-          <a  data-toggle="collapse"
-              href="#Cluster{{index}}" role="button" aria-expanded="false" aria-controls="collapseExample">
-            Cluster {{index+1}}  <i class="material-icons icon-padding-cluster">
-            keyboard_arrow_down
-          </i></a>
-        </label>
-        <div class="collapse" id="Cluster{{index}}">
-          <div class="card card-body" id="clusterForm">
-            <label>Cluster Priority</label>
-            <input type="text" class="form-control" [(ngModel)]="cluster[index].clusterPriority"  name="clusterPtiority">
-            <label>Pairwise criteria File</label>
-            <input id="pairwiseCriteriaFile" type="file" class="form-control file-input"
-                   [(ngModel)]="cluster[index].pairwiseCriteriaFile" name="pairwiseCriteria">
-            <label>Device Criteria File</label>
-            <input id="deviceCrteriaFile" type="file" class="form-control file-input"
-                   [(ngModel)]="cluster[index].deviceCriteriaFile" name="devceCriteriaFile">
-            <label>Device Curtailment file</label>
-            <input id="deviceCurtailmentFile" type="file" class="form-control file-input"
-                   [(ngModel)]="cluster[index].deviceCurtailmentFile">
+    <li *ngFor="let cluster of clusterList;let index = index;trackBy: trackByIndex;">
+          <div class="collapse-division">
+            <label class="collapse-division-label">
+              <a  data-toggle="collapse"
+                  href="#Cluster{{index}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Cluster {{index+1}}  <i class="material-icons icon-padding-cluster">
+                keyboard_arrow_down
+              </i></a>
+            </label>
+            <div class="collapse" id="Cluster{{index}}">
+              <div class="card card-body" id="clusterForm">
+                    <label>Cluster Priority</label>
+                    <input type="text" class="form-control" [(ngModel)]=cluster._clusterPriority  name="clusterPtiority">
+                    <label>Pairwise criteria File</label>
+                    <input id="pairwiseCriteriaFile" type="file" class="form-control file-input"
+                           [(ngModel)]=cluster._pairwiseCriteriaFile name="pairwiseCriteria">
+                    <label>Device Criteria File</label>
+                    <input id="deviceCrteriaFile" type="file" class="form-control file-input"
+                           [(ngModel)]=cluster._deviceCriteriaFile name="devceCriteriaFile">
+                    <label>Device Curtailment file</label>
+                    <input id="deviceCurtailmentFile" type="file" class="form-control file-input"
+                           [(ngModel)]=cluster._deviceCurtailmentFile>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </li>
-  </ul>
+        </li>
+      </ul>
 </div>
 
 <button id="addCluster" (click)="addCluster()"
         type="button" style="margin-left: 8%" class="btn btn-info btn-sm">Add Device Cluster</button>
+

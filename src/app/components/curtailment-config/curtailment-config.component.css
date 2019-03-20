@@ -1,0 +1,35 @@
+.division{
+  float:left;
+  width: 30%;
+  margin-left: 50px;
+}
+
+.collapse-division{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-style: groove;
+}
+
+.collapse-division-label{
+  width: 100%;
+}
+
+textarea{
+  margin-top: 5px;
+  background-color: lightgray;
+  width: 90%;
+  height: 100%;
+}
+
+.div-inbetween-padding{
+  margin-top: 5%;
+}
+
+
+
+.button-size{
+  width: 100px;
+  text-align: center;
+  border-radius: 100px;
+  margin-left: 10px;
+}

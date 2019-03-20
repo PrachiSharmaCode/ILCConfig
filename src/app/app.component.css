@@ -3,11 +3,6 @@
   padding-left: 10px;
 }
 
-.button-size-nav{
-  width: 200px;
-  text-align: center;
-  border-radius: 100px;
-}
 
 button:focus{
   color: aqua;
@@ -18,8 +13,14 @@ nav{
   margin-bottom: 30px;
 }
 
+@media screen and (max-width: 600px) {
+  .nav.responsive {
+    position: relative;
+  }
+}
+
 .button-size{
-  width: 200px;
+  width: 250px;
   text-align: center;
   border-radius: 100px;
 }

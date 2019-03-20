@@ -1,35 +1,90 @@
+<nav  id="navbarList" class="navbar navbar-expand-lg navbar-light bg-light navBorder" *ngIf="showNavButtons">
+    <h4  align="center" style=" color: yellowgreen" >ILC Configuration</h4>
+    <ul class="nav justify-content-center mx-auto">
+      <li class="nav-item pad-button">
+        <a style="color: black;" class="nav-link btn btn-outline-dark button-size " (click)="openHome()">Home</a>
+      </li>
+      <li class="nav-item pad-button">
+        <a style="color: black;" class="nav-link btn btn-outline-dark button-size " (click)="openIlcConfig()">ILC Configuration</a>
+      </li>
+      <li class="nav-item pad-button">
+        <a style="color: black;" class="nav-link btn btn-outline-dark button-size" (click)="openPairwise()">Pairwise</a>
+      </li>
+      <li class="nav-item pad-button">
+        <a style="color: black;" class="nav-link btn btn-outline-dark button-size" (click)="openCriteria()">Criteria Configuration</a>
+      </li>
+      <li class="nav-item pad-button">
+        <a style="color: black;" class="nav-link btn btn-outline-dark button-size" (click)="openCurtailment()">Curtailment Configuration</a>
+      </li>
+    </ul>
+</nav>
 
-<div align="center" class="padding-div">
+<div class="row">
+  <div  class="sidenav" *ngIf="homeOpen">
+    <div  style="text-align: center;padding-top: 5%; background-color: yellowgreen">
+      <h5>ILC Configuartion</h5>
+      <hr style="margin-top:5%; border: thick double yellowgreen;">
+    </div>
+    <div  align="center" class="padding-div centered"  style="text-align: center;margin-top: 20%">
+          <ul  class="list-group" style="list-style-type:none;">
+            <li>
+              <a class="btn btn-outline-dark button-size" (click)="openMasterDriver()">Master Driver</a>
+            </li>
+            <br/>
+            <li>
+              <a class="btn btn-outline-dark button-size" (click)="openILC()">ILC Configuration</a>
+            </li>
+            <br/>
+            <li>
+              <a class="btn btn-outline-dark button-size" (click)="openDocumentation()">Documentation</a>
+            </li>
+      </ul>
+    </div>
+  </div>
+  <div *ngIf="homeOpen && showDocumentation"  class="centeredContent" >
+    <h5>ILC Configuration</h5>
+    <p>level Configuration. Specify campus, building and building
+    parameters that will define volttron installation.<p>
 
-  <ul class="list-group">
-    <li>
-      <a class="btn btn-outline-dark button-size" href="#">ILC Configuration</a>
-      <p class="para-size">Top level Configuration. Specify campus, building and building
-        parameters that will define volttron installation.</p>
-    </li>
-    <li>
-      <a class="btn btn-outline-dark button-size" href="#">Pairwise</a>
-      <p class="para-size">Name and define curtailment criteria. Declare relative priority
-        of curtailment criteria.</p>
-    </li>
-    <li>
-      <a class="btn btn-outline-dark button-size" href="#">Criteria Configuration</a>
-      <p class="para-size">Delare Device. Define how curtailment criteria are evaluated for
-        each stage of each device</p>
-    </li>
-    <li>
-      <a class="btn btn-outline-dark button-size" href="#">Curtailment Configuration</a>
-      <p class="para-size">Define how device are evaluated for curtailment availability.Specify
-        which actions to apply in order i order to curtail devices.</p>
-    </li>
-    <li>
-      <a class="btn btn-outline-dark button-size" href="#">Open Directory</a>
-      <p class="para-size">Edit the configuration files located in a specific directory.</p>
-    </li>
-    <li>
-      <a class="btn btn-outline-dark button-size" href="#">Documentation</a>
-      <p class="para-size">read the current version of help and documentation available</p>
-    </li>
-  </ul>
+    <h5>Pairwise</h5>
+    <p>Name and define curtailment criteria. Declare relative priority
+    of curtailment criteria.</p>
 
+    <h5>Criteria Configuration</h5>
+    <p>Delare Device. Define how curtailment criteria are evaluated for
+
+    <h5>Curtailment Configuration</h5>
+    <p>Define how device are evaluated for curtailment availability.Specify
+    which actions to apply in order i order to curtail devices.</p>
+
+    <h5>Open Directory</h5>
+    <p>Edit the configuration files located in a specific directory.</p>
+
+    <h5>Documentation</h5>
+    <p>read the current version of help and documentation available</p>
+  </div>
+
+  <div *ngIf="homeOpen && showILC" class="centeredButtonContent">
+    <button type="button" class="btn btn-outline-info btn-lg btn-block">Upload ILC File</button>
+    <hr>
+    <button type="button" class="btn btn-outline-info btn-lg btn-block" (click)="openIlcConfig()">Start new ILC Configuration</button>
+  </div>
 </div>
+
+<div *ngIf="ilcCongifOpen">
+  <app-ilcconfig [ilc] = "ilc"></app-ilcconfig>
+</div>
+
+<div *ngIf="pairwiseOpen">
+  <app-pairwise></app-pairwise>
+</div>
+
+<div *ngIf="criteriaOPen">
+  <app-criteria-config [ilc] = "ilc"></app-criteria-config>
+</div>
+
+<div *ngIf="curtailmentOpen">
+  <app-curtailment-config [ilc] = "ilc"></app-curtailment-config>
+</div>
+
+<router-outlet></router-outlet>

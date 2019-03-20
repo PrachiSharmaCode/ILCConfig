@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="division padding-div" align="left">
+  <div class="division" align="left">
       <h5>Installation Configuration</h5>
       <div>
         <label>Campus</label>
@@ -52,10 +52,10 @@
   </div>
 
   <div class="division " align="left" >
-    <div id="clusterBlock">
+     <div id="clusterBlock">
       <h5 style="margin-left: 8%" >Clusters</h5>
-          <app-cluster></app-cluster>
-    </div>
+          <app-cluster [ilc]="ilc"></app-cluster>
+     </div>
   </div>
 
   <div class="division">

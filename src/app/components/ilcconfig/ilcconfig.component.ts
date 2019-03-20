@@ -1,12 +1,8 @@
-import { Component, OnInit, } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { ILCCongig} from '../../model/ILCConfig.model';
-import { Cluster} from '../../model/cluster.model';
-import { ILCconfigService} from '../../services/ILCConfigService/ilcconfig.service';
-import { ClusterService} from '../../services/cluster/cluster.service';
-import { saveAs} from 'file-saver';
-import * as FileSaver from "file-saver";
+import * as FileSaver from 'file-saver';
 
-  @Component({
+@Component({
     selector: 'app-ilcconfig',
     templateUrl: './ilcconfig.component.html',
     styleUrls: ['./ilcconfig.component.css']
@@ -14,9 +10,7 @@ import * as FileSaver from "file-saver";
 
   export class ILCConfigComponent implements OnInit {
 
-  ilc: ILCCongig;
-  cluster: Cluster[];
-
+  @Input() ilc: ILCCongig;
   campus: string;
   building: string;
   agentId: string;
@@ -31,11 +25,12 @@ import * as FileSaver from "file-saver";
   point: string;
   demandFormula: string;
   demandformulaAgrsArr = [];
-
   finalCalculation: string;
-  clusterArr: Cluster[] = [];
 
-  constructor(private ilcService: ILCconfigService, private clusterService: ClusterService) { }
+  testpaiewiese: string[];
+  arrlen: number;
+
+  constructor() { }
 
   addDemandFormula() {
     this.demandformulaAgrsArr.push('');
@@ -43,32 +38,26 @@ import * as FileSaver from "file-saver";
   }
 
   saveCalculation() {
-    const file = new Blob([this.ilcService.getFinalCalculation()],
-      {type: 'json'});
+    const file = new Blob([this.ilc.finalCalcualtion], {type: 'json'});
     FileSaver.saveAs(file, 'test.json');
   }
 
-  onRefeshClick() {
-    this.clusterService.finalClusterCalculation = '';
 
+  onRefeshClick() {
     if (this.staggerOfftime === undefined) {
       this.staggerOfftime = 'false';
     }
     if (this.staggerRelease === undefined) {
       this.staggerRelease = 'false';
     }
-
-    this.ilc = new ILCCongig(this.campus, this.building, this.device, this.point, this.demandFormula,
-                             this.demandformulaAgrsArr, this.agentId, this.demandLimit, this.curtailmentTime,
-                             this.curtailmentConfirm, this.curtailmentBreak, this.buildingPowerWindow,
-                             this.staggerRelease, this.staggerOfftime, this.clusterArr);
-    this.ilcService.createIlcConfig(this.ilc);
-
-    this.finalCalculation = this.ilcService.getFinalCalculation();
+    this.ilc.setILCConfig(this.campus, this.building, this.device, this.point, this.demandFormula,
+                          this.demandformulaAgrsArr, this.agentId, this.demandLimit, this.curtailmentTime,
+                          this.curtailmentConfirm, this.curtailmentBreak, this.buildingPowerWindow,
+                          this.staggerRelease, this.staggerOfftime);
+    this.finalCalculation = this.ilc.finalCalcualtion;
   }
 
   ngOnInit() {
-    this.ilc = this.ilcService.getIlcConfig();
     this.campus = this.ilc.campus;
     this.building = this.ilc.building;
     this.device = this.ilc.device;
@@ -81,13 +70,12 @@ import * as FileSaver from "file-saver";
     this.curtailmentConfirm = this.ilc.curtailmentConfirm;
     this.curtailmentBreak = this.ilc.curtailmentBreak;
     this.buildingPowerWindow = this.ilc.buildingPowerWindow;
-    this.clusterArr = this.ilc.cluster;
-
-    this.finalCalculation = this.ilcService.getFinalCalculation();
+    this.testpaiewiese = this.ilc.pairwiseCriteriaList;
+    this.arrlen = this.testpaiewiese.length;
+    this.finalCalculation = this.ilc.finalCalcualtion;
   }
 
-  trackByIndex(index: number, obj: any): any {
+  trackByIndex(index: number): any {
     return index;
   }
-
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ILCCongig} from "../../model/ILCConfig.model";
 
 @Component({
   selector: 'app-criteria-config',
@@ -7,11 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CriteriaConfigComponent implements OnInit {
 
-  ctriteria = ['HP1', 'HP2', 'HP3', 'HP4', 'HP5', 'HP6', 'HP7', 'HP8', 'HP9', 'HP10']
+  @Input() ilc: ILCCongig;
+  devices: string[];
+  campus: string;
+  building: string;
+  stageName: string;
+  criteriaList: string[];
 
   constructor() { }
 
   ngOnInit() {
+    this.devices = this.ilc.devices;
+    this.campus = this.ilc.campus;
+    this.building =  this.ilc.building;
+    this.criteriaList = this.ilc.pairwiseCriteriaList;
+  }
+
+  trackByIndex(index: number): any {
+    return index;
   }
 
 }
