@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { ILCCongig} from '../../model/ILCConfig.model';
+import {MainModel} from '../../model/main.model';
+import {PairwiseModel} from '../../model/pairwise.model';
 
 @Component({
   selector: 'app-cluster',
@@ -9,6 +11,7 @@ import { ILCCongig} from '../../model/ILCConfig.model';
 export class ClusterComponent implements OnInit {
 
   @Input() ilc: ILCCongig;
+  @Input() mainModel: MainModel;
 
   clusterList: { _deviceCriteriaFile: string;
                  _deviceCurtailmentFile: string;
@@ -23,6 +26,8 @@ export class ClusterComponent implements OnInit {
                            _deviceCriteriaFile: '',
                            _deviceCurtailmentFile: ''});
     this.clusterList = this.ilc.clusterList;
+    this.mainModel.addPairwise(new PairwiseModel());
+    this.mainModel.print();
   }
 
   ngOnInit() {

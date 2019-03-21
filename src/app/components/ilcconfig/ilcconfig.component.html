@@ -11,7 +11,7 @@
           <p  data-toggle="collapse" href="#collapseExample" role="button"
               aria-expanded="false" aria-controls="collapseExample">
               Power Meter
-              <i class="material-icons icon-padding-power">keyboard_arrow_down</i>
+              <i class="material-icons float-right">keyboard_arrow_down</i>
           </p>
         </label>
         <div class="collapse" id="collapseExample">
@@ -54,7 +54,7 @@
   <div class="division " align="left" >
      <div id="clusterBlock">
       <h5 style="margin-left: 8%" >Clusters</h5>
-          <app-cluster [ilc]="ilc"></app-cluster>
+          <app-cluster [ilc]="ilc" [mainModel] = "mainModel"></app-cluster>
      </div>
   </div>
 

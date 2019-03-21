@@ -5,7 +5,7 @@
             <label class="collapse-division-label">
               <a  data-toggle="collapse"
                   href="#Cluster{{index}}" role="button" aria-expanded="false" aria-controls="collapseExample">
-                Cluster {{index+1}}  <i class="material-icons icon-padding-cluster">
+                Cluster {{index+1}}  <i class="material-icons float-right">
                 keyboard_arrow_down
               </i></a>
             </label>
@@ -14,13 +14,13 @@
                     <label>Cluster Priority</label>
                     <input type="text" class="form-control" [(ngModel)]=cluster._clusterPriority  name="clusterPtiority">
                     <label>Pairwise criteria File</label>
-                    <input id="pairwiseCriteriaFile" type="file" class="form-control file-input"
+                    <input id="pairwiseCriteriaFile" type="text" class="form-control"
                            [(ngModel)]=cluster._pairwiseCriteriaFile name="pairwiseCriteria">
                     <label>Device Criteria File</label>
-                    <input id="deviceCrteriaFile" type="file" class="form-control file-input"
+                    <input id="deviceCrteriaFile" type="text" class="form-control"
                            [(ngModel)]=cluster._deviceCriteriaFile name="devceCriteriaFile">
                     <label>Device Curtailment file</label>
-                    <input id="deviceCurtailmentFile" type="file" class="form-control file-input"
+                    <input id="deviceCurtailmentFile" type="text" class="form-control"
                            [(ngModel)]=cluster._deviceCurtailmentFile>
               </div>
             </div>

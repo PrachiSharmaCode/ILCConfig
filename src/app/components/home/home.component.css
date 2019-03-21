@@ -16,7 +16,7 @@ nav{
   top: 0;
   left: 0;
   background-color: transparent;
-  border-right: thick double yellowgreen;
+  border-right: thick double darkgray;
   overflow-x: hidden;
   /*margin-top: 72px;*/
 }
@@ -29,7 +29,7 @@ nav{
 }
 
 .navBorder{
-  border-bottom: thick double yellowgreen;
+  border-bottom: thick double darkgrey;
 }
 
 .centered{

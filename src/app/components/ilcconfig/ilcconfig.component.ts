@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { ILCCongig} from '../../model/ILCConfig.model';
 import * as FileSaver from 'file-saver';
+import {MainModel} from "../../model/main.model";
 
 @Component({
     selector: 'app-ilcconfig',
@@ -11,6 +12,7 @@ import * as FileSaver from 'file-saver';
   export class ILCConfigComponent implements OnInit {
 
   @Input() ilc: ILCCongig;
+  @Input() mainModel: MainModel;
   campus: string;
   building: string;
   agentId: string;

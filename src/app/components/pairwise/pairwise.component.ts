@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import * as FileSaver from 'file-saver';
 import {PairwiseModel} from '../../model/pairwise.model';
+import {MainModel} from '../../model/main.model';
+import {ILCCongig} from "../../model/ILCConfig.model";
 
 
 @Component({
@@ -10,12 +12,18 @@ import {PairwiseModel} from '../../model/pairwise.model';
 })
 
 export class PairwiseComponent implements OnInit {
-  pairwise: PairwiseModel = new PairwiseModel();
+  @Input() ilc: ILCCongig;
+  @Input() pairwise: PairwiseModel;
+  @Input() mainModel: MainModel;
+  pairwiseList: PairwiseModel[] = [];
+  clusterList: { _deviceCriteriaFile: string;
+                  _deviceCurtailmentFile: string;
+                  _pairwiseCriteriaFile: string;
+                  _clusterPriority: string }[];
   pairwiseCriteriaList: string[] = [];
-  calculation = '';
   finalCalcultion: string;
-  criteria = new  Map<any, any>();
-  generate = false;
+  criteria = new Map<any, any>();
+  generate = true;
 
   constructor() { }
 
@@ -28,7 +36,21 @@ export class PairwiseComponent implements OnInit {
   }
   // 877-943-3530
   generateCamparisons() {
-    this.generate = true;
+    if (this.generate === undefined) {
+      let num = 0;
+      while (num < this.pairwiseCriteriaList.length) {
+        const hmap =  new Map();
+        for (let i = num + 1; i < this.pairwiseCriteriaList.length ; i++ ) {
+          hmap.set(this.pairwiseCriteriaList[i], 5);
+        }
+        this.criteria.set(this.pairwiseCriteriaList[num], hmap);
+        num++;
+      }
+    } else {
+      this.criteria =  this.pairwise.pairwiseCriteria;
+    }
+    this.generate =  true;
+    this.pairwise.setpairwise(this.pairwiseCriteriaList, this.criteria, this.generate, this.finalCalcultion);
   }
 
   updateValues(changeEvent, followCriteria, mainCriteria) {
@@ -44,25 +66,30 @@ export class PairwiseComponent implements OnInit {
     FileSaver.saveAs(file, 'pairwise.json');
   }
 
-  onRefreshButton() {
-    this.pairwise.pairwiseCriteria = this.criteria;
-    this.finalCalcultion = this.pairwise.pairwiaseCalculation;
-    console.log('isnde');
-    console.log(this.finalCalcultion);
+  onRefreshButton(i) {
+    this.pairwiseList[i].pairwiseCriteria = this.criteria;
+    this.pairwiseList[i].pairwiseCriteriaList = this.pairwiseCriteriaList;
+    // this.finalCalcultion = this.pairwise.setFinalCalculation();
+    // this.pairwise.pairwiaseCalculation =  this.finalCalcultion;
+    // console.log(this.pairwise.pairwiaseCalculation);
+    // this.pairwise.setpairwise(this.pairwiseCriteriaList, this.criteria, this.generate, this.finalCalcultion);
+    this.finalCalcultion =  this.pairwiseList[i].setFinalCalculation();
+    this.pairwiseList[i].setpairwise(this.pairwiseCriteriaList, this.criteria, this.generate, this.finalCalcultion);
+    console.log(this.pairwiseList[i].pairwiaseCalculation);
+   // this.pairwise.print();
   }
 
   ngOnInit() {
-    this.pairwiseCriteriaList = this.pairwise.pairwiseCriteriaList;
-    let num = 0;
-    while (num < this.pairwiseCriteriaList.length) {
-      const hmap =  new Map();
-      for (let i = num + 1; i < this.pairwiseCriteriaList.length ; i++ ) {
-        hmap.set(this.pairwiseCriteriaList[i], 5);
-      }
-      this.criteria.set(this.pairwiseCriteriaList[num], hmap);
-      num++;
+    this.pairwiseList =  this.mainModel.pairwiseList;
+    this.clusterList = this.ilc.clusterList;
+    for (let i = 0; i < this.clusterList.length ; i++) {
+      this.pairwiseList[i].pairwiseName = this.clusterList[i]._pairwiseCriteriaFile;
     }
-    this.finalCalcultion = this.pairwise.pairwiaseCalculation;
+    this.pairwiseCriteriaList = this.pairwise.pairwiseCriteriaList;
+    this.generate = this.pairwise.generated;
+    if (this.generate) {
+      this.criteria =  this.pairwise.pairwiseCriteria;
+    }
   }
 
   trackByIndex(index: number): any {

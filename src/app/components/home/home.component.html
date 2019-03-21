@@ -1,42 +1,42 @@
 <nav  id="navbarList" class="navbar navbar-expand-lg navbar-light bg-light navBorder" *ngIf="showNavButtons">
-    <h4  align="center" style=" color: yellowgreen" >ILC Configuration</h4>
+    <h4  align="center" style=" color: dimgrey" >ILC Configuration</h4>
     <ul class="nav justify-content-center mx-auto">
       <li class="nav-item pad-button">
-        <a style="color: black;" class="nav-link btn btn-outline-dark button-size " (click)="openHome()">Home</a>
+        <button  class="nav-link btn btn-outline-dark button-size " (click)="openHome()">Home</button>
       </li>
       <li class="nav-item pad-button">
-        <a style="color: black;" class="nav-link btn btn-outline-dark button-size " (click)="openIlcConfig()">ILC Configuration</a>
+        <button  class="nav-link btn btn-outline-dark button-size " (click)="openIlcConfig()">ILC Configuration</button>
       </li>
       <li class="nav-item pad-button">
-        <a style="color: black;" class="nav-link btn btn-outline-dark button-size" (click)="openPairwise()">Pairwise</a>
+        <button class="nav-link btn btn-outline-dark button-size" (click)="openPairwise()">Pairwise</button>
       </li>
       <li class="nav-item pad-button">
-        <a style="color: black;" class="nav-link btn btn-outline-dark button-size" (click)="openCriteria()">Criteria Configuration</a>
+        <button  class="nav-link btn btn-outline-dark button-size" (click)="openCriteria()">Criteria Configuration</button>
       </li>
       <li class="nav-item pad-button">
-        <a style="color: black;" class="nav-link btn btn-outline-dark button-size" (click)="openCurtailment()">Curtailment Configuration</a>
+        <button  class="nav-link btn btn-outline-dark button-size" (click)="openCurtailment()">Curtailment Configuration</button>
       </li>
     </ul>
 </nav>
 
 <div class="row">
   <div  class="sidenav" *ngIf="homeOpen">
-    <div  style="text-align: center;padding-top: 5%; background-color: yellowgreen">
-      <h5>ILC Configuartion</h5>
-      <hr style="margin-top:5%; border: thick double yellowgreen;">
+    <div  style="text-align: center;padding-top: 5%; background-color: dimgray">
+      <h5 style="color: white">ILC Configuartion</h5>
+      <hr style="margin-top:5%; border: thick double dimgray;">
     </div>
     <div  align="center" class="padding-div centered"  style="text-align: center;margin-top: 20%">
           <ul  class="list-group" style="list-style-type:none;">
             <li>
-              <a class="btn btn-outline-dark button-size" (click)="openMasterDriver()">Master Driver</a>
+              <button class="btn btn-outline-dark button-size" (click)="openMasterDriver()">Master Driver</button>
             </li>
             <br/>
             <li>
-              <a class="btn btn-outline-dark button-size" (click)="openILC()">ILC Configuration</a>
+              <button class="btn btn-outline-dark button-size" (click)="openILC()">ILC Configuration</button>
             </li>
             <br/>
             <li>
-              <a class="btn btn-outline-dark button-size" (click)="openDocumentation()">Documentation</a>
+              <button class="btn btn-outline-dark button-size" (click)="openDocumentation()">Documentation</button>
             </li>
       </ul>
     </div>
@@ -65,18 +65,18 @@
   </div>
 
   <div *ngIf="homeOpen && showILC" class="centeredButtonContent">
-    <button type="button" class="btn btn-outline-info btn-lg btn-block">Upload ILC File</button>
+    <button type="button" class="btn btn-outline-dark btn-lg btn-block">Upload ILC File</button>
     <hr>
-    <button type="button" class="btn btn-outline-info btn-lg btn-block" (click)="openIlcConfig()">Start new ILC Configuration</button>
+    <button type="button" class="btn btn-outline-dark btn-lg btn-block" (click)="openIlcConfig()">Start new ILC Configuration</button>
   </div>
 </div>
 
 <div *ngIf="ilcCongifOpen">
-  <app-ilcconfig [ilc] = "ilc"></app-ilcconfig>
+  <app-ilcconfig [ilc] = "ilc" [mainModel] = "mainModel"></app-ilcconfig>
 </div>
 
 <div *ngIf="pairwiseOpen">
-  <app-pairwise></app-pairwise>
+  <app-pairwise [ilc] = "ilc" [pairwise]= "pairwise" [mainModel] = "mainModel"></app-pairwise>
 </div>
 
 <div *ngIf="criteriaOPen">
