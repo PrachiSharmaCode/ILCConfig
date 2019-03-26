@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import * as FileSaver from 'file-saver';
 import {PairwiseModel} from '../../model/pairwise.model';
 import {MainModel} from '../../model/main.model';
-import {ILCCongig} from "../../model/ILCConfig.model";
+import {ILCCongig} from '../../model/ILCConfig.model';
 
 
 @Component({
@@ -24,6 +24,8 @@ export class PairwiseComponent implements OnInit {
   finalCalcultion: string;
   criteria = new Map<any, any>();
   generate = true;
+  showPairwiseList: boolean;
+  check  = 'j';
 
   constructor() { }
 
@@ -34,7 +36,7 @@ export class PairwiseComponent implements OnInit {
     }
     return criteriaList;
   }
-  // 877-943-3530
+
   generateCamparisons() {
     if (this.generate === undefined) {
       let num = 0;
@@ -82,6 +84,12 @@ export class PairwiseComponent implements OnInit {
   ngOnInit() {
     this.pairwiseList =  this.mainModel.pairwiseList;
     this.clusterList = this.ilc.clusterList;
+    console.log(this.clusterList);
+    if(this.clusterList.length === 0) {
+      this.showPairwiseList = false;
+    } else {
+      this.showPairwiseList =  true;
+    }
     for (let i = 0; i < this.clusterList.length ; i++) {
       this.pairwiseList[i].pairwiseName = this.clusterList[i]._pairwiseCriteriaFile;
     }

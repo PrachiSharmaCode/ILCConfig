@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
 import {ILCCongig} from '../../model/ILCConfig.model';
 import {PairwiseModel} from '../../model/pairwise.model';
+import {CriteriaModel} from "../../model/criteria.model";
 import {EventEmitter} from 'events';
 import {MainModel} from '../../model/main.model';
 
@@ -14,6 +15,7 @@ export class HomeComponent implements OnInit {
 
   ilc: ILCCongig = new ILCCongig();
   pairwise: PairwiseModel = new PairwiseModel();
+  criteria: CriteriaModel =  new CriteriaModel();
   mainModel: MainModel =  new MainModel();
   ilcCongifOpen: boolean;
   pairwiseOpen: boolean;

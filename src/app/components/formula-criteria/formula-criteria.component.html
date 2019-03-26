@@ -1,0 +1,30 @@
+<ng-container *ngFor="let arg of arguments;let i = index;trackBy: trackByIndex;">
+  <mat-form-field style="width: 100%">
+    <mat-label>Arguments</mat-label>
+    <mat-select  [(ngModel)]= "arg">
+      <mat-option value="Formula">CoolingTemperatureSetPoint</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-radio-group aria-label="Select an option" >
+    <mat-radio-button value="always">Always</mat-radio-button>&nbsp;&nbsp;&nbsp;
+    <mat-radio-button value="not curtailed">Not Curtailed</mat-radio-button>
+  </mat-radio-group>
+</ng-container>
+<div>
+  <button id="addparam" (click)="addArguments()" type="button" class="btn btn-info btn-sm">
+    Add Argument
+  </button>
+</div>
+<br>
+<div>
+  <mat-form-field class="example-full-width">
+    <textarea matInput placeholder="operation"></textarea>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Minimum(Optional)"></mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Maximum(Optional)"></mat-form-field>
+</div>
+
+
+

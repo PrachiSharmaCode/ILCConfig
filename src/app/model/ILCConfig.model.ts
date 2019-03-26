@@ -153,6 +153,10 @@ export class ILCCongig {
     return this._clusterList;
   }
 
+  updateClusterList(listOfCluster) {
+    this._clusterList = listOfCluster;
+  }
+
   get pairwiseCriteriaList(): string[] {
     return this._pairwiseCriteriaList;
   }
@@ -249,7 +253,7 @@ export class ILCCongig {
       average_building_power_window: this._buildingPowerWindow,
       stagger_release: this._staggerRelease,
       stagger_off_time: this._staggerOfftime,
-      cluster: this._clusterList
+      cluster: this._clusterList,
     };
     this._finalCalcualtion = JSON.stringify(obj, null, 4);
     return this._finalCalcualtion;

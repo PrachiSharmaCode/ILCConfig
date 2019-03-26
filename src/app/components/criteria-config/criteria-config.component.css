@@ -7,13 +7,12 @@
 .collapse-division{
   margin-top: 10px;
   margin-bottom: 10px;
-  border-style: groove;
+  border-style: ridge;
 }
 
 .collapse-division-label{
   width: 100%;
 }
-
 
 .div-inbetween-padding{
   margin-top: 5%;
