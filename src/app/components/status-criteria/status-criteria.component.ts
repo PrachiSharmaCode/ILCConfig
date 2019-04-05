@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatusCriteriaComponent implements OnInit {
 
+  pointName: string;
+  onValue: number;
+  offValue: number;
+
+
   constructor() { }
 
   ngOnInit() {

@@ -1,8 +1,8 @@
-<ng-container *ngFor="let arg of arguments;let i = index;trackBy: trackByIndex;">
+<ng-container *ngFor="let arg of argument;let i = index;trackBy: trackByIndex;">
   <mat-form-field style="width: 100%">
     <mat-label>Arguments</mat-label>
-    <mat-select  [(ngModel)]= "arg">
-      <mat-option value="Formula">CoolingTemperatureSetPoint</mat-option>
+    <mat-select  [(ngModel)]= "argument[i]">
+      <mat-option value="CoolingTemperatureSetPoint">CoolingTemperatureSetPoint</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-radio-group aria-label="Select an option" >
@@ -18,13 +18,10 @@
 <br>
 <div>
   <mat-form-field class="example-full-width">
-    <textarea matInput placeholder="operation"></textarea>
+    <textarea matInput placeholder="operation" [(ngModel)]="operation"></textarea>
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Minimum(Optional)"></mat-form-field>
+    <input matInput placeholder="Minimum(Optional)" [(ngModel)]="minimum"></mat-form-field>
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Maximum(Optional)"></mat-form-field>
+    <input matInput placeholder="Maximum(Optional)" [(ngModel)]="maximum"></mat-form-field>
 </div>
-
-
-

@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConstatntCriteriaComponent implements OnInit {
 
+  value: number;
+
   constructor() { }
 
   ngOnInit() {

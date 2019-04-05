@@ -17,6 +17,8 @@ import { MatFormFieldModule } from '@angular/material';
 import { MatInputModule } from '@angular/material';
 import {MatRadioModule} from '@angular/material/radio';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatIconModule} from '@angular/material/icon';
 
 import { ClusterComponent } from './components/cluster/cluster.component';
 import { FormulaCriteriaComponent} from './components/formula-criteria/formula-criteria.component';
@@ -51,6 +53,8 @@ import { ConstatntCriteriaComponent } from './components/constatnt-criteria/cons
     MatRadioModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
+    MatTabsModule,
+    MatIconModule,
     MDBBootstrapModule.forRoot()
   ],
   providers: [

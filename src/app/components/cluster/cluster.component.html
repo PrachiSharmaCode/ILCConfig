@@ -1,6 +1,5 @@
 <div>
-  <ul style="list-style-type:none;">
-    <li *ngFor="let cluster of clusterList;let index = index;trackBy: trackByIndex;">
+    <ng-container *ngFor="let cluster of clusterList;let index = index;trackBy: trackByIndex;">
       <div>
           <div class="collapse-division" style="clear: none;">
             <label class="collapse-division-label" style="text-align: center">
@@ -9,7 +8,7 @@
               </i>
               <a style="padding-left: 5px" data-toggle="collapse"
                   href="#Cluster{{index}}" role="button" aria-expanded="false" aria-controls="collapseExample">
-                Cluster {{index+1}}
+                {{cluster._clusterName}}
                 <i class="material-icons float-right">
                   keyboard_arrow_down
                 </i>
@@ -34,10 +33,18 @@
             </div>
           </div>
       </div>
-        </li>
-      </ul>
+        </ng-container>
 </div>
 
-<button id="addCluster" (click)="addCluster()"
-        type="button" style="margin-left: 8%" class="btn btn-info btn-sm">Add Device Cluster</button>
+<div  class="row border border-secondary collapse-division" *ngIf="getCluster" >
+  <mat-form-field class="example-full-width " style="width: 80%; margin-left: 20px">
+    <input matInput placeholder="Enter Criteria Name Here" [(ngModel)]="clusterName">
+  </mat-form-field>
+  <button (click)="addCluster()"  style="color: green; background-color: transparent; border: none" class="material-icons float-right">
+    check
+  </button>
+</div>
+
+<button id="addCluster" (click)="newCluster()"
+        type="button" style="alignment: center" class="btn btn-info btn-sm">Add Device Cluster</button>
 

@@ -48,6 +48,10 @@ nav{
   text-align: center;
 }
 
+.active{
+  background-color: darkgrey;
+}
+
 .centeredButtonContent{
   position: absolute;
   top: 30%;

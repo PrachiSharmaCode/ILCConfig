@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {CriteriaModel} from '../../model/criteria.model';
 
 @Component({
   selector: 'app-formula-criteria',
@@ -7,11 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormulaCriteriaComponent implements OnInit {
 
-  arguments = [''];
+  @Input() criteria: CriteriaModel;
+  argument: string[] = [];
+  @Output() updateArgumenrt = new EventEmitter<string[]>();
+  operation: string;
+  maximum: number;
+  minimum: number;
   constructor() { }
 
-  addArguments(){
-    this.arguments.push('');
+  addArguments() {
+    this.argument.push('');
+    this.updateArgumenrt.emit(this.argument);
+  }
+
+  onRefereashButton() {
+    this.criteria.updateFormulaOpration(this.argument, this.operation, this.minimum, this.maximum);
   }
 
   ngOnInit() {

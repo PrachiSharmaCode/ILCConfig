@@ -14,21 +14,30 @@ export class ClusterComponent implements OnInit {
   @Input() ilc: ILCCongig;
   @Input() mainModel: MainModel;
 
-  clusterList: { _deviceCriteriaFile: string;
+  clusterList: { _clusterName: string;
+                 _deviceCriteriaFile: string;
                  _deviceCurtailmentFile: string;
                  _pairwiseCriteriaFile: string;
                  _clusterPriority: string }[];
+  getCluster = false;
+  clusterName: string;
 
   constructor() {}
 
+  newCluster() {
+    this.getCluster = true;
+  }
   addCluster() {
-    this.clusterList.push({_clusterPriority: '',
+    this.clusterList.push({_clusterName: this.clusterName,
+                           _clusterPriority: '',
                            _pairwiseCriteriaFile: '',
                            _deviceCriteriaFile: '',
                            _deviceCurtailmentFile: ''});
     this.ilc.updateClusterList(this.clusterList);
     this.mainModel.addPairwise(new PairwiseModel());
     this.mainModel.print();
+    this.getCluster = false;
+    this.clusterName = '';
   }
 
   removeCluster(index) {

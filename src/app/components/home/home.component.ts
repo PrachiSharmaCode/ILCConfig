@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   showDocumentation = true;
   showILC = false;
   showMasterdriver = false;
+  // button: any;
 
   constructor() { }
 
@@ -89,6 +90,20 @@ export class HomeComponent implements OnInit {
     this.showDocumentation = false;
     this.showILC = false;
     this.showMasterdriver = true;
+  }
+
+  activeButton(value) {
+    console.log(value);
+    var clickedButton;
+    var button;
+    button = document.getElementsByClassName('active');
+    console.log(button);
+    button[0].className =  button[0].className.replace('active', '');
+    console.log(button);
+
+    clickedButton = document.getElementById(value.target.id);
+    clickedButton.className += ' active';
+    console.log(clickedButton);
   }
 
   ngOnInit() {

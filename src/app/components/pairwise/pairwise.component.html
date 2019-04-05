@@ -119,32 +119,32 @@
                       <label class="collapse-division-label">
                         <a  data-toggle="collapse" href="#historyZoneTempPoints{{index}}{{i}}" role="button"
                             aria-expanded="false" aria-controls="zoneTemp">
-                            {{mainCriteria}}  <i class="material-icons float-right">
-                            keyboard_arrow_down
-                          </i>
+                          {{mainCriteria}}  <i class="material-icons float-right">
+                          keyboard_arrow_down
+                        </i>
                         </a>
                       </label>
-                       <div class="collapse" id="historyZoneTempPoints{{index}}{{i}}">
-                         <div class="card card-body" >
-                           <label>Criteria</label>
-                           <ul style="list-style-type:none;">
-                             <li *ngFor="let criteiaList of remainingList(index);let i = index;trackBy: trackByIndex;">
-                               <div class="row">
-                                 <div class="inside-division">
-                                    <h6>{{criteiaList}}</h6>
-                                 </div>
-                                 <div class="inside-division">
-                                   <mat-slider id="{{criteiaList}}%{{mainCriteria}}" thumbLabel min="0" max="10" value="5"
-                                      step="1" tickInterval="1" (change)="updateValues($event, criteiaList,mainCriteria)">
-                                   </mat-slider>
-                                 </div>
-                               </div>
-                             </li>
-                            </ul>
-                          </div>
+                      <div class="collapse" id="historyZoneTempPoints{{index}}{{i}}">
+                        <div class="card card-body" >
+                          <label>Criteria</label>
+                          <ul style="list-style-type:none;">
+                            <li *ngFor="let criteiaList of remainingList(index);let i = index;trackBy: trackByIndex;">
+                              <div class="row">
+                                <div class="inside-division">
+                                  <h6>{{criteiaList}}</h6>
+                                </div>
+                                <div class="inside-division">
+                                  <mat-slider id="{{criteiaList}}%{{mainCriteria}}" thumbLabel min="0" max="10" value="5"
+                                              step="1" tickInterval="1" (change)="updateValues($event, criteiaList,mainCriteria)">
+                                  </mat-slider>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
                         </div>
                       </div>
-                    </ng-container>
+                    </div>
+                  </ng-container>
                 </div>
               </div>
               <div id = "textboxDivisin" class="division">

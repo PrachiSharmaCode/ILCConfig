@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoryCriteriaComponent implements OnInit {
 
+  comparisonType: string;
+  pointName: string;
+  previousTime: number;
+  minimum: number;
+  maximum: number;
+
   constructor() { }
 
   ngOnInit() {
   }
-
 }

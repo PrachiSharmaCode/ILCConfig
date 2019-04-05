@@ -28,10 +28,25 @@
       </label>
       <div class="collapse" id="criteria">
         <div class="card card-body">
-          <h6>Ctriteria Names</h6>
-          <ng-container *ngFor="let criteria of criteriaList">
-            <h6>{{criteria}}</h6>
+          <h5>Ctriteria Names</h5>
+          <ng-container *ngFor="let criteria of criteriaList;let index = index;trackBy: trackByIndex;">
+            <h6>{{criteria}}  <button (click)="removeCriteria(index)"  style="color: crimson; background-color: transparent; border: none" class="material-icons float-right">
+              close
+            </button></h6>
+            <hr>
           </ng-container>
+          <div  class="row border border-secondary collapse-division" *ngIf="getCriteria" >
+            <mat-form-field class="example-full-width " style="width: 80%; margin-left: 20px">
+              <input matInput placeholder="Enter Criteria Name Here" [(ngModel)]="getCriteriaValue">
+            </mat-form-field>
+            <button (click)="UpdateCriteriaList()"  style="color: green; background-color: transparent; border: none" class="material-icons float-right">
+              check
+            </button>
+          </div>
+
+          <button id="addcriteria" (click)="addCriteria()"  type="button" class="btn btn-info btn-sm">
+            Add Criteria
+          </button>
         </div>
       </div>
     </div>
@@ -80,7 +95,7 @@
         <div class="collapse-division border border-dark">
           <label class="collapse-division-label">
             <a  data-toggle="collapse" href="#{{devices[index]}}" role="button"
-                  aria-expanded="false" aria-controls="zoneTemp">
+                aria-expanded="false" aria-controls="zoneTemp">
                 {{device}}  {{campus}}/{{building}}/{{device}}
                 <i class="material-icons float-right">
                   keyboard_arrow_down
@@ -95,9 +110,9 @@
                   <div>
                     <div class="collapse-division border border-secondary">
                       <label class="collapse-division-label">
-                        <a  data-toggle="collapse" href="#{{criteriaList[i]+i+index}}" role="button"
-                            aria-expanded="false" aria-controls="zoneTemp">
-                          {{criteria}}{{i}}{{index}}
+                        <a data-toggle="collapse" href="#{{criteriaList[i]+i+index}}" role="button"
+                           aria-expanded="false" aria-controls="zoneTemp">
+                          {{criteria}}
                           <i class="material-icons float-right">
                             keyboard_arrow_down
                           </i>
@@ -106,10 +121,9 @@
                       <div class="collapse" id="{{criteriaList[i]+i+index}}">
                         <div class="card card-body">
                           <div class="input-group mb-3">
-
                             <mat-form-field style="width: 100%">
                               <mat-label>Choose Operation Type</mat-label>
-                              <mat-select  [(ngModel)]="operation[i]">
+                              <mat-select  [(ngModel)]= operationtype[index][i]>
                                 <mat-option value="Formula">Formula</mat-option>
                                 <mat-option value="status">status</mat-option>
                                 <mat-option value="mapper">mapper</mat-option>
@@ -117,24 +131,21 @@
                                 <mat-option value="history">history</mat-option>
                               </mat-select>
                             </mat-form-field>
-
-                            <div *ngIf="operation[i] == 'Formula'">
-                              <app-formula-criteria></app-formula-criteria>
+                            <div *ngIf="operationtype[index][i] == 'Formula'">
+                              <app-formula-criteria [criteria]="criteria" (updateArgumenrt)= "checkArg($event)"></app-formula-criteria>
                             </div>
-                            <div *ngIf="operation[i] == 'status'">
+                            <div *ngIf="operationtype[index][i] == 'status'">
                               <app-status-criteria></app-status-criteria>
                             </div>
-                            <div *ngIf="operation[i] == 'mapper'">
+                            <div *ngIf="operationtype[index][i] == 'mapper'">
                               <app-mapper-criteria></app-mapper-criteria>
                             </div>
-                            <div *ngIf="operation[i] == 'constant'">
+                            <div *ngIf="operationtype[index][i] == 'constant'">
                               <app-constatnt-criteria></app-constatnt-criteria>
                             </div>
-                            <div *ngIf="operation[i] == 'history'">
+                            <div *ngIf="operationtype[index][i] == 'history'">
                               <app-history-criteria></app-history-criteria>
                             </div>
-
-
                           </div>
                         </div>
                       </div>

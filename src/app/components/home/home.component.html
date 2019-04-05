@@ -2,19 +2,19 @@
     <h4  align="center" style=" color: dimgrey" >ILC Configuration</h4>
     <ul class="nav justify-content-center mx-auto">
       <li class="nav-item pad-button">
-        <button  class="nav-link btn btn-outline-dark button-size " (click)="openHome()">Home</button>
+        <button id="homeButton"  class="nav-link btn btn-outline-dark button-size " (click)="openHome(); activeButton($event)">Home</button>
       </li>
       <li class="nav-item pad-button">
-        <button  class="nav-link btn btn-outline-dark button-size " (click)="openIlcConfig()">ILC Configuration</button>
+        <button id="ilcConfigButton" class="nav-link btn btn-outline-dark button-size active" (click)="openIlcConfig(); activeButton($event)">ILC Configuration</button>
       </li>
       <li class="nav-item pad-button">
-        <button class="nav-link btn btn-outline-dark button-size" (click)="openPairwise()">Pairwise</button>
+        <button id="pairwiseButton" class="nav-link btn btn-outline-dark button-size" (click)="openPairwise(); activeButton($event)">Pairwise</button>
       </li>
       <li class="nav-item pad-button">
-        <button  class="nav-link btn btn-outline-dark button-size" (click)="openCriteria()">Criteria Configuration</button>
+        <button id="criteriaButton" class="nav-link btn btn-outline-dark button-size" (click)="openCriteria(); activeButton($event)">Criteria Configuration</button>
       </li>
       <li class="nav-item pad-button">
-        <button  class="nav-link btn btn-outline-dark button-size" (click)="openCurtailment()">Curtailment Configuration</button>
+        <button id="curtailmentButton" class="nav-link btn btn-outline-dark button-size" (click)="openCurtailment(); activeButton($event)">Curtailment Configuration</button>
       </li>
     </ul>
 </nav>
@@ -38,7 +38,7 @@
             <li>
               <button class="btn btn-outline-dark button-size" (click)="openDocumentation()">Documentation</button>
             </li>
-      </ul>
+          </ul>
     </div>
   </div>
   <div *ngIf="homeOpen && showDocumentation"  class="centeredContent" >
@@ -67,9 +67,10 @@
   <div *ngIf="homeOpen && showILC" class="centeredButtonContent">
     <button type="button" class="btn btn-outline-dark btn-lg btn-block">Upload ILC File</button>
     <hr>
-    <button type="button" class="btn btn-outline-dark btn-lg btn-block" (click)="openIlcConfig()">Start new ILC Configuration</button>
+    <button id="ilcConfigHome" type="button" class="btn btn-outline-dark btn-lg btn-block" (click)="openIlcConfig($event)">Start new ILC Configuration</button>
   </div>
 </div>
+
 
 <div *ngIf="ilcCongifOpen">
   <app-ilcconfig [ilc] = "ilc" [mainModel] = "mainModel"></app-ilcconfig>
@@ -88,3 +89,5 @@
 </div>
 
 <router-outlet></router-outlet>
+
+

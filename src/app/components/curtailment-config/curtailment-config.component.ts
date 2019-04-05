@@ -55,29 +55,31 @@ export class CurtailmentConfigComponent implements OnInit {
   ngOnInit() {
     this.criteriaList = this.ilc.pairwiseCriteriaList;
     this.devices = this.ilc.devices;
-    console.log(this.devices);
     this.campus = this.ilc.campus;
-    this.building = this.ilc.building;
+    this.building =  this.ilc.building;
+    console.log(this.campus);
+    console.log(this.building);
     this.curtailmentList = this.ilc.curtailmentList;
-    for (let i = 0; i < this.devices.length; i++) {
-      this.curtailmentList.push({
-            firstStageCooling: {
-              deviceTopic: this.campus + '/' + this.building + '/' + this.devices[i],
-              deviceStatus: {
-                condition: '',
-                deviceStageArgs: ''
-              }
-            },
-            curtailmentSetting: {
-              point: '',
-              curtailmentMethod: '',
-              offset: '',
-              value: '',
-              load: ''
+    if (this.curtailmentList.length !== this.devices.length) {
+      for (const device of this.devices) {
+        this.curtailmentList.push({
+          firstStageCooling: {
+            deviceTopic: this.campus + '/' + this.building + '/' + device,
+            deviceStatus: {
+              condition: '',
+              deviceStageArgs: ''
             }
-      });
+          },
+          curtailmentSetting: {
+            point: '',
+            curtailmentMethod: '',
+            offset: '',
+            value: '',
+            load: ''
+          }
+        });
+      }
     }
-    this.curtailmentList = this.ilc.curtailmentList;
   }
 
   trackByIndex(index: number): any {
