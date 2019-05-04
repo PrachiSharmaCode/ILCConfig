@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FormulaCriteriaComponent } from './formula-criteria.component';
+import {FormulaCriteriaComponent} from './formula-criteria.component';
 
 describe('FormulaCriteriaComponent', () => {
   let component: FormulaCriteriaComponent;
@@ -8,9 +8,9 @@ describe('FormulaCriteriaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormulaCriteriaComponent ]
+      declarations: [FormulaCriteriaComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ILCConfigComponent } from './ilcconfig.component';
+import {ILCConfigComponent} from './ilcconfig.component';
 
 describe('ILCConfigComponent', () => {
   let component: ILCConfigComponent;
@@ -8,9 +8,9 @@ describe('ILCConfigComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ILCConfigComponent ]
+      declarations: [ILCConfigComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

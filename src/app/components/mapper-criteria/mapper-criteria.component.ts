@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-mapper-criteria',
@@ -10,7 +10,8 @@ export class MapperCriteriaComponent implements OnInit {
   distName: string;
   mapKey: string;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

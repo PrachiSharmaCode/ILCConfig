@@ -1,25 +1,37 @@
 <div class="row">
   <div class="division" align="left">
-      <h5>Installation Configuration</h5>
-      <div>
-        <label>Campus</label>
-        <input type="text" class="form-control" [(ngModel)]="campus">
-        <label>Building</label>
-        <input type="text" class="form-control" [(ngModel)]="building">
-        <div class="collapse-division">
+    <h5>Installation Configuration</h5>
+    <div >
+      <mat-form-field style="width: 100%" class="example-full-width">
+        <input matInput placeholder="Campus"
+               [(ngModel)]="campus"></mat-form-field>
+      <mat-form-field style="width: 100%" class="example-full-width">
+        <input matInput placeholder="Buidling"
+               [(ngModel)]="building"></mat-form-field>
+      <!--<label>Campus</label>-->
+      <!--<input type="text" class="form-control" [(ngModel)]="campus">-->
+      <!--<label>Building</label>-->
+      <!--<input type="text" class="form-control" [(ngModel)]="building">-->
+      <div class="collapse-division">
         <label class="collapse-division-label">
-          <p  data-toggle="collapse" href="#collapseExample" role="button"
-              aria-expanded="false" aria-controls="collapseExample">
-              Power Meter
-              <i class="material-icons float-right">keyboard_arrow_down</i>
+          <p data-toggle="collapse" href="#collapseExample" role="button"
+             aria-expanded="false" aria-controls="collapseExample">
+            Power Meter
+            <i class="material-icons float-right">keyboard_arrow_down</i>
           </p>
         </label>
         <div class="collapse" id="collapseExample">
-          <div id="powerMeter"class="card card-body">
-            <label>Device</label>
-            <input type="text" class="form-control" [(ngModel)]="device">
-            <label>Point</label>
-            <input type="text" class="form-control" [(ngModel)]="point">
+          <div id="powerMeter" class="card card-body">
+            <mat-form-field style="width: 100%" class="example-full-width">
+              <input matInput placeholder="Device"
+                     [(ngModel)]="device"></mat-form-field>
+            <!--<label>Device</label>-->
+            <!--<input type="text" class="form-control" [(ngModel)]="device">-->
+            <mat-form-field style="width: 100%" class="example-full-width">
+              <input matInput placeholder="Point"
+                     [(ngModel)]="point"></mat-form-field>
+            <!--<label>Point</label>-->
+            <!--<input type="text" class="form-control" [(ngModel)]="point">-->
             <label>Demand Formula (Optional)</label>
             <input type="text" class="form-control" [(ngModel)]="demandFormula">
             <ul class="list-unstyled">
@@ -28,42 +40,60 @@
                 <input type="text" class="form-control" [(ngModel)]="demandformulaAgrsArr[index]">
               </li>
             </ul>
-        </div>
+          </div>
           <button id="addparam" (click)="addDemandFormula()" type="button" class="btn btn-info btn-sm">
             Add Parameter
           </button>
         </div>
       </div>
-    <label>AgentID</label>
-    <input type="text" class="form-control" [(ngModel)]="agentId">
-    <label>Demand Limit</label>
-    <input type="text" class="form-control" [(ngModel)]="demandLimit">
-    <label>Curtailment Time</label>
-    <input type="text" class="form-control" [(ngModel)]="curtailmentTime">
-    <label>Curtailment Confirm</label>
-    <input type="text" class="form-control" [(ngModel)]="curtailmentConfirm">
-    <label>Curtailment Break</label>
-    <input type="text" class="form-control" [(ngModel)]="curtailmentBreak">
-    <label>Building Power Window (Average)</label>
-    <input type="text" class="form-control" [(ngModel)]="buildingPowerWindow">
-    <input class="check-input" type="checkbox" [(ngModel)]="staggerRelease">Stagger release<br>
-    <input class="check-input" type="checkbox" [(ngModel)]="staggerOfftime">Stagger Off time<br>
-  </div>
+      <mat-form-field style="width: 100%" class="example-full-width">
+        <input matInput placeholder="AgentID"
+               [(ngModel)]="agentId"></mat-form-field>
+      <!--<label>AgentID</label>-->
+      <!--<input type="text" class="form-control" [(ngModel)]="agentId">-->
+      <mat-form-field style="width: 100%" class="example-full-width">
+        <input matInput placeholder="Demand Limit"
+               [(ngModel)]="demandLimit"></mat-form-field>
+      <!--<label>Demand Limit</label>-->
+      <!--<input type="text" class="form-control" [(ngModel)]="demandLimit">-->
+      <mat-form-field style="width: 100%" class="example-full-width">
+        <input matInput placeholder="Curtailment Time"
+               [(ngModel)]="curtailmentTime"></mat-form-field>
+      <!--<label>Curtailment Time</label>-->
+      <!--<input type="text" class="form-control" [(ngModel)]="curtailmentTime">-->
+      <mat-form-field style="width: 100%" class="example-full-width">
+        <input matInput placeholder="Curtailment Confirm"
+               [(ngModel)]="curtailmentConfirm"></mat-form-field>
+      <!--<label>Curtailment Confirm</label>-->
+      <!--<input type="text" class="form-control" [(ngModel)]="curtailmentConfirm">-->
+      <mat-form-field style="width: 100%" class="example-full-width">
+        <input matInput placeholder="Curtailment Break"
+               [(ngModel)]="curtailmentBreak"></mat-form-field>
+      <!--<label>Curtailment Break</label>-->
+      <!--<input type="text" class="form-control" [(ngModel)]="curtailmentBreak">-->
+      <mat-form-field style="width: 100%" class="example-full-width">
+        <input matInput placeholder="Building Power Window (Average)"
+               [(ngModel)]="buildingPowerWindow"></mat-form-field>
+      <!--<label>Building Power Window (Average)</label>-->
+      <!--<input type="text" class="form-control" [(ngModel)]="buildingPowerWindow">-->
+      <input class="check-input" type="checkbox" [(ngModel)]="staggerRelease">Stagger release<br>
+      <input class="check-input" type="checkbox" [(ngModel)]="staggerOfftime">Stagger Off time<br>
+    </div>
   </div>
 
-  <div class="division " align="left" >
-     <div id="clusterBlock">
-      <h5 >Clusters</h5>
-          <app-cluster [ilc]="ilc" [mainModel] = "mainModel"></app-cluster>
-     </div>
+  <div class="division " align="left">
+    <div id="clusterBlock">
+      <h5>Clusters</h5>
+      <app-cluster [ilc]="ilc" [mainModel]="mainModel"></app-cluster>
+    </div>
   </div>
 
   <div class="division">
     <div class="row">
       <h5>File Preview</h5>
-      <a (click)="onRefeshClick()" class="btn btn-outline-dark  button-size" >Refresh</a>
+      <a (click)="onRefeshClick()" class="btn btn-outline-dark  button-size">Refresh</a>
       <a href=#finalCal class="btn btn-outline-dark  button-size"
-         download="finalCalculation" (click)="saveCalculation()">Save As...</a>
+         download="finalCalculation" (click)="saveCalculation()">Save</a>
     </div>
     <textarea id="finalCal">
       {{finalCalculation}}

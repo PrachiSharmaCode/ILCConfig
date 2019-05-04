@@ -1,60 +1,58 @@
-.division{
-  float:left;
+.division {
+  float: left;
   width: 30%;
   margin-left: 48px;
 }
 
-.inside-division
-{
+.inside-division {
   float: left;
   width: 50%;
 }
 
-.div-outline{
+.div-outline {
   margin-top: 10px;
   margin-bottom: 10px;
   border-style: groove;
 }
 
-.collapse-division{
+.collapse-division {
   margin-top: 10px;
   margin-bottom: 10px;
   border-style: groove;
 }
 
-.collapse-division-label{
+.collapse-division-label {
   width: 100%;
 }
 
-.slider-design{
+.slider-design {
   width: 80%;
   margin-left: 10px;
 }
 
-.button-size{
+.button-size {
   width: 100px;
   text-align: center;
   border-radius: 100px;
   margin-left: 10px;
 }
 
-
-textarea{
+textarea {
   margin-top: 2%;
   background-color: lightgray;
   width: 90%;
   height: 80%;
 }
 
-.div-inbetween-padding{
+.div-inbetween-padding {
   margin-top: 5%;
 }
 
-.div-top-padding{
+.div-top-padding {
   margin-top: 15%;
 }
 
-.centeredContent{
+.centeredContent {
   position: absolute;
   top: 25%;
   left: 40%;

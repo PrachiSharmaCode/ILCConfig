@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HistoryCriteriaComponent } from './history-criteria.component';
+import {HistoryCriteriaComponent} from './history-criteria.component';
 
 describe('HistoryCriteriaComponent', () => {
   let component: HistoryCriteriaComponent;
@@ -8,9 +8,9 @@ describe('HistoryCriteriaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HistoryCriteriaComponent ]
+      declarations: [HistoryCriteriaComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

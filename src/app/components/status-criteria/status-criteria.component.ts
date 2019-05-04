@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-status-criteria',
@@ -12,7 +12,8 @@ export class StatusCriteriaComponent implements OnInit {
   offValue: number;
 
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

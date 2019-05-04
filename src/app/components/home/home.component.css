@@ -1,14 +1,15 @@
 
-nav{
+nav {
   margin-bottom: 30px;
 }
-.button-size{
+
+.button-size {
   width: 250px;
   text-align: center;
   border-radius: 100px;
 }
 
-.sidenav{
+.sidenav {
   height: 100%;
   width: 290px;
   position: fixed;
@@ -20,19 +21,20 @@ nav{
   overflow-x: hidden;
   /*margin-top: 72px;*/
 }
-.left{
+
+.left {
   left: 0;
 }
 
-.right{
+.right {
   right: 0;
 }
 
-.navBorder{
+.navBorder {
   border-bottom: thick double darkgrey;
 }
 
-.centered{
+.centered {
   position: absolute;
   top: 30%;
   left: 50%;
@@ -40,7 +42,7 @@ nav{
   text-align: center;
 }
 
-.centeredContent{
+.centeredContent {
   position: absolute;
   top: 25%;
   left: 40%;
@@ -48,11 +50,15 @@ nav{
   text-align: center;
 }
 
-.active{
+.active {
   background-color: darkgrey;
 }
 
-.centeredButtonContent{
+.activeBar {
+  background-color: darkgrey;
+}
+
+.centeredButtonContent {
   position: absolute;
   top: 30%;
   left: 50%;
@@ -60,9 +66,8 @@ nav{
   text-align: center;
 }
 
-.center-div
-{
- text-align: center;
+.center-div {
+  text-align: center;
   display: inline-block;
 }
 
@@ -72,22 +77,22 @@ nav{
   }
 }
 
-.pad-button{
+.pad-button {
   padding-left: 10px;
 }
 
-.button-size{
+.button-size {
   width: 230px;
   text-align: center;
   border-radius: 100px;
 }
 
 
-hr{
+hr {
   border-color: black;
 }
 
-.para-size{
+.para-size {
   width: 500px;
   text-align: center;
 }

@@ -1,140 +1,171 @@
-<div class="row">
-    <div class="division">
-      <div class="collapse-division">
-        <label class="collapse-division-label">
-          <h5  data-toggle="collapse" href="#ilcConfig" role="button"
-               aria-expanded="false" aria-controls="zoneTemp">
-            ILC Config  <i id="ilcConfigIcon" class="material-icons">
-            keyboard_arrow_down
-          </i>
-          </h5>
-        </label>
-        <div class="collapse" id="ilcConfig">
-          <div class="card card-body">
-            <h6>Current Device Topic Stem</h6>
-            <h6>CAMPUS/BUILDING</h6>
-          </div>
-        </div>
-      </div>
-      <div class="collapse-division div-inbetween-padding">
-        <label class="collapse-division-label">
-          <h5  data-toggle="collapse" href="#criteria" role="button"
-               aria-expanded="false" aria-controls="zoneTemp">
-            Criteria  <i id="criteriaIcon" class="material-icons ">
-            keyboard_arrow_down
-          </i>
-          </h5>
-        </label>
-        <div class="collapse" id="criteria">
-          <div class="card card-body">
-            <h5>Ctriteria Names</h5>
-            <ng-container *ngFor="let criteria of criteriaList">
-              <h6>{{criteria}}</h6>
-            </ng-container>
-          </div>
-        </div>
-      </div>
-      <div class="collapse-division div-inbetween-padding">
-        <label class="collapse-division-label">
-          <h5  data-toggle="collapse" href="#Devices" role="button"
-               aria-expanded="false" aria-controls="zoneTemp">
-            Devices  <i id="deviceIcon"  class="material-icons">
-            keyboard_arrow_down
-          </i>
-          </h5>
-        </label>
-        <div class="collapse" id="Devices">
-          <div class="card card-body">
-            <ul style="list-style-type:none;">
-              <li *ngFor="let device of devices">
-                <h6>{{device}}</h6>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="collapse-division div-inbetween-padding">
-        <label class="collapse-division-label">
-          <h5  data-toggle="collapse" href="#pointNames" role="button"
-               aria-expanded="false" aria-controls="zoneTemp">
-            Point Names  <i id="pointNamesIcon" class="material-icons icon-padding-point">
-            keyboard_arrow_down
-          </i>
-          </h5>
-        </label>
-        <div class="collapse" id="pointNames">
-          <div class="card card-body">
-            <h6>AverageZomeTemperature</h6>
-            <h6>CoolingTemperatureSetPoint</h6>
-            <h6>FirstStageCooling</h6>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="accordion" id="accordionExample" style="height: 80%; margin-left: 20px; margin-right: 20px;">
+  <ng-container *ngFor="let cluster of clusterList;let i = index;trackBy: trackByIndex;">
 
-    <div class="division">
-      <h5>Criteria Configuration</h5>
-      <div>
-        <ul style="list-style-type:none;">
-          <li *ngFor="let curtail of curtailmentList;let index = index;trackBy: trackByIndex;">
-            <div class="collapse-division">
+    <div class="card" style="margin-bottom: 10px; border-left: 6px solid black">
+      <div class="card-header border border-secondary" id="headingOne"
+           style="text-align: center;">
+        <label class="collapse-division-label">
+          <a data-toggle="collapse" href="#demo{{i}}" role="button" aria-expanded="false" aria-controls="zoneTemp">
+            {{cluster._deviceCurtailmentFile}}  <i class="material-icons float-right">
+            keyboard_arrow_down
+          </i>
+          </a>
+        </label>
+      </div>
+      <div id="demo{{i}}" class="collapse border border-dark" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="row">
+          <div class="division">
+            <div class="collapse-division border border-secondary">
               <label class="collapse-division-label">
-                <a  data-toggle="collapse" href="#{{devices[index]}}" role="button"
-                    aria-expanded="false" aria-controls="zoneTemp">
-                  {{devices[index]}} {{curtail.firstStageCooling.deviceTopic}}
-                  <i class="material-icons ">
-                    keyboard_arrow_down
-                  </i>
+                <a data-toggle="collapse" href="#ilcConfig{{i}}" role="button"
+                   aria-expanded="false" aria-controls="zoneTemp">
+                  ILC Config <i id="ilcConfigIcon" class="material-icons float-right">
+                  keyboard_arrow_down
+                </i>
                 </a>
               </label>
-              <div class="collapse" id="{{devices[index]}}">
+              <div class="collapse" id="ilcConfig{{i}}">
                 <div class="card card-body">
-                  <div>
-                    <h5>First Stage Cooling</h5>
-                    <p><label>Device Status</label></p>
-                    <label>Device Status Arguments</label>
-                    <input type="text" class="form-control"
-                           [(ngModel)]= curtail.firstStageCooling.deviceStatus.deviceStageArgs>
-                    <label>Condition</label>
-                    <input type="text" class="form-control"
-                           [(ngModel)]=curtail.firstStageCooling.deviceStatus.condition>
-
-                    <h5>Curtailment Setting</h5>
-                    <label>Point</label>
-                    <input type="text" class="form-control"
-                           [(ngModel)]=curtail.curtailmentSetting.point>
-                    <label>Curtailment Method</label>
-                    <input type="text" class="form-control"
-                           [(ngModel)]=curtail.curtailmentSetting.curtailmentMethod>
-                    <label>Offset</label>
-                    <input type="text" class="form-control"
-                           [(ngModel)]=curtail.curtailmentSetting.offset>
-                    <label>value</label>
-                    <input type="text" class="form-control"
-                           [(ngModel)]=curtail.curtailmentSetting.value>
-                    <label>Load</label>
-                    <input type="text" class="form-control"
-                           [(ngModel)]=curtail.curtailmentSetting.load>
-                    <div>
-                    </div>
-                  </div>
+                  <h6>Current Device Topic Stem</h6>
+                  <h6>CAMPUS/BUILDING</h6>
                 </div>
               </div>
             </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="division">
-      <div class="row">
-          <h5 style="margin-left: 3%">File Preview</h5>
-          <a style="margin-left: 3%"class="btn btn-outline-dark  button-size" (click)="onRefreshButton()">Refresh</a>
-          <a style="margin-left: 3%"class="btn btn-outline-dark  button-size" (click)="saveCurtailmentCalculation()">Save As...</a>
-      </div>
-        <textarea id="checktext">
-          {{finalCalculation}}
+            <div class="collapse-division div-inbetween-padding border border-secondary">
+              <label class="collapse-division-label">
+                <a data-toggle="collapse" href="#criteria{{i}}" role="button"
+                   aria-expanded="false" aria-controls="zoneTemp">
+                  Criteria <i id="criteriaIcon" class="material-icons float-right">
+                  keyboard_arrow_down
+                </i>
+                </a>
+              </label>
+              <div class="collapse" id="criteria{{i}}">
+                <div class="card card-body">
+                  <h5>Ctriteria Names</h5>
+                  <ng-container *ngFor="let criteria of criteriaList">
+                    <h6>{{criteria}}</h6>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="collapse-division div-inbetween-padding border border-secondary">
+              <label class="collapse-division-label">
+                <a data-toggle="collapse" href="#Devices{{i}}" role="button"
+                   aria-expanded="false" aria-controls="zoneTemp">
+                  Devices <i id="deviceIcon" class="material-icons float-right">
+                  keyboard_arrow_down
+                </i>
+                </a>
+              </label>
+              <div class="collapse" id="Devices{{i}}">
+                <div class="card card-body">
+                  <ul style="list-style-type:none;">
+                    <li *ngFor="let device of devices">
+                      <h6>{{device}}</h6>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="collapse-division div-inbetween-padding border border-secondary">
+              <label class="collapse-division-label">
+                <a data-toggle="collapse" href="#pointNames{{i}}" role="button"
+                   aria-expanded="false" aria-controls="zoneTemp">
+                  Point Names <i id="pointNamesIcon" class="material-icons float-right">
+                  keyboard_arrow_down
+                </i>
+                </a>
+              </label>
+              <div class="collapse" id="pointNames{{i}}">
+                <div class="card card-body">
+                  <h6>AverageZomeTemperature</h6>
+                  <h6>CoolingTemperatureSetPoint</h6>
+                  <h6>FirstStageCooling</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="division">
+            <h5>Criteria Configuration</h5>
+            <div>
+              <ng-container
+                *ngFor="let list of curtailmentModelList[i].curtailmentList;let index = index;trackBy: trackByIndex;">
+                <div class="collapse-division border border-secondary">
+                  <label class="collapse-division-label">
+                    <a data-toggle="collapse" href="#{{index}}{{i}}" role="button"
+                       aria-expanded="false" aria-controls="zoneTemp">
+                      {{devices[index]}} {{list.firstStageCooling.deviceTopic}}
+                      <i class="material-icons float-right">
+                        keyboard_arrow_down
+                      </i>
+                    </a>
+                  </label>
+                  <div class="collapse" id="{{index}}{{i}}">
+                    <div class="card card-body">
+                      <div>
+                        <h5>First Stage Cooling</h5>
+
+                        <p><label>Device Status</label></p>
+
+                        <mat-form-field style="width: 100%" class="example-full-width">
+                          <input matInput placeholder="Device Status Arguments "
+                                 [(ngModel)]="list.firstStageCooling.deviceStatus.deviceStageArgs"></mat-form-field>
+
+                        <mat-form-field style="width: 100%" class="example-full-width">
+                          <input matInput placeholder="Condition"
+                                 [(ngModel)]="list.firstStageCooling.deviceStatus.condition"></mat-form-field>
+
+                        <h5>Curtailment Setting</h5>
+
+                        <mat-form-field style="width: 100%" class="example-full-width">
+                          <input matInput placeholder="Point"
+                                 [(ngModel)]="list.curtailmentSetting.point"></mat-form-field>
+
+                        <mat-form-field style="width: 100%" class="example-full-width">
+                          <input matInput placeholder="Curtailment Method"
+                                 [(ngModel)]="list.curtailmentSetting.curtailmentMethod"></mat-form-field>
+
+                        <mat-form-field style="width: 100%" class="example-full-width">
+                          <input matInput placeholder="Offset"
+                                 [(ngModel)]="list.curtailmentSetting.offset"></mat-form-field>
+
+                        <mat-form-field style="width: 100%" class="example-full-width">
+                          <input matInput placeholder="Value"
+                                 [(ngModel)]="list.curtailmentSetting.value"></mat-form-field>
+
+                        <mat-form-field style="width: 100%" class="example-full-width">
+                          <input matInput placeholder="Load"
+                                 [(ngModel)]="list.curtailmentSetting.load"></mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+          <div class="division">
+            <div class="row">
+              <h5 style="margin-left: 3%">File Preview</h5>
+              <a style="margin-left: 3%" class="btn btn-outline-dark  button-size"
+                 (click)="onRefreshButton(i)">Refresh</a>
+              <a style="margin-left: 3%" class="btn btn-outline-dark  button-size"
+                 (click)="saveCurtailmentCalculation(i)">Save</a>
+            </div>
+            <textarea id="checktext">
+          {{curtailmentModelList[i].setFinalCalulation()}}
         </textarea>
+          </div>
+        </div>
+      </div>
     </div>
+  </ng-container>
 </div>
+
+
+
+
+
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-history-criteria',
@@ -13,7 +13,8 @@ export class HistoryCriteriaComponent implements OnInit {
   minimum: number;
   maximum: number;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

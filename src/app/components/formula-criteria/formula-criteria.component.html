@@ -1,11 +1,11 @@
 <ng-container *ngFor="let arg of argument;let i = index;trackBy: trackByIndex;">
   <mat-form-field style="width: 100%">
     <mat-label>Arguments</mat-label>
-    <mat-select  [(ngModel)]= "argument[i]">
+    <mat-select [(ngModel)]="argument[i]">
       <mat-option value="CoolingTemperatureSetPoint">CoolingTemperatureSetPoint</mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-radio-group aria-label="Select an option" >
+  <mat-radio-group aria-label="Select an option">
     <mat-radio-button value="always">Always</mat-radio-button>&nbsp;&nbsp;&nbsp;
     <mat-radio-button value="not curtailed">Not Curtailed</mat-radio-button>
   </mat-radio-group>

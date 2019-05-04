@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { StatusCriteriaComponent } from './status-criteria.component';
+import {StatusCriteriaComponent} from './status-criteria.component';
 
 describe('StatusCriteriaComponent', () => {
   let component: StatusCriteriaComponent;
@@ -8,9 +8,9 @@ describe('StatusCriteriaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StatusCriteriaComponent ]
+      declarations: [StatusCriteriaComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,50 +1,58 @@
 <div>
-    <ng-container *ngFor="let cluster of clusterList;let index = index;trackBy: trackByIndex;">
-      <div>
-          <div class="collapse-division" style="clear: none;">
-            <label class="collapse-division-label" style="text-align: center">
-              <i (click)="removeCluster(index)" style="color: red" class="material-icons float-left">
-                remove_circle_outline
-              </i>
-              <a style="padding-left: 5px" data-toggle="collapse"
-                  href="#Cluster{{index}}" role="button" aria-expanded="false" aria-controls="collapseExample">
-                {{cluster._clusterName}}
-                <i class="material-icons float-right">
-                  keyboard_arrow_down
-                </i>
-              </a>
-            </label>
-            <div class="collapse" id="Cluster{{index}}">
-              <div class="card card-body" id="clusterForm">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Cluster Priority"
-                         [(ngModel)]=cluster._clusterPriority name="clusterPtiority"></mat-form-field>
-                <mat-form-field class="example-full-width">
-                  <input  matInput id="pairwiseCriteriaFile" placeholder="Pairwise criteria File"
-                          [(ngModel)]=cluster._pairwiseCriteriaFile name="pairwiseCriteria"></mat-form-field>
-                <mat-form-field class="example-full-width">
-                  <input matInput id="deviceCrteriaFile" placeholder="Device Criteria File"
-                         [(ngModel)]=cluster._deviceCriteriaFile name="devceCriteriaFile"></mat-form-field>
-                <mat-form-field class="example-full-width">
-                  <input matInput id="deviceCurtailmentFile" placeholder="Device Curtailment file"
-                         [(ngModel)]=cluster._deviceCurtailmentFile name="deviceCurtailment"></mat-form-field>
-
-              </div>
-            </div>
+  <ng-container *ngFor="let cluster of clusterList;let index = index;trackBy: trackByIndex;">
+    <div>
+      <div class=" border border-secondary collapse-division" style="clear: none;">
+        <label class="collapse-division-label" style="text-align: center">
+          <i (click)="removeCluster(index)" style="color: red" class="material-icons float-left">
+            remove_circle_outline
+          </i>
+          <a style="padding-left: 5px" data-toggle="collapse"
+             href="#Cluster{{index}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+            {{cluster._clusterName}}
+            <i class="material-icons float-right">
+              keyboard_arrow_down
+            </i>
+          </a>
+        </label>
+        <div class="collapse" id="Cluster{{index}}">
+          <div class="card card-body" id="clusterForm">
+            <mat-form-field style="width: 100%">
+              <mat-label>Cluster Type</mat-label>
+              <mat-select [(ngModel)]=clusterType>
+                <mat-option value="RTU">RTU</mat-option>
+                <mat-option value="AUS">AUS</mat-option>
+                <mat-option value="LIGHT">LIGHT</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Cluster Priority"
+                     [(ngModel)]=cluster._clusterPriority name="clusterPtiority"></mat-form-field>
+            <mat-form-field class="example-full-width">
+              <input matInput id="pairwiseCriteriaFile" placeholder="Pairwise criteria File"
+                     [(ngModel)]=cluster._pairwiseCriteriaFile name="pairwiseCriteria"></mat-form-field>
+            <mat-form-field class="example-full-width">
+              <input matInput id="deviceCrteriaFile" placeholder="Device Criteria File"
+                     [(ngModel)]=cluster._deviceCriteriaFile name="devceCriteriaFile"></mat-form-field>
+            <mat-form-field class="example-full-width">
+              <input matInput id="deviceCurtailmentFile" placeholder="Device Curtailment file"
+                     [(ngModel)]=cluster._deviceCurtailmentFile name="deviceCurtailment"></mat-form-field>
           </div>
+        </div>
       </div>
-        </ng-container>
+    </div>
+  </ng-container>
 </div>
 
-<div  class="row border border-secondary collapse-division" *ngIf="getCluster" >
+<div class="row" *ngIf="getCluster">
   <mat-form-field class="example-full-width " style="width: 80%; margin-left: 20px">
     <input matInput placeholder="Enter Criteria Name Here" [(ngModel)]="clusterName">
   </mat-form-field>
-  <button (click)="addCluster()"  style="color: green; background-color: transparent; border: none" class="material-icons float-right">
-    check
+  <button (click)="addCluster()" style="color: green; background-color: transparent; border: none"
+          class="material-icons float-right"> check
   </button>
 </div>
 
 <button id="addCluster" (click)="newCluster()"
-        type="button" style="alignment: center" class="btn btn-info btn-sm">Add Device Cluster</button>
+        type="button" style="alignment: center" class="btn btn-info btn-sm">Add Device Cluster
+</button>
 

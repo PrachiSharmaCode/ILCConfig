@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PairwiseComponent } from './pairwise.component';
+import {PairwiseComponent} from './pairwise.component';
 
 describe('PairwiseComponent', () => {
   let component: PairwiseComponent;
@@ -8,9 +8,9 @@ describe('PairwiseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PairwiseComponent ]
+      declarations: [PairwiseComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

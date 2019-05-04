@@ -2,8 +2,8 @@ export class ILCCongig {
 
   private _calculation: string;
   /***ILC Configuration***/
-  private _campus: string;
-  private _building: string;
+  private _campus = 'Campus';
+  private _building = 'Building';
   private _device: string;
   private _point: string;
   private _demandFormula: string;
@@ -18,22 +18,20 @@ export class ILCCongig {
   private _staggerOfftime: string;
 
   /***CLUSTER***/
-  private _clusterList = [];
+  private _cluster = [];
 
   /***ILCCONFIG CALCULATION***/
   private _finalCalcualtion: string;
 
   /***PAIRWISE***/
   private _pairwiseCriteriaList = ['zonetemperature', 'stage',
-                                    'history-zonetemperature',
-                                    'rated-power', 'room-type'];
+    'history-zonetemperature',
+    'rated-power', 'room-type'];
   private _pairwiaseCalculation: string;
   private _pairwisecdriteria: Map<any, any>;
 
   /***CRITERIA***/
   private _devices = ['HP1', 'HP2', 'HP3'];
-  private _curtailmentList = [];
-  private _curtailmentCalculation: string;
 
   /*****GETTERS & SETTER*****/
   get campus(): string {
@@ -150,11 +148,11 @@ export class ILCCongig {
   }
 
   get clusterList(): any[] {
-    return this._clusterList;
+    return this._cluster;
   }
 
   updateClusterList(listOfCluster) {
-    this._clusterList = listOfCluster;
+    this._cluster = listOfCluster;
   }
 
   get pairwiseCriteriaList(): string[] {
@@ -166,7 +164,7 @@ export class ILCCongig {
   }
 
   get pairwisecdriteria(): Map<any, any> {
-    if(this._pairwisecdriteria === undefined) {
+    if (this._pairwisecdriteria === undefined) {
       let dummy = new Map();
       dummy.set('', '');
       return dummy;
@@ -174,47 +172,7 @@ export class ILCCongig {
     return this._pairwisecdriteria;
   }
 
-  set pairwisecdriteria(value: Map<any, any>) {
-    this._pairwisecdriteria = value;
-  }
-
-  get pairwiaseCalculation(): string {
-    if(this._pairwisecdriteria === undefined) {
-      return '';
-    }
-    let obj = [];
-    let num = 0;
-    while (num < this._pairwiseCriteriaList.length) {
-      let oobj = [];
-      const mainCriteria = this._pairwiseCriteriaList[num];
-      const hmap = this._pairwisecdriteria.get(mainCriteria);
-      for (let i = num + 1; i < this._pairwiseCriteriaList.length; i++) {
-        let followCriteria = '';
-        let followCriteriaValue = '';
-        followCriteria = this._pairwiseCriteriaList[i];
-        followCriteriaValue = hmap.get(this._pairwiseCriteriaList[i]);
-        let check = {};
-        check = {[followCriteria]: followCriteriaValue};
-        oobj.push(check);
-      }
-      obj.push({
-        [mainCriteria]: {
-          oobj
-        }
-      });
-      num++;
-    }
-    this._pairwiaseCalculation = JSON.stringify(obj, null, 4)
-      .replace('[', '').replace(']', '')
-      .replace(/\"oobj\":/g, '');
-    return this._pairwiaseCalculation;
-  }
-
-  set pairwiaseCalculation(value: string) {
-    this._pairwiaseCalculation = value;
-  }
-
-  setILCConfig(campus, building , device, point, demandFormula, demandFormulaArgs, agentId, demandLimit,
+  setILCConfig(campus, building, device, point, demandFormula, demandFormulaArgs, agentId, demandLimit,
                curtailmentTime, curtailmentConfim, curtailmentBreak, buildingPowerWindow, staggerRelease,
                staggerOfftime) {
     this._campus = campus;
@@ -253,20 +211,13 @@ export class ILCCongig {
       average_building_power_window: this._buildingPowerWindow,
       stagger_release: this._staggerRelease,
       stagger_off_time: this._staggerOfftime,
-      cluster: this._clusterList,
+      cluster: this._cluster,
     };
     this._finalCalcualtion = JSON.stringify(obj, null, 4);
     return this._finalCalcualtion;
   }
 
-  get calculation(): string {
-    this._calculation = this._finalCalcualtion + this._pairwiaseCalculation;
-    return this._calculation;
-  }
 
-  set calculation(value: string) {
-    this._calculation = value;
-  }
 
   get devices(): string[] {
     return this._devices;
@@ -276,31 +227,10 @@ export class ILCCongig {
     this._devices = value;
   }
 
-  get curtailmentList(): any[] {
-    return this._curtailmentList;
-  }
 
-  print(){
-    console.log('**********')
-    console.log(this._curtailmentList);
-  }
 
-  set curtailmentList(value: any[]) {
-    this._curtailmentList = value;
-  }
 
-  get curtailmentCalculation(): string {
-    let obj = {};
-    for (let i = 0; i < this.devices.length; i++) {
-      obj[this.devices[i]] = this._curtailmentList[i];
-    }
-    this._curtailmentCalculation = JSON.stringify(obj, null, 4);
-    return this._curtailmentCalculation;
-  }
 
-  set curtailmentCalculation(value: string) {
-    this._curtailmentCalculation = value;
+  constructor() {
   }
-
-  constructor() {}
 }

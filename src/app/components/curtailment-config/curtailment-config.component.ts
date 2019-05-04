@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ILCCongig} from '../../model/ILCConfig.model';
 import * as FileSaver from 'file-saver';
+import {CurtailmentModel} from '../../model/curtailment.model';
+import {MainModel} from '../../model/main.model';
 
 @Component({
   selector: 'app-curtailment-config',
@@ -10,19 +12,31 @@ import * as FileSaver from 'file-saver';
 export class CurtailmentConfigComponent implements OnInit {
 
   @Input() ilc: ILCCongig;
+  @Input() curtailment: CurtailmentModel;
+  @Input() mainModel: MainModel;
+
+  curtailmentModelList: CurtailmentModel[] = [];
+
+  clusterList: {
+    _deviceCriteriaFile: string;
+    _deviceCurtailmentFile: string;
+    _pairwiseCriteriaFile: string;
+    _clusterPriority: string
+  }[];
 
   criteriaList: string[];
   devices: string[];
   campus: string;
-  building: string;
-  finalCalculation: string;
-  curtailmentList: {
-    firstStageCooling: {
-      deviceTopic: string,
-      deviceStatus: {
-        condition: string,
-        deviceStageArgs: string
-      }
+      building: string;
+      finalCalculation: string;
+
+      curtailmentList: {
+        firstStageCooling: {
+          deviceTopic: string,
+          deviceStatus: {
+            condition: string,
+            deviceStageArgs: string
+          }
     },
     curtailmentSetting: {
       point: string,
@@ -31,40 +45,37 @@ export class CurtailmentConfigComponent implements OnInit {
       value: string,
       load: string
     }
-  }[];
+  }[] = [];
 
-  constructor() { }
-
-  checkList() {
-    console.log(this.curtailmentList);
+  constructor() {
   }
 
-  onRefreshButton() {
-    this.ilc.curtailmentList = this.curtailmentList;
-    this.finalCalculation = this.ilc.curtailmentCalculation;
+  onRefreshButton(i) {
+    this.curtailmentModelList[i].updateCurtailmentList(this.curtailmentModelList[i].curtailmentList);
+    this.finalCalculation = this.curtailmentModelList[i].setFinalCalulation();
     console.log(this.finalCalculation);
-    this.ilc.print();
   }
 
-  saveCurtailmentCalculation() {
-    const file = new Blob([this.ilc.curtailmentCalculation],
+  saveCurtailmentCalculation(i) {
+    const file = new Blob([this.curtailmentModelList[i].curtailmentCalculation],
       {type: 'json'});
-    FileSaver.saveAs(file, 'curtailment.json');
+    FileSaver.saveAs(file, this.clusterList[i]._deviceCurtailmentFile);
   }
 
   ngOnInit() {
+    this.clusterList = this.ilc.clusterList;
+    this.curtailmentModelList = this.mainModel.curtailmentList;
     this.criteriaList = this.ilc.pairwiseCriteriaList;
     this.devices = this.ilc.devices;
     this.campus = this.ilc.campus;
-    this.building =  this.ilc.building;
-    console.log(this.campus);
-    console.log(this.building);
-    this.curtailmentList = this.ilc.curtailmentList;
-    if (this.curtailmentList.length !== this.devices.length) {
-      for (const device of this.devices) {
-        this.curtailmentList.push({
+    this.building = this.ilc.building;
+    for (let j = 0; j < this.curtailmentModelList.length; j++) {
+      this.curtailmentModelList[j].curtailmentList = [];
+      for (let i = 0; i < this.devices.length; i++) {
+        this.curtailmentModelList[j].curtailmentList[i] = [];
+        this.curtailmentModelList[j].curtailmentList[i] = {
           firstStageCooling: {
-            deviceTopic: this.campus + '/' + this.building + '/' + device,
+            deviceTopic: this.campus + '/' + this.building + '/' + this.devices[i],
             deviceStatus: {
               condition: '',
               deviceStageArgs: ''
@@ -77,7 +88,7 @@ export class CurtailmentConfigComponent implements OnInit {
             value: '',
             load: ''
           }
-        });
+        };
       }
     }
   }

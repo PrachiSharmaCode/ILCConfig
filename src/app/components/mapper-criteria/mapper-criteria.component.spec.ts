@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MapperCriteriaComponent } from './mapper-criteria.component';
+import {MapperCriteriaComponent} from './mapper-criteria.component';
 
 describe('MapperCriteriaComponent', () => {
   let component: MapperCriteriaComponent;
@@ -8,9 +8,9 @@ describe('MapperCriteriaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MapperCriteriaComponent ]
+      declarations: [MapperCriteriaComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

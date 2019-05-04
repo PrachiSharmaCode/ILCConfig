@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-constatnt-criteria',
@@ -9,7 +9,8 @@ export class ConstatntCriteriaComponent implements OnInit {
 
   value: number;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

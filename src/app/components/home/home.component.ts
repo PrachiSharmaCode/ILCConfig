@@ -4,6 +4,12 @@ import {PairwiseModel} from '../../model/pairwise.model';
 import {CriteriaModel} from "../../model/criteria.model";
 import {EventEmitter} from 'events';
 import {MainModel} from '../../model/main.model';
+import {CurtailmentModel} from "../../model/curtailment.model";
+import {FormulaCriteriaModel} from "../../model/formulaCriteria.model";
+import {StatusCriteriaModel} from "../../model/statusCriteria.model";
+import {MapperCriteriaModel} from "../../model/mapperCriteria.model";
+import {ConstantCriteriaModel} from "../../model/constantCriteria.model";
+import {HistoryCriteriaModel} from "../../model/historyCriteria.model";
 
 
 @Component({
@@ -15,8 +21,14 @@ export class HomeComponent implements OnInit {
 
   ilc: ILCCongig = new ILCCongig();
   pairwise: PairwiseModel = new PairwiseModel();
-  criteria: CriteriaModel =  new CriteriaModel();
-  mainModel: MainModel =  new MainModel();
+  criteria: CriteriaModel = new CriteriaModel();
+  mainModel: MainModel = new MainModel();
+  formulaModel: FormulaCriteriaModel = new FormulaCriteriaModel();
+  statusModel: StatusCriteriaModel;
+  mapperModel: MapperCriteriaModel;
+  constantModel: ConstantCriteriaModel;
+  historyModel: HistoryCriteriaModel;
+  curtailment: CurtailmentModel = new CurtailmentModel();
   ilcCongifOpen: boolean;
   pairwiseOpen: boolean;
   criteriaOPen: boolean;
@@ -26,12 +38,12 @@ export class HomeComponent implements OnInit {
   showDocumentation = true;
   showILC = false;
   showMasterdriver = false;
-  // button: any;
 
-  constructor() { }
+  constructor() {
+  }
 
   openIlcConfig() {
-    this.ilcCongifOpen =  true;
+    this.ilcCongifOpen = true;
     this.pairwiseOpen = false;
     this.criteriaOPen = false;
     this.curtailmentOpen = false;
@@ -40,7 +52,7 @@ export class HomeComponent implements OnInit {
   }
 
   openPairwise() {
-    this.ilcCongifOpen =  false;
+    this.ilcCongifOpen = false;
     this.pairwiseOpen = true;
     this.criteriaOPen = false;
     this.curtailmentOpen = false;
@@ -49,7 +61,7 @@ export class HomeComponent implements OnInit {
   }
 
   openCriteria() {
-    this.ilcCongifOpen =  false;
+    this.ilcCongifOpen = false;
     this.pairwiseOpen = false;
     this.criteriaOPen = true;
     this.curtailmentOpen = false;
@@ -58,7 +70,7 @@ export class HomeComponent implements OnInit {
   }
 
   openCurtailment() {
-    this.ilcCongifOpen =  false;
+    this.ilcCongifOpen = false;
     this.pairwiseOpen = false;
     this.criteriaOPen = false;
     this.curtailmentOpen = true;
@@ -67,7 +79,7 @@ export class HomeComponent implements OnInit {
   }
 
   openHome() {
-    this.ilcCongifOpen =  false;
+    this.ilcCongifOpen = false;
     this.pairwiseOpen = false;
     this.criteriaOPen = false;
     this.curtailmentOpen = false;
@@ -92,18 +104,22 @@ export class HomeComponent implements OnInit {
     this.showMasterdriver = true;
   }
 
+  activeSideBarButton(value) {
+    var clickedButton;
+    var button;
+    button = document.getElementsByClassName('activeBar');
+    button[0].className = button[0].className.replace('activeBar', '');
+    clickedButton = document.getElementById(value.target.id);
+    clickedButton.className += ' activeBar';
+  }
+
   activeButton(value) {
-    console.log(value);
     var clickedButton;
     var button;
     button = document.getElementsByClassName('active');
-    console.log(button);
-    button[0].className =  button[0].className.replace('active', '');
-    console.log(button);
-
+    button[0].className = button[0].className.replace('active', '');
     clickedButton = document.getElementById(value.target.id);
     clickedButton.className += ' active';
-    console.log(clickedButton);
   }
 
   ngOnInit() {

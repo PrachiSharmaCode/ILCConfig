@@ -1,15 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { ILCCongig} from '../../model/ILCConfig.model';
+import {ILCCongig} from '../../model/ILCConfig.model';
 import * as FileSaver from 'file-saver';
 import {MainModel} from "../../model/main.model";
 
 @Component({
-    selector: 'app-ilcconfig',
-    templateUrl: './ilcconfig.component.html',
-    styleUrls: ['./ilcconfig.component.css']
-  })
+  selector: 'app-ilcconfig',
+  templateUrl: './ilcconfig.component.html',
+  styleUrls: ['./ilcconfig.component.css']
+})
 
-  export class ILCConfigComponent implements OnInit {
+export class ILCConfigComponent implements OnInit {
 
   @Input() ilc: ILCCongig;
   @Input() mainModel: MainModel;
@@ -32,11 +32,11 @@ import {MainModel} from "../../model/main.model";
   testpaiewiese: string[];
   arrlen: number;
 
-  constructor() { }
+  constructor() {
+  }
 
   addDemandFormula() {
     this.demandformulaAgrsArr.push('');
-    console.log(this.demandformulaAgrsArr);
   }
 
   saveCalculation() {
@@ -53,9 +53,9 @@ import {MainModel} from "../../model/main.model";
       this.staggerRelease = 'false';
     }
     this.ilc.setILCConfig(this.campus, this.building, this.device, this.point, this.demandFormula,
-                          this.demandformulaAgrsArr, this.agentId, this.demandLimit, this.curtailmentTime,
-                          this.curtailmentConfirm, this.curtailmentBreak, this.buildingPowerWindow,
-                          this.staggerRelease, this.staggerOfftime);
+      this.demandformulaAgrsArr, this.agentId, this.demandLimit, this.curtailmentTime,
+      this.curtailmentConfirm, this.curtailmentBreak, this.buildingPowerWindow,
+      this.staggerRelease, this.staggerOfftime);
     this.finalCalculation = this.ilc.finalCalcualtion;
   }
 

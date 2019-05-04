@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CurtailmentConfigComponent } from './curtailment-config.component';
+import {CurtailmentConfigComponent} from './curtailment-config.component';
 
 describe('CurtailmentConfigComponent', () => {
   let component: CurtailmentConfigComponent;
@@ -8,9 +8,9 @@ describe('CurtailmentConfigComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CurtailmentConfigComponent ]
+      declarations: [CurtailmentConfigComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
