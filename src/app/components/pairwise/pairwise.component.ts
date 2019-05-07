@@ -22,7 +22,7 @@ export class PairwiseComponent implements OnInit {
     _pairwiseCriteriaFile: string;
     _clusterPriority: string
   }[];
-  pairwiseCriteriaList: string[] = [];
+  pairwiseCriteriaList: string[][] = [];
   finalCalcultion: string;
   criteria = new Map<any, any>();
   generate = true;
@@ -34,10 +34,10 @@ export class PairwiseComponent implements OnInit {
   constructor() {
   }
 
-  remainingList(num: number): string[] {
+  remainingList(i: number, num: number): string[] {
     const criteriaList: string[] = [];
-    for (let i = num + 1; i < this.pairwiseCriteriaList.length; i++) {
-      criteriaList.push(this.pairwiseCriteriaList[i]);
+    for (let j = num + 1; j < this.pairwiseCriteriaList[i].length; j++) {
+      criteriaList.push(this.pairwiseCriteriaList[i][j]);
     }
     return criteriaList;
   }
@@ -64,18 +64,21 @@ export class PairwiseComponent implements OnInit {
     this.getCriteria = true;
   }
 
-  UpdateCriteriaList() {
-    this.pairwiseCriteriaList.push(this.getCriteriaValue);
+  UpdateCriteriaList(i, index) {
+    console.log(i);
+    console.log(index);
+    this.pairwiseCriteriaList[i][index] = this.getCriteriaValue;
     this.pairwise.updateCrirteriaList(this.pairwiseCriteriaList);
     this.getCriteria = false;
     this.getCriteriaValue = '';
   }
 
-  removeCriteria(index) {
+  removeCriteria(i, index) {
+    this.pairwiseCriteriaList[i].splice(index, 1);
     console.log('*******************');
     console.log(this.pairwiseCriteriaList);
     console.log('*******************');
-    this.pairwiseCriteriaList.splice(index, 1);
+    this.pairwise.updateCrirteriaList(this.pairwiseCriteriaList);
   }
 
   updateValues(changeEvent, followCriteria, mainCriteria) {
@@ -135,12 +138,14 @@ export class PairwiseComponent implements OnInit {
   onRefreshButton(i) {
     this.pairwiseList[i].pairwiseCriteria = this.criteria;
     this.pairwiseList[i].pairwiseCriteriaList = this.pairwiseCriteriaList;
-    this.finalCalcultion = this.pairwiseList[i].setFinalCalculation();
+    this.pairwiseList[i].setFinalCalculation();
     this.pairwiseList[i].setpairwise(this.pairwiseCriteriaList, this.criteria, this.generate, this.finalCalcultion);
   }
 
   ngOnInit() {
     this.pairwiseList = this.mainModel.pairwiseList;
+    this.pairwiseCriteriaList = this.mainModel.paireiseCriteriaList;
+    console.log(this.pairwiseCriteriaList);
     this.clusterList = this.ilc.clusterList;
     if (this.clusterList.length === 0) {
       this.showPairwiseList = false;
@@ -150,7 +155,6 @@ export class PairwiseComponent implements OnInit {
     for (let i = 0; i < this.clusterList.length; i++) {
       this.pairwiseList[i].pairwiseName = this.clusterList[i]._pairwiseCriteriaFile;
     }
-    this.pairwiseCriteriaList = this.pairwise.pairwiseCriteriaList;
     this.sliderValue = new Array(this.pairwiseCriteriaList.length);
     for (let index = 0; index <= this.pairwiseCriteriaList.length; index++) {
       if (this.sliderValue[index] === undefined) {

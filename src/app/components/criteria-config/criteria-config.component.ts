@@ -8,7 +8,7 @@ import {MainModel} from '../../model/main.model';
 import {StatusCriteriaModel} from '../../model/statusCriteria.model';
 import {MapperCriteriaModel} from '../../model/mapperCriteria.model';
 import {ConstantCriteriaModel} from '../../model/constantCriteria.model';
-import {HistoryCriteriaModel} from "../../model/historyCriteria.model";
+import {HistoryCriteriaModel} from '../../model/historyCriteria.model';
 
 @Component({
   selector: 'app-criteria-config',
@@ -42,7 +42,7 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
   building: string;
   stageName: string;
   operationtype: string[][];
-  criteriaList: string[];
+  criteriaList: string[][] = [];
   getCriteria = false;
   getCriteriaValue: string;
   finalCalulation: string;
@@ -118,12 +118,6 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
     this.getCriteria = true;
   }
 
-  UpdateCriteriaList() {
-    this.criteriaList.push(this.getCriteriaValue);
-    this.getCriteria = false;
-    this.getCriteriaValue = '';
-  }
-
   addArguments() {
     this.argument.push('');
   }
@@ -151,11 +145,12 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
     this.criteriaModelList[k].stageName = this.stageName;
     this.formulaModel.updateFormulaModel(this.argument, this.maximun, this.minimum, this.operation, this.formula);
     // this.criteriaModelList[k].getAllModels(this.criteriaModelList[k].formulaModel);
-    this.finalCalulation = this.criteriaModelList[k].setFinalCalulation(this.criteriaList);
+    this.criteriaModelList[k].setFinalCalulation(this.criteriaList);
   }
 
   ngOnInit() {
     this.criteriaModelList = this.mainModel.criteriaModelList;
+    this.criteriaList = this.mainModel.paireiseCriteriaList;
     this.clusterList = this.ilc.clusterList;
     this.devices = this.ilc.devices;
     this.campus = this.ilc.campus;
@@ -168,7 +163,7 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
     this.maximun = this.formulaModel.maximun;
 
     this.operation = this.formulaModel.operation;
-    this.criteriaList = this.pairwise.pairwiseCriteriaList;
+    console.log(this.criteriaList);
   }
 
   ngAfterViewInit() {

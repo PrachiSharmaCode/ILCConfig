@@ -1,9 +1,7 @@
 export class PairwiseModel {
 
   private _pairwiseName: string;
-  private _pairwiseCriteriaList = ['zonetemperature', 'stage',
-    'history-zonetemperature',
-    'rated-power', 'room-type'];
+  private _pairwiseCriteriaList: string[][] = [];
   private _pairwiaseCalculation: string;
   private _pairwiseCriteria: Map<any, any>;
   private _generated: boolean;
@@ -27,7 +25,7 @@ export class PairwiseModel {
     this._pairwiaseCalculation = calculation;
   }
 
-  get pairwiseCriteriaList(): string[] {
+  get pairwiseCriteriaList(): string[][] {
     return this._pairwiseCriteriaList;
   }
 
@@ -38,7 +36,7 @@ export class PairwiseModel {
     console.log(this._pairwiseCriteria);
   }
 
-  set pairwiseCriteriaList(value: string[]) {
+  set pairwiseCriteriaList(value: string[][]) {
     this._pairwiseCriteriaList = value;
   }
 
@@ -46,7 +44,7 @@ export class PairwiseModel {
     return this._generated;
   }
 
-  updateCrirteriaList(criteriaList: string[]) {
+  updateCrirteriaList(criteriaList: string[][]) {
     this._pairwiseCriteriaList = criteriaList;
   }
 
@@ -59,37 +57,34 @@ export class PairwiseModel {
   }
 
   setFinalCalculation() {
-    console.log(this.pairwiseCriteria)
-    let obj = [];
-    let num = 0;
-    while (num < this._pairwiseCriteriaList.length) {
-      let oobj = [];
-      const mainCriteria = this._pairwiseCriteriaList[num];
-      const hmap = this._pairwiseCriteria.get(mainCriteria);
-      for (let i = num + 1; i < this._pairwiseCriteriaList.length; i++) {
-        let followCriteria = '';
-        let followCriteriaValue = '';
-        followCriteria = this._pairwiseCriteriaList[i];
-        followCriteriaValue = hmap.get(this._pairwiseCriteriaList[i]);
-        let check = {};
-        check = {[followCriteria]: followCriteriaValue};
-        oobj.push(check);
-      }
-      obj.push({
-        [mainCriteria]: {
-          oobj
-        }
-      });
-      num++;
-    }
-    let cal = JSON.stringify(obj, null, 4)
-      .replace('[', '').replace(']', '')
-      .replace(/\"oobj\":/g, '');
-    return cal;
-  }
-
-  set pairwiaseCalculation(value: string) {
-    this._pairwiaseCalculation = value;
+    console.log(this._pairwiseCriteria);
+    console.log(this._pairwiseCriteriaList);
+    // let obj = [];
+    // let num = 0;
+    // while (num < this._pairwiseCriteriaList.length) {
+    //   let oobj = [];
+    //   const mainCriteria = this._pairwiseCriteriaList[num];
+    //   const hmap = this._pairwiseCriteria.get(mainCriteria);
+    //   for (let i = num + 1; i < this._pairwiseCriteriaList.length; i++) {
+    //     let followCriteria = '';
+    //     let followCriteriaValue = '';
+    //     followCriteria = this._pairwiseCriteriaList[i];
+    //     followCriteriaValue = hmap.get(this._pairwiseCriteriaList[i]);
+    //     let check = {};
+    //     check = {[followCriteria]: followCriteriaValue};
+    //     oobj.push(check);
+    //   }
+    //   obj.push({
+    //     [mainCriteria]: {
+    //       oobj
+    //     }
+    //   });
+    //   num++;
+    // }
+    // let cal = JSON.stringify(obj, null, 4)
+    //   .replace('[', '').replace(']', '')
+    //   .replace(/\"oobj\":/g, '');
+    // return cal;
   }
 
   get pairwiseCriteria(): Map<any, any> {

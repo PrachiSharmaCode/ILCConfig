@@ -46,6 +46,7 @@ export class ClusterComponent implements OnInit {
     this.mainModel.addPairwise(new PairwiseModel());
     this.mainModel.addCurtailment(new CurtailmentModel());
     this.mainModel.addCriteria(new CriteriaModel())
+    this.mainModel.addpairwiseCrteriaList(['zonetemperature-setpoint', 'stage', 'history-zonetemperature', 'rated-power', 'room-type']);
     this.mainModel.print();
     this.getCluster = false;
     this.clusterName = '';

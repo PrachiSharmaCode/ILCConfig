@@ -131,20 +131,21 @@ export class CriteriaModel {
   //   this.formulaModel.updateFormulaModel(argument, maximum, minimum, operation, formula);
   // }
 
-  setFinalCalulation(list: string[]) {
-    const obj = [];
-    for (let i = 0; i <= this.devices.length; i++) {
-      for (let j = 0; j <= list.length; j++) {
-        obj[i] = {
-          [this.stageName]: {
-            device_topic: this.devices[i],
-            // [list[j]]: this._formulaModel.formulaCalculate
-          }
-        };
-      }
-    }
-    this._criteriaCalculation = JSON.stringify(obj, null, 4);
-    return this._criteriaCalculation;
+  setFinalCalulation(list: string[][]) {
+    console.log(list);
+    // const obj = [];
+    // for (let i = 0; i <= this.devices.length; i++) {
+    //   for (let j = 0; j <= list.length; j++) {
+    //     obj[i] = {
+    //       [this.stageName]: {
+    //         device_topic: this.devices[i],
+    //         // [list[j]]: this._formulaModel.formulaCalculate
+    //       }
+    //     };
+    //   }
+    // }
+    // this._criteriaCalculation = JSON.stringify(obj, null, 4);
+    // return this._criteriaCalculation;
   }
 
 

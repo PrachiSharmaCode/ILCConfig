@@ -7,6 +7,7 @@ export class MainModel {
   private _pairwiseList: PairwiseModel[] = [];
   private _curtailmentList: CurtailmentModel[] = [];
   private _criteriaModelList: CriteriaModel[] = [];
+  private _paireiseCriteriaList: string[][] = [];
 
   addPairwise(pairwise: PairwiseModel) {
     this._pairwiseList.push(pairwise);
@@ -20,9 +21,22 @@ export class MainModel {
     this._criteriaModelList.push(criteria);
   }
 
+  addpairwiseCrteriaList(criteriaList: string[]) {
+    this.paireiseCriteriaList.push(criteriaList);
+  }
+
   print() {
     console.log(this._pairwiseList);
     console.log(this._curtailmentList);
+  }
+
+
+  get paireiseCriteriaList(): string[][] {
+    return this._paireiseCriteriaList;
+  }
+
+  set paireiseCriteriaList(value: string[][]) {
+    this._paireiseCriteriaList = value;
   }
 
   get pairwiseList(): PairwiseModel[] {
