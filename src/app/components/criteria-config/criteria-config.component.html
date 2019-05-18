@@ -113,7 +113,7 @@
                     <div class="card card-body">
                       <mat-form-field class="example-full-width">
                         <input matInput placeholder="Stage Name"></mat-form-field>
-                      <ng-container *ngFor="let criteria of criteriaList;let i = index;trackBy: trackByIndex;">
+                      <ng-container *ngFor="let criteria of criteriaList[k];let i = index;trackBy: trackByIndex;">
                         <div>
                           <div class="collapse-division border border-secondary">
                             <label class="collapse-division-label">
@@ -130,8 +130,7 @@
                                 <div class="input-group mb-3">
                                   <mat-form-field style="width: 100%">
                                     <mat-label>Choose Operation Type</mat-label>
-                                    <mat-select [(ngModel)]=operationtype[index][i]
-                                                (selectionChange)="addFormulaModel(k)">
+                                    <mat-select  [(ngModel)] = criteriaModelList[k].operationType[index][i]>
                                       <mat-option value="Formula">Formula</mat-option>
                                       <mat-option value="status">status</mat-option>
                                       <mat-option value="mapper">mapper</mat-option>
@@ -139,48 +138,48 @@
                                       <mat-option value="history">history</mat-option>
                                     </mat-select>
                                   </mat-form-field>
-                                  <div *ngIf="operationtype[index][i] == 'Formula'" id="childFormula" #childFormula>
+                                  <div *ngIf="criteriaModelList[k].operationType[index][i] == 'Formula'" id="childFormula">
+                                    <!--                                    <ng-container-->
+                                    <!--                                      *ngFor="let form of criteriaModelList[k].formulaModelArr;let f = index;trackBy: trackByIndex;">-->
                                     <ng-container
-                                      *ngFor="let form of criteriaModelList[k].formulaModelArr;let f = index;trackBy: trackByIndex;">
-                                      <!--***********Formula************-->
-                                      <!--<ng-container *ngFor="let arg of argument;let i = index;trackBy: trackByIndex;">-->
-                                      <!--<mat-form-field style="width: 100%">-->
-                                      <!--<mat-label>Arguments</mat-label>-->
-                                      <!--<mat-select [(ngModel)]="criteriaModelList[k].formulaModel.argument[i]">-->
-                                      <!--<mat-option value="CoolingTemperatureSetPoint">CoolingTemperatureSetPoint-->
-                                      <!--</mat-option>-->
-                                      <!--</mat-select>-->
-                                      <!--</mat-form-field>-->
-                                      <!--<mat-radio-group aria-label="Select an option">-->
-                                      <!--<mat-radio-button value="always">Always</mat-radio-button>&nbsp;&nbsp;&nbsp;-->
-                                      <!--<mat-radio-button value="not curtailed">Not Curtailed</mat-radio-button>-->
-                                      <!--</mat-radio-group>-->
-                                      <!--</ng-container>-->
-                                      <div>
-                                        <button id="addparam" (click)="addArguments()" type="button"
-                                                class="btn btn-info btn-sm">
-                                          Add Argument
-                                        </button>
-                                      </div>
-                                      <br>
-                                      <div>
-                                        <mat-form-field class="example-full-width">
-                                        <textarea matInput placeholder="operation"
-                                                  [(ngModel)]="form.argument"></textarea>
-                                        </mat-form-field>
-                                        <mat-form-field class="example-full-width">
-                                          <input matInput placeholder="Minimum(Optional)"
-                                                 [(ngModel)]="form.minimum">
-                                        </mat-form-field>
-                                        <mat-form-field class="example-full-width">
-                                          <input matInput placeholder="Maximum(Optional)"
-                                                 [(ngModel)]="form.maximun">
-                                        </mat-form-field>
-                                      </div>
+                                      *ngFor="let arg of criteriaModelList[k].formulaModel.argument;let x = index;trackBy: trackByIndex;">
+                                      <mat-form-field style="width: 100%">
+                                        <mat-label>Arguments</mat-label>
+                                        <mat-select [(ngModel)] = criteriaModelList[k].formulaModel.argument[x]>
+                                          <mat-option value="CoolingTemperatureSetPoint">CoolingTemperatureSetPoint
+                                          </mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                      <mat-radio-group aria-label="Select an option">
+                                        <mat-radio-button value="always">Always</mat-radio-button>&nbsp;&nbsp;&nbsp;
+                                        <mat-radio-button value="not curtailed">Not Curtailed</mat-radio-button>
+                                      </mat-radio-group>
                                     </ng-container>
+                                    <div>
+                                      <button id="addparam" (click)="criteriaModelList[k].formulaModel.addArugiment()" type="button"
+                                              class="btn btn-info btn-sm">
+                                        Add Argument
+                                      </button>
+                                    </div>
+                                    <br>
+                                    <div>
+                                      <mat-form-field class="example-full-width">
+                                        <textarea matInput placeholder="operation"
+                                                  [(ngModel)]="criteriaModelList[k].formulaModel.operation"></textarea>
+                                      </mat-form-field>
+                                      <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Minimum(Optional)"
+                                               [(ngModel)]="criteriaModelList[k].formulaModel.minimum">
+                                      </mat-form-field>
+                                      <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Maximum(Optional)"
+                                               [(ngModel)]="criteriaModelList[k].formulaModel.maximun">
+                                      </mat-form-field>
+                                    </div>
+                                    <!--                                    </ng-container>-->
                                   </div>
 
-                                  <div *ngIf="operationtype[index][i] == 'status'">
+                                  <div *ngIf="criteriaModelList[k].operationType[index][i] == 'status'">
                                     <mat-form-field class="example-full-width">
                                       <input matInput placeholder="Point Value"
                                              [(ngModel)]="criteriaModelList[k].statusModel.pointName">
@@ -192,8 +191,7 @@
                                       <input matInput placeholder="Off Value"
                                              [(ngModel)]="criteriaModelList[k].statusModel.offValue"></mat-form-field>
                                   </div>
-
-                                  <div *ngIf="operationtype[index][i] == 'mapper'">
+                                  <div *ngIf="criteriaModelList[k].operationType[index][i] == 'mapper'">
                                     <mat-form-field class="example-full-width">
                                       <input matInput placeholder="Map Key"
                                              [(ngModel)]="criteriaModelList[k].mapperModel.mapKey"></mat-form-field>
@@ -202,13 +200,13 @@
                                              [(ngModel)]="criteriaModelList[k].mapperModel.distName"></mat-form-field>
                                   </div>
 
-                                  <div *ngIf="operationtype[index][i] == 'constant'">
+                                  <div *ngIf="criteriaModelList[k].operationType[index][i] == 'constant'">
                                     <mat-form-field class="example-full-width">
                                       <input matInput placeholder="Value"
                                              [(ngModel)]="criteriaModelList[k].constantModel.value"></mat-form-field>
                                   </div>
 
-                                  <div *ngIf="operationtype[index][i] == 'history'">
+                                  <div *ngIf="criteriaModelList[k].operationType[index][i] == 'history'">
                                     <mat-form-field class="example-full-width">
                                       <input matInput placeholder="Comparision Type"
                                              [(ngModel)]="criteriaModelList[k].historyModel.comparisonType">
@@ -247,7 +245,7 @@
             <div class="row">
               <h5 style="margin-left: 3%">File Preview</h5>
               <a style="margin-left: 3%" class="btn btn-outline-dark  button-size"
-                 (click)="OnRefreshButton(k,f)">Refresh</a>
+                 (click)="OnRefreshButton(k)">Refresh</a>
               <a style="margin-left: 3%" class="btn btn-outline-dark  button-size">Save</a>
             </div>
             <textarea id="checktext"></textarea>

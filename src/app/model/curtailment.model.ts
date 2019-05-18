@@ -15,9 +15,8 @@ export class CurtailmentModel {
     curtailmentSetting: {
       point: string,
       curtailmentMethod: string,
-      offset: string,
-      value: string,
-      load: string
+      // @ts-ignore
+      [this._curtailmentList.curtailmentSetting.curtailmentMethod]: string ;
     }
   }[];
   private _curtailmentCalculation: string;

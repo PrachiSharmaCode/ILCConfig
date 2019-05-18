@@ -41,9 +41,8 @@ export class CurtailmentConfigComponent implements OnInit {
     curtailmentSetting: {
       point: string,
       curtailmentMethod: string,
-      offset: string,
-      value: string,
-      load: string
+      // @ts-ignore
+      [this.curtailmentList.curtailmentSetting.curtailmentMethod]: string;
     }
   }[] = [];
 
@@ -84,9 +83,6 @@ export class CurtailmentConfigComponent implements OnInit {
           curtailmentSetting: {
             point: '',
             curtailmentMethod: '',
-            offset: '',
-            value: '',
-            load: ''
           }
         };
       }

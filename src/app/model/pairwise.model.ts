@@ -5,9 +5,28 @@ export class PairwiseModel {
   private _pairwiaseCalculation: string;
   private _pairwiseCriteria: Map<any, any>;
   private _generated: boolean;
+  private _sliderValue: number[][] = [];
 
   constructor(pairwiseName?: string) {
     this._pairwiseName = pairwiseName;
+  }
+
+  get sliderValue(): number[][] {
+    // console.log(this._pairwiseCriteriaList);
+    // for (let index = 0; index < this._pairwiseCriteriaList.length; index++) {
+    //   this.sliderValue[index] = [];
+    // }
+    // console.log(this._sliderValue);
+    return this._sliderValue;
+  }
+
+  set sliderValue(value: number[][]) {
+    this._sliderValue = value;
+  }
+
+  updateSliderValue(slider: number[][]) {
+    this._sliderValue = slider;
+    console.log(this._sliderValue);
   }
 
   get pairwiseName(): string {

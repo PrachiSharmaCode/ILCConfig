@@ -1,14 +1,14 @@
 import {ILCCongig} from './ILCConfig.model';
 import {FormulaCriteriaModel} from './formulaCriteria.model';
 import {StatusCriteriaModel} from './statusCriteria.model';
-import {MapperCriteriaModel} from "./mapperCriteria.model";
-import {ConstantCriteriaModel} from "./constantCriteria.model";
-import {HistoryCriteriaModel} from "./historyCriteria.model";
+import {MapperCriteriaModel} from './mapperCriteria.model';
+import {ConstantCriteriaModel} from './constantCriteria.model';
+import {HistoryCriteriaModel} from './historyCriteria.model';
 
 export class CriteriaModel {
 
   private ilc: ILCCongig = new ILCCongig();
-  private _formulaModel: FormulaCriteriaModel[] = [];
+  private _formulaModel: FormulaCriteriaModel = new FormulaCriteriaModel();
   private _statusModel: StatusCriteriaModel =  new StatusCriteriaModel();
   private _mapperModel: MapperCriteriaModel = new MapperCriteriaModel();
   private _constantModel: ConstantCriteriaModel =  new ConstantCriteriaModel();
@@ -28,18 +28,18 @@ export class CriteriaModel {
 
   /***Formula***/
 
-  formulaModelArr: FormulaCriteriaModel[] = [];
-
-  formula: {
-    argument: string[],
-    operation: string,
-    minimum: number,
-    maximum: number
-  }[] = [];
-  private _arguments: string[];
-  private _operation: string;
-  private _minimum: number;
-  private _maximum: number;
+  // formulaModelArr: FormulaCriteriaModel[] = [];
+  //
+  // formula: {
+  //   argument: string[],
+  //   operation: string,
+  //   minimum: number,
+  //   maximum: number
+  // }[] = [];
+  // private _arguments: string[];
+  // private _operation: string;
+  // private _minimum: number;
+  // private _maximum: number;
 
   /***Status***/
 
@@ -52,15 +52,6 @@ export class CriteriaModel {
   // getAllModels(formula: FormulaCriteriaModel) {
   //   this._formulaModel = formula;
   // }
-
-  updateFormulaArr(formulaArr: FormulaCriteriaModel[]){
-    this.formulaModelArr = formulaArr;
-  }
-
-  get arguments(): string[] {
-    return this._arguments;
-  }
-
   updateCriteriaList(list: string[]) {
     this._critriaList = list;
   }
@@ -82,12 +73,15 @@ export class CriteriaModel {
   }
 
   get operationType(): string[][] {
-    this._operationType = [['', '', '', '', ''], ['', '', '', '', ''], ['', '', '', '', '']];
     return this._operationType;
   }
 
   set operationType(value: string[][]) {
     this._operationType = value;
+  }
+
+  updateOperationType(value: string[][]) {
+    this._operationType = [['', '', '', '', ''], ['', '', '', '', ''], ['', '', '', '', '']];
   }
 
   get criteriaCalculation(): string {
@@ -96,34 +90,6 @@ export class CriteriaModel {
 
   set criteriaCalculation(value: string) {
     this._criteriaCalculation = value;
-  }
-
-  get operation(): string {
-    return this._operation;
-  }
-
-  set operation(value: string) {
-    this._operation = value;
-  }
-
-  get minimum(): number {
-    return this._minimum;
-  }
-
-  set minimum(value: number) {
-    this._minimum = value;
-  }
-
-  get maximum(): number {
-    return this._maximum;
-  }
-
-  set maximum(value: number) {
-    this._maximum = value;
-  }
-
-  updateArguments(argument: string[]) {
-    this._arguments = argument;
   }
 
   // updateFormulaOpration(argument, operation, minimum, maximum, formula) {
@@ -149,11 +115,15 @@ export class CriteriaModel {
   }
 
 
-  get formulaModel(): FormulaCriteriaModel[] {
+  get formulaModel(): FormulaCriteriaModel {
     return this._formulaModel;
   }
 
-  set formulaModel(value: FormulaCriteriaModel[]) {
+  addArgument() {
+    this._formulaModel.addArugiment();
+  }
+
+  set formulaModel(value: FormulaCriteriaModel) {
     this._formulaModel = value;
   }
 

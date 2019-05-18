@@ -86,7 +86,6 @@
               </div>
             </div>
           </div>
-
           <div class="division">
             <h5>Criteria Configuration</h5>
             <div>
@@ -122,22 +121,30 @@
                         <mat-form-field style="width: 100%" class="example-full-width">
                           <input matInput placeholder="Point"
                                  [(ngModel)]="list.curtailmentSetting.point"></mat-form-field>
+<!--                        <mat-form-field style="width: 100%" class="example-full-width">-->
+<!--                          <input matInput placeholder="Curtailment Method"-->
+<!--                                 [(ngModel)]="list.curtailmentSetting.curtailmentMethod"></mat-form-field>-->
+                        <mat-form-field style="width: 100%">
+                          <mat-label>Curtailment Method</mat-label>
+                          <mat-select  [(ngModel)] = list.curtailmentSetting.curtailmentMethod>
+                            <mat-option value="Offset">Offset</mat-option>
+                            <mat-option value="Value">Value</mat-option>
+                            <mat-option value="Equation">Equation</mat-option>
+                          </mat-select>
+                        </mat-form-field>
 
-                        <mat-form-field style="width: 100%" class="example-full-width">
-                          <input matInput placeholder="Curtailment Method"
-                                 [(ngModel)]="list.curtailmentSetting.curtailmentMethod"></mat-form-field>
-
-                        <mat-form-field style="width: 100%" class="example-full-width">
+                        <mat-form-field  style="width: 100%" class="example-full-width"
+                                         *ngIf="list.curtailmentSetting.curtailmentMethod == 'Offset' ">
                           <input matInput placeholder="Offset"
                                  [(ngModel)]="list.curtailmentSetting.offset"></mat-form-field>
-
-                        <mat-form-field style="width: 100%" class="example-full-width">
+                        <mat-form-field style="width: 100%" class="example-full-width"
+                                        *ngIf="list.curtailmentSetting.curtailmentMethod == 'Value' ">
                           <input matInput placeholder="Value"
                                  [(ngModel)]="list.curtailmentSetting.value"></mat-form-field>
-
-                        <mat-form-field style="width: 100%" class="example-full-width">
-                          <input matInput placeholder="Load"
-                                 [(ngModel)]="list.curtailmentSetting.load"></mat-form-field>
+                        <mat-form-field style="width: 100%" class="example-full-width"
+                                        *ngIf="list.curtailmentSetting.curtailmentMethod == 'Equation' ">
+                          <input matInput placeholder="Equation"
+                                 [(ngModel)]="list.curtailmentSetting.Equation"></mat-form-field>
                       </div>
                     </div>
                   </div>

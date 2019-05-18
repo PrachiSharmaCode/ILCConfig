@@ -114,26 +114,23 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
   constructor() {
   }
 
-  addCriteria() {
-    this.getCriteria = true;
+  addArguments(k) {
+    console.log('inside add argument');
+    console.log(this.criteriaModelList[k].formulaModel.argument.length);
+    this.criteriaModelList[k].addArgument();
+    console.log(this.criteriaModelList[k].formulaModel.argument.length);
   }
 
-  addArguments() {
-    this.argument.push('');
+  addFormulaModel(k, i) {
+    console.log('inside add formula');
+    this.criteriaModelList[k].operationType[i] = [];
+    // this.formulaModelArr[this.formulaModelArr.length] = new FormulaCriteriaModel();
   }
 
-  removeCriteria(index) {
-    this.criteriaList.splice(index, 1);
-  }
-
-  addFormulaModel(k) {
-    this.formulaModelArr[this.formulaModelArr.length] = new FormulaCriteriaModel();
-    this.criteriaModelList[k].updateFormulaArr(this.formulaModelArr);
-  }
-
-  OnRefreshButton(k, f) {
+  OnRefreshButton(k) {
+    console.log(this.criteriaModelList[k].operationType);
     console.log('Formula Attributes');
-    console.log(this.criteriaModelList[k].formulaModelArr[f].print());
+    console.log(this.criteriaModelList[k].formulaModel.print());
     console.log('Status Attributes');
     console.log(this.criteriaModelList[k].statusModel.print());
     console.log('Mapper Attributes');
@@ -143,8 +140,6 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
     console.log('History Attributes');
     console.log(this.criteriaModelList[k].historyModel.print());
     this.criteriaModelList[k].stageName = this.stageName;
-    this.formulaModel.updateFormulaModel(this.argument, this.maximun, this.minimum, this.operation, this.formula);
-    // this.criteriaModelList[k].getAllModels(this.criteriaModelList[k].formulaModel);
     this.criteriaModelList[k].setFinalCalulation(this.criteriaList);
   }
 
@@ -157,7 +152,12 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
     this.building = this.ilc.building;
     this.stageName = this.criteria.stageName;
 
-    this.operationtype = this.criteria.operationType;
+    // this.operationtype = this.criteria.operationType;
+    for (let i = 0; i < this.criteriaModelList.length; i++) {
+      this.criteriaModelList[i].updateOperationType([['', '', '', '', ''], ['', '', '', '', ''], ['', '', '', '', '']]);
+      console.log(this.criteriaModelList[i].operationType);
+    }
+
     this.argument = this.formulaModel.argument;
     this.minimum = this.formulaModel.minimum;
     this.maximun = this.formulaModel.maximun;
@@ -167,7 +167,7 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // this.formulaChild.getFormulaDetails();
+
   }
 
   trackByIndex(index: number): any {

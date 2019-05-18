@@ -8,10 +8,6 @@
       <mat-form-field style="width: 100%" class="example-full-width">
         <input matInput placeholder="Buidling"
                [(ngModel)]="building"></mat-form-field>
-      <!--<label>Campus</label>-->
-      <!--<input type="text" class="form-control" [(ngModel)]="campus">-->
-      <!--<label>Building</label>-->
-      <!--<input type="text" class="form-control" [(ngModel)]="building">-->
       <div class="collapse-division">
         <label class="collapse-division-label">
           <p data-toggle="collapse" href="#collapseExample" role="button"
@@ -25,69 +21,62 @@
             <mat-form-field style="width: 100%" class="example-full-width">
               <input matInput placeholder="Device"
                      [(ngModel)]="device"></mat-form-field>
-            <!--<label>Device</label>-->
-            <!--<input type="text" class="form-control" [(ngModel)]="device">-->
             <mat-form-field style="width: 100%" class="example-full-width">
               <input matInput placeholder="Point"
                      [(ngModel)]="point"></mat-form-field>
-            <!--<label>Point</label>-->
-            <!--<input type="text" class="form-control" [(ngModel)]="point">-->
-            <label>Demand Formula (Optional)</label>
-            <input type="text" class="form-control" [(ngModel)]="demandFormula">
-            <ul class="list-unstyled">
-              <li *ngFor="let i of demandformulaAgrsArr; let index = index;trackBy: trackByIndex;">
-                <label>Demand Formula Arguments (Optional)</label>
-                <input type="text" class="form-control" [(ngModel)]="demandformulaAgrsArr[index]">
-              </li>
-            </ul>
+            <button *ngIf="!showAdvanceOption" (click)="advanceOption()" type="button"
+                    class="btn btn-info btn-sm">
+              Advance Options
+            </button>
+            <div *ngIf="showAdvanceOption">
+              <mat-form-field style="width: 100%" class="example-full-width">
+                <input matInput placeholder="Demand Formula (Optional)"
+                       [(ngModel)]="demandFormula"></mat-form-field>
+              <ul class="list-unstyled">
+                <li *ngFor="let i of demandformulaAgrsArr; let index = index;trackBy: trackByIndex;">
+                  <mat-form-field style="width: 100%" class="example-full-width">
+                    <input matInput placeholder="Demand Formula Arguments (Optional)"
+                           [(ngModel)]="demandformulaAgrsArr[index]"></mat-form-field>
+                </li>
+              </ul>
+              <button id="addparam" (click)="addDemandFormula()" type="button" class="btn btn-info btn-sm float-left">
+                Add Parameter
+              </button>
+              <button style="alignment: center" (click)="closeAdvenceOption()" type="button" class="btn btn-outline-danger btn-sm float-right">
+                Close Advance Options
+              </button>
+            </div>
           </div>
-          <button id="addparam" (click)="addDemandFormula()" type="button" class="btn btn-info btn-sm">
-            Add Parameter
-          </button>
         </div>
       </div>
       <mat-form-field style="width: 100%" class="example-full-width">
         <input matInput placeholder="AgentID"
                [(ngModel)]="agentId"></mat-form-field>
-      <!--<label>AgentID</label>-->
-      <!--<input type="text" class="form-control" [(ngModel)]="agentId">-->
       <mat-form-field style="width: 100%" class="example-full-width">
         <input matInput placeholder="Demand Limit"
                [(ngModel)]="demandLimit"></mat-form-field>
-      <!--<label>Demand Limit</label>-->
-      <!--<input type="text" class="form-control" [(ngModel)]="demandLimit">-->
       <mat-form-field style="width: 100%" class="example-full-width">
         <input matInput placeholder="Curtailment Time"
                [(ngModel)]="curtailmentTime"></mat-form-field>
-      <!--<label>Curtailment Time</label>-->
-      <!--<input type="text" class="form-control" [(ngModel)]="curtailmentTime">-->
       <mat-form-field style="width: 100%" class="example-full-width">
         <input matInput placeholder="Curtailment Confirm"
                [(ngModel)]="curtailmentConfirm"></mat-form-field>
-      <!--<label>Curtailment Confirm</label>-->
-      <!--<input type="text" class="form-control" [(ngModel)]="curtailmentConfirm">-->
       <mat-form-field style="width: 100%" class="example-full-width">
         <input matInput placeholder="Curtailment Break"
                [(ngModel)]="curtailmentBreak"></mat-form-field>
-      <!--<label>Curtailment Break</label>-->
-      <!--<input type="text" class="form-control" [(ngModel)]="curtailmentBreak">-->
       <mat-form-field style="width: 100%" class="example-full-width">
         <input matInput placeholder="Building Power Window (Average)"
                [(ngModel)]="buildingPowerWindow"></mat-form-field>
-      <!--<label>Building Power Window (Average)</label>-->
-      <!--<input type="text" class="form-control" [(ngModel)]="buildingPowerWindow">-->
       <input class="check-input" type="checkbox" [(ngModel)]="staggerRelease">Stagger release<br>
       <input class="check-input" type="checkbox" [(ngModel)]="staggerOfftime">Stagger Off time<br>
     </div>
   </div>
-
   <div class="division " align="left">
     <div id="clusterBlock">
       <h5>Clusters</h5>
       <app-cluster [ilc]="ilc" [mainModel]="mainModel"></app-cluster>
     </div>
   </div>
-
   <div class="division">
     <div class="row">
       <h5>File Preview</h5>

@@ -28,11 +28,20 @@ export class ILCConfigComponent implements OnInit {
   demandFormula: string;
   demandformulaAgrsArr = [];
   finalCalculation: string;
+  showAdvanceOption: boolean = false;
 
   testpaiewiese: string[];
   arrlen: number;
 
   constructor() {
+  }
+
+  advanceOption() {
+    this.showAdvanceOption = true;
+  }
+
+  closeAdvenceOption() {
+    this.showAdvanceOption = false;
   }
 
   addDemandFormula() {
