@@ -1,25 +1,36 @@
 
-nav {
-  margin-bottom: 30px;
+button{
+  background-color: #1BA781;
+  color: white;
+}
+nav{
+  text-align: center;
+  background-color: black;
+  /*border-bottom: thick double darkgray;*/
+}
+.navbar-nav{
+  width: 100%;
+  text-align: center;
 }
 
+.liAlign{
+  float: none;
+  display: inline;
+}
 .button-size {
-  width: 250px;
   text-align: center;
   border-radius: 100px;
 }
 
 .sidenav {
   height: 100%;
-  width: 290px;
+  width: 250px;
   position: fixed;
   z-index: 1;
   top: 0;
+  padding-top: 60px;
   left: 0;
-  background-color: transparent;
-  border-right: thick double darkgray;
   overflow-x: hidden;
-  /*margin-top: 72px;*/
 }
 
 .left {
@@ -36,34 +47,37 @@ nav {
 
 .centered {
   position: absolute;
-  top: 30%;
-  left: 50%;
+  top: 20%;
+  left: 30%;
   transform: translate(-50%, -50%);
   text-align: center;
 }
 
 .centeredContent {
-  position: absolute;
-  top: 25%;
-  left: 40%;
-  transform: translate(-10%, -10%);
+  background-color: white;
+  color: black;
+  margin-top: 10%;
+  padding: 5%;
   text-align: center;
+  border: solid #1BA781;
 }
 
 .active {
-  background-color: darkgrey;
+  color: white;
 }
 
 .activeBar {
-  background-color: darkgrey;
+  background-color: #B3DAF2;
+  color: black;
 }
 
 .centeredButtonContent {
   position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-10%, -10%);
+  padding: 5%;
+  margin-top: 40%;
   text-align: center;
+  /*background-color: white;*/
+
 }
 
 .center-div {
@@ -71,29 +85,44 @@ nav {
   display: inline-block;
 }
 
-@media screen and (max-width: 600px) {
-  .division.responsive {
-    position: relative;
-  }
-}
 
 .pad-button {
   padding-left: 10px;
 }
 
 .button-size {
-  width: 230px;
+  width: 200px;
   text-align: center;
   border-radius: 100px;
 }
 
 
 hr {
-  border-color: black;
+  border-color: white;
 }
+
+h5{
+  background-color: #1BA781;
+  }
 
 .para-size {
   width: 500px;
   text-align: center;
 }
 
+.example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.side{
+  width: 300px;
+  text-align: center;
+}
+
+.button-padding{
+  margin-top: 25%;
+}

@@ -3,7 +3,6 @@ import {ILCCongig} from '../../model/ILCConfig.model';
 import {MainModel} from '../../model/main.model';
 import {PairwiseModel} from '../../model/pairwise.model';
 import {CurtailmentModel} from '../../model/curtailment.model';
-import {MatInputModule} from '@angular/material/input';
 import {CriteriaModel} from '../../model/criteria.model';
 
 @Component({
@@ -17,11 +16,11 @@ export class ClusterComponent implements OnInit {
   @Input() mainModel: MainModel;
 
   clusterList: {
-    _clusterName: string;
-    _deviceCriteriaFile: string;
-    _deviceCurtailmentFile: string;
-    _pairwiseCriteriaFile: string;
-    _clusterPriority: string
+    cluster_name: string;
+    device_criteria_file: string;
+    device_curtailment_file: string;
+    pairwise_criteria_file: string;
+    cluster_priority: string
   }[];
   getCluster = false;
   clusterName: string;
@@ -36,17 +35,18 @@ export class ClusterComponent implements OnInit {
 
   addCluster() {
     this.clusterList.push({
-      _clusterName: this.clusterName,
-      _clusterPriority: '',
-      _pairwiseCriteriaFile: '',
-      _deviceCriteriaFile: '',
-      _deviceCurtailmentFile: ''
+      cluster_name: this.clusterName,
+      cluster_priority: '',
+      pairwise_criteria_file: '',
+      device_criteria_file: '',
+      device_curtailment_file: ''
     });
     this.ilc.updateClusterList(this.clusterList);
     this.mainModel.addPairwise(new PairwiseModel());
     this.mainModel.addCurtailment(new CurtailmentModel());
     this.mainModel.addCriteria(new CriteriaModel())
-    this.mainModel.addpairwiseCrteriaList(['zonetemperature-setpoint', 'stage', 'history-zonetemperature', 'rated-power', 'room-type']);
+    this.mainModel.addpairwiseCrteriaList(['zonetemperature-setpoint', 'stage',
+      'history-zonetemperature', 'rated-power', 'room-type']);
     this.mainModel.print();
     this.getCluster = false;
     this.clusterName = '';

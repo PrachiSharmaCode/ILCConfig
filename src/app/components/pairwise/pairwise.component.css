@@ -1,18 +1,6 @@
-.division {
-  float: left;
-  width: 30%;
-  margin-left: 48px;
-}
-
 .inside-division {
   float: left;
   width: 50%;
-}
-
-.div-outline {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-style: groove;
 }
 
 .collapse-division {
@@ -21,17 +9,8 @@
   border-style: groove;
 }
 
-.collapse-division-label {
-  width: 100%;
-}
-
-.slider-design {
-  width: 80%;
-  margin-left: 10px;
-}
-
 .button-size {
-  width: 100px;
+  width: 90px;
   text-align: center;
   border-radius: 100px;
   margin-left: 10px;
@@ -46,16 +25,4 @@ textarea {
 
 .div-inbetween-padding {
   margin-top: 5%;
-}
-
-.div-top-padding {
-  margin-top: 15%;
-}
-
-.centeredContent {
-  position: absolute;
-  top: 25%;
-  left: 40%;
-  transform: translate(-10%, -10%);
-  text-align: center;
 }

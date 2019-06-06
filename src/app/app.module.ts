@@ -19,13 +19,15 @@ import {MatRadioModule} from '@angular/material/radio';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 import { ClusterComponent } from './components/cluster/cluster.component';
 import { FormulaCriteriaComponent} from './components/formula-criteria/formula-criteria.component';
 import { StatusCriteriaComponent } from './components/status-criteria/status-criteria.component';
 import { MapperCriteriaComponent } from './components/mapper-criteria/mapper-criteria.component';
 import { HistoryCriteriaComponent } from './components/history-criteria/history-criteria.component';
-import { ConstatntCriteriaComponent } from './components/constatnt-criteria/constatnt-criteria.component';
+
+import { HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -40,11 +42,11 @@ import { ConstatntCriteriaComponent } from './components/constatnt-criteria/cons
     FormulaCriteriaComponent,
     StatusCriteriaComponent,
     MapperCriteriaComponent,
-    HistoryCriteriaComponent,
-    ConstatntCriteriaComponent
+    HistoryCriteriaComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     AppRoutingModule,
     MatSliderModule,
@@ -55,6 +57,7 @@ import { ConstatntCriteriaComponent } from './components/constatnt-criteria/cons
     BrowserAnimationsModule,
     MatTabsModule,
     MatIconModule,
+    MatSidenavModule,
     MDBBootstrapModule.forRoot()
   ],
   providers: [

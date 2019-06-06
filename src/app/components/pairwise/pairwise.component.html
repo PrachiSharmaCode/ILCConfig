@@ -7,7 +7,7 @@
              style="text-align: center; background-color: transparent; border: groove">
           <label class="collapse-division-label">
             <a data-toggle="collapse" href="#demo{{i}}" role="button" aria-expanded="false" aria-controls="zoneTemp">
-              {{cluster._pairwiseCriteriaFile}}  <i class="material-icons float-right">
+              {{cluster.pairwise_criteria_file}}  <i class="material-icons float-right">
               keyboard_arrow_down
             </i>
             </a>
@@ -15,117 +15,118 @@
         </div>
         <div id="demo{{i}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
           <div class="card-body">
-            <div class="row">
-              <div id="detailsDivision" class="division">
-                <h5>Criteria</h5>
-
-
-                <div class="collapse-division div-inbetween-padding border border-secondary">
-                  <label class="collapse-division-label">
-                    <a data-toggle="collapse" href="#criteria{{i}}" role="button"
-                       aria-expanded="false" aria-controls="zoneTemp">
-                      Criteria Name (One per Line) <i id="criteriaIcon" class="material-icons float-right">
-                      keyboard_arrow_down
-                    </i>
-                    </a>
-                  </label>
-                  <div class="collapse" id="criteria{{i}}">
-                    <div class="card card-body">
-                      <h5>Ctriteria Names</h5>
-                      <ng-container
-                        *ngFor="let criteria of pairwiseCriteriaList[i];let k = index;trackBy: trackByIndex;">
-                        <h6>{{criteria}}
-                          <button (click)="removeCriteria(i, k)"
-                                  style="color: crimson; background-color: transparent; border: none"
+            <div class="container">
+              <div class="row">
+                <div id="detailsDivision" class="col-sm">
+                  <h5>Criteria</h5>
+                  <div class="collapse-division border border-secondary">
+                    <label class="collapse-division-label">
+                      <a data-toggle="collapse" href="#criteria{{i}}" role="button"
+                         aria-expanded="false" aria-controls="zoneTemp">
+                        Criteria Name (One per Line) <i id="criteriaIcon" class="material-icons float-right">
+                        keyboard_arrow_down
+                      </i>
+                      </a>
+                    </label>
+                    <div class="collapse" id="criteria{{i}}">
+                      <div class="card card-body">
+                        <h5>Ctriteria Names</h5>
+                        <ng-container
+                          *ngFor="let criteria of pairwiseCriteriaList[i];let k = index;trackBy: trackByIndex;">
+                          <h6>{{criteria}}
+                            <button (click)="removeCriteria(i, k)"
+                                    style="color: crimson; background-color: transparent; border: none"
+                                    class="material-icons float-right">
+                              close
+                            </button>
+                          </h6>
+                          <hr>
+                        </ng-container>
+                        <div class="row border border-secondary collapse-division" *ngIf="getCriteria">
+                          <mat-form-field class="example-full-width " style="width: 80%; margin-left: 20px">
+                            <input matInput placeholder="Enter Criteria Name Here" [(ngModel)]="getCriteriaValue">
+                          </mat-form-field>
+                          <button (click)="UpdateCriteriaList(i, pairwiseCriteriaList[i].length)"
+                                  style="color: green; background-color: transparent; border: none"
                                   class="material-icons float-right">
-                            close
+                            check
                           </button>
-                        </h6>
-                        <hr>
-                      </ng-container>
-                      <div class="row border border-secondary collapse-division" *ngIf="getCriteria">
-                        <mat-form-field class="example-full-width " style="width: 80%; margin-left: 20px">
-                          <input matInput placeholder="Enter Criteria Name Here" [(ngModel)]="getCriteriaValue">
-                        </mat-form-field>
-                        <button (click)="UpdateCriteriaList(i, pairwiseCriteriaList[i].length)"
-                                style="color: green; background-color: transparent; border: none"
-                                class="material-icons float-right">
-                          check
+                        </div>
+                        <button id="addcriteria" (click)="addCriteria()" type="button" class="btn btn-info btn-sm">
+                          Add Criteria
                         </button>
                       </div>
-                      <button id="addcriteria" (click)="addCriteria()" type="button" class="btn btn-info btn-sm">
-                        Add Criteria
-                      </button>
                     </div>
                   </div>
+
+
+                  <button style="margin-left: 25%; border-radius: 100px" type="button"
+                          class="btn btn-outline-dark div-inbetween-padding" (click)="generateCamparisons()">
+                    Generate Comparisons
+                  </button>
                 </div>
-
-
-                <button style="margin-left: 25%; border-radius: 100px" type="button"
-                        class="btn btn-outline-dark div-inbetween-padding" (click)="generateCamparisons()">
-                  Generate Comparisons
-                </button>
-              </div>
-              <div id="workDivision" class="division" *ngIf="generate">
-                <h5>Pairwise Criteria</h5>
-                <div>
-                  <ng-container
-                    *ngFor="let mainCriteria of pairwiseCriteriaList[i];let index = index;trackBy: trackByIndex;">
-                    <div class="collapse-division">
-                      <label class="collapse-division-label">
-                        <a data-toggle="collapse" href="#historyZoneTempPoints{{index}}{{i}}" role="button"
-                           aria-expanded="false" aria-controls="zoneTemp">
-                          {{mainCriteria}}  <i class="material-icons float-right">
-                          keyboard_arrow_down
-                        </i>
-                        </a>
-                      </label>
-                      <div class="collapse" id="historyZoneTempPoints{{index}}{{i}}">
-                        <div class="card card-body">
-                          <div class="row">
-                            <label>Criteria</label>
-                            <div class="row" style="margin-left: 50%; width: 100%">
-                              <h6 class="float-left">Less</h6>
-                              <h6 class="float-right" style="margin-left: 30%;">More</h6>
-                            </div>
-                          </div>
-<!--                          <label>Criteria</label>-->
-                          <ul style="list-style-type:none;">
-                            <li *ngFor="let criteiaList of remainingList(i, index);let j = index;trackBy: trackByIndex;">
-                              <div class="row">
-                                <div class="inside-division">
-                                  <h6>{{criteiaList}} {{i}} {{index}} {{j}} </h6>
-                                </div>
-
-                                <div class="row">
-                                  <mat-slider id="{{criteiaList}}%{{mainCriteria}}" min="2" max="20"
-                                              value="11" invert
-                                              step="1" tickInterval="1"
-                                              (input)="updateSliderValue($event, j, index, i)">
-<!--                                              (change)="updateValues($event, criteiaList ,mainCriteria)">-->
-                                  </mat-slider>
-                                  <h5>{{pairwiseList[i].sliderValue[index][j]}}</h5>
-                                </div>
+                <div id="workDivision" class="col-sm" *ngIf="generate">
+                  <h5>Pairwise Criteria</h5>
+                  <div>
+                    <ng-container
+                      *ngFor="let mainCriteria of pairwiseCriteriaList[i];let index = index;trackBy: trackByIndex;">
+                      <div class="collapse-division">
+                        <label class="collapse-division-label">
+                          <a data-toggle="collapse" href="#historyZoneTempPoints{{index}}{{i}}" role="button"
+                             aria-expanded="false" aria-controls="zoneTemp">
+                            {{mainCriteria}}  <i class="material-icons float-right">
+                            keyboard_arrow_down
+                          </i>
+                          </a>
+                        </label>
+                        <div class="collapse" id="historyZoneTempPoints{{index}}{{i}}">
+                          <div class="card card-body">
+                            <div class="row">
+                              <label>Criteria</label>
+                              <div class="row" style="margin-left: 50%; width: 100%">
+                                <h6 class="float-left">Less</h6>
+                                <h6 class="float-right" style="margin-left: 30%;">More</h6>
                               </div>
-                            </li>
-                          </ul>
+                            </div>
+                            <!--                          <label>Criteria</label>-->
+                            <ul style="list-style-type:none;">
+                              <li
+                                *ngFor="let criteiaList of remainingList(i, index, mainCriteria);let j = index;trackBy: trackByIndex;">
+                                <div class="row">
+                                  <div class="inside-division">
+                                    <h6>{{criteiaList}} {{i}} {{index}} {{j}} </h6>
+                                  </div>
+
+                                  <div class="row">
+                                    <mat-slider id="{{criteiaList}}%{{mainCriteria}}" min="2" max="20"
+                                                value="11" invert
+                                                step="1" tickInterval="1"
+                                                (input)="updateSliderValue($event, j, index, i)">
+                                      (change)="updateValues($event, criteiaList ,mainCriteria)">
+                                    </mat-slider>
+                                    <h5>{{pairwiseList[i].sliderValue[index][j]}}</h5>
+                                  </div>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </ng-container>
+                    </ng-container>
+                  </div>
                 </div>
-              </div>
-              <div id="textboxDivisin" class="division">
-                <div class="row">
-                  <h5 style="margin-left: 3%">File Preview</h5>
-                  <a style="margin-left: 3%" class="btn btn-outline-dark  button-size"
-                     (click)="onRefreshButton(i)">Refresh</a>
-                  <a style="margin-left: 3%" class="btn btn-outline-dark  button-size"
-                     (click)="savePairwiseCalculation(i)">Save</a>
-                </div>
-                <textarea id="checktext">
+                <div id="textboxDivisin" class="col-sm">
+                  <div class="row">
+                    <h5 style="margin-left: 3%">File Preview</h5>
+                    <a style="margin-left: 3%" class="btn btn-outline-dark btn-sm button-size"
+                       (click)="onRefreshButton(i)">Refresh</a>
+                    <a style="margin-left: 3%" class="btn btn-outline-dark btn-sm button-size"
+                       (click)="savePairwiseCalculation(i)">Save</a>
+                  </div>
+                  <textarea id="checktext">
                   {{pairwiseList[i].pairwiaseCalculation}}
                 </textarea>
+                </div>
               </div>
             </div>
           </div>

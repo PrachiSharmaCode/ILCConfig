@@ -9,12 +9,15 @@
 }
 
 .collapse-division {
-  margin-top: 20px;
   margin-bottom: 10px;
 }
 
 .collapse-division-label {
   width: 100%;
+  padding-bottom: 1%;
+  padding-right: 1%;
+  padding-left: 1%;
+  background-color: #003B06;
 }
 
 input[type=text] {

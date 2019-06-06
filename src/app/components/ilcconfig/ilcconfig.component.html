@@ -1,91 +1,114 @@
-<div class="row">
-  <div class="division" align="left">
-    <h5>Installation Configuration</h5>
-    <div >
-      <mat-form-field style="width: 100%" class="example-full-width">
-        <input matInput placeholder="Campus"
-               [(ngModel)]="campus"></mat-form-field>
-      <mat-form-field style="width: 100%" class="example-full-width">
-        <input matInput placeholder="Buidling"
-               [(ngModel)]="building"></mat-form-field>
-      <div class="collapse-division">
-        <label class="collapse-division-label">
-          <p data-toggle="collapse" href="#collapseExample" role="button"
-             aria-expanded="false" aria-controls="collapseExample">
-            Power Meter
-            <i class="material-icons float-right">keyboard_arrow_down</i>
-          </p>
-        </label>
-        <div class="collapse" id="collapseExample">
-          <div id="powerMeter" class="card card-body">
-            <mat-form-field style="width: 100%" class="example-full-width">
-              <input matInput placeholder="Device"
-                     [(ngModel)]="device"></mat-form-field>
-            <mat-form-field style="width: 100%" class="example-full-width">
-              <input matInput placeholder="Point"
-                     [(ngModel)]="point"></mat-form-field>
-            <button *ngIf="!showAdvanceOption" (click)="advanceOption()" type="button"
-                    class="btn btn-info btn-sm">
-              Advance Options
-            </button>
-            <div *ngIf="showAdvanceOption">
-              <mat-form-field style="width: 100%" class="example-full-width">
-                <input matInput placeholder="Demand Formula (Optional)"
-                       [(ngModel)]="demandFormula"></mat-form-field>
-              <ul class="list-unstyled">
-                <li *ngFor="let i of demandformulaAgrsArr; let index = index;trackBy: trackByIndex;">
+<div class="container">
+  <div class="row">
+    <div class="col-sm col-padding">
+      <h5 class="heading">Installation Configuration</h5>
+      <div>
+
+        <div class="div-block rounded">
+          <mat-form-field style="width: 100%" class="example-full-width">
+            <input matInput placeholder="Campus"
+                   [(ngModel)]="campus"></mat-form-field>
+          <mat-form-field style="width: 100%" class="example-full-width">
+            <input matInput placeholder="Buidling"
+                   [(ngModel)]="building"></mat-form-field>
+        </div>
+
+
+        <div>
+          <div class="collapse-division">
+            <label class="collapse-division-label">
+              <p data-toggle="collapse" href="#collapseExample" role="button"
+                 aria-expanded="false" aria-controls="collapseExample">
+                Power Meter
+                <i class="material-icons float-right">keyboard_arrow_down</i>
+              </p>
+            </label>
+            <div class="collapse" id="collapseExample">
+              <div id="powerMeter" class="card card-body">
+                <mat-form-field style="width: 100%" class="example-full-width">
+                  <input matInput placeholder="Device"
+                         [(ngModel)]="device"></mat-form-field>
+                <mat-form-field style="width: 100%" class="example-full-width">
+                  <input matInput placeholder="Point"
+                         [(ngModel)]="point"></mat-form-field>
+                <a *ngIf="!showAdvanceOption" href="#" (click)="advanceOption()" style="color: #1BA781">
+                  <i class="material-icons float-left">add</i> Advance Options
+                </a>
+
+                <div *ngIf="showAdvanceOption">
                   <mat-form-field style="width: 100%" class="example-full-width">
-                    <input matInput placeholder="Demand Formula Arguments (Optional)"
-                           [(ngModel)]="demandformulaAgrsArr[index]"></mat-form-field>
-                </li>
-              </ul>
-              <button id="addparam" (click)="addDemandFormula()" type="button" class="btn btn-info btn-sm float-left">
-                Add Parameter
-              </button>
-              <button style="alignment: center" (click)="closeAdvenceOption()" type="button" class="btn btn-outline-danger btn-sm float-right">
-                Close Advance Options
-              </button>
+                    <input matInput placeholder="Demand Formula (Optional)"
+                           [(ngModel)]="demandFormula"></mat-form-field>
+                  <ul class="list-unstyled">
+                    <li *ngFor="let i of demandformulaAgrsArr; let index = index;trackBy: trackByIndex;">
+                      <mat-form-field style="width: 100%" class="example-full-width">
+                        <input matInput placeholder="Demand Formula Arguments (Optional)"
+                               [(ngModel)]="demandformulaAgrsArr[index]"></mat-form-field>
+                    </li>
+                  </ul>
+                  <a href="#" id="addparam" (click)="addDemandFormula()" class="float-left" style="color: #1BA781">
+                    <i class="material-icons float-left">add</i> Add Parameter
+                  </a>
+                  <a href="#" (click)="closeAdvenceOption()" class="float-right"  style="color:#1BA781 ">
+                    <i class="material-icons float-left">remove_circle_outline</i>Close Options
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+
+
+        <div class="div-block rounded">
+          <mat-form-field style="width: 100%" class="example-full-width">
+            <input matInput placeholder="AgentID"
+                   [(ngModel)]="agentId"></mat-form-field>
+        </div>
+
+
+        <div class="div-block rounded">
+          <mat-form-field style="width: 100%" class="example-full-width">
+            <input matInput placeholder="Demand Limit"
+                   [(ngModel)]="demandLimit"></mat-form-field>
+          <mat-form-field style="width: 100%" class="example-full-width">
+            <input matInput placeholder="Curtailment Time"
+                   [(ngModel)]="curtailmentTime"></mat-form-field>
+          <mat-form-field style="width: 100%" class="example-full-width">
+            <input matInput placeholder="Curtailment Confirm"
+                   [(ngModel)]="curtailmentConfirm"></mat-form-field>
+          <mat-form-field style="width: 100%" class="example-full-width">
+            <input matInput placeholder="Curtailment Break"
+                   [(ngModel)]="curtailmentBreak"></mat-form-field>
+          <mat-form-field style="width: 100%" class="example-full-width">
+            <input matInput placeholder="Building Power Window (Average)"
+                   [(ngModel)]="buildingPowerWindow"></mat-form-field>
+          <input class="check-input" type="checkbox" [(ngModel)]="staggerRelease">Stagger release<br>
+          <input class="check-input" type="checkbox" [(ngModel)]="staggerOfftime">Stagger Off time<br>
+        </div>
       </div>
-      <mat-form-field style="width: 100%" class="example-full-width">
-        <input matInput placeholder="AgentID"
-               [(ngModel)]="agentId"></mat-form-field>
-      <mat-form-field style="width: 100%" class="example-full-width">
-        <input matInput placeholder="Demand Limit"
-               [(ngModel)]="demandLimit"></mat-form-field>
-      <mat-form-field style="width: 100%" class="example-full-width">
-        <input matInput placeholder="Curtailment Time"
-               [(ngModel)]="curtailmentTime"></mat-form-field>
-      <mat-form-field style="width: 100%" class="example-full-width">
-        <input matInput placeholder="Curtailment Confirm"
-               [(ngModel)]="curtailmentConfirm"></mat-form-field>
-      <mat-form-field style="width: 100%" class="example-full-width">
-        <input matInput placeholder="Curtailment Break"
-               [(ngModel)]="curtailmentBreak"></mat-form-field>
-      <mat-form-field style="width: 100%" class="example-full-width">
-        <input matInput placeholder="Building Power Window (Average)"
-               [(ngModel)]="buildingPowerWindow"></mat-form-field>
-      <input class="check-input" type="checkbox" [(ngModel)]="staggerRelease">Stagger release<br>
-      <input class="check-input" type="checkbox" [(ngModel)]="staggerOfftime">Stagger Off time<br>
     </div>
-  </div>
-  <div class="division " align="left">
-    <div id="clusterBlock">
-      <h5>Clusters</h5>
-      <app-cluster [ilc]="ilc" [mainModel]="mainModel"></app-cluster>
-    </div>
-  </div>
-  <div class="division">
-    <div class="row">
-      <h5>File Preview</h5>
-      <a (click)="onRefeshClick()" class="btn btn-outline-dark  button-size">Refresh</a>
-      <a href=#finalCal class="btn btn-outline-dark  button-size"
-         download="finalCalculation" (click)="saveCalculation()">Save</a>
-    </div>
-    <textarea id="finalCal">
+      <div class="col-sm col-padding">
+        <div id="clusterBlock">
+          <h5 class="heading">Clusters</h5>
+          <app-cluster [ilc]="ilc" [mainModel]="mainModel"></app-cluster>
+        </div>
+      </div>
+      <div class="col-sm col-padding">
+        <div class="row">
+          <h5 class="heading" style="margin-left: 3%">File Preview</h5>
+          <button (click)="onRefeshClick()" class="btn btn-outline-dark btn-sm button-size">
+            <i class="material-icons float-left">autorenew</i>Refresh
+          </button>
+          <button href=#finalCal class="btn btn-outline-dark btn-sm button-size"
+                  download="finalCalculation" (click)="saveCalculation()">
+            <i class="material-icons float-left">
+              get_app
+            </i>Save
+          </button>
+        </div>
+        <textarea id="finalCal" class="rounded">
       {{finalCalculation}}
           </textarea>
+      </div>
+    </div>
   </div>
-</div>

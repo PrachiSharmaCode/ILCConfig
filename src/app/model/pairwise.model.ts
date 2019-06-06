@@ -12,11 +12,6 @@ export class PairwiseModel {
   }
 
   get sliderValue(): number[][] {
-    // console.log(this._pairwiseCriteriaList);
-    // for (let index = 0; index < this._pairwiseCriteriaList.length; index++) {
-    //   this.sliderValue[index] = [];
-    // }
-    // console.log(this._sliderValue);
     return this._sliderValue;
   }
 
@@ -42,6 +37,10 @@ export class PairwiseModel {
     this._pairwiseCriteria = pairwiseCriteria;
     this._generated = true;
     this._pairwiaseCalculation = calculation;
+  }
+
+  updateMap(pairMap) {
+    this._pairwiseCriteria = pairMap;
   }
 
   get pairwiseCriteriaList(): string[][] {
@@ -75,35 +74,23 @@ export class PairwiseModel {
     return this._pairwiaseCalculation;
   }
 
-  setFinalCalculation() {
-    console.log(this._pairwiseCriteria);
-    console.log(this._pairwiseCriteriaList);
-    // let obj = [];
-    // let num = 0;
-    // while (num < this._pairwiseCriteriaList.length) {
-    //   let oobj = [];
-    //   const mainCriteria = this._pairwiseCriteriaList[num];
-    //   const hmap = this._pairwiseCriteria.get(mainCriteria);
-    //   for (let i = num + 1; i < this._pairwiseCriteriaList.length; i++) {
-    //     let followCriteria = '';
-    //     let followCriteriaValue = '';
-    //     followCriteria = this._pairwiseCriteriaList[i];
-    //     followCriteriaValue = hmap.get(this._pairwiseCriteriaList[i]);
-    //     let check = {};
-    //     check = {[followCriteria]: followCriteriaValue};
-    //     oobj.push(check);
-    //   }
-    //   obj.push({
-    //     [mainCriteria]: {
-    //       oobj
-    //     }
-    //   });
-    //   num++;
-    // }
-    // let cal = JSON.stringify(obj, null, 4)
-    //   .replace('[', '').replace(']', '')
-    //   .replace(/\"oobj\":/g, '');
-    // return cal;
+  setFinalCalculation(i) {
+    console.log(this._sliderValue);
+    let jsonObh = {};
+    let count = 1 ;
+    console.log(this._pairwiseCriteriaList[i].length);
+
+    for (let j = 0; j < this._pairwiseCriteriaList[i].length; j++) {
+      jsonObh[this._pairwiseCriteriaList[i][j]] = {};
+      for (let k = 0; k < this._sliderValue[j].length; k++) {
+        jsonObh[this._pairwiseCriteriaList[i][j]][this._pairwiseCriteriaList[i][k + count]] = this._sliderValue[j][k];
+    }
+      count++;
+    }
+    let cal = JSON.stringify(jsonObh, null, 4);
+    console.log(cal);
+    this._pairwiaseCalculation = cal;
+    return cal;
   }
 
   get pairwiseCriteria(): Map<any, any> {

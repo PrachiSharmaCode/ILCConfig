@@ -8,11 +8,11 @@ import {HistoryCriteriaModel} from './historyCriteria.model';
 export class CriteriaModel {
 
   private ilc: ILCCongig = new ILCCongig();
-  private _formulaModel: FormulaCriteriaModel = new FormulaCriteriaModel();
-  private _statusModel: StatusCriteriaModel =  new StatusCriteriaModel();
-  private _mapperModel: MapperCriteriaModel = new MapperCriteriaModel();
-  private _constantModel: ConstantCriteriaModel =  new ConstantCriteriaModel();
-  private _historyModel: HistoryCriteriaModel =  new HistoryCriteriaModel();
+  private _formulaModel: FormulaCriteriaModel[][] = [];
+  private _statusModel: StatusCriteriaModel[][] = [];
+  private _mapperModel: MapperCriteriaModel[][] = [];
+  private _constantModel: ConstantCriteriaModel[][] = [];
+  private _historyModel: HistoryCriteriaModel[][] = [];
   private _critriaList: string[];
   private devices = this.ilc.devices;
   private _stageName: string;
@@ -97,66 +97,83 @@ export class CriteriaModel {
   //   this.formulaModel.updateFormulaModel(argument, maximum, minimum, operation, formula);
   // }
 
-  setFinalCalulation(list: string[][]) {
+  setFinalCalulation(list: string[][], l) {
     console.log(list);
-    // const obj = [];
-    // for (let i = 0; i <= this.devices.length; i++) {
-    //   for (let j = 0; j <= list.length; j++) {
-    //     obj[i] = {
-    //       [this.stageName]: {
-    //         device_topic: this.devices[i],
-    //         // [list[j]]: this._formulaModel.formulaCalculate
-    //       }
-    //     };
-    //   }
-    // }
-    // this._criteriaCalculation = JSON.stringify(obj, null, 4);
-    // return this._criteriaCalculation;
+    let jsonObh = {};
+    for (let j = 0; j < this.devices.length; j++) {
+      jsonObh[this.devices[j]] = {
+        FirstStageCooling: {
+          device_topic: 'CAMPUS/Buidling/' + this.devices[j],
+        }
+      };
+      for (let k = 0; k < list[0].length; k++) {
+        if (this.formulaModel[j][k] !== null) {
+          jsonObh[this.devices[j]][list[l][k]] = this.formulaModel[j][k];
+        }
+        if (this.statusModel[j][k] !== null) {
+          jsonObh[this.devices[j]][list[l][k]] = this.statusModel[j][k];
+        }
+        if (this.mapperModel[j][k] !== null) {
+          jsonObh[this.devices[j]][list[l][k]] = this.mapperModel[j][k];
+        }
+        if (this.constantModel[j][k] !== null) {
+          jsonObh[this.devices[j]][list[l][k]] = this.constantModel[j][k];
+        }
+        if (this.historyModel[j][k] !== null) {
+          jsonObh[this.devices[j]][list[l][k]] = this.historyModel[j][k];
+        }
+      }
+    }
+
+    const cal = JSON.stringify(jsonObh, null, 4);
+    console.log(cal);
+    this._criteriaCalculation = cal;
+    return cal;
   }
 
 
-  get formulaModel(): FormulaCriteriaModel {
+  get formulaModel(): FormulaCriteriaModel[][] {
     return this._formulaModel;
   }
 
-  addArgument() {
-    this._formulaModel.addArugiment();
-  }
+  // addArgument(val) {
+  //   this._formulaModel[val].addArugiment();
+  // }
 
-  set formulaModel(value: FormulaCriteriaModel) {
+  set formulaModel(value: FormulaCriteriaModel[][]) {
     this._formulaModel = value;
   }
 
-  get statusModel(): StatusCriteriaModel {
+  get statusModel(): StatusCriteriaModel[][] {
     return this._statusModel;
   }
 
-  set statusModel(value: StatusCriteriaModel) {
+  set statusModel(value: StatusCriteriaModel[][]) {
     this._statusModel = value;
   }
 
-  get mapperModel(): MapperCriteriaModel {
+  get mapperModel(): MapperCriteriaModel[][] {
     return this._mapperModel;
   }
 
-  set mapperModel(value: MapperCriteriaModel) {
+  set mapperModel(value: MapperCriteriaModel[][]) {
     this._mapperModel = value;
   }
 
 
-  get constantModel(): ConstantCriteriaModel {
+  get constantModel(): ConstantCriteriaModel[][] {
     return this._constantModel;
   }
 
-  set constantModel(value: ConstantCriteriaModel) {
+  set constantModel(value: ConstantCriteriaModel[][]) {
     this._constantModel = value;
   }
 
-  get historyModel(): HistoryCriteriaModel {
+  get historyModel(): HistoryCriteriaModel[][] {
     return this._historyModel;
   }
 
-  set historyModel(value: HistoryCriteriaModel) {
+  set historyModel(value: HistoryCriteriaModel[][]) {
     this._historyModel = value;
   }
 }

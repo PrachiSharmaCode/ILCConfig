@@ -1,15 +1,14 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ILCCongig} from '../../model/ILCConfig.model';
 import {PairwiseModel} from '../../model/pairwise.model';
-import {CriteriaModel} from "../../model/criteria.model";
-import {EventEmitter} from 'events';
+import {CriteriaModel} from '../../model/criteria.model';
 import {MainModel} from '../../model/main.model';
-import {CurtailmentModel} from "../../model/curtailment.model";
-import {FormulaCriteriaModel} from "../../model/formulaCriteria.model";
-import {StatusCriteriaModel} from "../../model/statusCriteria.model";
-import {MapperCriteriaModel} from "../../model/mapperCriteria.model";
-import {ConstantCriteriaModel} from "../../model/constantCriteria.model";
-import {HistoryCriteriaModel} from "../../model/historyCriteria.model";
+import {CurtailmentModel} from '../../model/curtailment.model';
+import {FormulaCriteriaModel} from '../../model/formulaCriteria.model';
+import {StatusCriteriaModel} from '../../model/statusCriteria.model';
+import {MapperCriteriaModel} from '../../model/mapperCriteria.model';
+import {ConstantCriteriaModel} from '../../model/constantCriteria.model';
+import {HistoryCriteriaModel} from '../../model/historyCriteria.model';
 
 
 @Component({
@@ -23,11 +22,11 @@ export class HomeComponent implements OnInit {
   pairwise: PairwiseModel = new PairwiseModel();
   criteria: CriteriaModel = new CriteriaModel();
   mainModel: MainModel = new MainModel();
-  formulaModel: FormulaCriteriaModel = new FormulaCriteriaModel();
-  statusModel: StatusCriteriaModel;
-  mapperModel: MapperCriteriaModel;
-  constantModel: ConstantCriteriaModel;
-  historyModel: HistoryCriteriaModel;
+  formulaModel: FormulaCriteriaModel[][] = [];
+  statusModel: StatusCriteriaModel[][] = [];
+  mapperModel: MapperCriteriaModel[][] = [];
+  constantModel: ConstantCriteriaModel[][] = [];
+  historyModel: HistoryCriteriaModel[][] = [];
   curtailment: CurtailmentModel = new CurtailmentModel();
   ilcCongifOpen: boolean;
   pairwiseOpen: boolean;
@@ -38,6 +37,7 @@ export class HomeComponent implements OnInit {
   showDocumentation = true;
   showILC = false;
   showMasterdriver = false;
+  masterFile: string;
 
   constructor() {
   }
@@ -104,9 +104,21 @@ export class HomeComponent implements OnInit {
     this.showMasterdriver = true;
   }
 
+  getMasterDriver(e) {
+   console.log(e.target.files);
+   const reader = new FileReader();
+    // tslint:disable-next-line:only-arrow-functions
+   reader.onload = function() {
+     console.log(reader.result);
+     const t = JSON.parse(reader.result.toString());
+     console.log(t.agent_id);
+   };
+   console.log(reader.readAsText(e.target.files[0]));
+  }
+
   activeSideBarButton(value) {
-    var clickedButton;
-    var button;
+    let clickedButton;
+    let button;
     button = document.getElementsByClassName('activeBar');
     button[0].className = button[0].className.replace('activeBar', '');
     clickedButton = document.getElementById(value.target.id);
@@ -114,8 +126,8 @@ export class HomeComponent implements OnInit {
   }
 
   activeButton(value) {
-    var clickedButton;
-    var button;
+    let clickedButton;
+    let button;
     button = document.getElementsByClassName('active');
     button[0].className = button[0].className.replace('active', '');
     clickedButton = document.getElementById(value.target.id);

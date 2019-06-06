@@ -19,14 +19,13 @@ export class PairwiseComponent implements OnInit {
   clusterList: {
     _deviceCriteriaFile: string;
     _deviceCurtailmentFile: string;
-    _pairwiseCriteriaFile: string;
+    pairwise_criteria_file: string;
     _clusterPriority: string
   }[];
   pairwiseCriteriaList: string[][] = [];
   finalCalcultion: string;
   criteria = new Map<any, any>();
   generate = true;
-  sliderCheck = false;
   showPairwiseList: boolean;
   getCriteria = false;
   getCriteriaValue: string;
@@ -102,36 +101,35 @@ export class PairwiseComponent implements OnInit {
     }
     if (changeEvent.value > 10) {
       this.pairwiseList[j].sliderValue[index][i] = changeEvent.value - 10;
-      // this.sliderValue[index][i] = changeEvent.value - 10
       console.log(this.pairwiseList[j].sliderValue[index][i]);
       console.log(this.pairwiseList[j].sliderValue);
     } else {
       if (changeEvent.value === 10) {
-        this.pairwiseList[j].sliderValue[index][i] = changeEvent.value - 8;
+        this.pairwiseList[j].sliderValue[index][i] = 1 / (changeEvent.value - 8);
       }
       if (changeEvent.value === 9) {
-        this.pairwiseList[j].sliderValue[index][i] = changeEvent.value - 6;
+        this.pairwiseList[j].sliderValue[index][i] = 1 / (changeEvent.value - 6);
       }
       if (changeEvent.value === 8) {
-        this.pairwiseList[j].sliderValue[index][i] = changeEvent.value - 4;
+        this.pairwiseList[j].sliderValue[index][i] = 1 / (changeEvent.value - 4);
       }
       if (changeEvent.value === 7) {
-        this.pairwiseList[j].sliderValue[index][i] = changeEvent.value - 2;
+        this.pairwiseList[j].sliderValue[index][i] = 1 / (changeEvent.value - 2);
       }
       if (changeEvent.value === 6) {
-        this.pairwiseList[j].sliderValue[index][i] = changeEvent.value;
+        this.pairwiseList[j].sliderValue[index][i] = 1 / (changeEvent.value);
       }
       if (changeEvent.value === 5) {
-        this.pairwiseList[j].sliderValue[index][i] = changeEvent.value + 2;
+        this.pairwiseList[j].sliderValue[index][i] = 1 / (changeEvent.value + 2);
       }
       if (changeEvent.value === 4) {
-        this.pairwiseList[j].sliderValue[index][i] = changeEvent.value + 4;
+        this.pairwiseList[j].sliderValue[index][i] = 1 / (changeEvent.value + 4);
       }
       if (changeEvent.value === 3) {
-        this.pairwiseList[j].sliderValue[index][i] = changeEvent.value + 6;
+        this.pairwiseList[j].sliderValue[index][i] = 1 / (changeEvent.value + 6);
       }
       if (changeEvent.value === 2) {
-        this.pairwiseList[j].sliderValue[index][i] = changeEvent.value + 8;
+        this.pairwiseList[j].sliderValue[index][i] = 1 / (changeEvent.value + 8);
       }
       console.log(this.pairwiseList[j].sliderValue[index][j]);
     }
@@ -140,49 +138,33 @@ export class PairwiseComponent implements OnInit {
   savePairwiseCalculation(i) {
     const file = new Blob([this.pairwiseList[i].pairwiaseCalculation],
       {type: 'json'});
-    FileSaver.saveAs(file, this.clusterList[i]._pairwiseCriteriaFile);
+    FileSaver.saveAs(file, this.clusterList[i].pairwise_criteria_file);
   }
 
   onRefreshButton(i) {
-    console.log(this.pairwiseList[i].sliderValue);
     this.pairwiseList[i].pairwiseCriteria = this.criteria;
     this.pairwiseList[i].pairwiseCriteriaList = this.pairwiseCriteriaList;
-    this.pairwiseList[i].setFinalCalculation();
-    this.pairwiseList[i].setpairwise(this.pairwiseCriteriaList, this.criteria, this.generate, this.finalCalcultion);
+    console.log(this.pairwiseList[i].setFinalCalculation(i));
   }
 
   ngOnInit() {
     this.pairwiseList = this.mainModel.pairwiseList;
     this.pairwiseCriteriaList = this.mainModel.paireiseCriteriaList;
+    console.log(this.pairwiseCriteriaList);
     this.clusterList = this.ilc.clusterList;
-    if (this.clusterList.length === 0) {
-      this.showPairwiseList = false;
-    } else {
-      this.showPairwiseList = true;
-    }
-    // this.sliderValue = new Array(this.pairwiseCriteriaList.length);
+    this.showPairwiseList = this.clusterList.length !== 0;
 
-    console.log(this.sliderValue);
     for (let i = 0; i < this.clusterList.length; i++) {
       this.pairwiseList[i].updateCrirteriaList(this.pairwiseCriteriaList);
-      this.pairwiseList[i].pairwiseName = this.clusterList[i]._pairwiseCriteriaFile;
+      this.pairwiseList[i].pairwiseName = this.clusterList[i].pairwise_criteria_file;
       this.sliderValue = new Array(this.pairwiseList[i].pairwiseCriteriaList[i].length);
-      for(let j = 0; j < this.sliderValue.length; j++) {
+      for (let j = 0; j < this.sliderValue.length; j++) {
         this.pairwiseList[i].sliderValue[j] = [];
         this.pairwiseList[i].sliderValue[j].fill(1);
       }
     }
 
     console.log(this.sliderValue);
-    // for (let i = 0; i < this.pairwiseList.length ; i++ ) {
-    //   for (let index = 0; index < this.pairwiseCriteriaList.length; index++) {
-    //     console.log('this is i: ' + i);
-    //     console.log('this is index: ' + index);
-    //     if (this.pairwiseList[i].sliderValue[index] === undefined) {
-    //       this.pairwiseList[i].sliderValue[index] = [];
-    //     }
-    //   }
-    // }
 
     this.generate = this.pairwise.generated;
     if (this.generate) {

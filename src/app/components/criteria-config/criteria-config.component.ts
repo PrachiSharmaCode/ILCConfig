@@ -20,21 +20,22 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
   @Input() ilc: ILCCongig;
   @Input() pairwise: PairwiseModel;
   @Input() criteria: CriteriaModel;
-  @Input() formulaModel: FormulaCriteriaModel = new FormulaCriteriaModel();
+  @Input() formulaModel: FormulaCriteriaModel[][] = [];
   @Input() mainModel: MainModel;
-  @Input() statusModel: StatusCriteriaModel;
-  @Input() mapperModel: MapperCriteriaModel;
-  @Input() constantModel: ConstantCriteriaModel;
-  @Input() historyModel: HistoryCriteriaModel;
+  @Input() statusModel: StatusCriteriaModel[][] = [];
+  @Input() mapperModel: MapperCriteriaModel[][] = [];
+  @Input() constantModel: ConstantCriteriaModel[][] = [];
+  @Input() historyModel: HistoryCriteriaModel[][] = [];
 
   criteriaModelList: CriteriaModel[] = [];
   formulaCriteriaModel: FormulaCriteriaModel;
 
   clusterList: {
-    _deviceCriteriaFile: string;
-    _deviceCurtailmentFile: string;
-    _pairwiseCriteriaFile: string;
-    _clusterPriority: string
+    cluster_name: string;
+    device_criteria_file: string;
+    device_curtailment_file: string;
+    pairwise_criteria_file: string;
+    cluster_priority: string
   }[];
 
   devices: string[];
@@ -55,6 +56,9 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
   };
 
   formulaModelArr: FormulaCriteriaModel[] = [];
+
+  /***Critertia Counts****/
+  formulaCount = -1;
 
   /***Formula Argumemts***/
 
@@ -96,6 +100,8 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
     value: number
   };
 
+  fcount = 0;
+
   /***history***/
   comparisonType: string;
   historyPointName: string;
@@ -114,12 +120,12 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
   constructor() {
   }
 
-  addArguments(k) {
-    console.log('inside add argument');
-    console.log(this.criteriaModelList[k].formulaModel.argument.length);
-    this.criteriaModelList[k].addArgument();
-    console.log(this.criteriaModelList[k].formulaModel.argument.length);
-  }
+  // addArguments(k, val) {
+  //   console.log('inside add argument');
+  //   console.log(this.criteriaModelList[k].formulaModel[val].argument.length);
+  //   // this.criteriaModelList[k].addArgument(val);
+  //   console.log(this.criteriaModelList[k].formulaModel[val].argument.length);
+  // }
 
   addFormulaModel(k, i) {
     console.log('inside add formula');
@@ -127,21 +133,60 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
     // this.formulaModelArr[this.formulaModelArr.length] = new FormulaCriteriaModel();
   }
 
+  updateCount(i, index, k, val) {
+    if (val === 'Formula') {
+      this.criteriaModelList[k].formulaModel[index][i] = new FormulaCriteriaModel();
+      console.log(this.criteriaModelList[k].formulaModel);
+    } else {
+      this.criteriaModelList[k].formulaModel[index][i] = null;
+    }
+
+    if (val === 'status') {
+      this.criteriaModelList[k].statusModel[index][i] = new StatusCriteriaModel();
+      console.log(this.criteriaModelList[k].statusModel);
+    } else {
+      this.criteriaModelList[k].statusModel[index][i] = null;
+    }
+
+    if (val === 'mapper') {
+      this.criteriaModelList[k].mapperModel[index][i] = new MapperCriteriaModel();
+      console.log(this.criteriaModelList[k].mapperModel);
+    } else {
+      this.criteriaModelList[k].mapperModel[index][i] = null;
+    }
+
+    if (val === 'constant') {
+      this.criteriaModelList[k].constantModel[index][i] = new ConstantCriteriaModel();
+      console.log(this.criteriaModelList[k].constantModel);
+    } else {
+      this.criteriaModelList[k].constantModel[index][i] = null;
+    }
+
+    if (val === 'history') {
+      this.criteriaModelList[k].historyModel[index][i] = new HistoryCriteriaModel();
+      console.log(this.criteriaModelList[k].historyModel);
+    } else {
+      this.criteriaModelList[k].historyModel[index][i] = null;
+    }
+  }
+
   OnRefreshButton(k) {
     console.log(this.criteriaModelList[k].operationType);
     console.log('Formula Attributes');
-    console.log(this.criteriaModelList[k].formulaModel.print());
+    console.log(this.criteriaModelList[k].formulaModel);
     console.log('Status Attributes');
-    console.log(this.criteriaModelList[k].statusModel.print());
+    console.log(this.criteriaModelList[k].statusModel);
     console.log('Mapper Attributes');
-    console.log(this.criteriaModelList[k].mapperModel.print());
+    console.log(this.criteriaModelList[k].mapperModel);
     console.log('Constant Attributes');
-    console.log(this.criteriaModelList[k].constantModel.print());
+    console.log(this.criteriaModelList[k].constantModel);
     console.log('History Attributes');
-    console.log(this.criteriaModelList[k].historyModel.print());
+    console.log(this.criteriaModelList[k].historyModel);
     this.criteriaModelList[k].stageName = this.stageName;
-    this.criteriaModelList[k].setFinalCalulation(this.criteriaList);
+    this.criteriaModelList[k].setFinalCalulation(this.criteriaList, k);
   }
+
+
 
   ngOnInit() {
     this.criteriaModelList = this.mainModel.criteriaModelList;
@@ -153,16 +198,17 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
     this.stageName = this.criteria.stageName;
 
     // this.operationtype = this.criteria.operationType;
+    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.criteriaModelList.length; i++) {
       this.criteriaModelList[i].updateOperationType([['', '', '', '', ''], ['', '', '', '', ''], ['', '', '', '', '']]);
-      console.log(this.criteriaModelList[i].operationType);
+      for (let subCriteria = 0; subCriteria < this.devices.length; subCriteria++) {
+        this.criteriaModelList[i].formulaModel[subCriteria] = [];
+        this.criteriaModelList[i].statusModel[subCriteria] = [];
+        this.criteriaModelList[i].historyModel[subCriteria] = [];
+        this.criteriaModelList[i].mapperModel[subCriteria] = [];
+        this.criteriaModelList[i].constantModel[subCriteria] = [];
+      }
     }
-
-    this.argument = this.formulaModel.argument;
-    this.minimum = this.formulaModel.minimum;
-    this.maximun = this.formulaModel.maximun;
-
-    this.operation = this.formulaModel.operation;
     console.log(this.criteriaList);
   }
 
