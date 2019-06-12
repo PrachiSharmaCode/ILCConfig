@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ILCCongig} from "./model/ILCConfig.model";
+import {ILCCongig} from './model/ILCConfig.model';
 
 
 @Component({

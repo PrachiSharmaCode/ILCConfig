@@ -1,20 +1,18 @@
 
 button{
-  background-color: #1BA781;
+  background-color: #0C9A6F;
   color: white;
 }
 nav{
-  text-align: center;
   background-color: black;
-  /*border-bottom: thick double darkgray;*/
 }
+
 .navbar-nav{
   width: 100%;
-  text-align: center;
 }
 
 .liAlign{
-  float: none;
+  float: left;
   display: inline;
 }
 .button-size {
@@ -59,11 +57,12 @@ nav{
   margin-top: 10%;
   padding: 5%;
   text-align: center;
-  border: solid #1BA781;
+  border: solid #0C9A6F;
 }
 
 .active {
-  color: white;
+  background-color: #B3DAF2;
+  color: black;
 }
 
 .activeBar {
@@ -87,7 +86,7 @@ nav{
 
 
 .pad-button {
-  padding-left: 10px;
+  padding-left: 12px;
 }
 
 .button-size {
@@ -96,13 +95,12 @@ nav{
   border-radius: 100px;
 }
 
-
 hr {
   border-color: white;
 }
 
 h5{
-  background-color: #1BA781;
+  background-color: #0C9A6F;
   }
 
 .para-size {

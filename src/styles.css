@@ -1,13 +1,37 @@
 /* You can add global styles to this file, and also import other style files *
  */
 
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 body{
   height: 100%;
   min-height: 100%;
   font-family: Cambria;
-  background-color: #0E293C;
+  background-color: #0E2338;
 }
 
+.WHITE{
+  color: white;
+}
+
+button{
+  background-color: #0C9A6F;
+  color: white;
+}
+
+.BACKGROUND-COLOR{
+  color: #0E2338;
+}
+
+.ACTIVE-BUTTON{
+  color: #92cacf;
+}
+
+.NONACTIVE-BUTTON{
+  color: #0C9A6F;
+}
+
+.COLLAPSE-COLOR{
+  color: #003114;
+}
 

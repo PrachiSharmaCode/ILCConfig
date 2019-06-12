@@ -1,10 +1,10 @@
-<div *ngIf="showPairwiseList" style="height: 80%; margin-left: 20px; margin-right: 20px;">
+<div *ngIf="showPairwiseList" style="height: 80%; margin-left: 5%; margin-right: 5%; margin-top: 2%">
   <div class="accordion" id="accordionExample">
     <ng-container *ngFor="let cluster of clusterList;let i = index;trackBy: trackByIndex;">
 
-      <div class="card" style="margin-bottom: 10px; border-left: 6px solid black">
+      <div class="card" style="margin-bottom: 3%; border: none;">
         <div class="card-header" id="headingOne"
-             style="text-align: center; background-color: transparent; border: groove">
+             style="text-align: center; background-color: #003114;">
           <label class="collapse-division-label">
             <a data-toggle="collapse" href="#demo{{i}}" role="button" aria-expanded="false" aria-controls="zoneTemp">
               {{cluster.pairwise_criteria_file}}  <i class="material-icons float-right">
@@ -13,15 +13,15 @@
             </a>
           </label>
         </div>
-        <div id="demo{{i}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div id="demo{{i}}" class="collapse " style="background-color: #0E2338" aria-labelledby="headingOne" data-parent="#accordionExample">
           <div class="card-body">
             <div class="container">
               <div class="row">
-                <div id="detailsDivision" class="col-sm">
+                <div id="detailsDivision" class="col">
                   <h5>Criteria</h5>
-                  <div class="collapse-division border border-secondary">
-                    <label class="collapse-division-label">
-                      <a data-toggle="collapse" href="#criteria{{i}}" role="button"
+                  <div class="collapse-division">
+                    <label class="collapse-division-label sub-collapse-division-label">
+                      <a  class="sub-collapse-label" data-toggle="collapse" href="#criteria{{i}}" role="button"
                          aria-expanded="false" aria-controls="zoneTemp">
                         Criteria Name (One per Line) <i id="criteriaIcon" class="material-icons float-right">
                         keyboard_arrow_down
@@ -42,7 +42,7 @@
                           </h6>
                           <hr>
                         </ng-container>
-                        <div class="row border border-secondary collapse-division" *ngIf="getCriteria">
+                        <div class="row collapse-division" *ngIf="getCriteria">
                           <mat-form-field class="example-full-width " style="width: 80%; margin-left: 20px">
                             <input matInput placeholder="Enter Criteria Name Here" [(ngModel)]="getCriteriaValue">
                           </mat-form-field>
@@ -61,18 +61,18 @@
 
 
                   <button style="margin-left: 25%; border-radius: 100px" type="button"
-                          class="btn btn-outline-dark div-inbetween-padding" (click)="generateCamparisons()">
+                          class="btn div-inbetween-padding" (click)="generateCamparisons()">
                     Generate Comparisons
                   </button>
                 </div>
-                <div id="workDivision" class="col-sm" *ngIf="generate">
+                <div id="workDivision" class="col" *ngIf="generate">
                   <h5>Pairwise Criteria</h5>
                   <div>
                     <ng-container
                       *ngFor="let mainCriteria of pairwiseCriteriaList[i];let index = index;trackBy: trackByIndex;">
                       <div class="collapse-division">
-                        <label class="collapse-division-label">
-                          <a data-toggle="collapse" href="#historyZoneTempPoints{{index}}{{i}}" role="button"
+                        <label class="collapse-division-label sub-collapse-division-label">
+                          <a class="sub-collapse-label"  data-toggle="collapse" href="#historyZoneTempPoints{{index}}{{i}}" role="button"
                              aria-expanded="false" aria-controls="zoneTemp">
                             {{mainCriteria}}  <i class="material-icons float-right">
                             keyboard_arrow_down
@@ -94,7 +94,7 @@
                                 *ngFor="let criteiaList of remainingList(i, index, mainCriteria);let j = index;trackBy: trackByIndex;">
                                 <div class="row">
                                   <div class="inside-division">
-                                    <h6>{{criteiaList}} {{i}} {{index}} {{j}} </h6>
+                                    <h6>{{criteiaList}} </h6>
                                   </div>
 
                                   <div class="row">
@@ -104,7 +104,7 @@
                                                 (input)="updateSliderValue($event, j, index, i)">
                                       (change)="updateValues($event, criteiaList ,mainCriteria)">
                                     </mat-slider>
-                                    <h5>{{pairwiseList[i].sliderValue[index][j]}}</h5>
+                                    <p>{{pairwiseList[i].sliderValue[index][j]}}</p>
                                   </div>
                                 </div>
                               </li>
@@ -115,13 +115,24 @@
                     </ng-container>
                   </div>
                 </div>
-                <div id="textboxDivisin" class="col-sm">
+                <div id="textboxDivisin" class="col">
                   <div class="row">
-                    <h5 style="margin-left: 3%">File Preview</h5>
-                    <a style="margin-left: 3%" class="btn btn-outline-dark btn-sm button-size"
-                       (click)="onRefreshButton(i)">Refresh</a>
-                    <a style="margin-left: 3%" class="btn btn-outline-dark btn-sm button-size"
-                       (click)="savePairwiseCalculation(i)">Save</a>
+                    <h5 class="heading" style="margin-left: 3%">File Preview</h5>
+                    <button (click)="onRefreshButton(i)" class="btn btn-outline-dark btn-sm button-size">
+                      <i class="material-icons float-left">autorenew</i>Refresh
+                    </button>
+                    <button href=#finalCal class="btn btn-outline-dark btn-sm button-size"
+                            download="finalCalculation" (click)="savePairwiseCalculation(i)">
+                      <i class="material-icons float-left">
+                        get_app
+                      </i>Save
+                    </button>
+
+<!--                    <h5 style="margin-left: 3%">File Preview</h5>-->
+<!--                    <a style="margin-left: 3%" class="btn btn-outline-dark btn-sm button-size"-->
+<!--                       (click)="onRefreshButton(i)">Refresh</a>-->
+<!--                    <a style="margin-left: 3%" class="btn btn-outline-dark btn-sm button-size"-->
+<!--                       (click)="savePairwiseCalculation(i)">Save</a>-->
                   </div>
                   <textarea id="checktext">
                   {{pairwiseList[i].pairwiaseCalculation}}
@@ -137,5 +148,5 @@
 </div>
 
 <div *ngIf="!showPairwiseList" style="text-align: center">
-  <p>Please create cluster!!</p>
+  <h3 style="color: #1BA781; margin-top: 20%">Please Create Cluster !!</h3>
 </div>

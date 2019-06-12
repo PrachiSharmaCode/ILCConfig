@@ -196,8 +196,6 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
     this.campus = this.ilc.campus;
     this.building = this.ilc.building;
     this.stageName = this.criteria.stageName;
-
-    // this.operationtype = this.criteria.operationType;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.criteriaModelList.length; i++) {
       this.criteriaModelList[i].updateOperationType([['', '', '', '', ''], ['', '', '', '', ''], ['', '', '', '', '']]);

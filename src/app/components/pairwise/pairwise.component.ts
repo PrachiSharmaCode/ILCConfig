@@ -91,11 +91,6 @@ export class PairwiseComponent implements OnInit {
   // }
 
   updateSliderValue(changeEvent, i, index, j) {
-    console.log('inside updateslidervalue');
-    console.log('this is i: ' + i);
-    console.log('this is index: ' + index);
-    console.log('inside click');
-    console.log(changeEvent.value);
     if (this.pairwiseList[j].sliderValue[index] === undefined) {
       this.pairwiseList[j].sliderValue[index] = [];
     }
@@ -146,6 +141,7 @@ export class PairwiseComponent implements OnInit {
     this.pairwiseList[i].pairwiseCriteriaList = this.pairwiseCriteriaList;
     console.log(this.pairwiseList[i].setFinalCalculation(i));
   }
+
 
   ngOnInit() {
     this.pairwiseList = this.mainModel.pairwiseList;

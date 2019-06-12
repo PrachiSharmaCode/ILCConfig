@@ -29,7 +29,7 @@ export class CurtailmentModel {
     this._curtailmentList = value;
   }
 
-  updateCurtailmentList(value: any[]) {
+  updateCurtailmentList(value) {
     this._curtailmentList = value;
   }
 

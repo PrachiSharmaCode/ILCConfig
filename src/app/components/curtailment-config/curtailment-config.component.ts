@@ -27,16 +27,16 @@ export class CurtailmentConfigComponent implements OnInit {
   criteriaList: string[];
   devices: string[];
   campus: string;
-      building: string;
-      finalCalculation: string;
+  building: string;
+  finalCalculation: string;
 
-      curtailmentList: {
-        firstStageCooling: {
-          deviceTopic: string,
-          deviceStatus: {
-            condition: string,
-            deviceStageArgs: string
-          }
+  curtailmentList: {
+    firstStageCooling: {
+      deviceTopic: string,
+      deviceStatus: {
+        condition: string,
+        deviceStageArgs: string
+      }
     },
     curtailmentSetting: {
       point: string,
@@ -50,7 +50,7 @@ export class CurtailmentConfigComponent implements OnInit {
   }
 
   onRefreshButton(i) {
-    this.curtailmentModelList[i].updateCurtailmentList(this.curtailmentModelList[i].curtailmentList);
+    // this.curtailmentModelList[i].updateCurtailmentList(this.curtailmentList);
     this.finalCalculation = this.curtailmentModelList[i].setFinalCalulation();
     console.log(this.finalCalculation);
   }
@@ -69,22 +69,26 @@ export class CurtailmentConfigComponent implements OnInit {
     this.campus = this.ilc.campus;
     this.building = this.ilc.building;
     for (let j = 0; j < this.curtailmentModelList.length; j++) {
-      this.curtailmentModelList[j].curtailmentList = [];
+      if (this.curtailmentModelList[j].curtailmentList === undefined) {
+        this.curtailmentModelList[j].curtailmentList = [];
+      }
       for (let i = 0; i < this.devices.length; i++) {
-        this.curtailmentModelList[j].curtailmentList[i] = [];
-        this.curtailmentModelList[j].curtailmentList[i] = {
-          firstStageCooling: {
-            deviceTopic: this.campus + '/' + this.building + '/' + this.devices[i],
-            deviceStatus: {
-              condition: '',
-              deviceStageArgs: ''
+        if (this.curtailmentModelList[j].curtailmentList[i] === undefined) {
+          this.curtailmentModelList[j].curtailmentList[i] = [];
+          this.curtailmentModelList[j].curtailmentList[i] = {
+            firstStageCooling: {
+              deviceTopic: this.campus + '/' + this.building + '/' + this.devices[i],
+              deviceStatus: {
+                condition: '',
+                deviceStageArgs: ''
+              }
+            },
+            curtailmentSetting: {
+              point: '',
+              curtailmentMethod: '',
             }
-          },
-          curtailmentSetting: {
-            point: '',
-            curtailmentMethod: '',
-          }
-        };
+          };
+        }
       }
     }
   }

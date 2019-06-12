@@ -31,41 +31,43 @@
 <!--  </div>-->
 <!--</nav>-->
 
-<nav class="navbar navbar-expand-lg" >
+<nav class="navbar navbar-expand-lg">
   <a class="navbar-brand" href="#" style="color: white">ILC Configuration</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+  <button *ngIf="showNavButtons" class="navbar-toggler" type="button" data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
           aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup" >
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="margin-left: 5%">
     <div class="navbar-nav">
-      <ul class="nav justify-content-center mx-auto " *ngIf="showNavButtons">
-        <li class="nav-item pad-button liAlign">
-          <button id="homeButton" class="btn btn-outline-dark button-size"
+      <ul class="nav justify-content-center" *ngIf="showNavButtons">
+        <li class="nav-item  liAlign">
+          <button id="homeButton" class="btn button-size"
                   (click)="openHome(); activeButton($event)">Home
           </button>
         </li>
         <li class="nav-item pad-button liAlign">
-          <button id="ilcConfigButton" class=" btn btn-outline-dark button-size active"
+          <button id="ilcConfigButton" class=" btn button-size active"
                   (click)="openIlcConfig(); activeButton($event)">ILC Configuration
           </button>
         </li>
         <li class="nav-item pad-button liAlign">
-          <button id="pairwiseButton" class="btn btn-outline-dark button-size"
-                  (click)="openPairwise(); activeButton($event)">Pairwise
+          <button id="pairwiseButton" class="btn button-size"
+                  (click)="openPairwise(); activeButton($event)">Pairwise Configuration
           </button>
         </li>
         <li class="nav-item pad-button liAlign">
-          <button id="criteriaButton" class="btn btn-outline-dark button-size"
+          <button id="criteriaButton" class="btn button-size"
                   (click)="openCriteria(); activeButton($event)">Criteria Configuration
           </button>
         </li>
         <li class="nav-item pad-button liAlign">
-          <button id="curtailmentButton" class="btn btn-outline-dark button-size"
+          <button id="curtailmentButton" class="btn button-size"
                   (click)="openCurtailment(); activeButton($event)">Curtailment Configuration
           </button>
         </li>
       </ul>
+
       <!--      <a id="homeButton" class=" nav-item nav-link btn btn-outline-dark button-size "-->
       <!--              (click)="openHome(); activeButton($event)">Home-->
       <!--      </a>-->
@@ -139,7 +141,7 @@
 
 
       <div *ngIf="homeOpen && showMasterdriver" class="centeredButtonContent">
-        <input  type="file" [(ngModel)]="masterFile" (change)="getMasterDriver($event)"  #file>
+        <input type="file" [(ngModel)]="masterFile" (change)="getMasterDriver($event)" #file>
         {{masterFile}}
         <button class="btn btn-outline-dark btn-lg btn-block" (click)="getMasterDriver()">
           Upload Master Driver
@@ -158,26 +160,26 @@
 </div>
 
 
-    <div *ngIf="ilcCongifOpen">
-      <app-ilcconfig [ilc]="ilc" [mainModel]="mainModel"></app-ilcconfig>
-    </div>
+<div *ngIf="ilcCongifOpen">
+  <app-ilcconfig [ilc]="ilc" [mainModel]="mainModel"></app-ilcconfig>
+</div>
 
-    <div *ngIf="pairwiseOpen">
-      <app-pairwise [ilc]="ilc" [pairwise]="pairwise" [mainModel]="mainModel"></app-pairwise>
-    </div>
+<div *ngIf="pairwiseOpen">
+  <app-pairwise [ilc]="ilc" [pairwise]="pairwise" [mainModel]="mainModel"></app-pairwise>
+</div>
 
-    <div *ngIf="criteriaOPen">
-      <app-criteria-config [ilc]="ilc" [pairwise]="pairwise" [criteria]="criteria"
-                           [formulaModel]="formulaModel" [mainModel]="mainModel"
-                           [statusModel]="statusModel" [mapperModel]="mapperModel"
-                           [constantModel]="constantModel" [historyModel]="historyModel">
-      </app-criteria-config>
-    </div>
+<div *ngIf="criteriaOPen">
+  <app-criteria-config [ilc]="ilc" [pairwise]="pairwise" [criteria]="criteria"
+                       [formulaModel]="formulaModel" [mainModel]="mainModel"
+                       [statusModel]="statusModel" [mapperModel]="mapperModel"
+                       [constantModel]="constantModel" [historyModel]="historyModel">
+  </app-criteria-config>
+</div>
 
-    <div *ngIf="curtailmentOpen">
-      <app-curtailment-config [ilc]="ilc" [curtailment]="curtailment" [mainModel]="mainModel"></app-curtailment-config>
-    </div>
+<div *ngIf="curtailmentOpen">
+  <app-curtailment-config [ilc]="ilc" [curtailment]="curtailment" [mainModel]="mainModel"></app-curtailment-config>
+</div>
 
-    <router-outlet></router-outlet>
+<router-outlet></router-outlet>
 
 

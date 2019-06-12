@@ -12,7 +12,8 @@
           </a>
         </label>
       </div>
-      <div id="demo{{i}}" class="collapse border border-dark" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div id="demo{{i}}" class="collapse border border-dark" aria-labelledby="headingOne"
+           data-parent="#accordionExample">
         <div class="row">
           <div class="division">
             <div class="collapse-division border border-secondary">
@@ -95,7 +96,7 @@
                   <label class="collapse-division-label">
                     <a data-toggle="collapse" href="#{{index}}{{i}}" role="button"
                        aria-expanded="false" aria-controls="zoneTemp">
-                      {{devices[index]}} {{list.firstStageCooling.deviceTopic}}
+                      {{devices[index]}} {{curtailmentModelList[i].curtailmentList[index].firstStageCooling.deviceTopic}}
                       <i class="material-icons float-right">
                         keyboard_arrow_down
                       </i>
@@ -110,41 +111,41 @@
 
                         <mat-form-field style="width: 100%" class="example-full-width">
                           <input matInput placeholder="Device Status Arguments "
-                                 [(ngModel)]="list.firstStageCooling.deviceStatus.deviceStageArgs"></mat-form-field>
+                                 [(ngModel)]="curtailmentModelList[i].curtailmentList[index].firstStageCooling.deviceStatus.deviceStageArgs"></mat-form-field>
+
+
 
                         <mat-form-field style="width: 100%" class="example-full-width">
                           <input matInput placeholder="Condition"
-                                 [(ngModel)]="list.firstStageCooling.deviceStatus.condition"></mat-form-field>
+                                 [(ngModel)]="curtailmentModelList[i].curtailmentList[index].firstStageCooling.deviceStatus.condition"></mat-form-field>
 
                         <h5>Curtailment Setting</h5>
 
                         <mat-form-field style="width: 100%" class="example-full-width">
                           <input matInput placeholder="Point"
-                                 [(ngModel)]="list.curtailmentSetting.point"></mat-form-field>
-<!--                        <mat-form-field style="width: 100%" class="example-full-width">-->
-<!--                          <input matInput placeholder="Curtailment Method"-->
-<!--                                 [(ngModel)]="list.curtailmentSetting.curtailmentMethod"></mat-form-field>-->
+                                 [(ngModel)]="curtailmentModelList[i].curtailmentList[index].curtailmentSetting.point"></mat-form-field>
+
                         <mat-form-field style="width: 100%">
                           <mat-label>Curtailment Method</mat-label>
-                          <mat-select  [(ngModel)] = list.curtailmentSetting.curtailmentMethod>
+                          <mat-select [(ngModel)]=curtailmentModelList[i].curtailmentList[index].curtailmentSetting.curtailmentMethod>
                             <mat-option value="Offset">Offset</mat-option>
                             <mat-option value="Value">Value</mat-option>
                             <mat-option value="Equation">Equation</mat-option>
                           </mat-select>
                         </mat-form-field>
 
-                        <mat-form-field  style="width: 100%" class="example-full-width"
-                                         *ngIf="list.curtailmentSetting.curtailmentMethod == 'Offset' ">
+                        <mat-form-field style="width: 100%" class="example-full-width"
+                                        *ngIf="curtailmentModelList[i].curtailmentList[index].curtailmentSetting.curtailmentMethod == 'Offset' ">
                           <input matInput placeholder="Offset"
-                                 [(ngModel)]="list.curtailmentSetting.offset"></mat-form-field>
+                                 [(ngModel)]="curtailmentModelList[i].curtailmentList[index].curtailmentSetting.offset"></mat-form-field>
                         <mat-form-field style="width: 100%" class="example-full-width"
-                                        *ngIf="list.curtailmentSetting.curtailmentMethod == 'Value' ">
+                                        *ngIf="curtailmentModelList[i].curtailmentList[index].curtailmentSetting.curtailmentMethod == 'Value' ">
                           <input matInput placeholder="Value"
-                                 [(ngModel)]="list.curtailmentSetting.value"></mat-form-field>
+                                 [(ngModel)]="curtailmentModelList[i].curtailmentList[index].curtailmentSetting.value"></mat-form-field>
                         <mat-form-field style="width: 100%" class="example-full-width"
-                                        *ngIf="list.curtailmentSetting.curtailmentMethod == 'Equation' ">
+                                        *ngIf="curtailmentModelList[i].curtailmentList[index].curtailmentSetting.curtailmentMethod == 'Equation' ">
                           <input matInput placeholder="Equation"
-                                 [(ngModel)]="list.curtailmentSetting.Equation"></mat-form-field>
+                                 [(ngModel)]="curtailmentModelList[i].curtailmentList[index].curtailmentSetting.Equation"></mat-form-field>
                       </div>
                     </div>
                   </div>

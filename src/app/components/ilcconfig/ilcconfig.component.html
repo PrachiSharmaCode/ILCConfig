@@ -13,17 +13,16 @@
                    [(ngModel)]="building"></mat-form-field>
         </div>
 
-
         <div>
           <div class="collapse-division">
             <label class="collapse-division-label">
-              <p data-toggle="collapse" href="#collapseExample" role="button"
+              <a class="sub-collapse-label" data-toggle="collapse" href="#collapseExample" role="button"
                  aria-expanded="false" aria-controls="collapseExample">
                 Power Meter
                 <i class="material-icons float-right">keyboard_arrow_down</i>
-              </p>
+              </a>
             </label>
-            <div class="collapse" id="collapseExample">
+            <div  class="collapse" id="collapseExample">
               <div id="powerMeter" class="card card-body">
                 <mat-form-field style="width: 100%" class="example-full-width">
                   <input matInput placeholder="Device"
@@ -49,7 +48,7 @@
                   <a href="#" id="addparam" (click)="addDemandFormula()" class="float-left" style="color: #1BA781">
                     <i class="material-icons float-left">add</i> Add Parameter
                   </a>
-                  <a href="#" (click)="closeAdvenceOption()" class="float-right"  style="color:#1BA781 ">
+                  <a href="#" (click)="closeAdvenceOption()" class="float-right" style="color:#1BA781 ">
                     <i class="material-icons float-left">remove_circle_outline</i>Close Options
                   </a>
                 </div>
@@ -87,28 +86,28 @@
         </div>
       </div>
     </div>
-      <div class="col-sm col-padding">
-        <div id="clusterBlock">
-          <h5 class="heading">Clusters</h5>
-          <app-cluster [ilc]="ilc" [mainModel]="mainModel"></app-cluster>
-        </div>
-      </div>
-      <div class="col-sm col-padding">
-        <div class="row">
-          <h5 class="heading" style="margin-left: 3%">File Preview</h5>
-          <button (click)="onRefeshClick()" class="btn btn-outline-dark btn-sm button-size">
-            <i class="material-icons float-left">autorenew</i>Refresh
-          </button>
-          <button href=#finalCal class="btn btn-outline-dark btn-sm button-size"
-                  download="finalCalculation" (click)="saveCalculation()">
-            <i class="material-icons float-left">
-              get_app
-            </i>Save
-          </button>
-        </div>
-        <textarea id="finalCal" class="rounded">
-      {{finalCalculation}}
-          </textarea>
+    <div class="col-sm col-padding">
+      <div id="clusterBlock">
+        <h5 class="heading">Clusters</h5>
+        <app-cluster [ilc]="ilc" [mainModel]="mainModel"></app-cluster>
       </div>
     </div>
+    <div class="col-sm col-padding">
+      <div class="row">
+        <h5 class="heading" style="margin-left: 3%">File Preview</h5>
+        <button (click)="onRefeshClick()" class="btn btn-outline-dark btn-sm button-size">
+          <i class="material-icons float-left">autorenew</i>Refresh
+        </button>
+        <button href=#finalCal class="btn btn-outline-dark btn-sm button-size"
+                download="finalCalculation" (click)="saveCalculation()">
+          <i class="material-icons float-left">
+            get_app
+          </i>Save
+        </button>
+      </div>
+      <textarea id="finalCal" class="rounded">
+      {{finalCalculation}}
+          </textarea>
+    </div>
   </div>
+</div>
