@@ -1,12 +1,12 @@
-<div class="accordion" id="accordionExample" style="height: 80%; margin-left: 5%; margin-right: 5%; margin-top: 2%">
+<div *ngIf="showCriteriaConfiguartion" class="accordion" id="accordionExample" style="height: 80%; margin-left: 5%; margin-right: 5%; margin-top: 2%">
   <ng-container *ngFor="let cluster of clusterList;let k = index;trackBy: trackByIndex;">
 
-    <div class="card" style="margin-bottom: 3%; border: none">
+    <div class="card" style=" margin-bottom: 3%; border: none">
       <div class="card-header" id="headingOne"
-           style="text-align: center; background-color: #003114; border: none" >
+           style="text-align: center; background-color: #003114; border: none; " >
         <label class="collapse-division-label">
           <a data-toggle="collapse" href="#demo{{k}}" role="button" aria-expanded="false" aria-controls="zoneTemp">
-            {{cluster.device_criteria_file}}  <i class="material-icons float-right">
+            {{cluster.device_criteria_file}}  <i class="material-icons float-right" style="font-size: 30px;">
             keyboard_arrow_down
           </i>
           </a>
@@ -16,7 +16,7 @@
            aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="container">
           <div class="row">
-            <div class="col">
+            <div class="col-sm">
               <div class="collapse-division">
                 <label class="collapse-division-label">
                   <a data-toggle="collapse" href="#ilcConfig" role="button"
@@ -33,7 +33,7 @@
                   </div>
                 </div>
               </div>
-              <div class="collapse-division">
+              <div class="collapse-division div-inbetween-padding">
                 <label class="collapse-division-label">
                   <a data-toggle="collapse" href="#criteria{{k}}" role="button"
                      aria-expanded="false" aria-controls="zoneTemp">
@@ -45,7 +45,7 @@
                 <div class="collapse" id="criteria{{k}}">
                   <div class="card card-body">
                     <h5>Ctriteria Names</h5>
-                    <ng-container *ngFor="let criteria of criteriaList;let j = index;trackBy: trackByIndex;">
+                    <ng-container *ngFor="let criteria of criteriaList[k];let j = index;trackBy: trackByIndex;">
                       <h6>{{criteria}}</h6>
                       <hr>
                     </ng-container>
@@ -58,7 +58,7 @@
                   </div>
                 </div>
               </div>
-              <div class="collapse-division">
+              <div class="collapse-division div-inbetween-padding">
                 <label class="collapse-division-label">
                   <a data-toggle="collapse" href="#Devices" role="button"
                       aria-expanded="false" aria-controls="zoneTemp">
@@ -77,7 +77,7 @@
                   </div>
                 </div>
               </div>
-              <div class="collapse-division">
+              <div class="collapse-division div-inbetween-padding">
                 <label class="collapse-division-label">
                   <a data-toggle="collapse" href="#pointNames" role="button"
                       aria-expanded="false" aria-controls="zoneTemp">
@@ -95,11 +95,11 @@
                 </div>
               </div>
             </div>
-            <div class="col">
+            <div class="col-sm">
               <h5>Criteria Configuration</h5>
               <div>
                 <ng-container *ngFor="let device of devices;let index = index;trackBy: trackByIndex;">
-                  <div class="collapse-division" style="width: 100%">
+                  <div class="collapse-division " style="width: 100%">
 
                     <label class="collapse-division-label">
                       <a data-toggle="collapse" href="#{{devices[index]}}{{k}}" role="button"
@@ -264,7 +264,7 @@
               </div>
             </div>
 
-            <div class="col">
+            <div class="col-sm">
 <!--              <div class="row">-->
 <!--                <h5 style="margin-left: 3%">File Preview</h5>-->
 <!--                <a style="margin-left: 3%" class="btn btn-outline-dark  button-size"-->
@@ -274,10 +274,10 @@
 
               <div class="row">
                 <h5 class="heading" style="margin-left: 3%">File Preview</h5>
-                <button (click)="OnRefreshButton(k)" class="btn btn-outline-dark btn-sm button-size">
+                <button (click)="OnRefreshButton(k)" class="btn button-size">
                   <i class="material-icons float-left">autorenew</i>Refresh
                 </button>
-                <button href=#finalCal class="btn btn-outline-dark btn-sm button-size"
+                <button href=#finalCal class="btn  button-size"
                         download="finalCalculation">
                   <i class="material-icons float-left">
                     get_app
@@ -303,5 +303,7 @@
   </ng-container>
 </div>
 
-
+<div *ngIf="!showCriteriaConfiguartion" style="text-align: center">
+  <h3 style="color: #1BA781; margin-top: 5%">Please Create Cluster !!</h3>
+</div>
 

@@ -6,8 +6,9 @@
         <div class="card-header" id="headingOne"
              style="text-align: center; background-color: #003114;">
           <label class="collapse-division-label">
-            <a data-toggle="collapse" href="#demo{{i}}" role="button" aria-expanded="false" aria-controls="zoneTemp">
-              {{cluster.pairwise_criteria_file}}  <i class="material-icons float-right">
+            <a data-toggle="collapse"  href="#demo{{i}}" role="button" aria-expanded="false" aria-controls="zoneTemp">
+              {{cluster.pairwise_criteria_file}}
+              <i class="material-icons float-right" style="font-size: 30px;">
               keyboard_arrow_down
             </i>
             </a>
@@ -17,7 +18,7 @@
           <div class="card-body">
             <div class="container">
               <div class="row">
-                <div id="detailsDivision" class="col">
+                <div id="detailsDivision" class="col-sm">
                   <h5>Criteria</h5>
                   <div class="collapse-division">
                     <label class="collapse-division-label sub-collapse-division-label">
@@ -60,12 +61,12 @@
                   </div>
 
 
-                  <button style="margin-left: 25%; border-radius: 100px" type="button"
+                  <button style="margin-left: 15%; border-radius: 100px" type="button"
                           class="btn div-inbetween-padding" (click)="generateCamparisons()">
                     Generate Comparisons
                   </button>
                 </div>
-                <div id="workDivision" class="col" *ngIf="generate">
+                <div id="workDivision" class="col-sm" *ngIf="generate">
                   <h5>Pairwise Criteria</h5>
                   <div>
                     <ng-container
@@ -98,7 +99,7 @@
                                   </div>
 
                                   <div class="row">
-                                    <mat-slider id="{{criteiaList}}%{{mainCriteria}}" min="2" max="20"
+                                    <mat-slider style="width: 100%" id="{{criteiaList}}%{{mainCriteria}}" min="2" max="20"
                                                 value="11" invert
                                                 step="1" tickInterval="1"
                                                 (input)="updateSliderValue($event, j, index, i)">
@@ -115,7 +116,7 @@
                     </ng-container>
                   </div>
                 </div>
-                <div id="textboxDivisin" class="col">
+                <div id="textboxDivisin" class="col-sm">
                   <div class="row">
                     <h5 class="heading" style="margin-left: 3%">File Preview</h5>
                     <button (click)="onRefreshButton(i)" class="btn btn-outline-dark btn-sm button-size">
@@ -148,5 +149,5 @@
 </div>
 
 <div *ngIf="!showPairwiseList" style="text-align: center">
-  <h3 style="color: #1BA781; margin-top: 20%">Please Create Cluster !!</h3>
+  <h3 style="color: #1BA781; margin-top: 5%">Please Create Cluster !!</h3>
 </div>

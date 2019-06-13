@@ -18,11 +18,13 @@ export class CurtailmentConfigComponent implements OnInit {
   curtailmentModelList: CurtailmentModel[] = [];
 
   clusterList: {
-    _deviceCriteriaFile: string;
-    _deviceCurtailmentFile: string;
-    _pairwiseCriteriaFile: string;
-    _clusterPriority: string
+    cluster_name: string;
+    device_criteria_file: string;
+    device_curtailment_file: string;
+    pairwise_criteria_file: string;
+    cluster_priority: string
   }[];
+
 
   criteriaList: string[];
   devices: string[];
@@ -58,7 +60,7 @@ export class CurtailmentConfigComponent implements OnInit {
   saveCurtailmentCalculation(i) {
     const file = new Blob([this.curtailmentModelList[i].curtailmentCalculation],
       {type: 'json'});
-    FileSaver.saveAs(file, this.clusterList[i]._deviceCurtailmentFile);
+    FileSaver.saveAs(file, this.clusterList[i].device_curtailment_file);
   }
 
   ngOnInit() {

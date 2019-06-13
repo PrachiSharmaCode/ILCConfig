@@ -44,6 +44,7 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
   stageName: string;
   operationtype: string[][];
   criteriaList: string[][] = [];
+  showCriteriaConfiguartion: boolean;
   getCriteria = false;
   getCriteriaValue: string;
   finalCalulation: string;
@@ -189,9 +190,11 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
+
     this.criteriaModelList = this.mainModel.criteriaModelList;
     this.criteriaList = this.mainModel.paireiseCriteriaList;
     this.clusterList = this.ilc.clusterList;
+    this.showCriteriaConfiguartion = this.clusterList.length !== 0;
     this.devices = this.ilc.devices;
     this.campus = this.ilc.campus;
     this.building = this.ilc.building;

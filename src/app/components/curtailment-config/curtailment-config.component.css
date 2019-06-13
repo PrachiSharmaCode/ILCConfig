@@ -7,10 +7,25 @@
 .collapse-division {
   margin-top: 10px;
   margin-bottom: 10px;
+  background-color: #003114;
+  border: none;
+}
+
+button{
+  background-color: #0C9A6F;
+  color: white;
+}
+
+button:hover{
+  background-color: #B3DAF2;
+  color: black;
 }
 
 .collapse-division-label {
   width: 100%;
+  background-color: #003114;
+  color: white;
+  font-size: 20px;
 }
 
 textarea {
@@ -24,6 +39,18 @@ textarea {
   margin-top: 5%;
 }
 
+.col-sm{
+  margin-top: 3%;
+}
+
+h5{
+  color: white;
+}
+
+a{
+  color: white;
+  padding-left: 2%;
+}
 
 .button-size {
   width: 100px;
@@ -31,3 +58,4 @@ textarea {
   border-radius: 100px;
   margin-left: 10px;
 }
+

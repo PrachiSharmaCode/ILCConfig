@@ -15,11 +15,23 @@ h5{
   color: white;
 }
 
+.div-inbetween-padding {
+  margin-top: 5%;
+}
+
 button{
   background-color: #0C9A6F;
   color: white;
 }
 
+button:hover{
+  background-color: #B3DAF2;
+  color: black;
+}
+
+.col-sm{
+  margin-top: 3%;
+}
 
 
 .collapse-division-label {
@@ -37,11 +49,26 @@ textarea {
 }
 
 .button-size {
-  width: 100px;
+  width: 90px;
   text-align: center;
   border-radius: 100px;
   margin-left: 10px;
+  font-size: 16px;
+  color: white;
 }
+/*@media only screen and (max-width: 1050px) {
+  .button-size {
+    width: 28%;
+    text-align: center;
+    border-radius: 100px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: white;
+  }
+}*/
+
+
 .col{
   margin-top: 2%;
 }

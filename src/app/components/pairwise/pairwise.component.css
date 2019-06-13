@@ -8,11 +8,22 @@ button{
   color: white;
 }
 
+button:hover{
+  background-color: #B3DAF2;
+  color: black;
+}
+
+
+
 .collapse-division {
   margin-top: 10px;
   margin-bottom: 10px;
   background-color: #003114;
   border: none;
+}
+
+.col-sm{
+  margin-top: 2%;
 }
 
 .sub-collapse-label{

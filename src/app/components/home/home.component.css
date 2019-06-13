@@ -3,6 +3,12 @@ button{
   background-color: #0C9A6F;
   color: white;
 }
+
+button:hover{
+  background-color: #B3DAF2;
+  color: black;
+}
+
 nav{
   background-color: black;
 }
@@ -14,6 +20,7 @@ nav{
 .liAlign{
   float: left;
   display: inline;
+  margin-bottom: 5px;
 }
 .button-size {
   text-align: center;
