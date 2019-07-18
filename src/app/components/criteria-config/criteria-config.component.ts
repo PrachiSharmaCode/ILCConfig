@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {ILCCongig} from '../../model/ILCConfig.model';
 import {PairwiseModel} from '../../model/pairwise.model';
 import {CriteriaModel} from '../../model/criteria.model';
@@ -15,7 +15,7 @@ import {HistoryCriteriaModel} from '../../model/historyCriteria.model';
   templateUrl: './criteria-config.component.html',
   styleUrls: ['./criteria-config.component.css']
 })
-export class CriteriaConfigComponent implements OnInit, AfterViewInit {
+export class CriteriaConfigComponent implements OnInit {
 
   @Input() ilc: ILCCongig;
   @Input() pairwise: PairwiseModel;
@@ -28,7 +28,7 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
   @Input() historyModel: HistoryCriteriaModel[][] = [];
 
   criteriaModelList: CriteriaModel[] = [];
-  formulaCriteriaModel: FormulaCriteriaModel;
+
 
   clusterList: {
     cluster_name: string;
@@ -42,26 +42,11 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
   campus: string;
   building: string;
   stageName: string;
-  operationtype: string[][];
+
   criteriaList: string[][] = [];
   showCriteriaConfiguartion: boolean;
   getCriteria = false;
   getCriteriaValue: string;
-  finalCalulation: string;
-
-  criteriaFile: {
-    StageName: {
-      deviceTopic: string,
-      criteriaName: {}[]
-    }[]
-  };
-
-  formulaModelArr: FormulaCriteriaModel[] = [];
-
-  /***Critertia Counts****/
-  formulaCount = -1;
-
-  /***Formula Argumemts***/
 
   formula: {
     argument: string[],
@@ -70,15 +55,6 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
     maximum: number
   }[] = [];
 
-  argument: string[] = [];
-  maximun: number;
-  minimum: number;
-  operation: string;
-
-  /***Status***/
-  pointName: string;
-  onValue: number;
-  offValue: number;
 
   status: {
     pointName: string,
@@ -86,9 +62,6 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
     OffValue: string
   }[] = [];
 
-  /***mapper***/
-  mapKey: string;
-  distName: string;
 
   mapper: {
     mapKey: string,
@@ -101,14 +74,6 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
     value: number
   };
 
-  fcount = 0;
-
-  /***history***/
-  comparisonType: string;
-  historyPointName: string;
-  previousTime: string;
-  historyMaximum: number;
-  historyMinimum: number;
 
   history: {
     comparisonType: string,
@@ -119,19 +84,6 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
   };
 
   constructor() {
-  }
-
-  // addArguments(k, val) {
-  //   console.log('inside add argument');
-  //   console.log(this.criteriaModelList[k].formulaModel[val].argument.length);
-  //   // this.criteriaModelList[k].addArgument(val);
-  //   console.log(this.criteriaModelList[k].formulaModel[val].argument.length);
-  // }
-
-  addFormulaModel(k, i) {
-    console.log('inside add formula');
-    this.criteriaModelList[k].operationType[i] = [];
-    // this.formulaModelArr[this.formulaModelArr.length] = new FormulaCriteriaModel();
   }
 
   updateCount(i, index, k, val) {
@@ -172,21 +124,9 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
   }
 
   OnRefreshButton(k) {
-    console.log(this.criteriaModelList[k].operationType);
-    console.log('Formula Attributes');
-    console.log(this.criteriaModelList[k].formulaModel);
-    console.log('Status Attributes');
-    console.log(this.criteriaModelList[k].statusModel);
-    console.log('Mapper Attributes');
-    console.log(this.criteriaModelList[k].mapperModel);
-    console.log('Constant Attributes');
-    console.log(this.criteriaModelList[k].constantModel);
-    console.log('History Attributes');
-    console.log(this.criteriaModelList[k].historyModel);
     this.criteriaModelList[k].stageName = this.stageName;
     this.criteriaModelList[k].setFinalCalulation(this.criteriaList, k);
   }
-
 
 
   ngOnInit() {
@@ -201,20 +141,23 @@ export class CriteriaConfigComponent implements OnInit, AfterViewInit {
     this.stageName = this.criteria.stageName;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.criteriaModelList.length; i++) {
-      this.criteriaModelList[i].updateOperationType([['', '', '', '', ''], ['', '', '', '', ''], ['', '', '', '', '']]);
+      if (this.criteriaModelList[i].operationType === undefined) {
+        this.criteriaModelList[i].updateOperationType([['', '', '', '', ''], ['', '', '', '', ''], ['', '', '', '', '']]);
+      }
       for (let subCriteria = 0; subCriteria < this.devices.length; subCriteria++) {
-        this.criteriaModelList[i].formulaModel[subCriteria] = [];
-        this.criteriaModelList[i].statusModel[subCriteria] = [];
+        console.log(this.criteriaModelList[i].formulaModel);
+        if (this.criteriaModelList[i].formulaModel[subCriteria] === undefined) {
+          this.criteriaModelList[i].formulaModel[subCriteria] = [];
+        }
+        if ( this.criteriaModelList[i].statusModel[subCriteria] === undefined) {
+          this.criteriaModelList[i].statusModel[subCriteria] = [];
+        }
         this.criteriaModelList[i].historyModel[subCriteria] = [];
         this.criteriaModelList[i].mapperModel[subCriteria] = [];
         this.criteriaModelList[i].constantModel[subCriteria] = [];
       }
     }
     console.log(this.criteriaList);
-  }
-
-  ngAfterViewInit() {
-
   }
 
   trackByIndex(index: number): any {

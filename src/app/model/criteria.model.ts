@@ -26,32 +26,6 @@ export class CriteriaModel {
     }[]
   };
 
-  /***Formula***/
-
-  // formulaModelArr: FormulaCriteriaModel[] = [];
-  //
-  // formula: {
-  //   argument: string[],
-  //   operation: string,
-  //   minimum: number,
-  //   maximum: number
-  // }[] = [];
-  // private _arguments: string[];
-  // private _operation: string;
-  // private _minimum: number;
-  // private _maximum: number;
-
-  /***Status***/
-
-  /***Mapper***/
-
-  /***Constant***/
-
-  /***History***/
-  //
-  // getAllModels(formula: FormulaCriteriaModel) {
-  //   this._formulaModel = formula;
-  // }
   updateCriteriaList(list: string[]) {
     this._critriaList = list;
   }
@@ -92,13 +66,14 @@ export class CriteriaModel {
     this._criteriaCalculation = value;
   }
 
-  // updateFormulaOpration(argument, operation, minimum, maximum, formula) {
-  //   this.formulaModel = new FormulaCriteriaModel(argument, maximum, minimum, operation);
-  //   this.formulaModel.updateFormulaModel(argument, maximum, minimum, operation, formula);
-  // }
 
   setFinalCalulation(list: string[][], l) {
     console.log(list);
+    console.log(l);
+    console.log(this.formulaModel);
+    console.log(this.statusModel);
+    console.log(this.mapperModel);
+    console.log(this.devices);
     let jsonObh = {};
     for (let j = 0; j < this.devices.length; j++) {
       jsonObh[this.devices[j]] = {
@@ -107,6 +82,7 @@ export class CriteriaModel {
         }
       };
       for (let k = 0; k < list[0].length; k++) {
+        console.log(this.formulaModel[j][k]);
         if (this.formulaModel[j][k] !== null) {
           jsonObh[this.devices[j]][list[l][k]] = this.formulaModel[j][k];
         }
@@ -135,10 +111,6 @@ export class CriteriaModel {
   get formulaModel(): FormulaCriteriaModel[][] {
     return this._formulaModel;
   }
-
-  // addArgument(val) {
-  //   this._formulaModel[val].addArugiment();
-  // }
 
   set formulaModel(value: FormulaCriteriaModel[][]) {
     this._formulaModel = value;
