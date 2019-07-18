@@ -9,8 +9,16 @@ import {StatusCriteriaModel} from '../../model/statusCriteria.model';
 import {MapperCriteriaModel} from '../../model/mapperCriteria.model';
 import {ConstantCriteriaModel} from '../../model/constantCriteria.model';
 import {HistoryCriteriaModel} from '../../model/historyCriteria.model';
+import { parse } from 'papaparse';
 
-
+interface point {
+  referenceName: string;
+  volttronPointName: string;
+}
+interface device {
+  deviceTopic: string;
+  devicePoints: point[];
+}
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -109,9 +117,31 @@ export class HomeComponent implements OnInit {
    const reader = new FileReader();
     // tslint:disable-next-line:only-arrow-functions
    reader.onload = function() {
-     console.log(reader.result);
-     const t = JSON.parse(reader.result.toString());
-     console.log(t.agent_id);
+      const masterDriverConfig = JSON.parse(reader.result.toString());
+      let device_names = Object.keys(masterDriverConfig).filter(key => !(key.endsWith(".csv")));
+      let devices = device_names.map(device => {
+        let deviceData = JSON.parse(parse(masterDriverConfig[device]["data"]).data.join("\n"));
+        if (deviceData["registry_config"]) {
+          console.log(deviceData["registry_config"]);
+          let registryConfigName = deviceData["registry_config"].split("//")[1];
+          let registryConfigData = parse(masterDriverConfig[registryConfigName]["data"]).data;
+          let registryConfigEntries = registryConfigData.slice(1).map(line => {
+            if (line[0] && line[1]){
+              return { 
+                referenceName: line[0],
+                volttronPointName: line[1]          
+              } as point;
+            }
+          });
+          let deviceEntry = {
+            deviceTopic: device,
+            devicePoints: registryConfigEntries
+          } as device;
+          // console.log(deviceEntry);
+          return deviceEntry;
+        }
+     });
+     return devices;
    };
    console.log(reader.readAsText(e.target.files[0]));
   }
