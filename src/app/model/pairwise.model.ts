@@ -77,17 +77,17 @@ export class PairwiseModel {
   setFinalCalculation(i) {
     console.log(this._sliderValue);
     let jsonObh = {};
-    let count = 1 ;
+    let count = 1;
     console.log(this._pairwiseCriteriaList[i].length);
 
     for (let j = 0; j < this._pairwiseCriteriaList[i].length; j++) {
       jsonObh[this._pairwiseCriteriaList[i][j]] = {};
       for (let k = 0; k < this._sliderValue[j].length; k++) {
-        if (this._sliderValue[j][k] === null || this._sliderValue[j][k] === undefined ){
+        if (this._sliderValue[j][k] === null || this._sliderValue[j][k] === undefined) {
           this._sliderValue[j][k] = 1;
         }
-        jsonObh[this._pairwiseCriteriaList[i][j]][this._pairwiseCriteriaList[i][k + count]] = this._sliderValue[j][k];
-    }
+        jsonObh[this._pairwiseCriteriaList[i][j]][this._pairwiseCriteriaList[i][k + count]] = 1 / this._sliderValue[j][k];
+      }
       count++;
     }
     let cal = JSON.stringify(jsonObh, null, 4);

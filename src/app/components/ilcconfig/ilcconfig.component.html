@@ -5,12 +5,28 @@
       <div>
 
         <div class="div-block rounded">
-          <mat-form-field style="width: 100%" class="example-full-width">
-            <input matInput placeholder="Campus"
-                   [(ngModel)]="campus"></mat-form-field>
-          <mat-form-field style="width: 100%" class="example-full-width">
-            <input matInput placeholder="Buidling"
-                   [(ngModel)]="building"></mat-form-field>
+<!--          <mat-form-field style="width: 100%" class="example-full-width">-->
+<!--            <input matInput placeholder="Campus"-->
+<!--                   [(ngModel)]="campus"></mat-form-field>-->
+
+
+          <mat-form-field style="width: 100%">
+            <mat-label>Campus</mat-label>
+            <mat-select  [(ngModel)]="campus" *ngFor="let camp of ilc.campusList">
+              <mat-option value="{{camp}}">{{camp}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field style="width: 100%">
+            <mat-label>Building</mat-label>
+            <mat-select  [(ngModel)]="building" *ngFor="let build of ilc.buildingList">
+              <mat-option value="{{build}}">{{build}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+<!--          <mat-form-field style="width: 100%" class="example-full-width">-->
+<!--            <input matInput placeholder="Buidling"-->
+<!--                   [(ngModel)]="building"></mat-form-field>-->
         </div>
 
         <div>

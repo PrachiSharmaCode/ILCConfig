@@ -59,3 +59,19 @@ button:hover{
   background-color: #B3DAF2;
   color: black;
 }
+
+.col-sm{
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.row{
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.container{
+  width: 100%;
+  max-width: none;
+  padding: 0;
+}

@@ -29,6 +29,8 @@ export class CriteriaConfigComponent implements OnInit {
 
   criteriaModelList: CriteriaModel[] = [];
 
+  operationVal: string[][] = [];
+
 
   clusterList: {
     cluster_name: string;
@@ -39,6 +41,12 @@ export class CriteriaConfigComponent implements OnInit {
   }[];
 
   devices: string[];
+
+  deviceAndPoints: {
+    deviceName: string,
+    devicePoints: string[]
+  }[] = [];
+
   campus: string;
   building: string;
   stageName: string;
@@ -136,28 +144,39 @@ export class CriteriaConfigComponent implements OnInit {
     this.clusterList = this.ilc.clusterList;
     this.showCriteriaConfiguartion = this.clusterList.length !== 0;
     this.devices = this.ilc.devices;
+    // console.log(this.ilc.devices);
     this.campus = this.ilc.campus;
     this.building = this.ilc.building;
     this.stageName = this.criteria.stageName;
+    this.deviceAndPoints = this.ilc.deviceAndPoint;
+    console.log(this.deviceAndPoints);
+    for (let i = 0; i < this.devices.length; i++) {
+      this.operationVal.push(['', '', '', '', '']);
+    }
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.criteriaModelList.length; i++) {
+      this.criteriaModelList[i].devices = this.ilc.devices;
       if (this.criteriaModelList[i].operationType === undefined) {
-        this.criteriaModelList[i].updateOperationType([['', '', '', '', ''], ['', '', '', '', ''], ['', '', '', '', '']]);
+        this.criteriaModelList[i].updateOperationType(this.operationVal);
       }
       for (let subCriteria = 0; subCriteria < this.devices.length; subCriteria++) {
-        console.log(this.criteriaModelList[i].formulaModel);
         if (this.criteriaModelList[i].formulaModel[subCriteria] === undefined) {
           this.criteriaModelList[i].formulaModel[subCriteria] = [];
         }
-        if ( this.criteriaModelList[i].statusModel[subCriteria] === undefined) {
+        if (this.criteriaModelList[i].statusModel[subCriteria] === undefined) {
           this.criteriaModelList[i].statusModel[subCriteria] = [];
         }
-        this.criteriaModelList[i].historyModel[subCriteria] = [];
-        this.criteriaModelList[i].mapperModel[subCriteria] = [];
-        this.criteriaModelList[i].constantModel[subCriteria] = [];
+        if (this.criteriaModelList[i].historyModel[subCriteria] === undefined) {
+          this.criteriaModelList[i].historyModel[subCriteria] = [];
+        }
+        if (this.criteriaModelList[i].mapperModel[subCriteria] === undefined) {
+          this.criteriaModelList[i].mapperModel[subCriteria] = [];
+        }
+        if (this.criteriaModelList[i].constantModel[subCriteria] === undefined) {
+          this.criteriaModelList[i].constantModel[subCriteria] = [];
+        }
       }
     }
-    console.log(this.criteriaList);
   }
 
   trackByIndex(index: number): any {

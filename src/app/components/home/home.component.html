@@ -1,36 +1,3 @@
-<!--<nav id="navbarList" class="navbar navbar-expand-lg navbar-light bg-light navBorder" *ngIf="showNavButtons">-->
-<!--&lt;!&ndash;  <h4 align="center" style=" color: dimgrey">ILC Configuration</h4>&ndash;&gt;-->
-<!--  <div class="container">-->
-<!--    <div class="row">-->
-
-<!--      <div class="col-12">-->
-<!--        <div class="row">-->
-<!--          <a id="homeButton" class="btn btn-outline-dark btn-sm button-size "-->
-<!--                  (click)="openHome(); activeButton($event)">Home-->
-<!--          </a>-->
-
-<!--          <a id="ilcConfigButton" class=" btn btn-outline-dark btn-sm button-size active"-->
-<!--                  (click)="openIlcConfig(); activeButton($event)">ILC Configuration-->
-<!--          </a>-->
-
-<!--          <a id="pairwiseButton" class=" btn btn-outline-dark btn-sm button-size"-->
-<!--                  (click)="openPairwise(); activeButton($event)">Pairwise-->
-<!--          </a>-->
-
-
-<!--          <a id="criteriaButton" class=" btn btn-outline-dark btn-sm button-size"-->
-<!--                  (click)="openCriteria(); activeButton($event)">Criteria Configuration-->
-<!--          </a>-->
-
-<!--          <a id="curtailmentButton" class=" btn btn-outline-dark btn-sm button-size"-->
-<!--                  (click)="openCurtailment(); activeButton($event)">Curtailment Configuration-->
-<!--          </a>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</nav>-->
-
 <nav class="navbar navbar-expand-lg">
   <a class="navbar-brand" href="#" style="color: white">ILC Configuration</a>
   <button *ngIf="showNavButtons" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -40,7 +7,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="margin-left: 5%">
     <div class="navbar-nav">
-      <ul class="nav justify-content-center" *ngIf="showNavButtons">
+      <ul class="nav " *ngIf="showNavButtons">
         <li class="nav-item  liAlign">
           <button id="homeButton" class="btn button-size"
                   (click)="openHome(); activeButton($event)">Home
@@ -68,96 +35,130 @@
         </li>
       </ul>
 
-      <!--      <a id="homeButton" class=" nav-item nav-link btn btn-outline-dark button-size "-->
-      <!--              (click)="openHome(); activeButton($event)">Home-->
-      <!--      </a>-->
-      <!--      <a id="ilcConfigButton" class=" nav-item  nav-link btn btn-outline-dark button-size active"-->
-      <!--              (click)="openIlcConfig(); activeButton($event)">ILC Configuration-->
-      <!--      </a>-->
-      <!--      <a id="pairwiseButton" class="nav-item  nav-link btn btn-outline-dark button-size"-->
-      <!--              (click)="openPairwise(); activeButton($event)">Pairwise-->
-      <!--      </a>-->
-      <!--      <a id="criteriaButton" class="nav-item  nav-link btn btn-outline-dark button-size"-->
-      <!--              (click)="openCriteria(); activeButton($event)">Criteria Configuration-->
-      <!--      </a>-->
-      <!--      <a id="curtailmentButton" class="nav-item  nav-link btn btn-outline-dark button-size"-->
-      <!--              (click)="openCurtailment(); activeButton($event)">Curtailment Configuration-->
-      <!--      </a>-->
+
+      <!--      <form *ngIf="!showNavButtons"  class="form-inline my-2 my-lg-0">-->
+      <!--        <input type="file" [(ngModel)]="masterFile" (change)="getMasterDriver($event)" #file hidden>-->
+      <!--        <button class="btn button-size  my-2 my-sm-0" (click)="file.click(); getMasterDriver($event)">-->
+      <!--          Upload Master Driver-->
+      <!--        </button>-->
+      <!--      </form>-->
+
     </div>
   </div>
 </nav>
 
-<div class="container">
+
+<div *ngIf="homeOpen" class="container">
   <div class="row">
-    <div class="col-4">
-      <div class="sidenav" *ngIf="homeOpen">
-        <div align="center" class="centered" style="text-align: center;">
-          <ul class="list-group" style="list-style-type:none;">
-            <li>
-              <button id="masterDriver" class="nav-link btn  button-size"
-                      (click)="openMasterDriver(); activeSideBarButton($event)">Master Driver
-              </button>
-            </li>
-            <br/>
-            <li>
-              <button id="ilcCongifBar" class="nav-link btn button-size"
-                      (click)="openILC(); activeSideBarButton($event)">ILC Configuration
-              </button>
-            </li>
-            <br/>
-            <li>
-              <button id="documentation" class="nav-link btn button-size activeBar"
-                      (click)="openDocumentation(); activeSideBarButton($event)">Documentation
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
+    <div align="center" class="col-sm col-padding">
+      <input type="file" [(ngModel)]="masterFile" (change)="getMasterDriver($event)" #file hidden>
+      <button class="btn btn-outline-dark btn-lg " (click)="file.click(); getMasterDriver($event)">
+        &nbsp;  Upload Master Driver
+        <i class="material-icons float-left">
+          publish
+        </i>
+      </button>
     </div>
-    <div class="col-5">
-      <div *ngIf="homeOpen && showDocumentation" class="centeredContent">
-        <h5>ILC Configuration</h5>
-        <p>level Configuration. Specify campus, building and <br> building
-          parameters that will define volttron installation.
-        <p>
+    <div class="col-sm" class="centeredContent">
+      <h5>ILC Configuration</h5>
+      <p>level Configuration. Specify campus, building and <br> building
+        parameters that will define volttron installation.
+      <p>
 
-        <h5>Pairwise</h5>
-        <p>Name and define curtailment criteria. Declare relative <br> priority
-          of curtailment criteria.</p>
+      <h5>Pairwise</h5>
+      <p>Name and define curtailment criteria. <br>
+        Declare relative priority of curtailmenr criteria
+      <p>
 
-        <h5>Criteria Configuration</h5>
-        <p>Delare Device. Define how curtailment criteria are <br> evaluated for each stage of each device</p>
+      <h5>Criteria Configuration</h5>
+      <p>Delare Device. Define how curtailment criteria are <br> evaluated for each stage of each device</p>
 
-        <h5>Curtailment Configuration</h5>
-        <p>Define how device are evaluated for curtailment <br> availability.Specify
-          which actions to apply in order in order to curtail devices.</p>
+      <h5>Curtailment Configuration</h5>
+      <p>Define how device are evaluated for curtailment <br> availability.Specify
+        which actions to apply in order in order to curtail devices.</p>
 
-        <h5>Open Directory</h5>
-        <p>Edit the configuration files located in a specific directory.</p>
+      <h5>Open Directory</h5>
+      <p>Edit the configuration files located in a specific directory.</p>
 
-        <h5>Documentation</h5>
-        <p>read the current version of help and documentation available</p>
-      </div>
-
-
-      <div *ngIf="homeOpen && showMasterdriver" class="centeredButtonContent">
-        <input type="file" [(ngModel)]="masterFile" (change)="getMasterDriver($event)" #file>
-        {{masterFile}}
-        <button class="btn btn-outline-dark btn-lg btn-block" (click)="getMasterDriver()">
-          Upload Master Driver
-        </button>
-      </div>
-
-      <div *ngIf="homeOpen && showILC" class="centeredButtonContent">
-        <button type="button" class="btn btn-outline-dark btn-lg btn-block">Upload ILC File</button>
-        <hr>
-        <button id="ilcConfigHome" type="button" class="btn btn-outline-dark btn-lg btn-block"
-                (click)="openIlcConfig($event)">Start new ILC Configuration
-        </button>
-      </div>
+      <h5>Documentation</h5>
+      <p>read the current version of help and documentation available</p>
     </div>
+
   </div>
 </div>
+
+<!--<div class="container">-->
+<!--  <div class="row ">-->
+<!--    &lt;!&ndash;    <div class="col-4">&ndash;&gt;-->
+<!--    &lt;!&ndash;      <div class="sidenav" *ngIf="homeOpen">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <div align="center" class="centered" style="text-align: center;">&ndash;&gt;-->
+<!--    &lt;!&ndash;          <ul class="list-group" style="list-style-type:none;">&ndash;&gt;-->
+<!--    &lt;!&ndash;            <li>&ndash;&gt;-->
+<!--    &lt;!&ndash;              <button id="masterDriver" class="nav-link btn  button-size"&ndash;&gt;-->
+<!--    &lt;!&ndash;                      (click)="openMasterDriver(); activeSideBarButton($event)">Master Driver&ndash;&gt;-->
+<!--    &lt;!&ndash;              </button>&ndash;&gt;-->
+<!--    &lt;!&ndash;            </li>&ndash;&gt;-->
+<!--    &lt;!&ndash;            <br/>&ndash;&gt;-->
+<!--    &lt;!&ndash;            <li>&ndash;&gt;-->
+<!--    &lt;!&ndash;              <button id="ilcCongifBar" class="nav-link btn button-size"&ndash;&gt;-->
+<!--    &lt;!&ndash;                      (click)="openILC(); activeSideBarButton($event)">ILC Configuration&ndash;&gt;-->
+<!--    &lt;!&ndash;              </button>&ndash;&gt;-->
+<!--    &lt;!&ndash;            </li>&ndash;&gt;-->
+<!--    &lt;!&ndash;            <br/>&ndash;&gt;-->
+<!--    &lt;!&ndash;            <li>&ndash;&gt;-->
+<!--    &lt;!&ndash;              <button id="documentation" class="nav-link btn button-size activeBar"&ndash;&gt;-->
+<!--    &lt;!&ndash;                      (click)="openDocumentation(); activeSideBarButton($event)">Documentation&ndash;&gt;-->
+<!--    &lt;!&ndash;              </button>&ndash;&gt;-->
+<!--    &lt;!&ndash;            </li>&ndash;&gt;-->
+<!--    &lt;!&ndash;          </ul>&ndash;&gt;-->
+<!--    &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;      </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--    <div class="col-sm col-padding" style="border: groove white">-->
+<!--      <div *ngIf="homeOpen && showILC" class="centeredButtonContent">-->
+<!--        <input type="file" [(ngModel)]="masterFile" (change)="getMasterDriver($event)" #file hidden>-->
+<!--        <button class="btn btn-outline-dark btn-lg btn-block" (click)="file.click(); getMasterDriver($event)">-->
+<!--          Upload Master Driver-->
+<!--        </button>-->
+<!--        <hr>-->
+<!--        <button id="documentation" class="btn btn-outline-dark btn-lg btn-block"-->
+<!--                (click)="openDocumentation(); activeSideBarButton($event)">Documentation-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="col-sm col-padding">-->
+<!--      <div *ngIf="homeOpen" class="centeredContent">-->
+
+
+<!--        <h5>ILC Configuration</h5>-->
+<!--        <p>level Configuration. Specify campus, building and <br> building-->
+<!--          parameters that will define volttron installation.-->
+<!--        <p>-->
+
+<!--        <h5>Pairwise</h5>-->
+<!--        <p>Name and define curtailment criteria. <br>-->
+<!--          Declare relative priority of curtailmenr criteria-->
+<!--        <p>-->
+
+<!--        <h5>Criteria Configuration</h5>-->
+<!--        <p>Delare Device. Define how curtailment criteria are <br> evaluated for each stage of each device</p>-->
+
+<!--        <h5>Curtailment Configuration</h5>-->
+<!--        <p>Define how device are evaluated for curtailment <br> availability.Specify-->
+<!--          which actions to apply in order in order to curtail devices.</p>-->
+
+<!--        <h5>Open Directory</h5>-->
+<!--        <p>Edit the configuration files located in a specific directory.</p>-->
+
+<!--        <h5>Documentation</h5>-->
+<!--        <p>read the current version of help and documentation available</p>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--  </div>-->
+<!--</div>-->
 
 
 <div *ngIf="ilcCongifOpen">

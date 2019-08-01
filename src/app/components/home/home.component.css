@@ -10,7 +10,10 @@ button:hover{
 }
 
 nav{
-  background-color: black;
+  background-color: black !important;
+}
+navbar-brand{
+  color: white;
 }
 
 .navbar-nav{
@@ -18,9 +21,9 @@ nav{
 }
 
 .liAlign{
-  float: left;
-  display: inline;
-  margin-bottom: 5px;
+
+  /*display: inline;*/
+  margin-bottom: 1px;
 }
 .button-size {
   text-align: center;
@@ -61,10 +64,30 @@ nav{
 .centeredContent {
   background-color: white;
   color: black;
-  margin-top: 10%;
-  padding: 5%;
+  margin-top: 2%;
+  padding: 2%;
   text-align: center;
   border: solid #0C9A6F;
+  /*margin-left: 20%;*/
+  width: 100%;
+
+}
+
+.centeredContentInside {
+  background-color: white;
+  color: black;
+  margin-bottom: 2%;
+  text-align: center;
+  border: solid #0C9A6F;
+}
+
+.centeredContentInside:hover {
+  background-color: white;
+  color: black;
+  margin-bottom: 2%;
+  text-align: center;
+  border: solid #B3DAF2;
+
 }
 
 .active {
@@ -107,7 +130,7 @@ hr {
 }
 
 h5{
-  background-color: #0C9A6F;
+  background-color: #B3DAF2;
   }
 
 .para-size {
@@ -130,4 +153,8 @@ h5{
 
 .button-padding{
   margin-top: 25%;
+}
+
+.col-padding{
+  margin-top: 2%;
 }

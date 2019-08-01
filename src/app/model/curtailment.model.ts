@@ -3,6 +3,7 @@ import {ILCCongig} from './ILCConfig.model';
 export class CurtailmentModel {
 
   private ilc: ILCCongig = new ILCCongig();
+  // private devices = this.ilc.devices;
   private devices = this.ilc.devices;
   private _curtailmentList: {
     firstStageCooling: {

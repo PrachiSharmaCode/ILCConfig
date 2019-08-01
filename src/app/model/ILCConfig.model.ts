@@ -4,7 +4,9 @@ export class ILCCongig {
   /***ILC Configuration***/
   private _campus = 'Campus';
   private _building = 'Building';
-  private _device: string;
+  private _campusList: string[] = [];
+  private _buildingList: string[] = [];
+  private _device: string[] = [];
   private _point: string;
   private _demandFormula: string;
   private _demandFormulaArgs: string[];
@@ -16,6 +18,20 @@ export class ILCCongig {
   private _buildingPowerWindow: string;
   private _staggerRelease: string;
   private _staggerOfftime: string;
+  private string: any;
+  private _devicePoint: string[][] = [];
+  private _devicesMasterList: {
+    deviceTopic: string,
+    devicePoints: {
+      referenceName: string,
+      volttronPointName: string,
+    }[]
+  }[];
+
+  private _deviceAndPoint: {
+    deviceName: string,
+    devicePoints: string[]
+  }[] = [];
 
   /***CLUSTER***/
   private _cluster = [];
@@ -31,9 +47,117 @@ export class ILCCongig {
   private _pairwisecdriteria: Map<any, any>;
 
   /***CRITERIA***/
-  private _devices = ['HP1', 'HP2', 'HP3'];
+  private _devices = [];
 
   /*****GETTERS & SETTER*****/
+
+  get devicesMasterList(): {
+    deviceTopic: string,
+    devicePoints: {
+      referenceName: string,
+      volttronPointName: string,
+    }[]
+  }[] {
+    return this._devicesMasterList;
+  }
+
+  setMasterDriver(devices: {
+    deviceTopic: string,
+    devicePoints: {
+      referenceName: string,
+      volttronPointName: string,
+    }[]
+  }[]) {
+    this.devicesMasterList = devices;
+
+    let devicesLength = this.devicesMasterList.length - 1;
+
+    while (devicesLength >= 0) {
+
+
+
+
+      if (this.devicesMasterList[devicesLength] !== undefined) {
+        let i = 0;
+        let count = 0;
+        let start = 0;
+        let end: number;
+
+        while (count <= 2) {
+
+          if (this.devicesMasterList[devicesLength].deviceTopic.charAt(i) === '/') {
+            count++;
+            if (count === 1) {
+              start = i;
+            }
+          }
+          i++;
+        }
+        end = i;
+
+        const str = this.devicesMasterList[devicesLength].deviceTopic.
+        substring(end, this.devicesMasterList[devicesLength].deviceTopic.length);
+        this._devices.push(str);
+        // console.log(this.devicesMasterList[devicesLength].devicePoints[0].volttronPointName);
+        const tempPoint: string[] = [];
+        for (let j = this.devicesMasterList[devicesLength].devicePoints.length - 1; j >= 0; j--) {
+          if (this.devicesMasterList[devicesLength].devicePoints[j] !== undefined) {
+            console.log(j);
+            tempPoint.push(this.devicesMasterList[devicesLength].devicePoints[j].volttronPointName);
+          }
+        }
+
+        this._devicePoint.push(tempPoint);
+
+        const temp: {
+          deviceName: string,
+          devicePoints: string[]
+        } = { deviceName: str,
+          devicePoints: tempPoint};
+
+        this._deviceAndPoint.push(temp);
+
+
+
+
+        const campusBuidling = this.devicesMasterList[devicesLength].deviceTopic.substring(start + 1, end - 1);
+
+
+        let campusbuidlingDetails: string[];
+        campusbuidlingDetails = campusBuidling.split('/');
+
+        if (!this._campusList.includes(campusbuidlingDetails[0])) {
+          this._campusList.push(campusbuidlingDetails[0]);
+        }
+
+        if (!this._buildingList.includes(campusbuidlingDetails[1])) {
+          this._buildingList.push(campusbuidlingDetails[1]);
+        }
+      }
+      devicesLength--;
+    }
+
+    console.log('*******');
+
+    console.log(this._devices);
+    console.log(this._devicePoint);
+    console.log(this._deviceAndPoint);
+    console.log('*******');
+    console.log(this.devicesMasterList);
+  }
+
+
+  // tslint:disable-next-line:adjacent-overload-signatures
+  set devicesMasterList(value: {
+    deviceTopic: string,
+    devicePoints: {
+      referenceName: string,
+      volttronPointName: string,
+    }[]
+  }[]) {
+    this._devicesMasterList = value;
+  }
+
   get campus(): string {
     return this._campus;
   }
@@ -50,13 +174,22 @@ export class ILCCongig {
     this._building = value;
   }
 
-  get device(): string {
-    return this._device;
+  get campusList(): string[] {
+    return this._campusList;
   }
 
-  set device(value: string) {
-    this._device = value;
+  set campusList(value: string[]) {
+    this._campusList = value;
   }
+
+  get buildingList(): string[] {
+    return this._buildingList;
+  }
+
+  set buildingList(value: string[]) {
+    this._buildingList = value;
+  }
+
 
   get point(): string {
     return this._point;
@@ -218,6 +351,13 @@ export class ILCCongig {
   }
 
 
+  get device(): string[] {
+    return this._device;
+  }
+
+  set device(value: string[]) {
+    this._device = value;
+  }
 
   get devices(): string[] {
     return this._devices;
@@ -226,10 +366,14 @@ export class ILCCongig {
   set devices(value: string[]) {
     this._devices = value;
   }
+  
+  get deviceAndPoint(): { deviceName: string; devicePoints: string[] }[] {
+    return this._deviceAndPoint;
+  }
 
-
-
-
+  set deviceAndPoint(value: { deviceName: string; devicePoints: string[] }[]) {
+    this._deviceAndPoint = value;
+  }
 
   constructor() {
   }

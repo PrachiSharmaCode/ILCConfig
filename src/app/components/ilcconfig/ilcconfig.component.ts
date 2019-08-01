@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ILCCongig} from '../../model/ILCConfig.model';
 import * as FileSaver from 'file-saver';
-import {MainModel} from "../../model/main.model";
+import {MainModel} from '../../model/main.model';
 
 @Component({
   selector: 'app-ilcconfig',
@@ -23,15 +23,23 @@ export class ILCConfigComponent implements OnInit {
   buildingPowerWindow: string;
   staggerRelease: string;
   staggerOfftime: string;
-  device: string;
+  device: string[];
   point: string;
   demandFormula: string;
   demandformulaAgrsArr = [];
   finalCalculation: string;
-  showAdvanceOption: boolean = false;
+  showAdvanceOption = false;
 
   testpaiewiese: string[];
   arrlen: number;
+
+  check: {
+    deviceTopic: string,
+    devicePoints: {
+      referenceName: string,
+      volttronPointName: string,
+    }[]
+  }[];
 
   constructor() {
   }
@@ -69,9 +77,14 @@ export class ILCConfigComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.check = this.ilc.devicesMasterList;
+    console.log(this.check);
+
+
     this.campus = this.ilc.campus;
     this.building = this.ilc.building;
     this.device = this.ilc.device;
+    console.log(this.device);
     this.point = this.ilc.point;
     this.demandFormula = this.ilc.demandFormula;
     this.demandformulaAgrsArr = this.ilc.demandFormulaArgs;

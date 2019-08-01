@@ -14,7 +14,7 @@ export class CriteriaModel {
   private _constantModel: ConstantCriteriaModel[][] = [];
   private _historyModel: HistoryCriteriaModel[][] = [];
   private _critriaList: string[];
-  private devices = this.ilc.devices;
+  private _devices: string[] = [];
   private _stageName: string;
   private _operationType: string[][];
   private _criteriaCalculation: string;
@@ -28,6 +28,15 @@ export class CriteriaModel {
 
   updateCriteriaList(list: string[]) {
     this._critriaList = list;
+  }
+
+
+  get devices(): string[] {
+    return this._devices;
+  }
+
+  set devices(value: string[]) {
+    this._devices = value;
   }
 
   get critriaList(): string[] {
@@ -55,7 +64,7 @@ export class CriteriaModel {
   }
 
   updateOperationType(value: string[][]) {
-    this._operationType = [['', '', '', '', ''], ['', '', '', '', ''], ['', '', '', '', '']];
+    this._operationType = value;
   }
 
   get criteriaCalculation(): string {
@@ -70,39 +79,37 @@ export class CriteriaModel {
   setFinalCalulation(list: string[][], l) {
     console.log(list);
     console.log(l);
-    console.log(this.formulaModel);
     console.log(this.statusModel);
     console.log(this.mapperModel);
-    console.log(this.devices);
+    console.log(this._devices.length);
     let jsonObh = {};
-    for (let j = 0; j < this.devices.length; j++) {
-      jsonObh[this.devices[j]] = {
+    for (let j = 0; j < this._devices.length; j++) {
+      jsonObh[this._devices[j]] = {
         FirstStageCooling: {
-          device_topic: 'CAMPUS/Buidling/' + this.devices[j],
+          device_topic: 'CAMPUS/Buidling/' + + this._devices[j],
         }
       };
       for (let k = 0; k < list[0].length; k++) {
-        console.log(this.formulaModel[j][k]);
+
         if (this.formulaModel[j][k] !== null) {
-          jsonObh[this.devices[j]][list[l][k]] = this.formulaModel[j][k];
+          jsonObh[this._devices[j]][list[l][k]] = this.formulaModel[j][k];
         }
         if (this.statusModel[j][k] !== null) {
-          jsonObh[this.devices[j]][list[l][k]] = this.statusModel[j][k];
+          jsonObh[this._devices[j]][list[l][k]] = this.statusModel[j][k];
         }
         if (this.mapperModel[j][k] !== null) {
-          jsonObh[this.devices[j]][list[l][k]] = this.mapperModel[j][k];
+          jsonObh[this._devices[j]][list[l][k]] = this.mapperModel[j][k];
         }
         if (this.constantModel[j][k] !== null) {
-          jsonObh[this.devices[j]][list[l][k]] = this.constantModel[j][k];
+          jsonObh[this._devices[j]][list[l][k]] = this.constantModel[j][k];
         }
         if (this.historyModel[j][k] !== null) {
-          jsonObh[this.devices[j]][list[l][k]] = this.historyModel[j][k];
+          jsonObh[this._devices[j]][list[l][k]] = this.historyModel[j][k];
         }
       }
     }
 
     const cal = JSON.stringify(jsonObh, null, 4);
-    console.log(cal);
     this._criteriaCalculation = cal;
     return cal;
   }
