@@ -12,8 +12,17 @@ button:hover{
 nav{
   background-color: black !important;
 }
+
+.centerNavBrand{
+  float: left;
+  padding-left: 5%;
+  text-align: center;
+  width: 100%;
+}
+
 navbar-brand{
   color: white;
+  float: none;
 }
 
 .navbar-nav{
@@ -64,11 +73,12 @@ navbar-brand{
 .centeredContent {
   background-color: white;
   color: black;
-  margin-top: 2%;
   padding: 2%;
   text-align: center;
-  border: solid #0C9A6F;
+  /*border: solid #0C9A6F;*/
+  border-radius: 20px;
   /*margin-left: 20%;*/
+
   width: 100%;
 
 }
@@ -76,18 +86,16 @@ navbar-brand{
 .centeredContentInside {
   background-color: white;
   color: black;
-  margin-bottom: 2%;
+  margin-bottom: 1%;
   text-align: center;
-  border: solid #0C9A6F;
+  border-bottom: inset #1BA781;
+  border-size: 1px ;
+
 }
 
 .centeredContentInside:hover {
-  background-color: white;
-  color: black;
-  margin-bottom: 2%;
-  text-align: center;
-  border: solid #B3DAF2;
-
+  box-shadow: 1px 1px 1px 1px  #1BA781;
+  margin-top: 7%;
 }
 
 .active {
@@ -125,18 +133,30 @@ navbar-brand{
   border-radius: 100px;
 }
 
-hr {
-  border-color: white;
-}
+
 
 h5{
-  background-color: #B3DAF2;
+  background-color: transparent;
+  color: #0C9A6F;
+  margin-top: 5px;
   }
+
+p{
+  font-size: 18px;
+}
+
+hr{
+  border-color: #0C9A6F;
+  padding: 0 !important;
+  margin: 0 !important;
+}
 
 .para-size {
   width: 500px;
   text-align: center;
 }
+
+
 
 .example-container {
   position: absolute;
@@ -156,5 +176,6 @@ h5{
 }
 
 .col-padding{
-  margin-top: 2%;
+  margin-top: 1%;
+
 }

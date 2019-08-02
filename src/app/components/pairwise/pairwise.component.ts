@@ -69,15 +69,32 @@ export class PairwiseComponent implements OnInit {
     console.log(index);
     this.pairwiseCriteriaList[i][index] = this.getCriteriaValue;
     this.pairwise.updateCrirteriaList(this.pairwiseCriteriaList);
+    this.pairwiseList[i].sliderValue.push([]);
+    console.log(this.pairwiseCriteriaList);
+    for (let j = 0; j < this.pairwiseList[i].sliderValue.length; j++) {
+      this.pairwiseList[i].sliderValue[j] = [];
+      for (let k = j + 1; k < this.pairwiseList[i].sliderValue.length; k++) {
+        this.pairwiseList[i].sliderValue[j][k] = 1;
+      }
+    }
+    console.log(this.pairwiseList[i].sliderValue);
     this.getCriteria = false;
     this.getCriteriaValue = '';
   }
 
   removeCriteria(i, index) {
     this.pairwiseCriteriaList[i].splice(index, 1);
-    this.pairwiseList[i].sliderValue.splice(index, 1);
+    // this.pairwiseList[i].sliderValue.splice(index, 1);
+    this.pairwiseList[i].sliderValue.length--;
+    for (let j = 0; j < this.pairwiseList[i].sliderValue.length; j++) {
+      this.pairwiseList[i].sliderValue[j] = [];
+      for (let k = j + 1; k < this.pairwiseList[i].sliderValue.length; k++) {
+        this.pairwiseList[i].sliderValue[j][k] = 1;
+      }
+    }
     console.log('*******************');
     console.log(this.pairwiseCriteriaList);
+    console.log(this.pairwiseList[i].sliderValue);
     console.log('*******************');
     this.pairwise.updateCrirteriaList(this.pairwiseCriteriaList);
   }

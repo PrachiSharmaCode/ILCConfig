@@ -1,6 +1,9 @@
 <nav class="navbar navbar-expand-lg">
+<!--  <div *ngIf="!showNavButtons" class="centerNavBrand">-->
+<!--    <a class="navbar-brand" href="#" style="color: white">ILC Configuration</a></div>-->
   <a class="navbar-brand" href="#" style="color: white">ILC Configuration</a>
-  <button *ngIf="showNavButtons" class="navbar-toggler" type="button" data-toggle="collapse"
+
+  <button *ngIf="showNavButtons" class="navbar-toggler float-left" type="button" data-toggle="collapse"
           data-target="#navbarNavAltMarkup"
           aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -34,17 +37,16 @@
           </button>
         </li>
       </ul>
-
-
-      <!--      <form *ngIf="!showNavButtons"  class="form-inline my-2 my-lg-0">-->
-      <!--        <input type="file" [(ngModel)]="masterFile" (change)="getMasterDriver($event)" #file hidden>-->
-      <!--        <button class="btn button-size  my-2 my-sm-0" (click)="file.click(); getMasterDriver($event)">-->
-      <!--          Upload Master Driver-->
-      <!--        </button>-->
-      <!--      </form>-->
-
     </div>
   </div>
+
+<!--  <input type="file" [(ngModel)]="masterFile" (change)="getMasterDriver($event)" #file hidden>-->
+<!--  <button *ngIf="homeOpen" class="btn btn-outline-dark " (click)="file.click(); getMasterDriver($event)">-->
+<!--    &nbsp; Upload Master Driver-->
+<!--    <i class="material-icons float-left">-->
+<!--      publish-->
+<!--    </i>-->
+<!--  </button>-->
 </nav>
 
 
@@ -53,33 +55,56 @@
     <div align="center" class="col-sm col-padding">
       <input type="file" [(ngModel)]="masterFile" (change)="getMasterDriver($event)" #file hidden>
       <button class="btn btn-outline-dark btn-lg " (click)="file.click(); getMasterDriver($event)">
-        &nbsp;  Upload Master Driver
+        &nbsp; Upload Master Driver
         <i class="material-icons float-left">
           publish
         </i>
       </button>
     </div>
-    <div class="col-sm" class="centeredContent">
+    <div class="col" class="centeredContent">
+
+
+      <!--        <input type="file" [(ngModel)]="masterFile" (change)="getMasterDriver($event)" #file hidden>-->
+      <!--        <button class="btn btn-outline-dark btn-lg " style="margin-bottom: 2%" (click)="file.click(); getMasterDriver($event)">-->
+      <!--          &nbsp;  Upload Master Driver &nbsp;-->
+      <!--          <i class="material-icons float-right">-->
+      <!--            publish-->
+      <!--          </i>-->
+      <!--        </button>-->
+
+      <!--      <div class="centeredContentInside"><h5>ILC Configuration</h5>-->
+      <!--        <p>level Configuration. Specify campus, building and <br> building-->
+      <!--          parameters that will define volttron installation.-->
+      <!--        <p></div>-->
+
+      <!--      <div class="centeredContentInside"><h5>Pairwise</h5>-->
+      <!--        <p>Name and define curtailment criteria. <br>-->
+      <!--          Declare relative priority of curtailmenr criteria-->
+      <!--        <p></div>-->
+
+      <hr>
       <h5>ILC Configuration</h5>
       <p>level Configuration. Specify campus, building and <br> building
         parameters that will define volttron installation.
       <p>
 
+      <hr>
       <h5>Pairwise</h5>
       <p>Name and define curtailment criteria. <br>
         Declare relative priority of curtailmenr criteria
       <p>
 
+      <hr>
       <h5>Criteria Configuration</h5>
       <p>Delare Device. Define how curtailment criteria are <br> evaluated for each stage of each device</p>
-
+      <hr>
       <h5>Curtailment Configuration</h5>
       <p>Define how device are evaluated for curtailment <br> availability.Specify
         which actions to apply in order in order to curtail devices.</p>
-
+      <hr>
       <h5>Open Directory</h5>
       <p>Edit the configuration files located in a specific directory.</p>
-
+      <hr>
       <h5>Documentation</h5>
       <p>read the current version of help and documentation available</p>
     </div>

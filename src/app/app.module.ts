@@ -28,6 +28,7 @@ import { MapperCriteriaComponent } from './components/mapper-criteria/mapper-cri
 import { HistoryCriteriaComponent } from './components/history-criteria/history-criteria.component';
 
 import { HttpClientModule} from '@angular/common/http';
+import {OverlayModule} from '@angular/cdk/overlay';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { HttpClientModule} from '@angular/common/http';
     MatTabsModule,
     MatIconModule,
     MatSidenavModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    OverlayModule
   ],
   providers: [
   ],

@@ -40,7 +40,11 @@ export class CriteriaConfigComponent implements OnInit {
     cluster_priority: string
   }[];
 
-  devices: string[];
+  devices: {
+    deviceName: string,
+    devicePoints: string[]
+  }[] = [];
+
 
   deviceAndPoints: {
     deviceName: string,
@@ -131,35 +135,41 @@ export class CriteriaConfigComponent implements OnInit {
     }
   }
 
+  addOrRemove(id, e, d) {
+    console.log(this.deviceAndPoints[d]);
+    this.devices.push(this.deviceAndPoints[d]);
+    console.log(this.devices);
+  }
+
   OnRefreshButton(k) {
     this.criteriaModelList[k].stageName = this.stageName;
-    this.criteriaModelList[k].setFinalCalulation(this.criteriaList, k);
+    // this.criteriaModelList[k].setFinalCalulation(this.criteriaList, k);
   }
 
 
   ngOnInit() {
 
     this.criteriaModelList = this.mainModel.criteriaModelList;
+    console.log(this.criteriaModelList);
     this.criteriaList = this.mainModel.paireiseCriteriaList;
     this.clusterList = this.ilc.clusterList;
     this.showCriteriaConfiguartion = this.clusterList.length !== 0;
-    this.devices = this.ilc.devices;
     // console.log(this.ilc.devices);
     this.campus = this.ilc.campus;
     this.building = this.ilc.building;
     this.stageName = this.criteria.stageName;
     this.deviceAndPoints = this.ilc.deviceAndPoint;
     console.log(this.deviceAndPoints);
-    for (let i = 0; i < this.devices.length; i++) {
+    for (let i = 0; i < this.deviceAndPoints.length; i++) {
       this.operationVal.push(['', '', '', '', '']);
     }
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.criteriaModelList.length; i++) {
-      this.criteriaModelList[i].devices = this.ilc.devices;
+      this.criteriaModelList[i].devices = [];
       if (this.criteriaModelList[i].operationType === undefined) {
         this.criteriaModelList[i].updateOperationType(this.operationVal);
       }
-      for (let subCriteria = 0; subCriteria < this.devices.length; subCriteria++) {
+      for (let subCriteria = 0; subCriteria < this.deviceAndPoints.length; subCriteria++) {
         if (this.criteriaModelList[i].formulaModel[subCriteria] === undefined) {
           this.criteriaModelList[i].formulaModel[subCriteria] = [];
         }
