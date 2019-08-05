@@ -72,10 +72,9 @@
                   <div class="card card-body">
                     <ul style="list-style-type:none;">
                       <li *ngFor="let device of deviceAndPoints;let d = index;trackBy: trackByIndex;">
-                        <!--                        <h6>{{device.deviceName}}</h6>-->
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value="device" [checked]='false'
-                                 (change)="addOrRemove(device.deviceName, $event, d)" id="{{device.deviceName}}">
+                          <input class="form-check-input" type="checkbox" value="device" [checked]=device.checked
+                                 (change)="addOrRemove(device.deviceName, $event, d, k)" id="{{device.deviceName}}">
                           <label class="form-check-label" for="{{device.deviceName}}">
                             {{device.deviceName}}
                           </label>
@@ -106,7 +105,7 @@
             <div class="col-sm">
               <h5>Criteria Configuration</h5>
               <div>
-                <ng-container *ngFor="let device of devices;let index = index;trackBy: trackByIndex;">
+                <ng-container *ngFor="let device of criteriaModelList[k].devices;let index = index;trackBy: trackByIndex;">
                   <div class="collapse-division " style="width: 100%">
 
                     <label class="collapse-division-label">

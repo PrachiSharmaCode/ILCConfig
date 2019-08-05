@@ -37,6 +37,10 @@ export class CriteriaModel {
     return this._devices;
   }
 
+  updateDevceList(value: { deviceName: string; devicePoints: string[] }[]) {
+    this.devices = value;
+  }
+
   set devices(value: { deviceName: string; devicePoints: string[] }[]) {
     this._devices = value;
   }

@@ -43,12 +43,13 @@ export class CriteriaConfigComponent implements OnInit {
   devices: {
     deviceName: string,
     devicePoints: string[]
-  }[] = [];
+  }[];
 
 
   deviceAndPoints: {
     deviceName: string,
-    devicePoints: string[]
+    devicePoints: string[],
+    checked: boolean
   }[] = [];
 
   campus: string;
@@ -135,10 +136,53 @@ export class CriteriaConfigComponent implements OnInit {
     }
   }
 
-  addOrRemove(id, e, d) {
+  addOrRemove(id, e, d, i) {
     console.log(this.deviceAndPoints[d]);
-    this.devices.push(this.deviceAndPoints[d]);
-    console.log(this.devices);
+
+    if (this.criteriaModelList[i].devices === undefined) {
+      this.criteriaModelList[i].devices = [];
+    }
+
+    if (e.target.checked) {
+
+      this.deviceAndPoints[d].checked = true;
+      this.ilc.updateDeviceAndPoints(this.deviceAndPoints);
+
+      this.criteriaModelList[i].devices.push(this.deviceAndPoints[d]);
+      console.log(this.devices);
+
+      this.operationVal.push(['', '', '', '', '']);
+      this.criteriaModelList[i].updateOperationType(this.operationVal);
+
+      this.criteriaModelList[i].formulaModel.push([]);
+      this.criteriaModelList[i].statusModel.push([]);
+      this.criteriaModelList[i].historyModel.push([]);
+      this.criteriaModelList[i].mapperModel.push([]);
+      this.criteriaModelList[i].constantModel.push([]);
+    } else {
+      console.log(id);
+      this.deviceAndPoints[d].checked = false;
+      this.ilc.updateDeviceAndPoints(this.deviceAndPoints);
+      for (let i = 0; i < this.criteriaModelList[i].devices.length; i++) {
+        if (this.criteriaModelList[i].devices[i].deviceName === id) {
+          console.log(this.criteriaModelList[i].devices[i].deviceName);
+          this.criteriaModelList[i].devices.splice(i, 1);
+          this.criteriaModelList[i].formulaModel.splice(i, 1);
+          this.criteriaModelList[i].statusModel.splice(i, 1);
+          this.criteriaModelList[i].historyModel.splice(i, 1);
+          this.criteriaModelList[i].mapperModel.splice(i, 1);
+          this.criteriaModelList[i].constantModel.splice(i, 1);
+          break;
+        }
+      }
+    }
+    console.log(this.criteriaModelList[i].devices);
+    console.log(this.criteriaModelList[i].formulaModel);
+    console.log(this.criteriaModelList[i].statusModel);
+    console.log(this.criteriaModelList[i].historyModel);
+    console.log(this.criteriaModelList[i].mapperModel);
+    console.log(this.criteriaModelList[i].constantModel);
+
   }
 
   OnRefreshButton(k) {
@@ -150,43 +194,13 @@ export class CriteriaConfigComponent implements OnInit {
   ngOnInit() {
 
     this.criteriaModelList = this.mainModel.criteriaModelList;
-    console.log(this.criteriaModelList);
     this.criteriaList = this.mainModel.paireiseCriteriaList;
     this.clusterList = this.ilc.clusterList;
     this.showCriteriaConfiguartion = this.clusterList.length !== 0;
-    // console.log(this.ilc.devices);
     this.campus = this.ilc.campus;
     this.building = this.ilc.building;
     this.stageName = this.criteria.stageName;
     this.deviceAndPoints = this.ilc.deviceAndPoint;
-    console.log(this.deviceAndPoints);
-    for (let i = 0; i < this.deviceAndPoints.length; i++) {
-      this.operationVal.push(['', '', '', '', '']);
-    }
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.criteriaModelList.length; i++) {
-      this.criteriaModelList[i].devices = [];
-      if (this.criteriaModelList[i].operationType === undefined) {
-        this.criteriaModelList[i].updateOperationType(this.operationVal);
-      }
-      for (let subCriteria = 0; subCriteria < this.deviceAndPoints.length; subCriteria++) {
-        if (this.criteriaModelList[i].formulaModel[subCriteria] === undefined) {
-          this.criteriaModelList[i].formulaModel[subCriteria] = [];
-        }
-        if (this.criteriaModelList[i].statusModel[subCriteria] === undefined) {
-          this.criteriaModelList[i].statusModel[subCriteria] = [];
-        }
-        if (this.criteriaModelList[i].historyModel[subCriteria] === undefined) {
-          this.criteriaModelList[i].historyModel[subCriteria] = [];
-        }
-        if (this.criteriaModelList[i].mapperModel[subCriteria] === undefined) {
-          this.criteriaModelList[i].mapperModel[subCriteria] = [];
-        }
-        if (this.criteriaModelList[i].constantModel[subCriteria] === undefined) {
-          this.criteriaModelList[i].constantModel[subCriteria] = [];
-        }
-      }
-    }
   }
 
   trackByIndex(index: number): any {

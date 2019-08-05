@@ -30,7 +30,8 @@ export class ILCCongig {
 
   private _deviceAndPoint: {
     deviceName: string,
-    devicePoints: string[]
+    devicePoints: string[],
+    checked: boolean;
   }[] = [];
 
   /***CLUSTER***/
@@ -111,9 +112,12 @@ export class ILCCongig {
 
         const temp: {
           deviceName: string,
-          devicePoints: string[]
+          devicePoints: string[],
+          checked: boolean
         } = { deviceName: str,
-          devicePoints: tempPoint};
+          devicePoints: tempPoint,
+          checked: false
+        };
 
         this._deviceAndPoint.push(temp);
 
@@ -156,6 +160,10 @@ export class ILCCongig {
     }[]
   }[]) {
     this._devicesMasterList = value;
+  }
+
+  updateDeviceAndPoints(value: { deviceName: string; devicePoints: string[]; checked: boolean}[]){
+    this.deviceAndPoint = value;
   }
 
   get campus(): string {
@@ -366,12 +374,12 @@ export class ILCCongig {
   set devices(value: string[]) {
     this._devices = value;
   }
-  
-  get deviceAndPoint(): { deviceName: string; devicePoints: string[] }[] {
+
+  get deviceAndPoint(): { deviceName: string; devicePoints: string[]; checked: boolean }[] {
     return this._deviceAndPoint;
   }
 
-  set deviceAndPoint(value: { deviceName: string; devicePoints: string[] }[]) {
+  set deviceAndPoint(value: { deviceName: string; devicePoints: string[]; checked: boolean}[]) {
     this._deviceAndPoint = value;
   }
 
