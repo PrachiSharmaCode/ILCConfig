@@ -175,6 +175,7 @@ export class CriteriaConfigComponent implements OnInit {
       }
       this.devices.push(temp);
 
+      this.ilc.updateILCDevices(this.devices)
       this.ilc.updateDeviceAndPoints(this.deviceAndPoints);
 
       console.log(this.devices);
@@ -204,12 +205,17 @@ export class CriteriaConfigComponent implements OnInit {
         this.criteriaModelList[i].historyModel.splice(count, 1);
         this.criteriaModelList[i].mapperModel.splice(count, 1);
         this.criteriaModelList[i].constantModel.splice(count, 1);
+        this.criteriaModelList[i].operationType.splice(count, 1);
         break;
       }
+      this.ilc.updateILCDevices(this.devices)
+      this.ilc.updateDeviceAndPoints(this.deviceAndPoints);
+      console.log(this.criteriaModelList);
     }
   }
 
   OnRefreshButton(k) {
+    this.criteriaModelList[k].updateDevceList(this.devices);
     this.criteriaModelList[k].stageName = this.stageName;
     this.criteriaModelList[k].setFinalCalulation(this.criteriaList, k);
   }

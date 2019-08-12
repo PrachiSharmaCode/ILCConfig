@@ -30,7 +30,7 @@ export class CurtailmentConfigComponent implements OnInit {
   devices: {
     deviceName: string,
     devicePoints: string[]
-  }[];
+  }[] = [];
   campus: string;
   building: string;
   finalCalculation: string;
@@ -70,7 +70,8 @@ export class CurtailmentConfigComponent implements OnInit {
     this.clusterList = this.ilc.clusterList;
     this.curtailmentModelList = this.mainModel.curtailmentList;
     this.criteriaList = this.ilc.pairwiseCriteriaList;
-    // this.devices = this..devices;
+    this.devices = this.ilc.devices;
+    console.log(this.devices)
     this.campus = this.ilc.campus;
     this.building = this.ilc.building;
     for (let j = 0; j < this.curtailmentModelList.length; j++) {

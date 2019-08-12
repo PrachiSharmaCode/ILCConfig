@@ -62,6 +62,10 @@ export class ILCCongig {
     this._devices = value;
   }
 
+  updateILCDevices(value: { deviceName: string; devicePoints: string[]} []){
+    this._devices = value;
+  }
+
 
   get devicesMasterList(): {
     deviceTopic: string,

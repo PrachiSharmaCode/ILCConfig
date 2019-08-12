@@ -56,7 +56,7 @@ export class CriteriaModel {
   }
 
   updateDevceList(value: { deviceName: string; devicePoints: string[]; }[]) {
-    this.devices = value;
+    this._devices = value;
   }
 
   // tslint:disable-next-line:adjacent-overload-signatures
@@ -105,14 +105,14 @@ export class CriteriaModel {
 
 
   setFinalCalulation(list: string[][], l) {
-    // console.log(list);
-    // console.log(l);
-    // console.log(this.formulaModel);
-    // console.log(this.statusModel);
-    // console.log(this.mapperModel);
-    // console.log(this.historyModel);
-    // console.log(this.constantModel);
-    // console.log(this._devices.length);
+    console.log(list);
+    console.log(l);
+    console.log(this.formulaModel);
+    console.log(this.statusModel);
+    console.log(this.mapperModel);
+    console.log(this.historyModel);
+    console.log(this.constantModel);
+    console.log(this._devices.length);
     let jsonObh = {};
     for (let j = 0; j < this._devices.length; j++) {
       jsonObh[this._devices[j].deviceName] = {

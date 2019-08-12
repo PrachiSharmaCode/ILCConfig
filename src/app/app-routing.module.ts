@@ -7,11 +7,11 @@ import { CurtailmentConfigComponent } from './components/curtailment-config/curt
 import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
-  // {path: 'home', component: HomeComponent},
-  // {path: 'ILCConfiguration', component: ILCConfigComponent},
-  // {path: 'pairwiseConfiguration', component: PairwiseComponent},
-  // {path: 'criteriaConfiguration', component: CriteriaConfigComponent},
-  // {path: 'curtialmentConfiguration', component: CurtailmentConfigComponent}
+  {path: 'home', component: HomeComponent},
+  {path: 'ILCConfiguration', component: ILCConfigComponent},
+  {path: 'pairwiseConfiguration', component: PairwiseComponent},
+  {path: 'criteriaConfiguration', component: CriteriaConfigComponent},
+  {path: 'curtialmentConfiguration', component: CurtailmentConfigComponent}
 ];
 
 @NgModule({

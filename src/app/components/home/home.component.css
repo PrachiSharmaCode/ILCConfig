@@ -137,18 +137,28 @@ navbar-brand{
 
 h5{
   background-color: transparent;
-  color: #0C9A6F;
-  margin-top: 5px;
+  color: white;
+  margin-top: 1%;
+  margin-right: 15%;
+  margin-left: 15%;
   }
+
+
 
 p{
   font-size: 18px;
+  color: #1BA781;
+}
+
+
+p:hover{
+  color: white;
 }
 
 hr{
-  border-color: #0C9A6F;
-  padding: 0 !important;
-  margin: 0 !important;
+  border-color: #92cacf;
+  margin-right: 10%;
+  margin-left: 10%;
 }
 
 .para-size {

@@ -64,7 +64,7 @@
                   <div class="card card-body">
                     <ul style="list-style-type:none;">
                       <li *ngFor="let device of devices">
-                        <h6>{{device}}</h6>
+                        <h6>{{device.deviceName}}</h6>
                       </li>
                     </ul>
                   </div>
@@ -97,7 +97,7 @@
                     <label class="collapse-division-label">
                       <a data-toggle="collapse" href="#{{index}}{{i}}" role="button"
                          aria-expanded="false" aria-controls="zoneTemp">
-                        {{devices[index]}} {{curtailmentModelList[i].curtailmentList[index].firstStageCooling.deviceTopic}}
+                        {{devices[index].deviceName}} {{curtailmentModelList[i].curtailmentList[index].firstStageCooling.deviceTopic}}
                         <i class="material-icons float-right">
                           keyboard_arrow_down
                         </i>
@@ -171,7 +171,7 @@
                 </button>
               </div>
               <textarea id="checktext">
-<!--          {{curtailmentModelList[i].setFinalCalulation()}}-->
+          {{curtailmentModelList[i].setFinalCalulation()}}
           </textarea>
             </div>
           </div>
