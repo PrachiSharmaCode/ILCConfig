@@ -1,6 +1,5 @@
 export class ILCCongig {
 
-  private _calculation: string;
   /***ILC Configuration***/
   private _campus = 'Campus';
   private _building = 'Building';
@@ -28,6 +27,11 @@ export class ILCCongig {
     }[]
   }[];
 
+  private _devices: {
+    deviceName: string,
+    devicePoints: string[]
+  }[] = [];
+
   private _deviceAndPoint: {
     deviceName: string,
     devicePoints: string[],
@@ -47,10 +51,17 @@ export class ILCCongig {
   private _pairwiaseCalculation: string;
   private _pairwisecdriteria: Map<any, any>;
 
-  /***CRITERIA***/
-  private _devices = [];
 
   /*****GETTERS & SETTER*****/
+
+  get devices(): { deviceName: string; devicePoints: string[] }[] {
+    return this._devices;
+  }
+
+  set devices(value: { deviceName: string; devicePoints: string[] }[]) {
+    this._devices = value;
+  }
+
 
   get devicesMasterList(): {
     deviceTopic: string,
@@ -70,22 +81,14 @@ export class ILCCongig {
     }[]
   }[]) {
     this.devicesMasterList = devices;
-
     let devicesLength = this.devicesMasterList.length - 1;
-
     while (devicesLength >= 0) {
-
-
-
-
       if (this.devicesMasterList[devicesLength] !== undefined) {
         let i = 0;
         let count = 0;
         let start = 0;
         let end: number;
-
         while (count <= 2) {
-
           if (this.devicesMasterList[devicesLength].deviceTopic.charAt(i) === '/') {
             count++;
             if (count === 1) {
@@ -95,37 +98,26 @@ export class ILCCongig {
           i++;
         }
         end = i;
-
-        const str = this.devicesMasterList[devicesLength].deviceTopic.
-        substring(end, this.devicesMasterList[devicesLength].deviceTopic.length);
-        this._devices.push(str);
-        // console.log(this.devicesMasterList[devicesLength].devicePoints[0].volttronPointName);
+        const str = this.devicesMasterList[devicesLength].deviceTopic.substring(end, this.devicesMasterList[devicesLength].deviceTopic.length);
         const tempPoint: string[] = [];
         for (let j = this.devicesMasterList[devicesLength].devicePoints.length - 1; j >= 0; j--) {
           if (this.devicesMasterList[devicesLength].devicePoints[j] !== undefined) {
-            console.log(j);
             tempPoint.push(this.devicesMasterList[devicesLength].devicePoints[j].volttronPointName);
           }
         }
-
         this._devicePoint.push(tempPoint);
-
         const temp: {
           deviceName: string,
           devicePoints: string[],
           checked: boolean
-        } = { deviceName: str,
+        } = {
+          deviceName: str,
           devicePoints: tempPoint,
           checked: false
         };
-
         this._deviceAndPoint.push(temp);
 
-
-
-
         const campusBuidling = this.devicesMasterList[devicesLength].deviceTopic.substring(start + 1, end - 1);
-
 
         let campusbuidlingDetails: string[];
         campusbuidlingDetails = campusBuidling.split('/');
@@ -140,14 +132,6 @@ export class ILCCongig {
       }
       devicesLength--;
     }
-
-    console.log('*******');
-
-    console.log(this._devices);
-    console.log(this._devicePoint);
-    console.log(this._deviceAndPoint);
-    console.log('*******');
-    console.log(this.devicesMasterList);
   }
 
 
@@ -162,8 +146,15 @@ export class ILCCongig {
     this._devicesMasterList = value;
   }
 
-  updateDeviceAndPoints(value: { deviceName: string; devicePoints: string[]; checked: boolean}[]){
+  updateDeviceAndPoints(value: { deviceName: string; devicePoints: string[]; checked: boolean }[]) {
     this.deviceAndPoint = value;
+  }
+
+  updateDevices(value: {
+    deviceName: string,
+    devicePoints: string[]
+  }[]) {
+    this._devices = value;
   }
 
   get campus(): string {
@@ -359,27 +350,11 @@ export class ILCCongig {
   }
 
 
-  get device(): string[] {
-    return this._device;
-  }
-
-  set device(value: string[]) {
-    this._device = value;
-  }
-
-  get devices(): string[] {
-    return this._devices;
-  }
-
-  set devices(value: string[]) {
-    this._devices = value;
-  }
-
   get deviceAndPoint(): { deviceName: string; devicePoints: string[]; checked: boolean }[] {
     return this._deviceAndPoint;
   }
 
-  set deviceAndPoint(value: { deviceName: string; devicePoints: string[]; checked: boolean}[]) {
+  set deviceAndPoint(value: { deviceName: string; devicePoints: string[]; checked: boolean }[]) {
     this._deviceAndPoint = value;
   }
 

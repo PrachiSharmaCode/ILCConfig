@@ -100,12 +100,26 @@ export class CriteriaConfigComponent implements OnInit {
   }
 
   updateCount(i, index, k, val) {
+
+    console.log(k);
     if (val === 'Formula') {
+      console.log('index' + index);
+      console.log('i' + i);
+      console.log('val' + val);
+      if (this.criteriaModelList[k].formulaModel[index][i] === undefined) {
+        this.criteriaModelList[k].formulaModel[index][i] = new FormulaCriteriaModel();
+      }
       this.criteriaModelList[k].formulaModel[index][i] = new FormulaCriteriaModel();
+      this.criteriaModelList[k].formulaModel[index][i].argument.push('');
+
+      console.log(this.criteriaModelList[k].formulaModel[0][0]);
+      console.log(this.criteriaModelList);
       console.log(this.criteriaModelList[k].formulaModel);
     } else {
       this.criteriaModelList[k].formulaModel[index][i] = null;
     }
+
+    console.log(this.criteriaModelList[k].formulaModel[index][i]);
 
     if (val === 'status') {
       this.criteriaModelList[k].statusModel[index][i] = new StatusCriteriaModel();
@@ -132,62 +146,72 @@ export class CriteriaConfigComponent implements OnInit {
       this.criteriaModelList[k].historyModel[index][i] = new HistoryCriteriaModel();
       console.log(this.criteriaModelList[k].historyModel);
     } else {
+      if (this.criteriaModelList[k].historyModel === undefined) {
+        this.criteriaModelList[k].historyModel = [];
+      }
       this.criteriaModelList[k].historyModel[index][i] = null;
     }
   }
 
-  addOrRemove(id, e, d, i) {
-    console.log(this.deviceAndPoints[d]);
+  addOrRemove(id, e, d, k) {
 
-    if (this.criteriaModelList[i].devices === undefined) {
-      this.criteriaModelList[i].devices = [];
-    }
+    console.log(id, k, d, e);
+    console.log(this.deviceAndPoints);
 
     if (e.target.checked) {
 
       this.deviceAndPoints[d].checked = true;
+
+      const temp: {
+        deviceName: string,
+        devicePoints: string[],
+      } = {
+        deviceName: this.deviceAndPoints[d].deviceName,
+        devicePoints: this.deviceAndPoints[d].devicePoints,
+      };
+
+      if (this.devices === undefined) {
+        this.devices = [];
+      }
+      this.devices.push(temp);
+
       this.ilc.updateDeviceAndPoints(this.deviceAndPoints);
 
-      this.criteriaModelList[i].devices.push(this.deviceAndPoints[d]);
       console.log(this.devices);
 
-      this.operationVal.push(['', '', '', '', '']);
-      this.criteriaModelList[i].updateOperationType(this.operationVal);
 
-      this.criteriaModelList[i].formulaModel.push([]);
-      this.criteriaModelList[i].statusModel.push([]);
-      this.criteriaModelList[i].historyModel.push([]);
-      this.criteriaModelList[i].mapperModel.push([]);
-      this.criteriaModelList[i].constantModel.push([]);
+      for (let i = 0; i < this.criteriaModelList.length; i++) {
+        if (this.criteriaModelList[i].operationType === undefined) {
+          this.criteriaModelList[i].operationType = [];
+        }
+        this.criteriaModelList[i].operationType.push(['', '', '', '', '']);
+      }
+      console.log(this.criteriaModelList);
     } else {
-      console.log(id);
       this.deviceAndPoints[d].checked = false;
-      this.ilc.updateDeviceAndPoints(this.deviceAndPoints);
-      for (let i = 0; i < this.criteriaModelList[i].devices.length; i++) {
-        if (this.criteriaModelList[i].devices[i].deviceName === id) {
-          console.log(this.criteriaModelList[i].devices[i].deviceName);
-          this.criteriaModelList[i].devices.splice(i, 1);
-          this.criteriaModelList[i].formulaModel.splice(i, 1);
-          this.criteriaModelList[i].statusModel.splice(i, 1);
-          this.criteriaModelList[i].historyModel.splice(i, 1);
-          this.criteriaModelList[i].mapperModel.splice(i, 1);
-          this.criteriaModelList[i].constantModel.splice(i, 1);
+      let count = 0;
+
+      for (let j = 0; j < this.devices.length; j++) {
+        if (this.devices[j].deviceName === id) {
+          this.devices.splice(j, 1);
+          count = j;
           break;
         }
       }
+      for (let i = 0; i < this.criteriaModelList.length; i++) {
+        this.criteriaModelList[i].formulaModel.splice(count, 1);
+        this.criteriaModelList[i].statusModel.splice(count, 1);
+        this.criteriaModelList[i].historyModel.splice(count, 1);
+        this.criteriaModelList[i].mapperModel.splice(count, 1);
+        this.criteriaModelList[i].constantModel.splice(count, 1);
+        break;
+      }
     }
-    console.log(this.criteriaModelList[i].devices);
-    console.log(this.criteriaModelList[i].formulaModel);
-    console.log(this.criteriaModelList[i].statusModel);
-    console.log(this.criteriaModelList[i].historyModel);
-    console.log(this.criteriaModelList[i].mapperModel);
-    console.log(this.criteriaModelList[i].constantModel);
-
   }
 
   OnRefreshButton(k) {
     this.criteriaModelList[k].stageName = this.stageName;
-    // this.criteriaModelList[k].setFinalCalulation(this.criteriaList, k);
+    this.criteriaModelList[k].setFinalCalulation(this.criteriaList, k);
   }
 
 
@@ -196,12 +220,42 @@ export class CriteriaConfigComponent implements OnInit {
     this.criteriaModelList = this.mainModel.criteriaModelList;
     this.criteriaList = this.mainModel.paireiseCriteriaList;
     this.clusterList = this.ilc.clusterList;
+    this.deviceAndPoints = this.ilc.deviceAndPoint;
     this.showCriteriaConfiguartion = this.clusterList.length !== 0;
     this.campus = this.ilc.campus;
     this.building = this.ilc.building;
     this.stageName = this.criteria.stageName;
-    this.deviceAndPoints = this.ilc.deviceAndPoint;
+    for (let i = 0; i < this.criteriaModelList.length; i++) {
+      for (let subCriteria = 0; subCriteria < 3; subCriteria++) {
+        if (this.criteriaModelList[i].formulaModel[subCriteria] === undefined) {
+          this.criteriaModelList[i].formulaModel[subCriteria] = [];
+        }
+        if (this.criteriaModelList[i].statusModel[subCriteria] === undefined) {
+          this.criteriaModelList[i].statusModel[subCriteria] = [];
+        }
+        if (this.criteriaModelList[i].historyModel[subCriteria] === undefined) {
+          this.criteriaModelList[i].historyModel[subCriteria] = [];
+        }
+        if (this.criteriaModelList[i].mapperModel[subCriteria] === undefined) {
+          this.criteriaModelList[i].mapperModel[subCriteria] = [];
+        }
+        if (this.criteriaModelList[i].constantModel[subCriteria] === undefined) {
+          this.criteriaModelList[i].constantModel[subCriteria] = [];
+        }
+      }
+    }
+
+    // this.criteriaModelList[0].operationType = [];
+    // this.criteriaModelList[1].operationType = [];
+    //
+    // this.criteriaModelList[0].operationType.push(['', '', '', '', '']);
+    // this.criteriaModelList[0].operationType.push(['', '', '', '', '']);
+    // this.criteriaModelList[0].operationType.push(['', '', '', '', '']);
+    // this.criteriaModelList[1].operationType.push(['', '', '', '', '']);
+    // this.criteriaModelList[1].operationType.push(['', '', '', '', '']);
+    // this.criteriaModelList[1].operationType.push(['', '', '', '', '']);
   }
+
 
   trackByIndex(index: number): any {
     return index;

@@ -27,7 +27,10 @@ export class CurtailmentConfigComponent implements OnInit {
 
 
   criteriaList: string[];
-  devices: string[];
+  devices: {
+    deviceName: string,
+    devicePoints: string[]
+  }[];
   campus: string;
   building: string;
   finalCalculation: string;
@@ -53,7 +56,7 @@ export class CurtailmentConfigComponent implements OnInit {
 
   onRefreshButton(i) {
     // this.curtailmentModelList[i].updateCurtailmentList(this.curtailmentList);
-    this.finalCalculation = this.curtailmentModelList[i].setFinalCalulation();
+    // this.finalCalculation = this.curtailmentModelList[i].setFinalCalulation();
     console.log(this.finalCalculation);
   }
 
@@ -67,14 +70,15 @@ export class CurtailmentConfigComponent implements OnInit {
     this.clusterList = this.ilc.clusterList;
     this.curtailmentModelList = this.mainModel.curtailmentList;
     this.criteriaList = this.ilc.pairwiseCriteriaList;
-    this.devices = this.ilc.devices;
+    // this.devices = this..devices;
     this.campus = this.ilc.campus;
     this.building = this.ilc.building;
     for (let j = 0; j < this.curtailmentModelList.length; j++) {
+      this.devices = this.curtailmentModelList[j].devices;
       if (this.curtailmentModelList[j].curtailmentList === undefined) {
         this.curtailmentModelList[j].curtailmentList = [];
       }
-      for (let i = 0; i < this.devices.length; i++) {
+      for (let i = 0; i < this.curtailmentModelList[j].devices.length; i++) {
         if (this.curtailmentModelList[j].curtailmentList[i] === undefined) {
           this.curtailmentModelList[j].curtailmentList[i] = [];
           this.curtailmentModelList[j].curtailmentList[i] = {

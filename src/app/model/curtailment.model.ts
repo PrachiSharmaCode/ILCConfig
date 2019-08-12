@@ -1,10 +1,15 @@
 import {ILCCongig} from './ILCConfig.model';
+import {CriteriaModel} from './criteria.model';
 
 export class CurtailmentModel {
 
   private ilc: ILCCongig = new ILCCongig();
+  private criteris: CriteriaModel = new CriteriaModel();
   // private devices = this.ilc.devices;
-  private devices = this.ilc.devices;
+  private _devices: { deviceName: string,
+    devicePoints: string[],
+    checked: boolean
+  }[] = []
   private _curtailmentList: {
     firstStageCooling: {
       deviceTopic: string,
@@ -26,6 +31,7 @@ export class CurtailmentModel {
     return this._curtailmentList;
   }
 
+
   set curtailmentList(value: any[]) {
     this._curtailmentList = value;
   }
@@ -38,16 +44,25 @@ export class CurtailmentModel {
     return this._curtailmentCalculation;
   }
 
-  setFinalCalulation() {
-    let obj = {};
-    for (let i = 0; i < this.devices.length ; i++) {
-      obj[this.devices[i]] = this._curtailmentList[i];
-    }
-    let cal = JSON.stringify(obj, null, 4).replace('[', '').replace(']', '');
-    return cal;
-  }
+  // setFinalCalulation() {
+  //   let obj = {};
+  //   for (let i = 0; i < this.devices.length ; i++) {
+  //     obj[this.devices[i]] = this._curtailmentList[i];
+  //   }
+  //   let cal = JSON.stringify(obj, null, 4).replace('[', '').replace(']', '');
+  //   return cal;
+  // }
 
   set curtailmentCalculation(value: string) {
     this._curtailmentCalculation = value;
+  }
+
+
+  get devices(): { deviceName: string; devicePoints: string[]; checked: boolean }[] {
+    return this._devices;
+  }
+
+  set devices(value: { deviceName: string; devicePoints: string[]; checked: boolean }[]) {
+    this._devices = value;
   }
 }

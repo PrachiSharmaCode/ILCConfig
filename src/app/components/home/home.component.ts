@@ -46,11 +46,7 @@ export class HomeComponent implements OnInit {
   curtailmentOpen: boolean;
   homeOpen = true;
   showNavButtons = false;
-  showDocumentation = false;
-  showILC = true;
-  showMasterdriver = false;
   masterFile: string;
-  check: object;
 
   constructor() {
   }
@@ -99,39 +95,21 @@ export class HomeComponent implements OnInit {
     this.homeOpen = true;
   }
 
-  openILC() {
-    this.showDocumentation = false;
-    this.showILC = true;
-    this.showMasterdriver = false;
-  }
-
-  openDocumentation() {
-    this.showDocumentation = true;
-    this.showILC = false;
-    this.showMasterdriver = false;
-  }
-
-  openMasterDriver() {
-    this.showDocumentation = false;
-    this.showILC = false;
-    this.showMasterdriver = true;
-  }
-
   getMasterDriver(e) {
-    console.log(e.target.files);
     const reader = new FileReader();
     //  const reader = e.target.files;
-    // tslint:disable-next-line:only-arrow-functions
-    reader.onload = (e) => {
+    // tslint:disable-next-line:only-arrow-functions no-shadowed-variable
+    reader.onload = () => {
       const masterDriverConfig = JSON.parse(reader.result.toString());
-      let device_names = Object.keys(masterDriverConfig).filter(key => !(key.endsWith('.csv')));
-      let devices = device_names.map(device => {
-        let deviceData = JSON.parse(parse(masterDriverConfig[device].data).data.join('\n'));
+      // tslint:disable-next-line:variable-name
+      const device_names = Object.keys(masterDriverConfig).filter(key => !(key.endsWith('.csv')));
+      // tslint:disable-next-line:no-shadowed-variable
+      const devices = device_names.map(device => {
+        const deviceData = JSON.parse(parse(masterDriverConfig[device].data).data.join('\n'));
         if (deviceData.registry_config) {
-          console.log(deviceData.registry_config);
-          let registryConfigName = deviceData.registry_config.split('//')[1];
-          let registryConfigData = parse(masterDriverConfig[registryConfigName].data).data;
-          let registryConfigEntries = registryConfigData.slice(1).map(line => {
+          const registryConfigName = deviceData.registry_config.split('//')[1];
+          const registryConfigData = parse(masterDriverConfig[registryConfigName].data).data;
+          const registryConfigEntries = registryConfigData.slice(1).map(line => {
             if (line[0] && line[1]) {
               return {
                 referenceName: line[0],
@@ -139,11 +117,10 @@ export class HomeComponent implements OnInit {
               } as point;
             }
           });
-          let deviceEntry = {
+          const deviceEntry = {
             deviceTopic: device,
             devicePoints: registryConfigEntries
           } as device;
-          // console.log(deviceEntry);
           return deviceEntry;
         }
       });
@@ -154,15 +131,6 @@ export class HomeComponent implements OnInit {
     if (e.target.files !== undefined) {
       reader.readAsText(e.target.files[0]);
     }
-  }
-
-  activeSideBarButton(value) {
-    let clickedButton;
-    let button;
-    button = document.getElementsByClassName('activeBar');
-    button[0].className = button[0].className.replace('activeBar', '');
-    clickedButton = document.getElementById(value.target.id);
-    clickedButton.className += ' activeBar';
   }
 
   activeButton(value) {

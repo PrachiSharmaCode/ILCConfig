@@ -7,7 +7,7 @@
            style="text-align: center; background-color: #003114; border: none; ">
         <label class="collapse-division-label">
           <a data-toggle="collapse" href="#demo{{k}}" role="button" aria-expanded="false" aria-controls="zoneTemp">
-            {{cluster.device_criteria_file}}  <i class="material-icons float-right" style="font-size: 30px;">
+            {{cluster.device_criteria_file}} {{k}}  <i class="material-icons float-right" style="font-size: 30px;">
             keyboard_arrow_down
           </i>
           </a>
@@ -61,22 +61,22 @@
               </div>
               <div class="collapse-division div-inbetween-padding">
                 <label class="collapse-division-label">
-                  <a data-toggle="collapse" href="#Devices" role="button"
+                  <a data-toggle="collapse" href="#Devices{{k}}" role="button"
                      aria-expanded="false" aria-controls="zoneTemp">
                     Devices <i id="deviceIcon" class="material-icons float-right">
                     keyboard_arrow_down
                   </i>
                   </a>
                 </label>
-                <div class="collapse" id="Devices">
+                <div class="collapse" id="Devices{{k}}">
                   <div class="card card-body">
                     <ul style="list-style-type:none;">
-                      <li *ngFor="let device of deviceAndPoints;let d = index;trackBy: trackByIndex;">
+                      <li *ngFor="let devices of this.deviceAndPoints;let d = index;trackBy: trackByIndex;">
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value="device" [checked]=device.checked
-                                 (change)="addOrRemove(device.deviceName, $event, d, k)" id="{{device.deviceName}}">
-                          <label class="form-check-label" for="{{device.deviceName}}">
-                            {{device.deviceName}}
+                          <input class="form-check-input" type="checkbox" value="device" [checked]=devices.checked
+                                 (change)="addOrRemove(devices.deviceName, $event, d, k)" id="{{devices.deviceName}}">
+                          <label class="form-check-label" for="{{devices.deviceName}}">
+                            {{devices.deviceName}}{{k}}
                           </label>
                         </div>
                       </li>
@@ -105,13 +105,14 @@
             <div class="col-sm">
               <h5>Criteria Configuration</h5>
               <div>
-                <ng-container *ngFor="let device of criteriaModelList[k].devices;let index = index;trackBy: trackByIndex;">
+                <ng-container *ngFor="let device of devices;let index = index;trackBy: trackByIndex;">
                   <div class="collapse-division " style="width: 100%">
 
                     <label class="collapse-division-label">
                       <a data-toggle="collapse" href="#{{[index]}}{{k}}" role="button"
                          aria-expanded="false" aria-controls="zoneTemp">
-                        {{device.deviceName}}  {{campus}}/{{building}}/{{device.deviceName}}<i class="material-icons float-right">
+                        {{device.deviceName}}  {{campus}}/{{building}}/{{device.deviceName}} {{index}}{{k}}<i
+                        class="material-icons float-right">
                         keyboard_arrow_down
                       </i>
                       </a>
@@ -126,7 +127,7 @@
                               <label class="collapse-division-label" style="background-color: white">
                                 <a style="color: black" data-toggle="collapse" href="#{{k}}{{i}}{{index}}" role="button"
                                    aria-expanded="false" aria-controls="zoneTemp">
-                                  {{criteria}}
+                                  {{criteria}}{{k}} {{i}} {{index}}
                                   <i class="material-icons float-right">
                                     keyboard_arrow_down
                                   </i>
@@ -139,7 +140,7 @@
                                       <mat-label>Choose Operation Type</mat-label>
                                       <mat-select [(ngModel)]=criteriaModelList[k].operationType[index][i]
                                                   (selectionChange)="updateCount(i, index, k, criteriaModelList[k].operationType[index][i])">
-                                        <mat-option value="Formula">Formula</mat-option>
+                                        <mat-option value="Formula">Formula{{i}}{{index}}{{k}}</mat-option>
                                         <mat-option value="status">status</mat-option>
                                         <mat-option value="mapper">mapper</mat-option>
                                         <mat-option value="constant">constant</mat-option>
@@ -148,16 +149,15 @@
                                     </mat-form-field>
                                     <div *ngIf="criteriaModelList[k].operationType[index][i] == 'Formula'"
                                          id="childFormula">
-                                      <!--                                    <ng-container-->
-                                      <!--                                      *ngFor="let form of criteriaModelList[k].formulaModelArr;let f = index;trackBy: trackByIndex;">-->
                                       <ng-container
                                         *ngFor="let arg of criteriaModelList[k].formulaModel[index][i].argument;let x = index;trackBy: trackByIndex;">
                                         <mat-form-field style="width: 100%">
                                           <mat-label>Arguments{{x}}</mat-label>
                                           <mat-select
                                             [(ngModel)]=criteriaModelList[k].formulaModel[index][i].argument[x]>
-                                            <mat-option value="CoolingTemperatureSetPoint">CoolingTemperatureSetPoint
-                                            </mat-option>
+                                            <div *ngFor="let point of device.devicePoints">
+                                              <mat-option value="{{point}}">{{point}}</mat-option>
+                                            </div>
                                           </mat-select>
                                         </mat-form-field>
                                         <mat-radio-group aria-label="Select an option">

@@ -25,12 +25,6 @@ export class MainModel {
     this.paireiseCriteriaList.push(criteriaList);
   }
 
-  print() {
-    console.log(this._pairwiseList);
-    console.log(this._curtailmentList);
-  }
-
-
   get paireiseCriteriaList(): string[][] {
     return this._paireiseCriteriaList;
   }

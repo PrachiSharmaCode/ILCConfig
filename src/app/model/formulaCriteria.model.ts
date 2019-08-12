@@ -5,12 +5,12 @@ export class FormulaCriteriaModel {
   private _minimum: number;
   private _maximun: number;
   private _formulaCalculate: any;
-  private formula: {
-    argument: string[],
-    operation: string,
-    minimum: number,
-    maximum: number
-  }[] = [];
+  // private formula: {
+  //   argument: string[],
+  //   operation: string,
+  //   minimum: number,
+  //   maximum: number
+  // }[] = [];
 
   get argument(): string[] {
     return this._argument;
