@@ -14,6 +14,7 @@ export class CriteriaModel {
   private _constantModel: ConstantCriteriaModel[][] = [];
   private _historyModel: HistoryCriteriaModel[][] = [];
   private _critriaList: string[];
+  private argument = 'argument';
   private _devices: {
     deviceName: string,
     devicePoints: string[]
@@ -105,19 +106,21 @@ export class CriteriaModel {
 
 
   setFinalCalulation(list: string[][], l) {
-    console.log(list);
-    console.log(l);
-    console.log(this.formulaModel);
-    console.log(this.statusModel);
-    console.log(this.mapperModel);
-    console.log(this.historyModel);
-    console.log(this.constantModel);
-    console.log(this._devices.length);
+    // console.log(list);
+    // console.log(l);
+    // console.log(this.formulaModel);
+    // console.log(this.statusModel);
+    // console.log(this.mapperModel);
+    // console.log(this.historyModel);
+    // console.log(this.constantModel);
+    // console.log(this._devices.length);
+
+
     let jsonObh = {};
     for (let j = 0; j < this._devices.length; j++) {
       jsonObh[this._devices[j].deviceName] = {
-        FirstStageCooling: {
-          device_topic: 'CAMPUS/Buidling/' + +this._devices[j],
+        curtail: {
+          device_topic: 'CAMPUS/Buidling/' + +this._devices[j].deviceName,
         }
       };
       for (let k = 0; k < list[0].length; k++) {
@@ -140,7 +143,12 @@ export class CriteriaModel {
       }
     }
 
-    const cal = JSON.stringify(jsonObh, null, 4);
+    let jobj = {};
+    for (let j = 0; j < this._devices.length; j++) {
+      jobj[this._devices[j].deviceName] = jsonObh;
+    }
+
+    const cal = JSON.stringify(jobj, null, 4);
     this._criteriaCalculation = cal;
     return cal;
   }

@@ -30,7 +30,7 @@ export class CurtailmentConfigComponent implements OnInit {
   devices: {
     deviceName: string,
     devicePoints: string[]
-  }[] = [];
+  }[];
   campus: string;
   building: string;
   finalCalculation: string;
@@ -75,16 +75,16 @@ export class CurtailmentConfigComponent implements OnInit {
     this.campus = this.ilc.campus;
     this.building = this.ilc.building;
     for (let j = 0; j < this.curtailmentModelList.length; j++) {
-      this.devices = this.curtailmentModelList[j].devices;
+      // this.devices = this.curtailmentModelList[j].devices;
       if (this.curtailmentModelList[j].curtailmentList === undefined) {
         this.curtailmentModelList[j].curtailmentList = [];
       }
-      for (let i = 0; i < this.curtailmentModelList[j].devices.length; i++) {
+      for (let i = 0; i < this.devices.length; i++) {
         if (this.curtailmentModelList[j].curtailmentList[i] === undefined) {
           this.curtailmentModelList[j].curtailmentList[i] = [];
           this.curtailmentModelList[j].curtailmentList[i] = {
             firstStageCooling: {
-              deviceTopic: this.campus + '/' + this.building + '/' + this.devices[i],
+              deviceTopic: this.campus + '/' + this.building + '/' + this.devices[i].deviceName,
               deviceStatus: {
                 condition: '',
                 deviceStageArgs: ''
@@ -98,6 +98,7 @@ export class CurtailmentConfigComponent implements OnInit {
         }
       }
     }
+    console.log(this.curtailmentModelList);
   }
 
   trackByIndex(index: number): any {

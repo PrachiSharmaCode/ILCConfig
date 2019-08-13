@@ -69,8 +69,8 @@ textarea {
 }*/
 
 .col-sm{
-  padding-left: 2%;
-  padding-right: 2%;
+  padding-left: 1%;
+  padding-right: 1%;
 }
 
 .row{
@@ -92,3 +92,4 @@ textarea {
 .example-full-width {
   width: 100%;
 }
+

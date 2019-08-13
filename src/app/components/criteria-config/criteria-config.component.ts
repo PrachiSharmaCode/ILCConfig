@@ -216,6 +216,7 @@ export class CriteriaConfigComponent implements OnInit {
 
   OnRefreshButton(k) {
     this.criteriaModelList[k].updateDevceList(this.devices);
+    this.ilc.updateILCDevices(this.devices)
     this.criteriaModelList[k].stageName = this.stageName;
     this.criteriaModelList[k].setFinalCalulation(this.criteriaList, k);
   }
@@ -231,6 +232,7 @@ export class CriteriaConfigComponent implements OnInit {
     this.campus = this.ilc.campus;
     this.building = this.ilc.building;
     this.stageName = this.criteria.stageName;
+    this.devices = this.ilc.devices;
     for (let i = 0; i < this.criteriaModelList.length; i++) {
       for (let subCriteria = 0; subCriteria < 3; subCriteria++) {
         if (this.criteriaModelList[i].formulaModel[subCriteria] === undefined) {
