@@ -218,7 +218,7 @@ export class CriteriaConfigComponent implements OnInit {
     this.criteriaModelList[k].updateDevceList(this.devices);
     this.ilc.updateILCDevices(this.devices)
     this.criteriaModelList[k].stageName = this.stageName;
-    this.criteriaModelList[k].setFinalCalulation(this.criteriaList, k);
+    console.log(this.criteriaModelList[k].setFinalCalulation(this.criteriaList, k));
   }
 
 

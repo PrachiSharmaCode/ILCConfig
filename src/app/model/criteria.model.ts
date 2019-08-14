@@ -116,13 +116,17 @@ export class CriteriaModel {
     // console.log(this._devices.length);
 
 
-    let jsonObh = {};
+    const jsonObh = {};
     for (let j = 0; j < this._devices.length; j++) {
+
       jsonObh[this._devices[j].deviceName] = {
-        curtail: {
-          device_topic: 'CAMPUS/Buidling/' + +this._devices[j].deviceName,
+        [this._devices[j].deviceName]: {
+          curtail: {
+            device_topic: 'CAMPUS/Buidling/' + +this._devices[j].deviceName,
+          }
         }
       };
+
       for (let k = 0; k < list[0].length; k++) {
 
         if (this.formulaModel[j][k] !== null) {
@@ -143,12 +147,12 @@ export class CriteriaModel {
       }
     }
 
-    let jobj = {};
-    for (let j = 0; j < this._devices.length; j++) {
-      jobj[this._devices[j].deviceName] = jsonObh;
-    }
+    // let jobj = {};
+    // for (let j = 0; j < this._devices.length; j++) {
+    //   jobj[this._devices[j].deviceName] = jsonObh;
+    // }
 
-    const cal = JSON.stringify(jobj, null, 4);
+    const cal = JSON.stringify(jsonObh, null, 4);
     this._criteriaCalculation = cal;
     return cal;
   }
