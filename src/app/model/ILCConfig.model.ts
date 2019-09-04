@@ -102,7 +102,8 @@ export class ILCCongig {
           i++;
         }
         end = i;
-        const str = this.devicesMasterList[devicesLength].deviceTopic.substring(end, this.devicesMasterList[devicesLength].deviceTopic.length);
+        const str = this.devicesMasterList[devicesLength].deviceTopic.
+        substring(end, this.devicesMasterList[devicesLength].deviceTopic.length);
         const tempPoint: string[] = [];
         for (let j = this.devicesMasterList[devicesLength].devicePoints.length - 1; j >= 0; j--) {
           if (this.devicesMasterList[devicesLength].devicePoints[j] !== undefined) {

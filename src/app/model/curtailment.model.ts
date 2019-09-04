@@ -43,6 +43,14 @@ export class CurtailmentModel {
     return this._curtailmentCalculation;
   }
 
+  updateDevices(value: {
+    deviceName: string,
+    devicePoints: string[]
+  }[]) {
+    this._devices = value;
+  }
+
+
   setFinalCalulation() {
     let obj = {};
     for (let i = 0; i < this.devices.length ; i++) {

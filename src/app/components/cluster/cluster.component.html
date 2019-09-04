@@ -20,12 +20,12 @@
               <mat-label>Cluster Type</mat-label>
               <mat-select [(ngModel)]=clusterType>
                 <mat-option value="RTU">RTU</mat-option>
-                <mat-option value="AUS">AUS</mat-option>
+                <mat-option value="AHU">AHU</mat-option>
                 <mat-option value="LIGHT">LIGHT</mat-option>
               </mat-select>
             </mat-form-field>
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Cluster Priority" type="number"
+              <input matInput placeholder="Cluster Priority" type="number" max="1" min="0" step=".01"
                      [(ngModel)]=cluster.cluster_priority name="clusterPtiority"></mat-form-field>
             <mat-form-field class="example-full-width">
               <input matInput id="pairwiseCriteriaFile" placeholder="Pairwise criteria File"
@@ -39,9 +39,6 @@
           </div>
         </div>
       </div>
-
-
-
     </div>
   </ng-container>
 </div>
@@ -49,7 +46,7 @@
 <div class="row" *ngIf="getCluster" style="margin-bottom: 2%">
   <mat-form-field class="example-full-width rounded-left" style="width: 80%; margin-left: 20px;
   background-color: white; padding-left: 5%; padding-right: 5%; padding-top: 3%">
-    <input matInput placeholder="Enter Criteria Name Here" [(ngModel)]="clusterName">
+    <input matInput placeholder="Enter Cluster Name Here" [(ngModel)]="clusterName">
   </mat-form-field>
   <button (click)="addCluster()" style="color: #1BA781; background-color: white; border: none"
           class="material-icons float-right round"> check

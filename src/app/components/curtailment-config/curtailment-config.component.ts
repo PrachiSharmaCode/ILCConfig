@@ -25,12 +25,19 @@ export class CurtailmentConfigComponent implements OnInit {
     cluster_priority: string
   }[];
 
+  deviceAndPoints: {
+    deviceName: string,
+    devicePoints: string[],
+    checked: boolean
+  }[] = [];
+
 
   criteriaList: string[];
   devices: {
     deviceName: string,
     devicePoints: string[]
   }[];
+
   campus: string;
   building: string;
   finalCalculation: string;
@@ -54,9 +61,51 @@ export class CurtailmentConfigComponent implements OnInit {
   constructor() {
   }
 
+  addOrRemove(id, e, d, k) {
+
+    console.log(id, k, d, e);
+    console.log(this.deviceAndPoints);
+
+    if (e.target.checked) {
+
+      this.deviceAndPoints[d].checked = true;
+
+      const temp: {
+        deviceName: string,
+        devicePoints: string[],
+      } = {
+        deviceName: this.deviceAndPoints[d].deviceName,
+        devicePoints: this.deviceAndPoints[d].devicePoints,
+      };
+
+      if (this.devices === undefined) {
+        this.devices = [];
+      }
+      this.devices.push(temp);
+
+
+      console.log(this.devices);
+
+
+    } else {
+      this.deviceAndPoints[d].checked = false;
+      let count = 0;
+
+      for (let j = 0; j < this.devices.length; j++) {
+        if (this.devices[j].deviceName === id) {
+          this.devices.splice(j, 1);
+          count = j;
+          break;
+        }
+      }
+
+    }
+  }
+
   onRefreshButton(i) {
     // this.curtailmentModelList[i].updateCurtailmentList(this.curtailmentList);
-    // this.finalCalculation = this.curtailmentModelList[i].setFinalCalulation();
+    this.curtailmentModelList[i].updateDevices(this.devices);
+    this.finalCalculation = this.curtailmentModelList[i].setFinalCalulation();
     console.log(this.finalCalculation);
   }
 
@@ -70,8 +119,9 @@ export class CurtailmentConfigComponent implements OnInit {
     this.clusterList = this.ilc.clusterList;
     this.curtailmentModelList = this.mainModel.curtailmentList;
     this.criteriaList = this.ilc.pairwiseCriteriaList;
+    this.deviceAndPoints = this.ilc.deviceAndPoint;
     this.devices = this.ilc.devices;
-    console.log(this.devices)
+    console.log(this.devices);
     this.campus = this.ilc.campus;
     this.building = this.ilc.building;
     for (let j = 0; j < this.curtailmentModelList.length; j++) {

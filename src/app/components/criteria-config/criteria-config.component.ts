@@ -96,61 +96,98 @@ export class CriteriaConfigComponent implements OnInit {
     minimum: number,
   };
 
+  addaugment = false;
+
   constructor() {
   }
 
   updateCount(i, index, k, val) {
 
+
     console.log(k);
     if (val === 'Formula') {
+      if (this.criteriaModelList[k].formulaModel[index][i] === undefined) {
+        this.criteriaModelList[k].formulaModel[index][i] = new FormulaCriteriaModel();
+        this.criteriaModelList[k].augmentFormulaModel[index][i] = new FormulaCriteriaModel();
+      }
       console.log('index' + index);
       console.log('i' + i);
       console.log('val' + val);
-      if (this.criteriaModelList[k].formulaModel[index][i] === undefined) {
-        this.criteriaModelList[k].formulaModel[index][i] = new FormulaCriteriaModel();
-      }
       this.criteriaModelList[k].formulaModel[index][i] = new FormulaCriteriaModel();
       this.criteriaModelList[k].formulaModel[index][i].argument.push('');
 
-      console.log(this.criteriaModelList[k].formulaModel[0][0]);
-      console.log(this.criteriaModelList);
-      console.log(this.criteriaModelList[k].formulaModel);
+      this.criteriaModelList[k].augmentFormulaModel[index][i] = new FormulaCriteriaModel();
+      this.criteriaModelList[k].augmentFormulaModel[index][i].argument.push('');
+
     } else {
       this.criteriaModelList[k].formulaModel[index][i] = null;
+      this.criteriaModelList[k].augmentFormulaModel[index][i] = null;
     }
 
-    console.log(this.criteriaModelList[k].formulaModel[index][i]);
 
     if (val === 'status') {
+      if (this.criteriaModelList[k].statusModel[index][i] === undefined) {
+        this.criteriaModelList[k].statusModel[index][i] = new StatusCriteriaModel();
+        this.criteriaModelList[k].augmentStatusModel[index][i] = new StatusCriteriaModel();
+      }
       this.criteriaModelList[k].statusModel[index][i] = new StatusCriteriaModel();
-      console.log(this.criteriaModelList[k].statusModel);
+      this.criteriaModelList[k].augmentStatusModel[index][i] = new StatusCriteriaModel();
     } else {
       this.criteriaModelList[k].statusModel[index][i] = null;
+      this.criteriaModelList[k].augmentStatusModel[index][i] = null;
     }
 
     if (val === 'mapper') {
+      if (this.criteriaModelList[k].mapperModel[index][i] === undefined) {
+        this.criteriaModelList[k].mapperModel[index][i] = new MapperCriteriaModel();
+        this.criteriaModelList[k].augmentMapperModel[index][i] = new MapperCriteriaModel();
+      }
       this.criteriaModelList[k].mapperModel[index][i] = new MapperCriteriaModel();
-      console.log(this.criteriaModelList[k].mapperModel);
+      this.criteriaModelList[k].augmentMapperModel[index][i] = new MapperCriteriaModel();
     } else {
       this.criteriaModelList[k].mapperModel[index][i] = null;
+      this.criteriaModelList[k].augmentMapperModel[index][i] = null;
     }
 
     if (val === 'constant') {
+      if (this.criteriaModelList[k].constantModel[index][i] === undefined) {
+        this.criteriaModelList[k].constantModel[index][i] = new ConstantCriteriaModel();
+        this.criteriaModelList[k].augmentConstantModel[index][i] = new ConstantCriteriaModel();
+      }
       this.criteriaModelList[k].constantModel[index][i] = new ConstantCriteriaModel();
-      console.log(this.criteriaModelList[k].constantModel);
+      this.criteriaModelList[k].augmentConstantModel[index][i] = new ConstantCriteriaModel();
     } else {
       this.criteriaModelList[k].constantModel[index][i] = null;
+      this.criteriaModelList[k].augmentConstantModel[index][i] = null;
     }
 
     if (val === 'history') {
+      if (this.criteriaModelList[k].historyModel[index][i] === undefined) {
+        this.criteriaModelList[k].historyModel[index][i] = new HistoryCriteriaModel();
+        this.criteriaModelList[k].augmentHistoryModel[index][i] = new HistoryCriteriaModel();
+      }
       this.criteriaModelList[k].historyModel[index][i] = new HistoryCriteriaModel();
-      console.log(this.criteriaModelList[k].historyModel);
+      this.criteriaModelList[k].augmentHistoryModel[index][i] = new HistoryCriteriaModel();
     } else {
       if (this.criteriaModelList[k].historyModel === undefined) {
         this.criteriaModelList[k].historyModel = [];
+        this.criteriaModelList[k].augmentHistoryModel = [];
       }
       this.criteriaModelList[k].historyModel[index][i] = null;
+      this.criteriaModelList[k].augmentHistoryModel[index][i] = null;
     }
+  }
+
+  addAugmentSexction(k, index) {
+    if (!this.criteriaModelList[k].showAugmentSection[index]) {
+      this.criteriaModelList[k].showAugmentSection[index] = true;
+      // this.criteriaModelList[k].updateAugmentSection();
+      // this.criteriaModelList[k].augmentFormulaModel = this.criteriaModelList[k].formulaModel;
+      this.criteriaModelList[k].updateAugmentFormula();
+    } else {
+      this.criteriaModelList[k].showAugmentSection[index] = false;
+    }
+    console.log(this.criteriaModelList[k].showAugmentSection);
   }
 
   addOrRemove(id, e, d, k) {
@@ -175,7 +212,7 @@ export class CriteriaConfigComponent implements OnInit {
       }
       this.devices.push(temp);
 
-      this.ilc.updateILCDevices(this.devices)
+      this.ilc.updateILCDevices(this.devices);
       this.ilc.updateDeviceAndPoints(this.deviceAndPoints);
 
       console.log(this.devices);
@@ -206,19 +243,33 @@ export class CriteriaConfigComponent implements OnInit {
         this.criteriaModelList[i].mapperModel.splice(count, 1);
         this.criteriaModelList[i].constantModel.splice(count, 1);
         this.criteriaModelList[i].operationType.splice(count, 1);
+
+        this.criteriaModelList[i].augmentFormulaModel.splice(count, 1);
+        this.criteriaModelList[i].augmentStatusModel.splice(count, 1);
+        this.criteriaModelList[i].augmentHistoryModel.splice(count, 1);
+        this.criteriaModelList[i].augmentMapperModel.splice(count, 1);
+        this.criteriaModelList[i].augmentConstantModel.splice(count, 1);
+        this.criteriaModelList[i].operationType.splice(count, 1);
         break;
       }
-      this.ilc.updateILCDevices(this.devices)
+      this.ilc.updateILCDevices(this.devices);
       this.ilc.updateDeviceAndPoints(this.deviceAndPoints);
       console.log(this.criteriaModelList);
     }
   }
 
   OnRefreshButton(k) {
+
+    console.log(this.criteriaModelList[k].formulaModel);
+    console.log(this.criteriaModelList[k].augmentFormulaModel);
+
     this.criteriaModelList[k].updateDevceList(this.devices);
-    this.ilc.updateILCDevices(this.devices)
+    this.ilc.updateILCDevices(this.devices);
     this.criteriaModelList[k].stageName = this.stageName;
-    console.log(this.criteriaModelList[k].setFinalCalulation(this.criteriaList, k));
+    this.criteriaModelList[k].campus = this.campus;
+    this.criteriaModelList[k].building = this.building;
+
+    this.criteriaModelList[k].setFinalCalulation(this.criteriaList, k);
   }
 
 
@@ -238,30 +289,35 @@ export class CriteriaConfigComponent implements OnInit {
         if (this.criteriaModelList[i].formulaModel[subCriteria] === undefined) {
           this.criteriaModelList[i].formulaModel[subCriteria] = [];
         }
+        if (this.criteriaModelList[i].augmentFormulaModel[subCriteria] === undefined) {
+          this.criteriaModelList[i].augmentFormulaModel[subCriteria] = [];
+        }
         if (this.criteriaModelList[i].statusModel[subCriteria] === undefined) {
           this.criteriaModelList[i].statusModel[subCriteria] = [];
+        }
+        if (this.criteriaModelList[i].augmentStatusModel[subCriteria] === undefined) {
+          this.criteriaModelList[i].augmentStatusModel[subCriteria] = [];
         }
         if (this.criteriaModelList[i].historyModel[subCriteria] === undefined) {
           this.criteriaModelList[i].historyModel[subCriteria] = [];
         }
+        if (this.criteriaModelList[i].augmentHistoryModel[subCriteria] === undefined) {
+          this.criteriaModelList[i].augmentHistoryModel[subCriteria] = [];
+        }
         if (this.criteriaModelList[i].mapperModel[subCriteria] === undefined) {
           this.criteriaModelList[i].mapperModel[subCriteria] = [];
+        }
+        if (this.criteriaModelList[i].augmentMapperModel[subCriteria] === undefined) {
+          this.criteriaModelList[i].augmentMapperModel[subCriteria] = [];
         }
         if (this.criteriaModelList[i].constantModel[subCriteria] === undefined) {
           this.criteriaModelList[i].constantModel[subCriteria] = [];
         }
+        if (this.criteriaModelList[i].augmentConstantModel[subCriteria] === undefined) {
+          this.criteriaModelList[i].augmentConstantModel[subCriteria] = [];
+        }
       }
     }
-
-    // this.criteriaModelList[0].operationType = [];
-    // this.criteriaModelList[1].operationType = [];
-    //
-    // this.criteriaModelList[0].operationType.push(['', '', '', '', '']);
-    // this.criteriaModelList[0].operationType.push(['', '', '', '', '']);
-    // this.criteriaModelList[0].operationType.push(['', '', '', '', '']);
-    // this.criteriaModelList[1].operationType.push(['', '', '', '', '']);
-    // this.criteriaModelList[1].operationType.push(['', '', '', '', '']);
-    // this.criteriaModelList[1].operationType.push(['', '', '', '', '']);
   }
 
 

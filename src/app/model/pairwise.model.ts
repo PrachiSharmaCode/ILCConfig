@@ -53,6 +53,7 @@ export class PairwiseModel {
   }
 
   setFinalCalculation(i) {
+    console.log(this._sliderValue);
     const jsonObh = {};
     let count = 1;
     for (let j = 0; j < this._pairwiseCriteriaList[i].length; j++) {
@@ -61,7 +62,13 @@ export class PairwiseModel {
         if (this._sliderValue[j][k] === null || this._sliderValue[j][k] === undefined) {
           this._sliderValue[j][k] = 1;
         }
-        jsonObh[this._pairwiseCriteriaList[i][j]][this._pairwiseCriteriaList[i][k + count]] = 1 / this._sliderValue[j][k];
+        let val = 1;
+        if (this._sliderValue[j][k] > 10) {
+          val = 1 / this._sliderValue[j][k];
+        } else {
+          val = this._sliderValue[j][k];
+        }
+        jsonObh[this._pairwiseCriteriaList[i][j]][this._pairwiseCriteriaList[i][k + count]] = val;
       }
       count++;
     }

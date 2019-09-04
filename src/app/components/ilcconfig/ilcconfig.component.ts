@@ -23,12 +23,21 @@ export class ILCConfigComponent implements OnInit {
   buildingPowerWindow: string;
   staggerRelease: string;
   staggerOfftime: string;
-  device: string[];
+  device: string;
   point: string;
+  points: string[] = [];
   demandFormula: string;
   demandformulaAgrsArr = [];
   finalCalculation: string;
   showAdvanceOption = false;
+
+  devicesMasterList: {
+    deviceTopic: string,
+    devicePoints: {
+      referenceName: string,
+      volttronPointName: string,
+    }[]
+  }[] = [];
 
   testpaiewiese: string[];
   arrlen: number;
@@ -43,6 +52,16 @@ export class ILCConfigComponent implements OnInit {
 
   constructor() {
   }
+
+
+  updatePoints() {
+    for (let i = 0; i < this.ilc.deviceAndPoint.length; i++) {
+      if (this.ilc.deviceAndPoint[i].deviceName === this.device) {
+        this.points = this.ilc.deviceAndPoint[i].devicePoints;
+      }
+    }
+  }
+
 
   advanceOption() {
     this.showAdvanceOption = true;
@@ -92,6 +111,7 @@ export class ILCConfigComponent implements OnInit {
     this.testpaiewiese = this.ilc.pairwiseCriteriaList;
     this.arrlen = this.testpaiewiese.length;
     this.finalCalculation = this.ilc.finalCalcualtion;
+    this.devicesMasterList = this.ilc.devicesMasterList;
   }
 
   trackByIndex(index: number): any {

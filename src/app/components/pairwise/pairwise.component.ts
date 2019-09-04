@@ -3,6 +3,7 @@ import * as FileSaver from 'file-saver';
 import {PairwiseModel} from '../../model/pairwise.model';
 import {MainModel} from '../../model/main.model';
 import {ILCCongig} from '../../model/ILCConfig.model';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 
 @Component({
@@ -98,7 +99,7 @@ export class PairwiseComponent implements OnInit {
       this.pairwiseList[j].sliderValue[index] = [];
     }
     if (changeEvent.value > 10) {
-      this.pairwiseList[j].sliderValue[index][i] = changeEvent.value - 10;
+      this.pairwiseList[j].sliderValue[index][i] = changeEvent.value;
     } else {
       if (changeEvent.value === 10) {
         this.pairwiseList[j].sliderValue[index][i] = changeEvent.value - 8;
@@ -136,12 +137,27 @@ export class PairwiseComponent implements OnInit {
     FileSaver.saveAs(file, this.clusterList[i].pairwise_criteria_file);
   }
 
+  pairwiseSort(event: CdkDragDrop<string[]>, i) {
+    moveItemInArray(this.pairwiseCriteriaList[i], event.previousIndex, event.currentIndex);
+  }
+
+  updateSliderColor(critera, main, val) {
+    console.log(val);
+    let slider = document.getElementById(critera + '%' + main);
+
+    if (val.value > 11) {
+      slider.style.color = 'green';
+    }
+    if (val.value < 11) {
+      slider.style.color = 'red';
+    }
+  }
+
   onRefreshButton(i) {
     this.pairwiseList[i].pairwiseCriteria = this.criteria;
     this.pairwiseList[i].pairwiseCriteriaList = this.pairwiseCriteriaList;
     this.pairwiseList[i].setFinalCalculation(i);
   }
-
 
   ngOnInit() {
     this.pairwiseList = this.mainModel.pairwiseList;

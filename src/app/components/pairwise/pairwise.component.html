@@ -32,32 +32,18 @@
                     </label>
                     <div class="collapse" id="criteria{{i}}">
                       <div class="card card-body">
-                        <h5>Ctriteria Names</h5>
-                        <ng-container
-                          *ngFor="let criteria of pairwiseCriteriaList[i];let k = index;trackBy: trackByIndex;">
-                          <h6>{{criteria}}
+
+                        <div cdkDropList class="example-list" (cdkDropListDropped)="pairwiseSort($event, i)">
+                          <div style="background-color: white" class="example-box" *ngFor="let criteria of pairwiseCriteriaList[i];let k = index;trackBy: trackByIndex;" cdkDrag>
+                            {{criteria}}
                             <button (click)="removeCriteria(i, k)"
                                     style="color: crimson; background-color: transparent; border: none"
                                     class="material-icons float-right">
                               close
                             </button>
-                          </h6>
-                          <hr>
-                        </ng-container>
-
-<!--                        <div align="center" class="row collapse-division"-->
-<!--                             style="background-color: white; border: groove #1BA781" *ngIf="getCriteria">-->
-<!--                          <mat-form-field class="example-full-width " style="width: 80%;margin-left: 5px">-->
-<!--                            <input matInput placeholder="Enter Criteria Name Here" [(ngModel)]="getCriteriaValue">-->
-<!--                          </mat-form-field>-->
-<!--                          <button (click)="UpdateCriteriaList(i, pairwiseCriteriaList[i].length)"-->
-<!--                                  style="color: green; background-color: transparent; border: none"-->
-<!--                                  class="material-icons float-right">-->
-<!--                            check-->
-<!--                          </button>-->
-<!--                        </div>-->
-
-
+                            <hr>
+                          </div>
+                        </div>
                         <div  class="row" *ngIf="getCriteria" style="margin-bottom: 2%; width: 100%">
                           <mat-form-field class="example-full-width rounded-left" style="width: 80%;
                             background-color: white; padding-left: 1px;padding-top: 1%">
@@ -116,14 +102,17 @@
                                     <h6>{{criteiaList}} </h6>
                                   </div>
                                   <div class="row">
-                                    <mat-slider style="width: 90%" id="{{criteiaList}}%{{mainCriteria}}" min="2"
+                                    <mat-slider style="width: 90%; color: red" id="{{criteiaList}}%{{mainCriteria}}" min="2"
                                                 max="20"
                                                 value="11" invert
-                                                step="1" tickInterval="1"
-                                                (input)="updateSliderValue($event, j, index, i)">
+                                                step="1" tickInterval="10"
+                                                class=check
+                                                (input)="updateSliderValue($event, j, index, i);  updateSliderColor(criteiaList, mainCriteria, $event)">
                                       (change)="updateValues($event, criteiaList ,mainCriteria)">
                                     </mat-slider>
-                                    <p>{{pairwiseList[i].sliderValue[index][j]}}</p>
+                                    <p  *ngIf="pairwiseList[i].sliderValue[index][j] < 10" id="sliderValueIndicator1">{{pairwiseList[i].sliderValue[index][j]}}</p>
+
+                                    <p *ngIf="pairwiseList[i].sliderValue[index][j] > 10" id="sliderValueIndicator">{{pairwiseList[i].sliderValue[index][j] - 10}}</p>
                                   </div>
                                 </div>
                               </li>

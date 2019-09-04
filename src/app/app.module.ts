@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import { ClusterComponent } from './components/cluster/cluster.component';
 import { FormulaCriteriaComponent} from './components/formula-criteria/formula-criteria.component';
@@ -59,6 +60,7 @@ import {OverlayModule} from '@angular/cdk/overlay';
     MatTabsModule,
     MatIconModule,
     MatSidenavModule,
+    DragDropModule,
     MDBBootstrapModule.forRoot(),
     OverlayModule
   ],

@@ -62,6 +62,19 @@
                 </label>
                 <div class="collapse" id="Devices{{i}}">
                   <div class="card card-body">
+
+<!--                    <ul style="list-style-type:none;">-->
+<!--                      <li *ngFor="let devices of this.deviceAndPoints;let d = index;trackBy: trackByIndex;">-->
+<!--                        <div class="form-check">-->
+<!--                          <input class="form-check-input" type="checkbox" value="device" [checked]=devices.checked-->
+<!--                                 (change)="addOrRemove(devices.deviceName, $event, d, k)" id="{{devices.deviceName}}">-->
+<!--                          <label class="form-check-label" for="{{devices.deviceName}}">-->
+<!--                            {{devices.deviceName}}{{k}}-->
+<!--                          </label>-->
+<!--                        </div>-->
+<!--                      </li>-->
+<!--                    </ul>-->
+
                     <ul style="list-style-type:none;">
                       <li *ngFor="let device of devices">
                         <h6>{{device.deviceName}}</h6>

@@ -101,10 +101,13 @@ export class HomeComponent implements OnInit {
     // tslint:disable-next-line:only-arrow-functions no-shadowed-variable
     reader.onload = () => {
       const masterDriverConfig = JSON.parse(reader.result.toString());
+      console.log(masterDriverConfig);
       // tslint:disable-next-line:variable-name
       const device_names = Object.keys(masterDriverConfig).filter(key => !(key.endsWith('.csv')));
+      console.log(device_names);
       // tslint:disable-next-line:no-shadowed-variable
       const devices = device_names.map(device => {
+        console.log(devices);
         const deviceData = JSON.parse(parse(masterDriverConfig[device].data).data.join('\n'));
         if (deviceData.registry_config) {
           const registryConfigName = deviceData.registry_config.split('//')[1];

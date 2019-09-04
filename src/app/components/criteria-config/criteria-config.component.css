@@ -78,6 +78,10 @@ textarea {
   margin-right: 0;
 }
 
+.border-light{
+  border-color: lightgray !important;
+}
+
 .container{
   width: 100%;
   max-width: none;
