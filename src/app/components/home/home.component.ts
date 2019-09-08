@@ -10,6 +10,7 @@ import {MapperCriteriaModel} from '../../model/mapperCriteria.model';
 import {ConstantCriteriaModel} from '../../model/constantCriteria.model';
 import {HistoryCriteriaModel} from '../../model/historyCriteria.model';
 import {parse} from 'papaparse';
+import *  as moment from 'moment';
 
 // tslint:disable-next-line:class-name
 interface point {
@@ -148,4 +149,23 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  collateConfigurations(e) {
+    let configStore = {}
+
+    for (let i in e.target.files){
+      const file = e.target.files[i];
+      const reader = new FileReader();
+  
+      reader.onload = (f) => {
+        const configuration = JSON.parse(reader.result.toString());
+        console.log(configuration);
+        const typeFormat = file.name.endsWith(".yml") ? "yml" : file.name.endsWith(".csv") ? "csv" : "json";
+        configStore[file.name] = {"data": configuration, "type": typeFormat, "modified": moment.utc().format()}
+      };
+  
+      reader.readAsText(file);
+    }
+    return JSON.stringify(configStore);
+  }
+  
 }
