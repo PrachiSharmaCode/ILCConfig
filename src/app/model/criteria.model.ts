@@ -17,6 +17,7 @@ export class CriteriaModel {
   private _campus = '';
   private _building = '';
   private curtail = 'curtail';
+  private _augment = 'augment';
 
   private _showAugmentSection: boolean[] = [];
   private _augmentFormulaModel: FormulaCriteriaModel[][] = [];
@@ -24,7 +25,6 @@ export class CriteriaModel {
   private _augmentMapperModel: MapperCriteriaModel[][] = [];
   private _augmentConstantModel: ConstantCriteriaModel[][] = [];
   private _augmentHistoryModel: HistoryCriteriaModel[][] = [];
-  private _augment = 'augment';
   private _critriaList: string[];
   private argument = 'argument';
   private _devices: {
@@ -34,20 +34,13 @@ export class CriteriaModel {
 
   private _devicesAndPoint: {
     deviceName: string,
-    devicePoints: string[]
+    devicePoints: string[],
     checked: boolean
   }[] = [];
+
   private _stageName: string;
   private _operationType: string[][];
   private _criteriaCalculation: string;
-  //
-  // private _criteriaFile: {
-  //   StageName: {
-  //     deviceTopic: string,
-  //     criteriaName: {}[]
-  //   }[]
-  // };
-
 
   get campus(): string {
     return this._campus;
@@ -71,6 +64,11 @@ export class CriteriaModel {
 
   set showAugmentSection(value: boolean[]) {
     this._showAugmentSection = value;
+  }
+
+  updateaugmentList(index) {
+    this._showAugmentSection[index] = true;
+    console.log(this._showAugmentSection);
   }
 
   get augmentFormulaModel(): FormulaCriteriaModel[][] {
@@ -140,7 +138,7 @@ export class CriteriaModel {
           this.augmentFormulaModel[i][j] = new FormulaCriteriaModel();
           this.augmentFormulaModel[i][j].argument = this.formulaModel[i][j].argument;
           this.augmentFormulaModel[i][j].maximun = this.formulaModel[i][j].maximun;
-          this.augmentFormulaModel[i][j].minimum = this.formulaModel[i][j].minimum;
+          this.augmentFormulaModel[i][j].mini = this.formulaModel[i][j].mini;
           this.augmentFormulaModel[i][j].operation = this.formulaModel[i][j].operation;
         }
 
@@ -170,8 +168,8 @@ export class CriteriaModel {
             this.augmentMapperModel[i] = [];
           }
           this.augmentMapperModel[i][j] = new MapperCriteriaModel();
-          this.augmentMapperModel[i][j].distName = this.augmentMapperModel[i][j].distName;
-          this.augmentMapperModel[i][j].mapKey = this.augmentMapperModel[i][j].mapKey;
+          this.augmentMapperModel[i][j].distName = this.mapperModel[i][j].distName;
+          this.augmentMapperModel[i][j].mapKey = this.mapperModel[i][j].mapKey;
         }
 
         if (this.historyModel[i][j] === null) {
@@ -184,11 +182,11 @@ export class CriteriaModel {
             this.augmentHistoryModel[i] = [];
           }
           this.augmentHistoryModel[i][j] = new HistoryCriteriaModel();
-          this.augmentHistoryModel[i][j].historyMaximum = this.augmentHistoryModel[i][j].historyMaximum;
-          this.augmentHistoryModel[i][j].historyMinimum = this.augmentHistoryModel[i][j].historyMinimum;
-          this.augmentHistoryModel[i][j].comparisonType = this.augmentHistoryModel[i][j].comparisonType;
-          this.augmentHistoryModel[i][j].historyPointName = this.augmentHistoryModel[i][j].historyPointName;
-          this.augmentHistoryModel[i][j].previousTime = this.augmentHistoryModel[i][j].previousTime;
+          this.augmentHistoryModel[i][j].historyMaximum = this.historyModel[i][j].historyMaximum;
+          this.augmentHistoryModel[i][j].historyMinimum = this.historyModel[i][j].historyMinimum;
+          this.augmentHistoryModel[i][j].comparisonType = this.historyModel[i][j].comparisonType;
+          this.augmentHistoryModel[i][j].historyPointName = this.historyModel[i][j].historyPointName;
+          this.augmentHistoryModel[i][j].previousTime = this.historyModel[i][j].previousTime;
         }
 
         if (this.constantModel[i][j] === null) {
@@ -201,33 +199,11 @@ export class CriteriaModel {
             this.augmentConstantModel[i] = [];
           }
           this.augmentConstantModel[i][j] = new ConstantCriteriaModel();
-          this.augmentConstantModel[i][j].conatant = this.augmentConstantModel[i][j].conatant;
-          this.augmentConstantModel[i][j].value = this.augmentConstantModel[i][j].value;
+          this.augmentConstantModel[i][j].conatant = this.constantModel[i][j].conatant;
+          this.augmentConstantModel[i][j].value = this.constantModel[i][j].value;
         }
       }
     }
-
-    // for (let i = 0; i < this.statusModel.length; i++) {
-    //   for (let j = 0; j < this.statusModel[i].length; j++) {
-    //     if (this.augmentStatusModel === undefined) {
-    //       this.augmentStatusModel = [];
-    //     }
-    //     if (this.statusModel[i][j] === null) {
-    //       if (this.augmentStatusModel[i] === undefined) {
-    //         this.augmentStatusModel[i] = [];
-    //       }
-    //       this.augmentStatusModel[i][j] = null;
-    //   } else {
-    //     if (this.augmentStatusModel[i] === undefined) {
-    //       this.augmentStatusModel[i] = [];
-    //     }
-    //     this.augmentStatusModel[i][j] = new StatusCriteriaModel();
-    //     this.augmentStatusModel[i][j].pointName = this.statusModel[i][j].pointName;
-    //     this.augmentStatusModel[i][j].offValue = this.statusModel[i][j].offValue;
-    //     this.augmentStatusModel[i][j].onValue = this.statusModel[i][j].onValue;
-    //   }
-    //   }
-    // }
   }
 
   get devicesAndPoint(): { deviceName: string; devicePoints: string[]; checked: boolean }[] {
@@ -295,27 +271,17 @@ export class CriteriaModel {
 
 
   setFinalCalulation(list: string[][], l) {
-    // console.log(l);
-    // console.log(this.formulaModel);
-    // console.log(this.statusModel);
-    // console.log(this.mapperModel);
-    // console.log(this.historyModel);
-    // console.log(this.constantModel);
+
     console.log(this._devices);
 
-
-    const obj = {} as any;
     let jsonObh = {};
-    let augjson = {};
-    let augCriteria = {};
-
 
     for (let j = 0; j < this._devices.length; j++) {
 
       jsonObh[this._devices[j].deviceName] = {
         [this._devices[j].deviceName]: {
           [this.curtail]: {
-            device_topic: this.campus + this.building  +this._devices[j].deviceName,
+            device_topic: this.campus + this.building + this._devices[j].deviceName,
           }
         }
       };
@@ -338,93 +304,35 @@ export class CriteriaModel {
           jsonObh[this._devices[j].deviceName][this._devices[j].deviceName][this.curtail][list[l][k]] = this.historyModel[j][k];
         }
       }
+
+      console.log(this._showAugmentSection);
+      if (this._showAugmentSection[j]) {
+
+        jsonObh[this._devices[j].deviceName][this._devices[j].deviceName][this._augment] = {
+          device_topic: this.campus + this.building + this._devices[j].deviceName
+        };
+        for (let k = 0; k < list[0].length; k++) {
+
+          if (this.augmentFormulaModel[j][k] !== null) {
+            jsonObh[this._devices[j].deviceName][this._devices[j].deviceName][this._augment][list[l][k]] = this.augmentFormulaModel[j][k];
+          }
+          if (this.augmentStatusModel[j][k] !== null) {
+            jsonObh[this._devices[j].deviceName][this._devices[j].deviceName][this._augment][list[l][k]] = this.augmentStatusModel[j][k];
+          }
+          if (this.augmentMapperModel[j][k] !== null) {
+            jsonObh[this._devices[j].deviceName][this._devices[j].deviceName][this._augment][list[l][k]] = this.augmentMapperModel[j][k];
+          }
+          if (this.augmentConstantModel[j][k] !== null) {
+            jsonObh[this._devices[j].deviceName][this._devices[j].deviceName][this._augment][list[l][k]] = this.augmentConstantModel[j][k];
+          }
+          if (this.augmentHistoryModel[j][k] !== null) {
+            jsonObh[this._devices[j].deviceName][this._devices[j].deviceName][this._augment][list[l][k]] = this.augmentHistoryModel[j][k];
+          }
+        }
+      }
     }
 
-
-    // for (let j = 0; j < this._devices.length; j++) {
-    //
-    //   jsonObh[this._devices[j].deviceName] = {
-    //     [this._devices[j].deviceName]: {
-    //       curtail: {
-    //         device_topic: this.campus + this.building + this._devices[j].deviceName,
-    //         obj
-    //       }
-    //     }
-    //   };
-    //
-    //   for (let k = 0; k < list[0].length; k++) {
-    //
-    //     obj[j] = {};
-    //
-    //     if (this.formulaModel[j][k] !== null) {
-    //       obj[j][list[l][k]] = this.formulaModel[j][k];
-    //     }
-    //     if (this.statusModel[j][k] !== null) {
-    //       obj[j][list[l][k]] = this.statusModel[j][k];
-    //     }
-    //     if (this.mapperModel[j][k] !== null) {
-    //       obj[j][list[l][k]] = this.mapperModel[j][k];
-    //     }
-    //     if (this.constantModel[j][k] !== null) {
-    //       obj[j][list[l][k]] = this.constantModel[j][k];
-    //     }
-    //     if (this.historyModel[j][k] !== null) {
-    //       obj[j][list[l][k]] = this.historyModel[j][k];
-    //     }
-    //   }
-    //
-    //   if (this._showAugmentSection) {
-    //     for (let k = 0; k < list[0].length; k++) {
-    //
-    //       if (this.augmentFormulaModel[j][k] !== null) {
-    //         augCriteria[list[l][k]] = this.augmentFormulaModel[j][k];
-    //       }
-    //       if (this.augmentStatusModel[j][k] !== null) {
-    //         augCriteria[list[l][k]] = this.augmentStatusModel[j][k];
-    //       }
-    //       if (this.augmentMapperModel[j][k] !== null) {
-    //         augCriteria[list[l][k]] = this.augmentMapperModel[j][k];
-    //       }
-    //       if (this.augmentConstantModel[j][k] !== null) {
-    //         augCriteria[list[l][k]] = this.augmentConstantModel[j][k];
-    //       }
-    //       if (this.augmentHistoryModel[j][k] !== null) {
-    //         augCriteria[list[l][k]] = this.augmentHistoryModel[j][k];
-    //       }
-    //     }
-    //
-    //     augjson[this._augment] = {
-    //       device_topic: 'CAMPUS/Buidling/' + this._devices[j].deviceName,
-    //       augCriteria
-    //     };
-    //   }
-    //
-    //   jsonObh[this._devices[j].deviceName] = {
-    //     [this._devices[j].deviceName]: {
-    //       curtail: {
-    //         device_topic: 'CAMPUS/Buidling/' + this._devices[j].deviceName,
-    //         obj,
-    //         augjson
-    //       }
-    //     }
-    //   };
-    //
-    // }
-
     let cal = JSON.stringify(jsonObh, null, 4).replace('\"obj\": {', '').replace('\"augjson\": {}', '');
-    // this._criteriaCalculation = cal;
-    // if (this._showAugmentSection) {
-    //   return cal.replace('\"augjson\": {', '').substring(0, cal.length - 2);
-    // }
-    // cal = cal.substring(0, cal.length - 1);
-    //
-    // this._result = this._result + cal;
-
-    // cal = '';
-    // jsonObh = {};
-    //
-    // augjson = {};
-    // augCriteria = {};
 
     console.log(this._result);
 

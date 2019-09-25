@@ -60,19 +60,29 @@
                 </mat-form-field>
 
 
-                <a *ngIf="!showAdvanceOption" href="#" (click)="advanceOption()" style="color: #1BA781">
+                <a *ngIf="!this.ilc.showAdvanceOption" href="#" (click)="advanceOption()" style="color: #1BA781">
                   <i class="material-icons float-left">add</i> Advance Options
                 </a>
 
-                <div *ngIf="showAdvanceOption">
+                <div *ngIf="this.ilc.showAdvanceOption">
                   <mat-form-field style="width: 100%" class="example-full-width">
                     <input matInput placeholder="Demand Formula (Optional)"
                            [(ngModel)]="demandFormula"></mat-form-field>
                   <ul class="list-unstyled">
                     <li *ngFor="let i of demandformulaAgrsArr; let index = index;trackBy: trackByIndex;">
-                      <mat-form-field style="width: 100%" class="example-full-width">
-                        <input matInput placeholder="Demand Formula Arguments (Optional)"
-                               [(ngModel)]="demandformulaAgrsArr[index]"></mat-form-field>
+
+                      <mat-form-field style="width: 100%">
+                      <mat-label>Demand Formula Arguments (Optional)</mat-label>
+                      <mat-select [(ngModel)]=demandformulaAgrsArr[index]>
+                        <div *ngFor="let point of points">
+                          <mat-option value="{{point}}">{{point}}</mat-option>
+                        </div>
+                      </mat-select>
+                      </mat-form-field>
+
+<!--                      <mat-form-field style="width: 100%" class="example-full-width">-->
+<!--                        <input matInput placeholder="Demand Formula Arguments (Optional)"-->
+<!--                               [(ngModel)]="demandformulaAgrsArr[index]"></mat-form-field>-->
                     </li>
                   </ul>
                   <a href="#" id="addparam" (click)="addDemandFormula()" class="float-left" style="color: #1BA781">
@@ -97,19 +107,19 @@
 
         <div class="div-block rounded">
           <mat-form-field style="width: 100%" class="example-full-width">
-            <input matInput placeholder="Demand Limit"
+            <input  matInput placeholder="Demand Limit"
                    [(ngModel)]="demandLimit"></mat-form-field>
           <mat-form-field style="width: 100%" class="example-full-width">
-            <input matInput placeholder="Curtailment Time"
+            <input matInput type="number" placeholder="Curtailment Time"
                    [(ngModel)]="curtailmentTime"></mat-form-field>
           <mat-form-field style="width: 100%" class="example-full-width">
-            <input matInput placeholder="Curtailment Confirm"
+            <input matInput type="number" placeholder="Curtailment Confirm"
                    [(ngModel)]="curtailmentConfirm"></mat-form-field>
           <mat-form-field style="width: 100%" class="example-full-width">
-            <input matInput placeholder="Curtailment Break"
+            <input matInput type="number" placeholder="Curtailment Break"
                    [(ngModel)]="curtailmentBreak"></mat-form-field>
           <mat-form-field style="width: 100%" class="example-full-width">
-            <input matInput placeholder="Building Power Window (Average)"
+            <input matInput type="number" placeholder="Building Power Window (Average)"
                    [(ngModel)]="buildingPowerWindow"></mat-form-field>
           <input class="check-input" type="checkbox" [(ngModel)]="staggerRelease">Stagger release<br>
           <input class="check-input" type="checkbox" [(ngModel)]="staggerOfftime">Stagger Off time<br>

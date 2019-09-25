@@ -3,12 +3,12 @@
   width: 50%;
 }
 
-button{
+button {
   background-color: #0C9A6F;
   color: white;
 }
 
-button:hover{
+button:hover {
   background-color: #B3DAF2;
   color: black;
 }
@@ -20,9 +20,11 @@ button:hover{
 /*  color: red;*/
 /*}*/
 
-::ng-deep .mat-accent .mat-slider-thumb, .mat-accent .mat-slider-thumb-label, .mat-accent .mat-slider-track-fill {
-  border-color: red;
-}
+/*::ng-deep .mat-accent .mat-slider-thumb, .mat-accent .mat-slider-thumb-label, .mat-accent .mat-slider-track-fill {*/
+/*  border-color: red;*/
+/*}*/
+
+
 /*::ng-deep .mat-accent .mat-slider-thumb-label-text {*/
 /*  color: blue;*/
 /*}*/
@@ -44,29 +46,29 @@ button:hover{
 }
 
 
-.col-sm{
+.col-sm {
   padding-left: 2%;
   padding-right: 2%;
 }
 
-.row{
+.row {
   margin-left: 0;
   margin-right: 0;
 }
 
-.container{
+.container {
   width: 100%;
   max-width: none;
   padding: 0;
 }
 
-.sub-collapse-label{
+.sub-collapse-label {
   padding-left: 2%;
   font-size: 17px;
   color: white;
 }
 
-h5{
+h5 {
   color: white;
 }
 
@@ -85,14 +87,14 @@ h5{
   font-size: 20px;
 }
 
-.sub-collapse-division-label{
+.sub-collapse-division-label {
   width: 100%;
   background-color: #003114;
   color: white;
   height: 30px;
 }
 
-a{
+a {
   color: white;
 }
 

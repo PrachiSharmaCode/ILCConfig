@@ -2,8 +2,8 @@ export class FormulaCriteriaModel {
 
   private _argument: string[] = [];
   private _operation: string;
-  private _minimum: number;
-  private _maximun: number;
+  private minimum: number;
+  private maximum: number;
   private _formulaCalculate: any;
   // private formula: {
   //   argument: string[],
@@ -31,8 +31,8 @@ export class FormulaCriteriaModel {
 
   print() {
     console.log(this._argument);
-    console.log(this._maximun);
-    console.log(this._minimum);
+    console.log(this.maximum);
+    console.log(this.minimum);
     console.log(this._operation);
   }
 
@@ -44,20 +44,20 @@ export class FormulaCriteriaModel {
     this._operation = value;
   }
 
-  get minimum(): number {
-    return this._minimum;
+  get mini(): number {
+    return this.minimum;
   }
 
-  set minimum(value: number) {
-    this._minimum = value;
+  set mini(value: number) {
+    this.minimum = value;
   }
 
   get maximun(): number {
-    return this._maximun;
+    return this.maximum;
   }
 
   set maximun(value: number) {
-    this._maximun = value;
+    this.maximum = value;
   }
 
   get formulaCalculate(): any {
@@ -65,8 +65,8 @@ export class FormulaCriteriaModel {
       operation: this._operation,
       operation_type: 'formula',
       operation_args: this._argument,
-      minimum: this._minimum,
-      maximum: this._maximun
+      minimum: this.minimum,
+      maximum: this.maximum
     };
     this._formulaCalculate = obj;
     return this._formulaCalculate;

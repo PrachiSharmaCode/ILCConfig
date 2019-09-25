@@ -2,14 +2,14 @@ export class HistoryCriteriaModel {
   
   private _comparisonType: string;
   private _historyPointName: string;
-  private _previousTime: string;
+  private _previousTime: number;
   private _historyMaximum: number;
   private _historyMinimum: number;
   
   private _history: {
     comparisonType: string,
     historyPointName: string,
-    previousTime: string,
+    previousTime: number,
     historyMaximum: number,
     historyMinimum: number,
   };
@@ -31,11 +31,11 @@ export class HistoryCriteriaModel {
     this._historyPointName = value;
   }
 
-  get previousTime(): string {
+  get previousTime(): number {
     return this._previousTime;
   }
 
-  set previousTime(value: string) {
+  set previousTime(value: number) {
     this._previousTime = value;
   }
 
@@ -55,19 +55,11 @@ export class HistoryCriteriaModel {
     this._historyMinimum = value;
   }
 
-  get history(): { comparisonType: string; historyPointName: string; previousTime: string; historyMaximum: number; historyMinimum: number } {
+  get history(): { comparisonType: string; historyPointName: string; previousTime: number; historyMaximum: number; historyMinimum: number } {
     return this._history;
   }
 
-  set history(value: { comparisonType: string; historyPointName: string; previousTime: string; historyMaximum: number; historyMinimum: number }) {
+  set history(value: { comparisonType: string; historyPointName: string; previousTime: number; historyMaximum: number; historyMinimum: number }) {
     this._history = value;
-  }
-
-  print() {
-    console.log(this._comparisonType);
-    console.log(this._historyMaximum);
-    console.log(this._historyMinimum);
-    console.log(this._historyPointName);
-    console.log(this._previousTime);
   }
 }

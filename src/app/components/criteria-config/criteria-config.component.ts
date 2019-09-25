@@ -71,8 +71,8 @@ export class CriteriaConfigComponent implements OnInit {
 
   status: {
     pointName: string,
-    onValue: string,
-    OffValue: string
+    onValue: number,
+    OffValue: number
   }[] = [];
 
 
@@ -91,7 +91,7 @@ export class CriteriaConfigComponent implements OnInit {
   history: {
     comparisonType: string,
     historyPointName: string,
-    previousTime: string,
+    previousTime: number,
     maximum: number,
     minimum: number,
   };
@@ -181,8 +181,7 @@ export class CriteriaConfigComponent implements OnInit {
   addAugmentSexction(k, index) {
     if (!this.criteriaModelList[k].showAugmentSection[index]) {
       this.criteriaModelList[k].showAugmentSection[index] = true;
-      // this.criteriaModelList[k].updateAugmentSection();
-      // this.criteriaModelList[k].augmentFormulaModel = this.criteriaModelList[k].formulaModel;
+      this.criteriaModelList[k].updateaugmentList(index);
       this.criteriaModelList[k].updateAugmentFormula();
     } else {
       this.criteriaModelList[k].showAugmentSection[index] = false;
@@ -266,10 +265,7 @@ export class CriteriaConfigComponent implements OnInit {
     this.criteriaModelList[k].updateDevceList(this.devices);
     this.ilc.updateILCDevices(this.devices);
     this.criteriaModelList[k].stageName = this.stageName;
-    this.criteriaModelList[k].campus = this.campus;
-    this.criteriaModelList[k].building = this.building;
-
-    this.criteriaModelList[k].setFinalCalulation(this.criteriaList, k);
+    console.log(this.criteriaModelList[k].setFinalCalulation(this.criteriaList, k));
   }
 
 

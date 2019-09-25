@@ -1,6 +1,5 @@
 <nav class="navbar navbar-expand-lg">
-<!--  <div *ngIf="!showNavButtons" class="centerNavBrand">-->
-<!--    <a class="navbar-brand" href="#" style="color: white">ILC Configuration</a></div>-->
+
   <a class="navbar-brand" href="#" style="color: white">ILC Configuration</a>
 
   <button *ngIf="showNavButtons" class="navbar-toggler float-left" type="button" data-toggle="collapse"
@@ -40,13 +39,6 @@
     </div>
   </div>
 
-<!--  <input type="file" [(ngModel)]="masterFile" (change)="getMasterDriver($event)" #file hidden>-->
-<!--  <button *ngIf="homeOpen" class="btn btn-outline-dark " (click)="file.click(); getMasterDriver($event)">-->
-<!--    &nbsp; Upload Master Driver-->
-<!--    <i class="material-icons float-left">-->
-<!--      publish-->
-<!--    </i>-->
-<!--  </button>-->
 </nav>
 
 <div *ngIf="homeOpen" align="center">
@@ -54,176 +46,33 @@
   <h5></h5>
   <hr>
   <h5>ILC Configuration</h5>
-  <p>Top Level Configuration. Specify campus, building and  building
-    parameters that will define volttron installation.
+  <p>Top Level Configuration. Specify campus, building and  building level
+    parameters.
   <p>
 
   <hr>
   <h5>Pairwise</h5>
-  <p>Name and define curtailment criteria.
+  <p>Name and define control criteria.
     Declare relative priority of control criteria
   <p>
 
   <hr>
   <h5>Criteria Configuration</h5>
-  <p>Declare Devices. Define how control criteria are evaluated for each device</p>
+  <p>Select Controllable devices. Define how control criteria are evaluated for each device</p>
   <hr>
-  <h5>Curtailment Configuration</h5>
-  <p>Define how device are evaluated for curtailment availability.Specify
-    which actions to apply in order in order to curtail devices.</p>
+  <h5>Control Configuration</h5>
+  <p>Define how device are evaluated to determine availability to control.Specify
+    actions for each devices.</p>
   <hr>
-<!--  <h5>Open Directory</h5>-->
-<!--  <p>Edit the configuration files located in a specific directory.</p>-->
-<!--  <hr>-->
-<!--  <h5>Documentation</h5>-->
-<!--  <p>read the current version of help and documentation available</p>-->
-<!--  <hr>-->
 
   <input type="file" [(ngModel)]="masterFile" (change)="getMasterDriver($event)" #file hidden>
   <button style="margin-top: 1%" class="btn btn-outline-dark btn-lg " (click)="file.click(); getMasterDriver($event)">
-    &nbsp; Upload Master Driver
+    &nbsp; Upload Master Driver Configuration Store
     <i class="material-icons float-left">
       publish
     </i>
   </button>
 </div>
-
-
-<!--<div *ngIf="homeOpen" class="container">-->
-<!--  <div class="row">-->
-<!--    <div align="center" class="col-sm col-padding">-->
-<!--      <input type="file" [(ngModel)]="masterFile" (change)="getMasterDriver($event)" #file hidden>-->
-<!--      <button class="btn btn-outline-dark btn-lg " (click)="file.click(); getMasterDriver($event)">-->
-<!--        &nbsp; Upload Master Driver-->
-<!--        <i class="material-icons float-left">-->
-<!--          publish-->
-<!--        </i>-->
-<!--      </button>-->
-<!--    </div>-->
-<!--    <div class="col" class="centeredContent">-->
-
-
-<!--      &lt;!&ndash;        <input type="file" [(ngModel)]="masterFile" (change)="getMasterDriver($event)" #file hidden>&ndash;&gt;-->
-<!--      &lt;!&ndash;        <button class="btn btn-outline-dark btn-lg " style="margin-bottom: 2%" (click)="file.click(); getMasterDriver($event)">&ndash;&gt;-->
-<!--      &lt;!&ndash;          &nbsp;  Upload Master Driver &nbsp;&ndash;&gt;-->
-<!--      &lt;!&ndash;          <i class="material-icons float-right">&ndash;&gt;-->
-<!--      &lt;!&ndash;            publish&ndash;&gt;-->
-<!--      &lt;!&ndash;          </i>&ndash;&gt;-->
-<!--      &lt;!&ndash;        </button>&ndash;&gt;-->
-
-<!--      &lt;!&ndash;      <div class="centeredContentInside"><h5>ILC Configuration</h5>&ndash;&gt;-->
-<!--      &lt;!&ndash;        <p>level Configuration. Specify campus, building and <br> building&ndash;&gt;-->
-<!--      &lt;!&ndash;          parameters that will define volttron installation.&ndash;&gt;-->
-<!--      &lt;!&ndash;        <p></div>&ndash;&gt;-->
-
-<!--      &lt;!&ndash;      <div class="centeredContentInside"><h5>Pairwise</h5>&ndash;&gt;-->
-<!--      &lt;!&ndash;        <p>Name and define curtailment criteria. <br>&ndash;&gt;-->
-<!--      &lt;!&ndash;          Declare relative priority of curtailmenr criteria&ndash;&gt;-->
-<!--      &lt;!&ndash;        <p></div>&ndash;&gt;-->
-
-<!--      <hr>-->
-<!--      <h5>ILC Configuration</h5>-->
-<!--      <p>level Configuration. Specify campus, building and <br> building-->
-<!--        parameters that will define volttron installation.-->
-<!--      <p>-->
-
-<!--      <hr>-->
-<!--      <h5>Pairwise</h5>-->
-<!--      <p>Name and define curtailment criteria. <br>-->
-<!--        Declare relative priority of curtailmenr criteria-->
-<!--      <p>-->
-
-<!--      <hr>-->
-<!--      <h5>Criteria Configuration</h5>-->
-<!--      <p>Delare Device. Define how curtailment criteria are <br> evaluated for each stage of each device</p>-->
-<!--      <hr>-->
-<!--      <h5>Curtailment Configuration</h5>-->
-<!--      <p>Define how device are evaluated for curtailment <br> availability.Specify-->
-<!--        which actions to apply in order in order to curtail devices.</p>-->
-<!--      <hr>-->
-<!--      <h5>Open Directory</h5>-->
-<!--      <p>Edit the configuration files located in a specific directory.</p>-->
-<!--      <hr>-->
-<!--      <h5>Documentation</h5>-->
-<!--      <p>read the current version of help and documentation available</p>-->
-<!--    </div>-->
-
-<!--  </div>-->
-<!--</div>-->
-
-<!--<div class="container">-->
-<!--  <div class="row ">-->
-<!--    &lt;!&ndash;    <div class="col-4">&ndash;&gt;-->
-<!--    &lt;!&ndash;      <div class="sidenav" *ngIf="homeOpen">&ndash;&gt;-->
-<!--    &lt;!&ndash;        <div align="center" class="centered" style="text-align: center;">&ndash;&gt;-->
-<!--    &lt;!&ndash;          <ul class="list-group" style="list-style-type:none;">&ndash;&gt;-->
-<!--    &lt;!&ndash;            <li>&ndash;&gt;-->
-<!--    &lt;!&ndash;              <button id="masterDriver" class="nav-link btn  button-size"&ndash;&gt;-->
-<!--    &lt;!&ndash;                      (click)="openMasterDriver(); activeSideBarButton($event)">Master Driver&ndash;&gt;-->
-<!--    &lt;!&ndash;              </button>&ndash;&gt;-->
-<!--    &lt;!&ndash;            </li>&ndash;&gt;-->
-<!--    &lt;!&ndash;            <br/>&ndash;&gt;-->
-<!--    &lt;!&ndash;            <li>&ndash;&gt;-->
-<!--    &lt;!&ndash;              <button id="ilcCongifBar" class="nav-link btn button-size"&ndash;&gt;-->
-<!--    &lt;!&ndash;                      (click)="openILC(); activeSideBarButton($event)">ILC Configuration&ndash;&gt;-->
-<!--    &lt;!&ndash;              </button>&ndash;&gt;-->
-<!--    &lt;!&ndash;            </li>&ndash;&gt;-->
-<!--    &lt;!&ndash;            <br/>&ndash;&gt;-->
-<!--    &lt;!&ndash;            <li>&ndash;&gt;-->
-<!--    &lt;!&ndash;              <button id="documentation" class="nav-link btn button-size activeBar"&ndash;&gt;-->
-<!--    &lt;!&ndash;                      (click)="openDocumentation(); activeSideBarButton($event)">Documentation&ndash;&gt;-->
-<!--    &lt;!&ndash;              </button>&ndash;&gt;-->
-<!--    &lt;!&ndash;            </li>&ndash;&gt;-->
-<!--    &lt;!&ndash;          </ul>&ndash;&gt;-->
-<!--    &lt;!&ndash;        </div>&ndash;&gt;-->
-<!--    &lt;!&ndash;      </div>&ndash;&gt;-->
-<!--    &lt;!&ndash;    </div>&ndash;&gt;-->
-
-<!--    <div class="col-sm col-padding" style="border: groove white">-->
-<!--      <div *ngIf="homeOpen && showILC" class="centeredButtonContent">-->
-<!--        <input type="file" [(ngModel)]="masterFile" (change)="getMasterDriver($event)" #file hidden>-->
-<!--        <button class="btn btn-outline-dark btn-lg btn-block" (click)="file.click(); getMasterDriver($event)">-->
-<!--          Upload Master Driver-->
-<!--        </button>-->
-<!--        <hr>-->
-<!--        <button id="documentation" class="btn btn-outline-dark btn-lg btn-block"-->
-<!--                (click)="openDocumentation(); activeSideBarButton($event)">Documentation-->
-<!--        </button>-->
-<!--      </div>-->
-<!--    </div>-->
-
-<!--    <div class="col-sm col-padding">-->
-<!--      <div *ngIf="homeOpen" class="centeredContent">-->
-
-
-<!--        <h5>ILC Configuration</h5>-->
-<!--        <p>level Configuration. Specify campus, building and <br> building-->
-<!--          parameters that will define volttron installation.-->
-<!--        <p>-->
-
-<!--        <h5>Pairwise</h5>-->
-<!--        <p>Name and define curtailment criteria. <br>-->
-<!--          Declare relative priority of curtailmenr criteria-->
-<!--        <p>-->
-
-<!--        <h5>Criteria Configuration</h5>-->
-<!--        <p>Delare Device. Define how curtailment criteria are <br> evaluated for each stage of each device</p>-->
-
-<!--        <h5>Curtailment Configuration</h5>-->
-<!--        <p>Define how device are evaluated for curtailment <br> availability.Specify-->
-<!--          which actions to apply in order in order to curtail devices.</p>-->
-
-<!--        <h5>Open Directory</h5>-->
-<!--        <p>Edit the configuration files located in a specific directory.</p>-->
-
-<!--        <h5>Documentation</h5>-->
-<!--        <p>read the current version of help and documentation available</p>-->
-<!--      </div>-->
-<!--    </div>-->
-
-<!--  </div>-->
-<!--</div>-->
-
 
 <div *ngIf="ilcCongifOpen">
   <app-ilcconfig [ilc]="ilc" [mainModel]="mainModel"></app-ilcconfig>

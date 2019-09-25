@@ -17,12 +17,12 @@ export class ILCConfigComponent implements OnInit {
   building: string;
   agentId: string;
   demandLimit: string;
-  curtailmentTime: string;
-  curtailmentConfirm: string;
-  curtailmentBreak: string;
-  buildingPowerWindow: string;
-  staggerRelease: string;
-  staggerOfftime: string;
+  curtailmentTime: number;
+  curtailmentConfirm: number;
+  curtailmentBreak: number;
+  buildingPowerWindow: number;
+  staggerRelease: boolean;
+  staggerOfftime: boolean;
   device: string;
   point: string;
   points: string[] = [];
@@ -64,7 +64,7 @@ export class ILCConfigComponent implements OnInit {
 
 
   advanceOption() {
-    this.showAdvanceOption = true;
+    this.ilc.showAdvanceOption = true;
   }
 
   closeAdvenceOption() {
@@ -83,10 +83,10 @@ export class ILCConfigComponent implements OnInit {
 
   onRefeshClick() {
     if (this.staggerOfftime === undefined) {
-      this.staggerOfftime = 'false';
+      this.staggerOfftime = false;
     }
     if (this.staggerRelease === undefined) {
-      this.staggerRelease = 'false';
+      this.staggerRelease = false;
     }
     this.ilc.setILCConfig(this.campus, this.building, this.device, this.point, this.demandFormula,
       this.demandformulaAgrsArr, this.agentId, this.demandLimit, this.curtailmentTime,

@@ -35,6 +35,12 @@ export class PairwiseComponent implements OnInit {
   constructor() {
   }
 
+
+  showAugmentSection(i) {
+    this.pairwiseList[i].showAugmentSection[i] = true;
+    this.pairwiseList[i].augmentSliderValue = this.pairwiseList[i].sliderValue;
+  }
+
   remainingList(i: number, num: number): string[] {
     const criteriaList: string[] = [];
     for (let j = num + 1; j < this.pairwiseCriteriaList[i].length; j++) {
@@ -94,6 +100,44 @@ export class PairwiseComponent implements OnInit {
   }
 
 
+  updateAugmentSliderValue(changeEvent, i, index, j) {
+    if (this.pairwiseList[j].augmentSliderValue[index] === undefined) {
+      this.pairwiseList[j].augmentSliderValue[index] = [];
+    }
+    if (changeEvent.value > 10) {
+      this.pairwiseList[j].augmentSliderValue[index][i] = changeEvent.value;
+    } else {
+      if (changeEvent.value === 10) {
+        this.pairwiseList[j].augmentSliderValue[index][i] = changeEvent.value - 8;
+      }
+      if (changeEvent.value === 9) {
+        this.pairwiseList[j].augmentSliderValue[index][i] = changeEvent.value - 6;
+      }
+      if (changeEvent.value === 8) {
+        this.pairwiseList[j].augmentSliderValue[index][i] = changeEvent.value - 4;
+      }
+      if (changeEvent.value === 7) {
+        this.pairwiseList[j].augmentSliderValue[index][i] = changeEvent.value - 2;
+      }
+      if (changeEvent.value === 6) {
+        this.pairwiseList[j].augmentSliderValue[index][i] = changeEvent.value;
+      }
+      if (changeEvent.value === 5) {
+        this.pairwiseList[j].augmentSliderValue[index][i] = changeEvent.value + 2;
+      }
+      if (changeEvent.value === 4) {
+        this.pairwiseList[j].augmentSliderValue[index][i] = changeEvent.value + 4;
+      }
+      if (changeEvent.value === 3) {
+        this.pairwiseList[j].augmentSliderValue[index][i] = changeEvent.value + 6;
+      }
+      if (changeEvent.value === 2) {
+        this.pairwiseList[j].augmentSliderValue[index][i] = changeEvent.value + 8;
+      }
+    }
+  }
+
+
   updateSliderValue(changeEvent, i, index, j) {
     if (this.pairwiseList[j].sliderValue[index] === undefined) {
       this.pairwiseList[j].sliderValue[index] = [];
@@ -144,7 +188,9 @@ export class PairwiseComponent implements OnInit {
   updateSliderColor(critera, main, val) {
     console.log(val);
     let slider = document.getElementById(critera + '%' + main);
+    let ring = slider.getElementsByClassName('mat-slider-focus-ring');
 
+    console.log(ring);
     if (val.value > 11) {
       slider.style.color = 'green';
     }

@@ -11,13 +11,14 @@ export class ILCCongig {
   private _demandFormulaArgs: string[];
   private _agentId: string;
   private _demandLimit: string;
-  private _curtailmentTime: string;
-  private _curtailmentConfirm: string;
-  private _curtailmentBreak: string;
-  private _buildingPowerWindow: string;
-  private _staggerRelease: string;
-  private _staggerOfftime: string;
+  private _curtailmentTime: number;
+  private _curtailmentConfirm: number;
+  private _curtailmentBreak: number;
+  private _buildingPowerWindow: number;
+  private _staggerRelease: boolean;
+  private _staggerOfftime: boolean;
   private string: any;
+  private _showAdvanceOption = false;
   private _devicePoint: string[][] = [];
   private _devicesMasterList: {
     deviceTopic: string,
@@ -54,6 +55,15 @@ export class ILCCongig {
 
   /*****GETTERS & SETTER*****/
 
+  get showAdvanceOption(): boolean {
+    return this._showAdvanceOption;
+  }
+
+  set showAdvanceOption(value: boolean) {
+    this._showAdvanceOption = value;
+  }
+
+
   get devices(): { deviceName: string; devicePoints: string[] }[] {
     return this._devices;
   }
@@ -62,7 +72,7 @@ export class ILCCongig {
     this._devices = value;
   }
 
-  updateILCDevices(value: { deviceName: string; devicePoints: string[]} []){
+  updateILCDevices(value: { deviceName: string; devicePoints: string[] } []) {
     this._devices = value;
   }
 
@@ -102,8 +112,7 @@ export class ILCCongig {
           i++;
         }
         end = i;
-        const str = this.devicesMasterList[devicesLength].deviceTopic.
-        substring(end, this.devicesMasterList[devicesLength].deviceTopic.length);
+        const str = this.devicesMasterList[devicesLength].deviceTopic.substring(end, this.devicesMasterList[devicesLength].deviceTopic.length);
         const tempPoint: string[] = [];
         for (let j = this.devicesMasterList[devicesLength].devicePoints.length - 1; j >= 0; j--) {
           if (this.devicesMasterList[devicesLength].devicePoints[j] !== undefined) {
@@ -236,51 +245,51 @@ export class ILCCongig {
     this._demandLimit = value;
   }
 
-  get curtailmentTime(): string {
+  get curtailmentTime(): number {
     return this._curtailmentTime;
   }
 
-  set curtailmentTime(value: string) {
+  set curtailmentTime(value: number) {
     this._curtailmentTime = value;
   }
 
-  get curtailmentConfirm(): string {
+  get curtailmentConfirm(): number {
     return this._curtailmentConfirm;
   }
 
-  set curtailmentConfirm(value: string) {
+  set curtailmentConfirm(value: number) {
     this._curtailmentConfirm = value;
   }
 
-  get curtailmentBreak(): string {
+  get curtailmentBreak(): number {
     return this._curtailmentBreak;
   }
 
-  set curtailmentBreak(value: string) {
+  set curtailmentBreak(value: number) {
     this._curtailmentBreak = value;
   }
 
-  get buildingPowerWindow(): string {
+  get buildingPowerWindow(): number {
     return this._buildingPowerWindow;
   }
 
-  set buildingPowerWindow(value: string) {
+  set buildingPowerWindow(value: number) {
     this._buildingPowerWindow = value;
   }
 
-  get staggerRelease(): string {
+  get staggerRelease(): boolean {
     return this._staggerRelease;
   }
 
-  set staggerRelease(value: string) {
+  set staggerRelease(value: boolean) {
     this._staggerRelease = value;
   }
 
-  get staggerOfftime(): string {
+  get staggerOfftime(): boolean {
     return this._staggerOfftime;
   }
 
-  set staggerOfftime(value: string) {
+  set staggerOfftime(value: boolean) {
     this._staggerOfftime = value;
   }
 
@@ -335,10 +344,10 @@ export class ILCCongig {
       power_meter: {
         device: this._device,
         point: this._point,
-        demand_formula: {
-          operation: 'Abs' + [this._demandFormula],
-          operation_args: this._demandFormulaArgs
-        }
+        // demand_formula: {
+        //   operation: 'Abs' + [this._demandFormula],
+        //   operation_args: this._demandFormulaArgs
+        // }
       },
       agent_id: this._agentId,
       demand_limit: this._demandLimit,
@@ -350,6 +359,16 @@ export class ILCCongig {
       stagger_off_time: this._staggerOfftime,
       cluster: this._cluster,
     };
+
+
+    if (this._showAdvanceOption) {
+      const power = 'power_meter';
+      const demand = 'demand_formula';
+      obj[power][demand] = {
+        operation: [this._demandFormula],
+        operation_args: this._demandFormulaArgs
+      };
+    }
     this._finalCalcualtion = JSON.stringify(obj, null, 4);
     return this._finalCalcualtion;
   }

@@ -20,10 +20,22 @@ export class CurtailmentConfigComponent implements OnInit {
   clusterList: {
     cluster_name: string;
     device_criteria_file: string;
-    device_curtailment_file: string;
+    device_control_file: string;
     pairwise_criteria_file: string;
     cluster_priority: string
   }[];
+
+  _augment: {
+    condition: string,
+    device_status_args: string
+  }[] = [];
+
+  _augmentSetting: {
+    point: string,
+    control_method: string,
+    // @ts-ignore
+    [this.curtailmentSetting.control_method]: string;
+  }[] = [];
 
   deviceAndPoints: {
     deviceName: string,
@@ -43,18 +55,18 @@ export class CurtailmentConfigComponent implements OnInit {
   finalCalculation: string;
 
   curtailmentList: {
-    firstStageCooling: {
-      deviceTopic: string,
-      deviceStatus: {
+    device_topic: string,
+    device_status: {
+      curtail: {
         condition: string,
-        deviceStageArgs: string
-      }
+        device_status_args: string
+      },
     },
     curtailmentSetting: {
       point: string,
-      curtailmentMethod: string,
+      control_method: string,
       // @ts-ignore
-      [this.curtailmentList.curtailmentSetting.curtailmentMethod]: string;
+      [this.curtailmentList.curtailmentSetting.control_method]: string;
     }
   }[] = [];
 
@@ -83,10 +95,7 @@ export class CurtailmentConfigComponent implements OnInit {
       }
       this.devices.push(temp);
 
-
       console.log(this.devices);
-
-
     } else {
       this.deviceAndPoints[d].checked = false;
       let count = 0;
@@ -98,8 +107,46 @@ export class CurtailmentConfigComponent implements OnInit {
           break;
         }
       }
-
     }
+  }
+
+  showAugmentSection(i, index) {
+    this.curtailmentModelList[i].showAugmentSection[i] = true;
+    // console.log(this.curtailmentModelList[i].showAugmentSection[i]);
+    if (this.curtailmentModelList[i].curtailmentList[index].device_status.augment === undefined) {
+      this.curtailmentModelList[i].curtailmentList[index].device_status.augment = {
+        device_status_args: '',
+        condition: ''
+      };
+    }
+    this.curtailmentModelList[i].curtailmentList[index].device_status.augment.condition =
+      this.curtailmentModelList[i].curtailmentList[index].device_status.curtail.condition;
+    this.curtailmentModelList[i].curtailmentList[index].device_status.augment.device_status_args =
+      this.curtailmentModelList[i].curtailmentList[index].device_status.curtail.device_status_args;
+  }
+
+  showAugmentSettingSection(i, index) {
+    this.curtailmentModelList[i].showAugmentSeetingSection[i] = true;
+    console.log(i + this.curtailmentModelList[i].showAugmentSeetingSection[i]);
+    if (this.curtailmentModelList[i].curtailmentList[index].augment_setting === undefined) {
+      this.curtailmentModelList[i].curtailmentList[index].augment_setting = {
+        control_method: '',
+        point: '',
+        offset: '',
+        equation: '',
+        value: ''
+      };
+    }
+    this.curtailmentModelList[i].curtailmentList[index].augment_setting.control_method =
+      this.curtailmentModelList[i].curtailmentList[index].curtailment_setting.control_method;
+    this.curtailmentModelList[i].curtailmentList[index].augment_setting.point =
+      this.curtailmentModelList[i].curtailmentList[index].curtailment_setting.point;
+    this.curtailmentModelList[i].curtailmentList[index].augment_setting.offset =
+      this.curtailmentModelList[i].curtailmentList[index].curtailment_setting.offset;
+    this.curtailmentModelList[i].curtailmentList[index].augment_setting.equation =
+      this.curtailmentModelList[i].curtailmentList[index].curtailment_setting.equation;
+    this.curtailmentModelList[i].curtailmentList[index].augment_setting.value =
+      this.curtailmentModelList[i].curtailmentList[index].curtailment_setting.value;
   }
 
   onRefreshButton(i) {
@@ -112,7 +159,7 @@ export class CurtailmentConfigComponent implements OnInit {
   saveCurtailmentCalculation(i) {
     const file = new Blob([this.curtailmentModelList[i].curtailmentCalculation],
       {type: 'json'});
-    FileSaver.saveAs(file, this.clusterList[i].device_curtailment_file);
+    FileSaver.saveAs(file, this.clusterList[i].device_control_file);
   }
 
   ngOnInit() {
@@ -125,7 +172,6 @@ export class CurtailmentConfigComponent implements OnInit {
     this.campus = this.ilc.campus;
     this.building = this.ilc.building;
     for (let j = 0; j < this.curtailmentModelList.length; j++) {
-      // this.devices = this.curtailmentModelList[j].devices;
       if (this.curtailmentModelList[j].curtailmentList === undefined) {
         this.curtailmentModelList[j].curtailmentList = [];
       }
@@ -133,16 +179,24 @@ export class CurtailmentConfigComponent implements OnInit {
         if (this.curtailmentModelList[j].curtailmentList[i] === undefined) {
           this.curtailmentModelList[j].curtailmentList[i] = [];
           this.curtailmentModelList[j].curtailmentList[i] = {
-            firstStageCooling: {
-              deviceTopic: this.campus + '/' + this.building + '/' + this.devices[i].deviceName,
-              deviceStatus: {
+            device_topic: this.campus + '/' + this.building + '/' + this.devices[i].deviceName,
+            device_status: {
+              curtail: {
                 condition: '',
-                deviceStageArgs: ''
-              }
+                device_status_args: ''
+              },
+              augment: {
+                condition: '',
+                device_status_args: ''
+              },
             },
-            curtailmentSetting: {
+            curtailment_setting: {
               point: '',
-              curtailmentMethod: '',
+              control_method: '',
+            },
+            augment_setting: {
+              point: '',
+              control_method: '',
             }
           };
         }

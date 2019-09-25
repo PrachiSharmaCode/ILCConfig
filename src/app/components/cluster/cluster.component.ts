@@ -18,7 +18,7 @@ export class ClusterComponent implements OnInit {
   clusterList: {
     cluster_name: string;
     device_criteria_file: string;
-    device_curtailment_file: string;
+    device_control_file: string;
     pairwise_criteria_file: string;
     cluster_priority: string
   }[];
@@ -39,12 +39,12 @@ export class ClusterComponent implements OnInit {
       cluster_priority: '',
       pairwise_criteria_file: '',
       device_criteria_file: '',
-      device_curtailment_file: ''
+      device_control_file: ''
     });
     this.ilc.updateClusterList(this.clusterList);
     this.mainModel.addPairwise(new PairwiseModel());
     this.mainModel.addCurtailment(new CurtailmentModel());
-    this.mainModel.addCriteria(new CriteriaModel())
+    this.mainModel.addCriteria(new CriteriaModel());
     this.mainModel.addpairwiseCrteriaList(['zonetemperature-setpoint', 'stage',
       'history-zonetemperature', 'rated-power', 'room-type']);
     this.getCluster = false;

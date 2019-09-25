@@ -6,6 +6,26 @@ export class PairwiseModel {
   private _pairwiseCriteria: Map<any, any>;
   private _generated: boolean;
   private _sliderValue: number[][] = [];
+  private _augmentSliderValue: number[][] = [];
+  private _showAugmentSection: boolean[] = [];
+  private curtail = 'curtail';
+  private _augment = 'augment';
+
+  get augmentSliderValue(): number[][] {
+    return this._augmentSliderValue;
+  }
+
+  set augmentSliderValue(value: number[][]) {
+    this._augmentSliderValue = value;
+  }
+
+  get showAugmentSection(): boolean[] {
+    return this._showAugmentSection;
+  }
+
+  set showAugmentSection(value: boolean[]) {
+    this._showAugmentSection = value;
+  }
 
   constructor(pairwiseName?: string) {
     this._pairwiseName = pairwiseName;
@@ -55,9 +75,10 @@ export class PairwiseModel {
   setFinalCalculation(i) {
     console.log(this._sliderValue);
     const jsonObh = {};
+    jsonObh[this.curtail] = {}
     let count = 1;
     for (let j = 0; j < this._pairwiseCriteriaList[i].length; j++) {
-      jsonObh[this._pairwiseCriteriaList[i][j]] = {};
+      jsonObh[this.curtail][this._pairwiseCriteriaList[i][j]] = {};
       for (let k = 0; k < this._sliderValue[j].length; k++) {
         if (this._sliderValue[j][k] === null || this._sliderValue[j][k] === undefined) {
           this._sliderValue[j][k] = 1;
@@ -68,9 +89,30 @@ export class PairwiseModel {
         } else {
           val = this._sliderValue[j][k];
         }
-        jsonObh[this._pairwiseCriteriaList[i][j]][this._pairwiseCriteriaList[i][k + count]] = val;
+        jsonObh[this.curtail][this._pairwiseCriteriaList[i][j]][this._pairwiseCriteriaList[i][k + count]] = val;
       }
       count++;
+    }
+
+    if(this.showAugmentSection[i]){
+      jsonObh[this._augment] = {}
+      let count = 1;
+      for (let j = 0; j < this._pairwiseCriteriaList[i].length; j++) {
+        jsonObh[this._augment][this._pairwiseCriteriaList[i][j]] = {};
+        for (let k = 0; k < this.augmentSliderValue[j].length; k++) {
+          if (this.augmentSliderValue[j][k] === null || this.augmentSliderValue[j][k] === undefined) {
+            this.augmentSliderValue[j][k] = 1;
+          }
+          let val = 1;
+          if (this.augmentSliderValue[j][k] > 10) {
+            val = 1 / this.augmentSliderValue[j][k];
+          } else {
+            val = this.augmentSliderValue[j][k];
+          }
+          jsonObh[this._augment][this._pairwiseCriteriaList[i][j]][this._pairwiseCriteriaList[i][k + count]] = val;
+        }
+        count++;
+      }
     }
     const cal = JSON.stringify(jsonObh, null, 4);
     this._pairwiaseCalculation = cal;
