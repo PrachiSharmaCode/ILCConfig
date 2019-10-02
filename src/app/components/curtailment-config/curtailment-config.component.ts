@@ -139,7 +139,7 @@ export class CurtailmentConfigComponent implements OnInit {
         offset: '',
         equation: '',
         value: '',
-        Load: '',
+        load: '',
       };
     }
     this.curtailmentModelList[i].curtailmentList[index].augment_setting.control_method =
