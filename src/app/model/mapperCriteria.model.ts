@@ -1,31 +1,44 @@
-export class MapperCriteriaModel{
+export class MapperCriteriaModel {
 
-  private _mapKey: string;
-  private _distName: string;
+  // tslint:disable-next-line:variable-name
+  private map_key: string;
+  // tslint:disable-next-line:variable-name
+  private dist_name: string;
+  // tslint:disable-next-line:variable-name
+  private operation_type = 'mapper';
+
   private _mapper: {
     mapKey: string,
     distName: string
   };
 
   print() {
-   console.log(this._distName);
-   console.log(this._mapKey);
+    console.log(this.dist_name);
+    console.log(this.map_key);
   }
 
-  get mapKey(): string {
-    return this._mapKey;
+  get getoperation_type(): string {
+    return this.operation_type;
   }
 
-  set mapKey(value: string) {
-    this._mapKey = value;
+  set setoperation_type(value: string) {
+    this.operation_type = value;
   }
 
-  get distName(): string {
-    return this._distName;
+  get getmap_key(): string {
+    return this.map_key;
   }
 
-  set distName(value: string) {
-    this._distName = value;
+  set setmap_key(value: string) {
+    this.map_key = value;
+  }
+
+  get getdist_name(): string {
+    return this.dist_name;
+  }
+
+  set setdist_name(value: string) {
+    this.dist_name = value;
   }
 
   get mapper(): { mapKey: string; distName: string } {

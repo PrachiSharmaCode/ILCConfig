@@ -136,10 +136,10 @@ export class CriteriaModel {
             this.augmentFormulaModel[i] = [];
           }
           this.augmentFormulaModel[i][j] = new FormulaCriteriaModel();
-          this.augmentFormulaModel[i][j].argument = this.formulaModel[i][j].argument;
+          this.augmentFormulaModel[i][j].setoperation_args = this.formulaModel[i][j].getoperation_args;
           this.augmentFormulaModel[i][j].maximun = this.formulaModel[i][j].maximun;
           this.augmentFormulaModel[i][j].mini = this.formulaModel[i][j].mini;
-          this.augmentFormulaModel[i][j].operation = this.formulaModel[i][j].operation;
+          this.augmentFormulaModel[i][j].setoperation = this.formulaModel[i][j].getoperation;
         }
 
 
@@ -153,9 +153,9 @@ export class CriteriaModel {
             this.augmentStatusModel[i] = [];
           }
           this.augmentStatusModel[i][j] = new StatusCriteriaModel();
-          this.augmentStatusModel[i][j].pointName = this.statusModel[i][j].pointName;
-          this.augmentStatusModel[i][j].offValue = this.statusModel[i][j].offValue;
-          this.augmentStatusModel[i][j].onValue = this.statusModel[i][j].onValue;
+          this.augmentStatusModel[i][j].setpointName = this.statusModel[i][j].getpointName;
+          this.augmentStatusModel[i][j].setoffValue = this.statusModel[i][j].getoffValue;
+          this.augmentStatusModel[i][j].setonValue = this.statusModel[i][j].getonValue;
         }
 
         if (this.mapperModel[i][j] === null) {
@@ -168,8 +168,8 @@ export class CriteriaModel {
             this.augmentMapperModel[i] = [];
           }
           this.augmentMapperModel[i][j] = new MapperCriteriaModel();
-          this.augmentMapperModel[i][j].distName = this.mapperModel[i][j].distName;
-          this.augmentMapperModel[i][j].mapKey = this.mapperModel[i][j].mapKey;
+          this.augmentMapperModel[i][j].setdist_name = this.mapperModel[i][j].getdist_name;
+          this.augmentMapperModel[i][j].setmap_key = this.mapperModel[i][j].getmap_key;
         }
 
         if (this.historyModel[i][j] === null) {
@@ -182,11 +182,11 @@ export class CriteriaModel {
             this.augmentHistoryModel[i] = [];
           }
           this.augmentHistoryModel[i][j] = new HistoryCriteriaModel();
-          this.augmentHistoryModel[i][j].historyMaximum = this.historyModel[i][j].historyMaximum;
-          this.augmentHistoryModel[i][j].historyMinimum = this.historyModel[i][j].historyMinimum;
-          this.augmentHistoryModel[i][j].comparisonType = this.historyModel[i][j].comparisonType;
-          this.augmentHistoryModel[i][j].historyPointName = this.historyModel[i][j].historyPointName;
-          this.augmentHistoryModel[i][j].previousTime = this.historyModel[i][j].previousTime;
+          this.augmentHistoryModel[i][j].sethistoryMaximum = this.historyModel[i][j].gethistoryMaximum;
+          this.augmentHistoryModel[i][j].sethistoryMinimum = this.historyModel[i][j].gethistoryMinimum;
+          this.augmentHistoryModel[i][j].setcomparisonType = this.historyModel[i][j].getcomparisonType;
+          this.augmentHistoryModel[i][j].sethistoryPointName = this.historyModel[i][j].gethistoryPointName;
+          this.augmentHistoryModel[i][j].setpreviousTime = this.historyModel[i][j].getpreviousTime;
         }
 
         if (this.constantModel[i][j] === null) {
@@ -200,7 +200,7 @@ export class CriteriaModel {
           }
           this.augmentConstantModel[i][j] = new ConstantCriteriaModel();
           this.augmentConstantModel[i][j].conatant = this.constantModel[i][j].conatant;
-          this.augmentConstantModel[i][j].value = this.constantModel[i][j].value;
+          this.augmentConstantModel[i][j].setvalue = this.constantModel[i][j].getvalue;
         }
       }
     }

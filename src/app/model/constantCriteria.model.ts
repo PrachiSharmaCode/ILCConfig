@@ -1,16 +1,27 @@
-export class ConstantCriteriaModel{
+export class ConstantCriteriaModel {
 
-  private _value: number;
+  private value: number;
+  // tslint:disable-next-line:variable-name
+  private operation_type = 'constant';
   private _conatant: {
     value: number
   };
 
-  get value(): number {
-    return this._value;
+
+  get getoperation_type(): string {
+    return this.operation_type;
   }
 
-  set value(value: number) {
-    this._value = value;
+  set setoperation_type(value: string) {
+    this.operation_type = value;
+  }
+
+  get getvalue(): number {
+    return this.value;
+  }
+
+  set setvalue(value: number) {
+    this.value = value;
   }
 
   get conatant(): { value: number } {
@@ -22,6 +33,6 @@ export class ConstantCriteriaModel{
   }
 
   print() {
-    console.log(this._value);
+    console.log(this.value);
   }
 }

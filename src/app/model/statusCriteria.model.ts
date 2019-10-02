@@ -1,30 +1,44 @@
 export class StatusCriteriaModel {
 
-  private _pointName: string;
-  private _onValue: number;
-  private _offValue: number;
+  // tslint:disable-next-line:variable-name
+  private point_name: string;
+  // tslint:disable-next-line:variable-name
+  private on_value: number;
+  // tslint:disable-next-line:variable-name
+  private off_value: number;
+  // tslint:disable-next-line:variable-name
+  private operation_type = ' status';
 
-  get pointName(): string {
-    return this._pointName;
+
+  get getoperation_type(): string {
+    return this.operation_type;
   }
 
-  set pointName(value: string) {
-    this._pointName = value;
+  set setoperation_type(value: string) {
+    this.operation_type = value;
   }
 
-  get onValue(): number {
-    return this._onValue;
+  get getpointName(): string {
+    return this.point_name;
   }
 
-  set onValue(value: number) {
-    this._onValue = value;
+  set setpointName(value: string) {
+    this.point_name = value;
   }
 
-  get offValue(): number {
-    return this._offValue;
+  get getonValue(): number {
+    return this.on_value;
   }
 
-  set offValue(value: number) {
-    this._offValue = value;
+  set setonValue(value: number) {
+    this.on_value = value;
+  }
+
+  get getoffValue(): number {
+    return this.off_value;
+  }
+
+  set setoffValue(value: number) {
+    this.off_value = value;
   }
 }

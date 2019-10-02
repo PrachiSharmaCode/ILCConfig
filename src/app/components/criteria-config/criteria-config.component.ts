@@ -89,9 +89,9 @@ export class CriteriaConfigComponent implements OnInit {
 
 
   history: {
-    comparisonType: string,
-    historyPointName: string,
-    previousTime: number,
+    comparison_type: string,
+    point_name: string,
+    previous_time: number,
     maximum: number,
     minimum: number,
   };
@@ -114,10 +114,10 @@ export class CriteriaConfigComponent implements OnInit {
       console.log('i' + i);
       console.log('val' + val);
       this.criteriaModelList[k].formulaModel[index][i] = new FormulaCriteriaModel();
-      this.criteriaModelList[k].formulaModel[index][i].argument.push('');
+      this.criteriaModelList[k].formulaModel[index][i].getoperation_args.push('');
 
       this.criteriaModelList[k].augmentFormulaModel[index][i] = new FormulaCriteriaModel();
-      this.criteriaModelList[k].augmentFormulaModel[index][i].argument.push('');
+      this.criteriaModelList[k].augmentFormulaModel[index][i].getoperation_args.push('');
 
     } else {
       this.criteriaModelList[k].formulaModel[index][i] = null;

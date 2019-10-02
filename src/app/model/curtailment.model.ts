@@ -18,11 +18,11 @@ export class CurtailmentModel {
     device_status: {
       curtail: {
         condition: string,
-        device_status_args: string
+        device_status_args: string[]
       },
       augment: {
         condition: string,
-        device_status_args: string
+        device_status_args: string[]
       }
     },
     curtail_setting: {
@@ -186,7 +186,7 @@ export class CurtailmentModel {
         obj[this.devices[j][i].deviceName][this.devices[j][i].deviceName] = this._curtailmentList[i];
       }
     }
-    let cal = JSON.stringify(obj, null, 4).replace('[', '').replace(']', '');
+    let cal = JSON.stringify(obj, null, 4);
     return cal;
   }
 

@@ -1,65 +1,88 @@
 export class HistoryCriteriaModel {
-  
-  private _comparisonType: string;
-  private _historyPointName: string;
-  private _previousTime: number;
-  private _historyMaximum: number;
-  private _historyMinimum: number;
-  
+
+  // tslint:disable-next-line:variable-name
+  private comparison_type: string;
+  // tslint:disable-next-line:variable-name
+  private point_name: string;
+  // tslint:disable-next-line:variable-name
+  private previous_time: number;
+  private maximum: number;
+  private minimum: number;
+  // tslint:disable-next-line:variable-name
+  private operation_type = 'history';
+
   private _history: {
-    comparisonType: string,
-    historyPointName: string,
-    previousTime: number,
-    historyMaximum: number,
-    historyMinimum: number,
+    comparison_type: string,
+    point_name: string,
+    previous_time: number,
+    // @ts-ignore
+    maximum: number,
+    // @ts-ignore
+    maximum: number,
   };
 
 
-  get comparisonType(): string {
-    return this._comparisonType;
+  get getcomparisonType(): string {
+    return this.comparison_type;
   }
 
-  set comparisonType(value: string) {
-    this._comparisonType = value;
+  set setcomparisonType(value: string) {
+    this.comparison_type = value;
   }
 
-  get historyPointName(): string {
-    return this._historyPointName;
+  get gethistoryPointName(): string {
+    return this.point_name;
   }
 
-  set historyPointName(value: string) {
-    this._historyPointName = value;
+  set sethistoryPointName(value: string) {
+    this.point_name = value;
   }
 
-  get previousTime(): number {
-    return this._previousTime;
+  get getpreviousTime(): number {
+    return this.previous_time;
   }
 
-  set previousTime(value: number) {
-    this._previousTime = value;
+  set setpreviousTime(value: number) {
+    this.previous_time = value;
   }
 
-  get historyMaximum(): number {
-    return this._historyMaximum;
+  get gethistoryMaximum(): number {
+    return this.maximum;
   }
 
-  set historyMaximum(value: number) {
-    this._historyMaximum = value;
+  set sethistoryMaximum(value: number) {
+    this.maximum = value;
   }
 
-  get historyMinimum(): number {
-    return this._historyMinimum;
+  get gethistoryMinimum(): number {
+    return this.minimum;
   }
 
-  set historyMinimum(value: number) {
-    this._historyMinimum = value;
+  set sethistoryMinimum(value: number) {
+    this.minimum = value;
   }
 
-  get history(): { comparisonType: string; historyPointName: string; previousTime: number; historyMaximum: number; historyMinimum: number } {
+  get gethistory(): {
+    comparison_type: string,
+    point_name: string,
+    previous_time: number,
+    // @ts-ignore
+    maximum: number,
+    // @ts-ignore
+    maximum: number,
+  } {
     return this._history;
   }
 
-  set history(value: { comparisonType: string; historyPointName: string; previousTime: number; historyMaximum: number; historyMinimum: number }) {
+  set sethistory(value: {
+    comparison_type: string,
+    point_name: string,
+    previous_time: number,
+    // @ts-ignore
+    maximum: number,
+    // @ts-ignore
+    maximum: number,
+  }) {
     this._history = value;
   }
 }
