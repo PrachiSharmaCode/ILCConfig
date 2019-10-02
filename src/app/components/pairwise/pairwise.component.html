@@ -79,8 +79,11 @@
                     Add Augment Section
                   </button>
                 </div>
+
+
                 <div id="workDivision" class="col-sm" *ngIf="generate">
                   <h5>Pairwise Criteria</h5>
+                  <h6 style="color: white">Curtil Section</h6>
                   <div>
                     <ng-container
                       *ngFor="let mainCriteria of pairwiseCriteriaList[i];let index = index;trackBy: trackByIndex;">
@@ -125,7 +128,7 @@
                                     <p style="color: red" *ngIf="pairwiseList[i].sliderValue[index][j] < 10"
                                        id="sliderValueIndicator1">{{pairwiseList[i].sliderValue[index][j]}}</p>
 
-                                    <p  style="color: green"  *ngIf="pairwiseList[i].sliderValue[index][j] > 10"
+                                    <p style="color: green" *ngIf="pairwiseList[i].sliderValue[index][j] > 10"
                                        id="sliderValueIndicator">{{pairwiseList[i].sliderValue[index][j] - 10}}</p>
                                   </div>
                                 </div>
@@ -139,7 +142,8 @@
                 </div>
 
                 <div id="augmwntWorkDivision" class="col-sm" *ngIf="this.pairwiseList[i].showAugmentSection[i]">
-                  <h5>Augment Section</h5>
+                  <h5 style="visibility: hidden">Pairwise Criteria</h5>
+                  <h6 style="color: white">Augment Section</h6>
                   <div>
                     <ng-container
                       *ngFor="let mainCriteria of pairwiseCriteriaList[i];let index = index;trackBy: trackByIndex;">
@@ -171,7 +175,7 @@
                                     <h6>{{criteiaList}} </h6>
                                   </div>
                                   <div class="row">
-                                    <mat-slider style="width: 90%; color: red" id="{{criteiaList}}%augment{{mainCriteria}}"
+                                    <mat-slider style="width: 90%; color: red" id="{{mainCriteria}}%{{criteiaList}}"
                                                 min="2"
                                                 max="20"
                                                 value="11" invert
@@ -183,8 +187,9 @@
                                     <p style="color: red" *ngIf="pairwiseList[i].augmentSliderValue[index][j] < 10"
                                        id="augmentSliderValueIndicator1">{{pairwiseList[i].augmentSliderValue[index][j]}}</p>
 
-                                    <p  style="color: green"  *ngIf="pairwiseList[i].augmentSliderValue[index][j] > 10"
-                                        id="augmentSliderValueIndicator">{{pairwiseList[i].augmentSliderValue[index][j] - 10}}</p>
+                                    <p style="color: green"
+                                       *ngIf="pairwiseList[i].augmentSliderValue[index][j] > 10"
+                                       id="augmentSliderValueIndicator">{{pairwiseList[i].augmentSliderValue[index][j] - 10}}</p>
                                   </div>
                                 </div>
                               </li>

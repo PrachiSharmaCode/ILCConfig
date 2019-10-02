@@ -38,7 +38,14 @@ export class PairwiseComponent implements OnInit {
 
   showAugmentSection(i) {
     this.pairwiseList[i].showAugmentSection[i] = true;
-    this.pairwiseList[i].augmentSliderValue = this.pairwiseList[i].sliderValue;
+
+    for (let j = 0; j < this.pairwiseList[i].sliderValue.length; j++) {
+      for (let k = 0; k < this.pairwiseList[i].sliderValue[j].length; k++) {
+        this.pairwiseList[i].augmentSliderValue[j][k] = this.pairwiseList[i].sliderValue[j][k];
+      }
+    }
+
+    // this.pairwiseList[i].augmentSliderValue = this.pairwiseList[i].sliderValue;
   }
 
   remainingList(i: number, num: number): string[] {
@@ -72,7 +79,6 @@ export class PairwiseComponent implements OnInit {
   }
 
   UpdateCriteriaList(i, index) {
-
     this.pairwiseCriteriaList[i][index] = this.getCriteriaValue;
     this.pairwise.updateCrirteriaList(this.pairwiseCriteriaList);
     this.pairwiseList[i].sliderValue.push([]);
@@ -98,7 +104,6 @@ export class PairwiseComponent implements OnInit {
     }
     this.pairwise.updateCrirteriaList(this.pairwiseCriteriaList);
   }
-
 
   updateAugmentSliderValue(changeEvent, i, index, j) {
     if (this.pairwiseList[j].augmentSliderValue[index] === undefined) {
@@ -136,7 +141,6 @@ export class PairwiseComponent implements OnInit {
       }
     }
   }
-
 
   updateSliderValue(changeEvent, i, index, j) {
     if (this.pairwiseList[j].sliderValue[index] === undefined) {
@@ -210,15 +214,16 @@ export class PairwiseComponent implements OnInit {
     this.pairwiseCriteriaList = this.mainModel.paireiseCriteriaList;
     this.clusterList = this.ilc.clusterList;
     this.showPairwiseList = this.clusterList.length !== 0;
-
     for (let i = 0; i < this.clusterList.length; i++) {
       this.pairwiseList[i].updateCrirteriaList(this.pairwiseCriteriaList);
       this.pairwiseList[i].pairwiseName = this.clusterList[i].pairwise_criteria_file;
       this.sliderValue = new Array(this.pairwiseList[i].pairwiseCriteriaList[i].length);
       for (let j = 0; j < this.sliderValue.length; j++) {
         this.pairwiseList[i].sliderValue[j] = [];
+        this.pairwiseList[i].augmentSliderValue[j] = [];
         for (let k = j + 1; k < this.sliderValue.length; k++) {
           this.pairwiseList[i].sliderValue[j][k] = 1;
+          this.pairwiseList[i].augmentSliderValue[j][k] = 1;
         }
       }
     }

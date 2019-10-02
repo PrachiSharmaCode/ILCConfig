@@ -41,6 +41,20 @@
 
 </nav>
 
+<!--<div align="center" solid *ngIf="showAlert"  class="alert alert-danger alertBox" role="alert">-->
+<!--  Something is wrong!! <br>-->
+<!--  Please check Master Driver and upload again. <br>-->
+<!--  Thank You.-->
+<!--</div>-->
+
+<!--<div *ngIf="showAlert">-->
+<!--  <h1 mat-dialog-title>Hi </h1>-->
+<!--  <div mat-dialog-content>-->
+<!--    <p>What's your favorite animal?</p>-->
+<!--  </div>-->
+<!--</div>-->
+
+
 <div *ngIf="homeOpen" align="center">
 
   <h5></h5>
@@ -72,6 +86,7 @@
       publish
     </i>
   </button>
+
 </div>
 
 <div *ngIf="ilcCongifOpen">
@@ -91,7 +106,7 @@
 </div>
 
 <div *ngIf="curtailmentOpen">
-  <app-curtailment-config [ilc]="ilc" [curtailment]="curtailment" [mainModel]="mainModel"></app-curtailment-config>
+  <app-curtailment-config [ilc]="ilc" [curtailment]="curtailment" [mainModel]="mainModel" [criteria]="criteria"></app-curtailment-config>
 </div>
 
 <router-outlet></router-outlet>

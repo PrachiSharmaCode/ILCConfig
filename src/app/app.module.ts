@@ -21,6 +21,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { ClusterComponent } from './components/cluster/cluster.component';
 import { FormulaCriteriaComponent} from './components/formula-criteria/formula-criteria.component';
@@ -30,6 +31,7 @@ import { HistoryCriteriaComponent } from './components/history-criteria/history-
 
 import { HttpClientModule} from '@angular/common/http';
 import {OverlayModule} from '@angular/cdk/overlay';
+import { WrongFileAlertComponent } from './components/wrong-file-alert/wrong-file-alert.component';
 
 
 @NgModule({
@@ -44,7 +46,8 @@ import {OverlayModule} from '@angular/cdk/overlay';
     FormulaCriteriaComponent,
     StatusCriteriaComponent,
     MapperCriteriaComponent,
-    HistoryCriteriaComponent
+    HistoryCriteriaComponent,
+    WrongFileAlertComponent
   ],
   imports: [
     BrowserModule,
@@ -61,9 +64,11 @@ import {OverlayModule} from '@angular/cdk/overlay';
     MatIconModule,
     MatSidenavModule,
     DragDropModule,
+    MatDialogModule,
     MDBBootstrapModule.forRoot(),
     OverlayModule
   ],
+  entryComponents: [WrongFileAlertComponent],
   providers: [
   ],
   bootstrap: [AppComponent]

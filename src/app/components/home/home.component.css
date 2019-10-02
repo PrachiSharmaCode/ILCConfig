@@ -150,6 +150,12 @@ p{
   color: #1BA781;
 }
 
+.alertBox{
+  align-items: center;
+  margin-top: 15%;
+  margin-left: 15%;
+}
+
 
 p:hover{
   color: white;

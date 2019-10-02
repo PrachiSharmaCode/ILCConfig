@@ -5,11 +5,14 @@ export class CurtailmentModel {
 
   private ilc: ILCCongig = new ILCCongig();
   private criteris: CriteriaModel = new CriteriaModel();
+
+  private _campus: string;
+  private _building: string;
   // private devices = this.ilc.devices;
   private _devices: {
     deviceName: string,
     devicePoints: string[],
-  }[] = [];
+  }[][] = [];
   private _curtailmentList: {
     device_topic: string,
     device_status: {
@@ -22,7 +25,7 @@ export class CurtailmentModel {
         device_status_args: string
       }
     },
-    curtailment_setting: {
+    curtail_setting: {
       point: string,
       control_method: string,
       // @ts-ignore
@@ -30,7 +33,7 @@ export class CurtailmentModel {
       value: number;
       equation: number;
       // [this._curtailmentList.curtailmentSetting.control_method]: string;
-      Load: number
+      load: number
     }
     augment_setting: {
       point: string,
@@ -40,7 +43,7 @@ export class CurtailmentModel {
       value: number;
       equation: number;
       // [this._curtailmentList.curtailmentSetting.control_method]: string;
-      Load: number
+      load: number
     }
   }[];
   private _curtailmentCalculation: string;
@@ -64,6 +67,22 @@ export class CurtailmentModel {
     return this._curtailmentList;
   }
 
+
+  get campus(): string {
+    return this._campus;
+  }
+
+  set campus(value: string) {
+    this._campus = value;
+  }
+
+  get building(): string {
+    return this._building;
+  }
+
+  set building(value: string) {
+    this._building = value;
+  }
 
   get augment(): { condition: string; device_status_args: string } [] {
     return this._augment;
@@ -113,39 +132,59 @@ export class CurtailmentModel {
   updateDevices(value: {
     deviceName: string,
     devicePoints: string[]
-  }[]) {
+  }[][]) {
     this._devices = value;
   }
 
 
   setFinalCalulation() {
     let obj = {};
-    for (let i = 0; i < this.devices.length; i++) {
-      if (this._curtailmentList[i].curtailment_setting.control_method === 'offset') {
-        delete this._curtailmentList[i].curtailment_setting.value;
-        delete this._curtailmentList[i].curtailment_setting.equation;
-      }
+    for (let j = 0; j < this.devices.length; j++) {
+      for (let i = 0; i < this.devices[j].length; i++) {
+        if (this._curtailmentList[i].curtail_setting.control_method === 'offset') {
+          delete this._curtailmentList[i].curtail_setting.value;
+          delete this._curtailmentList[i].curtail_setting.equation;
+        }
 
-      if (this._curtailmentList[i].curtailment_setting.control_method === 'value') {
-        delete this._curtailmentList[i].curtailment_setting.offset;
-        delete this._curtailmentList[i].curtailment_setting.equation;
-      }
+        if (this._curtailmentList[i].curtail_setting.control_method === 'value') {
+          delete this._curtailmentList[i].curtail_setting.offset;
+          delete this._curtailmentList[i].curtail_setting.equation;
+        }
 
-      if (this._curtailmentList[i].curtailment_setting.control_method === 'equation') {
-        delete this._curtailmentList[i].curtailment_setting.value;
-        delete this._curtailmentList[i].curtailment_setting.offset;
-      }
+        if (this._curtailmentList[i].curtail_setting.control_method === 'equation') {
+          delete this._curtailmentList[i].curtail_setting.value;
+          delete this._curtailmentList[i].curtail_setting.offset;
+        }
 
-      if (!this._showAugmentSection[i]) {
-        delete this._curtailmentList[i].device_status.augment;
-      }
+        if (this._showAugmentSeetingSection[i]) {
+          if (this._curtailmentList[i].augment_setting.control_method === 'offset') {
+            delete this._curtailmentList[i].augment_setting.value;
+            delete this._curtailmentList[i].augment_setting.equation;
+          }
 
-      if (!this._showAugmentSeetingSection[i]) {
-        delete this._curtailmentList[i].augment_setting;
-      }
+          if (this._curtailmentList[i].augment_setting.control_method === 'value') {
+            delete this._curtailmentList[i].augment_setting.offset;
+            delete this._curtailmentList[i].augment_setting.equation;
+          }
 
-      obj[this.devices[i].deviceName] = {};
-      obj[this.devices[i].deviceName][this.devices[i].deviceName] = this._curtailmentList[i];
+          if (this._curtailmentList[i].augment_setting.control_method === 'equation') {
+            delete this._curtailmentList[i].augment_setting.value;
+            delete this._curtailmentList[i].augment_setting.offset;
+          }
+        }
+
+
+        if (!this._showAugmentSection[i]) {
+          delete this._curtailmentList[i].device_status.augment;
+        }
+
+        if (!this._showAugmentSeetingSection[i]) {
+          delete this._curtailmentList[i].augment_setting;
+        }
+
+        obj[this.devices[j][i].deviceName] = {};
+        obj[this.devices[j][i].deviceName][this.devices[j][i].deviceName] = this._curtailmentList[i];
+      }
     }
     let cal = JSON.stringify(obj, null, 4).replace('[', '').replace(']', '');
     return cal;
@@ -156,11 +195,11 @@ export class CurtailmentModel {
   }
 
 
-  get devices(): { deviceName: string; devicePoints: string[]; }[] {
+  get devices(): { deviceName: string; devicePoints: string[]; }[][] {
     return this._devices;
   }
 
-  set devices(value: { deviceName: string; devicePoints: string[]; }[]) {
+  set devices(value: { deviceName: string; devicePoints: string[]; }[][]) {
     this._devices = value;
   }
 }

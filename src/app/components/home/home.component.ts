@@ -10,6 +10,11 @@ import {MapperCriteriaModel} from '../../model/mapperCriteria.model';
 import {ConstantCriteriaModel} from '../../model/constantCriteria.model';
 import {HistoryCriteriaModel} from '../../model/historyCriteria.model';
 import {parse} from 'papaparse';
+import {WrongFileAlertComponent} from '../wrong-file-alert/wrong-file-alert.component';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {errorObject} from 'rxjs/internal-compatibility';
+import {errorHandler} from '@angular/platform-browser/src/browser';
+import {syntaxError} from '@angular/compiler';
 
 // tslint:disable-next-line:class-name
 interface point {
@@ -47,8 +52,9 @@ export class HomeComponent implements OnInit {
   homeOpen = true;
   showNavButtons = false;
   masterFile: string;
+  showAlert = false;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
   }
 
   openIlcConfig() {
@@ -95,12 +101,28 @@ export class HomeComponent implements OnInit {
     this.homeOpen = true;
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(WrongFileAlertComponent, {
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
   getMasterDriver(e) {
     const reader = new FileReader();
     //  const reader = e.target.files;
     // tslint:disable-next-line:only-arrow-functions no-shadowed-variable
     reader.onload = () => {
-      const masterDriverConfig = JSON.parse(reader.result.toString());
+
+      let masterDriverConfig;
+      try {
+        masterDriverConfig = JSON.parse(reader.result.toString());
+      } catch (e) {
+        this.openDialog();
+      }
+
       console.log(masterDriverConfig);
       // tslint:disable-next-line:variable-name
       const device_names = Object.keys(masterDriverConfig).filter(key => !(key.endsWith('.csv')));
@@ -127,6 +149,7 @@ export class HomeComponent implements OnInit {
           return deviceEntry;
         }
       });
+      this.showAlert = false;
       this.ilc.setMasterDriver(devices);
       this.openIlcConfig();
       return devices;

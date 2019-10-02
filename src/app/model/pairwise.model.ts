@@ -75,7 +75,7 @@ export class PairwiseModel {
   setFinalCalculation(i) {
     console.log(this._sliderValue);
     const jsonObh = {};
-    jsonObh[this.curtail] = {}
+    jsonObh[this.curtail] = {};
     let count = 1;
     for (let j = 0; j < this._pairwiseCriteriaList[i].length; j++) {
       jsonObh[this.curtail][this._pairwiseCriteriaList[i][j]] = {};
@@ -89,13 +89,17 @@ export class PairwiseModel {
         } else {
           val = this._sliderValue[j][k];
         }
-        jsonObh[this.curtail][this._pairwiseCriteriaList[i][j]][this._pairwiseCriteriaList[i][k + count]] = val;
+
+        if (this._pairwiseCriteriaList[i][k + count] !== undefined) {
+          jsonObh[this.curtail][this._pairwiseCriteriaList[i][j]][this._pairwiseCriteriaList[i][k + count]] = val;
+        }
+
       }
       count++;
     }
 
-    if(this.showAugmentSection[i]){
-      jsonObh[this._augment] = {}
+    if (this.showAugmentSection[i]) {
+      jsonObh[this._augment] = {};
       let count = 1;
       for (let j = 0; j < this._pairwiseCriteriaList[i].length; j++) {
         jsonObh[this._augment][this._pairwiseCriteriaList[i][j]] = {};
@@ -109,7 +113,10 @@ export class PairwiseModel {
           } else {
             val = this.augmentSliderValue[j][k];
           }
-          jsonObh[this._augment][this._pairwiseCriteriaList[i][j]][this._pairwiseCriteriaList[i][k + count]] = val;
+          if (this._pairwiseCriteriaList[i][k + count] !== undefined) {
+            jsonObh[this._augment][this._pairwiseCriteriaList[i][j]][this._pairwiseCriteriaList[i][k + count]] = val;
+          }
+
         }
         count++;
       }

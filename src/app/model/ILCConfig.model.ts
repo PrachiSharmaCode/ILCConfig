@@ -31,7 +31,7 @@ export class ILCCongig {
   private _devices: {
     deviceName: string,
     devicePoints: string[]
-  }[] = [];
+  }[][] = [];
 
   private _deviceAndPoint: {
     deviceName: string,
@@ -64,15 +64,15 @@ export class ILCCongig {
   }
 
 
-  get devices(): { deviceName: string; devicePoints: string[] }[] {
+  get devices(): { deviceName: string; devicePoints: string[] }[][] {
     return this._devices;
   }
 
-  set devices(value: { deviceName: string; devicePoints: string[] }[]) {
+  set devices(value: { deviceName: string; devicePoints: string[] }[][]) {
     this._devices = value;
   }
 
-  updateILCDevices(value: { deviceName: string; devicePoints: string[] } []) {
+  updateILCDevices(value: { deviceName: string; devicePoints: string[] } [][]) {
     this._devices = value;
   }
 
@@ -167,7 +167,7 @@ export class ILCCongig {
   updateDevices(value: {
     deviceName: string,
     devicePoints: string[]
-  }[]) {
+  }[][]) {
     this._devices = value;
   }
 
@@ -342,7 +342,7 @@ export class ILCCongig {
       campus: this._campus,
       building: this._building,
       power_meter: {
-        device: this._device,
+        device_topic: this._device,
         point: this._point,
         // demand_formula: {
         //   operation: 'Abs' + [this._demandFormula],
@@ -365,7 +365,7 @@ export class ILCCongig {
       const power = 'power_meter';
       const demand = 'demand_formula';
       obj[power][demand] = {
-        operation: [this._demandFormula],
+        operation: this._demandFormula,
         operation_args: this._demandFormulaArgs
       };
     }
