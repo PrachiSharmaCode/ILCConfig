@@ -8,13 +8,16 @@ export class FormulaCriteriaModel {
   // tslint:disable-next-line:variable-name
   private operation_type = 'formula';
   private _formulaCalculate: any;
-  // private formula: {
-  //   argument: string[],
-  //   operation: string,
-  //   minimum: number,
-  //   maximum: number
-  // }[] = [];
+  private _operationArgsCheck: string[] = [];
 
+
+  get operationArgsCheck(): string[] {
+    return this._operationArgsCheck;
+  }
+
+  set operationArgsCheck(value: string[]) {
+    this._operationArgsCheck = value;
+  }
 
   get operationtype(): string {
     return this.operation_type;
@@ -52,7 +55,7 @@ export class FormulaCriteriaModel {
     return this.operation;
   }
 
-  set setoperation(value: string) {
+  set getoperation(value: string) {
     this.operation = value;
   }
 

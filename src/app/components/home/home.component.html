@@ -59,13 +59,13 @@
 
   <h5></h5>
   <hr>
-  <h5>ILC Configuration</h5>
-  <p>Top Level Configuration. Specify campus, building and  building level
+  <h5>Top Level Configuration</h5>
+  <p>Specify campus, building and  building level
     parameters.
   <p>
 
   <hr>
-  <h5>Pairwise</h5>
+  <h5>Pairwise Configuration</h5>
   <p>Name and define control criteria.
     Declare relative priority of control criteria
   <p>
@@ -75,8 +75,7 @@
   <p>Select Controllable devices. Define how control criteria are evaluated for each device</p>
   <hr>
   <h5>Control Configuration</h5>
-  <p>Define how device are evaluated to determine availability to control.Specify
-    actions for each devices.</p>
+  <p>	Define how devices are evaluated to determine availability to control.  Specify control actions for devices.</p>
   <hr>
 
   <input type="file" [(ngModel)]="masterFile" (change)="getMasterDriver($event)" #file hidden>

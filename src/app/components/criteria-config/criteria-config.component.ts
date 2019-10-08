@@ -65,7 +65,8 @@ export class CriteriaConfigComponent implements OnInit {
     argument: string[],
     operation: string,
     minimum: number,
-    maximum: number
+    maximum: number,
+    check: {string: string[]}
   }[] = [];
 
 
@@ -260,8 +261,8 @@ export class CriteriaConfigComponent implements OnInit {
 
   OnRefreshButton(k) {
 
-    console.log(this.criteriaModelList[k].formulaModel);
-    console.log(this.criteriaModelList[k].augmentFormulaModel);
+    // console.log(this.criteriaModelList[k].formulaModel);
+    // console.log(this.criteriaModelList[k].augmentFormulaModel);
 
     this.criteriaModelList[k].updateDevceList(this.devices);
     this.ilc.updateILCDevices(this.devices);

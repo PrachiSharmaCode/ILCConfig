@@ -7,6 +7,7 @@ import {HistoryCriteriaModel} from './historyCriteria.model';
 
 export class CriteriaModel {
 
+  private always = 'always';
   private ilc: ILCCongig = new ILCCongig();
   private _formulaModel: FormulaCriteriaModel[][] = [];
   private _statusModel: StatusCriteriaModel[][] = [];
@@ -18,6 +19,10 @@ export class CriteriaModel {
   private _building: string;
   private curtail = 'curtail';
   private _augment = 'augment';
+  private operationArgs = 'check';
+  private argumentNumber = 0;
+
+  private test = '';
 
   private _showAugmentSection: boolean[] = [];
   private _augmentFormulaModel: FormulaCriteriaModel[][] = [];
@@ -139,23 +144,7 @@ export class CriteriaModel {
           this.augmentFormulaModel[i][j].setoperation_args = this.formulaModel[i][j].getoperation_args;
           this.augmentFormulaModel[i][j].maximun = this.formulaModel[i][j].maximun;
           this.augmentFormulaModel[i][j].mini = this.formulaModel[i][j].mini;
-          this.augmentFormulaModel[i][j].setoperation = this.formulaModel[i][j].getoperation;
-        }
-
-
-        if (this.statusModel[i][j] === null) {
-          if (this.augmentStatusModel[i] === undefined) {
-            this.augmentStatusModel[i] = [];
-          }
-          this.augmentStatusModel[i][j] = null;
-        } else {
-          if (this.augmentStatusModel[i] === undefined) {
-            this.augmentStatusModel[i] = [];
-          }
-          this.augmentStatusModel[i][j] = new StatusCriteriaModel();
-          this.augmentStatusModel[i][j].setpointName = this.statusModel[i][j].getpointName;
-          this.augmentStatusModel[i][j].setoffValue = this.statusModel[i][j].getoffValue;
-          this.augmentStatusModel[i][j].setonValue = this.statusModel[i][j].getonValue;
+          this.augmentFormulaModel[i][j].getoperation = this.formulaModel[i][j].getoperation;
         }
 
         if (this.mapperModel[i][j] === null) {
@@ -204,6 +193,28 @@ export class CriteriaModel {
         }
       }
     }
+
+
+    for (let s = 0; s < this.statusModel.length; s++) {
+      for (let t = 0; t < this.statusModel[s].length; t++) {
+
+        if (this.statusModel[s][t] === null) {
+          if (this.augmentStatusModel[s] === undefined) {
+            this.augmentStatusModel[s] = [];
+          }
+          this.augmentStatusModel[s][t] = null;
+        } else {
+          if (this.augmentStatusModel[s] === undefined) {
+            this.augmentStatusModel[s] = [];
+          }
+          this.augmentStatusModel[s][t] = new StatusCriteriaModel();
+          this.augmentStatusModel[s][t].setpointName = this.statusModel[s][t].getpointName;
+          this.augmentStatusModel[s][t].setoffValue = this.statusModel[s][t].getoffValue;
+          this.augmentStatusModel[s][t].setonValue = this.statusModel[s][t].getonValue;
+        }
+      }
+    }
+
   }
 
   get devicesAndPoint(): { deviceName: string; devicePoints: string[]; checked: boolean }[] {
@@ -273,9 +284,10 @@ export class CriteriaModel {
   setFinalCalulation(list: string[][], l) {
 
     console.log(this.campus);
-    console.log(this.building)
+    console.log(this.building);
 
     let jsonObh = {};
+
 
     for (let j = 0; j < this._devices.length; j++) {
 
@@ -284,16 +296,42 @@ export class CriteriaModel {
       jsonObh[this._devices[l][j].deviceName] = {
         [this._devices[l][j].deviceName]: {
           [this.curtail]: {
-            device_topic: this.campus + '/' + this.building + '/'  + this._devices[l][j].deviceName,
+            device_topic: this.campus + '/' + this.building + '/' + this._devices[l][j].deviceName,
           }
         }
       };
 
-      for (let k = 0; k < list[0].length; k++) {
 
+      for (let k = 0; k < list[0].length; k++) {
         if (this.formulaModel[j][k] !== null) {
+
+          //  if (this.formulaModel[j][k] !== undefined) {
+          //   this.test = this.test + this.formulaModel[j][k].
+          //       operationArgsCheck[this.formulaModel[j][k].operationArgsCheck[j].length - 1] + ':' + '[' +
+          //     this.formulaModel[j][k].getoperation_args[this.formulaModel[j][k].getoperation_args[j].length - 1] + ']';
+          //   jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]]
+          //     [this.operationArgs] = [this.test];
+          //   console.log(this.argumentNumber);
+          // }
+
           jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]]
             = this.formulaModel[j][k];
+          console.log(this.formulaModel[j][k]);
+
+          // if (this.formulaModel[j][k] !== undefined) {
+          //   console.log(this.formulaModel[j][k].getoperation_args[this.formulaModel[j][k].operationArgsCheck.length - 1]);
+          //   console.log(this.formulaModel[j][k].getoperation_args[this.formulaModel[j][k].getoperation_args.length - 1]);
+          // }
+
+          //  if (this.formulaModel[j][k] !== undefined && this.formulaModel[j][k].
+          //    operationArgsCheck !== undefined && this.formulaModel[j][k].getoperation_args !== undefined) {
+          //   this.test = this.test + this.formulaModel[j][k].
+          //       operationArgsCheck[this.formulaModel[j][k].operationArgsCheck.length - 1] + ':' + '[' +
+          //     this.formulaModel[j][k].getoperation_args[this.formulaModel[j][k].getoperation_args.length - 1] + ']';
+          //   jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]]
+          //     [this.operationArgs] = [this.test];
+          //   console.log(this.argumentNumber);
+          // }
         }
         if (this.statusModel[j][k] !== null) {
           jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]]
@@ -317,7 +355,7 @@ export class CriteriaModel {
       if (this._showAugmentSection[j]) {
 
         jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment] = {
-          device_topic: this.campus + this.building + this._devices[l][j].deviceName
+          device_topic: this.campus + '/' + this.building + '/' + this._devices[l][j].deviceName
         };
         for (let k = 0; k < list[0].length; k++) {
 
@@ -348,7 +386,6 @@ export class CriteriaModel {
     let cal = JSON.stringify(jsonObh, null, 4).replace('\"obj\": {', '').replace('\"augjson\": {}', '');
 
     console.log(this._result);
-
     return cal;
   }
 

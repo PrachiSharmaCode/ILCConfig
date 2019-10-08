@@ -32,7 +32,7 @@ export class CurtailmentConfigComponent implements OnInit {
 
   _augment: {
     condition: string,
-    device_status_args: string
+    device_status_args: string[]
   }[] = [];
 
   _augmentSetting: {
@@ -119,11 +119,42 @@ export class CurtailmentConfigComponent implements OnInit {
     this.curtailmentModelList[i].curtailmentList[index].device_status.curtail.device_status_args.push('');
   }
 
+
+  addEquatoinArgument(i, index) {
+    this.curtailmentModelList[i].curtailmentList[index].curtail_setting.equation.equation_args.push('');
+  }
+
+  addAugmentEquatoinArgument(i, index) {
+    this.curtailmentModelList[i].curtailmentList[index].augment_setting.equation.equation_args.push('');
+  }
+
   addAugmentStatusArgument(i, index) {
     this.curtailmentModelList[i].curtailmentList[index].device_status.augment.device_status_args.push('');
   }
 
-  showAugmentSection(i, index) {
+  // showAugmentSection(i, index) {
+  //
+  //   this.augmentStatusArgument = this.statusArgument;
+  //   this.curtailmentModelList[i].showAugmentSection[index] = true;
+  //
+  //
+  //   if (this.curtailmentModelList[i].curtailmentList[index].device_status.augment === undefined) {
+  //     this.curtailmentModelList[i].curtailmentList[index].device_status.augment = {
+  //       device_status_args: '',
+  //       condition: ''
+  //     };
+  //   }
+  //   this.curtailmentModelList[i].curtailmentList[index].device_status.augment.condition =
+  //     this.curtailmentModelList[i].curtailmentList[index].device_status.curtail.condition;
+  //
+  //   for (let arg = 0; arg < this.curtailmentModelList[i].curtailmentList[index].device_status.curtail.device_status_args.length; arg++) {
+  //     this.curtailmentModelList[i].curtailmentList[index].device_status.augment.device_status_args[arg] =
+  //       this.curtailmentModelList[i].curtailmentList[index].device_status.curtail.device_status_args[arg];
+  //   }
+  //
+  // }
+
+  showAugmentSettingSection(i, index) {
 
     this.augmentStatusArgument = this.statusArgument;
     this.curtailmentModelList[i].showAugmentSection[index] = true;
@@ -143,9 +174,7 @@ export class CurtailmentConfigComponent implements OnInit {
         this.curtailmentModelList[i].curtailmentList[index].device_status.curtail.device_status_args[arg];
     }
 
-  }
 
-  showAugmentSettingSection(i, index) {
     this.curtailmentModelList[i].showAugmentSeetingSection[index] = true;
     console.log(i + this.curtailmentModelList[i].showAugmentSeetingSection[i]);
     if (this.curtailmentModelList[i].curtailmentList[index].augment_setting === undefined) {
@@ -164,8 +193,22 @@ export class CurtailmentConfigComponent implements OnInit {
       this.curtailmentModelList[i].curtailmentList[index].curtail_setting.point;
     this.curtailmentModelList[i].curtailmentList[index].augment_setting.offset =
       this.curtailmentModelList[i].curtailmentList[index].curtail_setting.offset;
-    this.curtailmentModelList[i].curtailmentList[index].augment_setting.equation =
-      this.curtailmentModelList[i].curtailmentList[index].curtail_setting.equation;
+
+
+    for (let e = 0; e < this.curtailmentModelList[i].curtailmentList[index].curtail_setting.equation.equation_args.length; e++) {
+      this.curtailmentModelList[i].curtailmentList[index].augment_setting.equation.equation_args[e] =
+        this.curtailmentModelList[i].curtailmentList[index].curtail_setting.equation.equation_args[e];
+    }
+
+    this.curtailmentModelList[i].curtailmentList[index].augment_setting.equation.operation =
+      this.curtailmentModelList[i].curtailmentList[index].curtail_setting.equation.operation;
+
+    this.curtailmentModelList[i].curtailmentList[index].augment_setting.equation.maximum =
+      this.curtailmentModelList[i].curtailmentList[index].curtail_setting.equation.maximum;
+
+    this.curtailmentModelList[i].curtailmentList[index].augment_setting.equation.minimum =
+      this.curtailmentModelList[i].curtailmentList[index].curtail_setting.equation.minimum;
+
     this.curtailmentModelList[i].curtailmentList[index].augment_setting.value =
       this.curtailmentModelList[i].curtailmentList[index].curtail_setting.value;
     this.curtailmentModelList[i].curtailmentList[index].augment_setting.load =
@@ -223,10 +266,22 @@ export class CurtailmentConfigComponent implements OnInit {
             curtail_setting: {
               point: '',
               control_method: '',
+              equation: {
+                equation_args: [''],
+                operation: '',
+                minimum: '',
+                maximum: '',
+              },
             },
             augment_setting: {
               point: '',
               control_method: '',
+              equation: {
+                equation_args: [''],
+                operation: '',
+                minimum: '',
+                maximum: '',
+              },
             }
           };
         }

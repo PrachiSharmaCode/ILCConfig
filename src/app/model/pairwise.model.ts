@@ -85,7 +85,8 @@ export class PairwiseModel {
         }
         let val = 1;
         if (this._sliderValue[j][k] > 10) {
-          val = 1 / this._sliderValue[j][k];
+          console.log(this._sliderValue[j][k]);
+          val = 1 / (this._sliderValue[j][k] - 10);
         } else {
           val = this._sliderValue[j][k];
         }
@@ -109,7 +110,7 @@ export class PairwiseModel {
           }
           let val = 1;
           if (this.augmentSliderValue[j][k] > 10) {
-            val = 1 / this.augmentSliderValue[j][k];
+            val = 1 / (this.augmentSliderValue[j][k] - 10);
           } else {
             val = this.augmentSliderValue[j][k];
           }

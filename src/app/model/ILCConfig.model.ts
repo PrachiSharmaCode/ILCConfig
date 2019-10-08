@@ -342,7 +342,7 @@ export class ILCCongig {
       campus: this._campus,
       building: this._building,
       power_meter: {
-        device_topic: this._device,
+        device_topic: this.campus + '/' + this.building + '/' + this._device,
         point: this._point,
         // demand_formula: {
         //   operation: 'Abs' + [this._demandFormula],

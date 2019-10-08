@@ -68,7 +68,7 @@ export class ILCConfigComponent implements OnInit {
   }
 
   closeAdvenceOption() {
-    this.showAdvanceOption = false;
+    this.ilc.showAdvanceOption = false;
   }
 
   addDemandFormula() {

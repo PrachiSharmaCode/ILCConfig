@@ -130,7 +130,16 @@ export class HomeComponent implements OnInit {
       // tslint:disable-next-line:no-shadowed-variable
       const devices = device_names.map(device => {
         console.log(devices);
-        const deviceData = JSON.parse(parse(masterDriverConfig[device].data).data.join('\n'));
+        // const deviceData = JSON.parse(parse(masterDriverConfig[device].data).data.join('\n'));
+
+        let deviceData;
+        try {
+          deviceData = JSON.parse(parse(masterDriverConfig[device].data).data.join('\n'));
+        } catch (e) {
+          this.openDialog();
+        }
+
+
         if (deviceData.registry_config) {
           const registryConfigName = deviceData.registry_config.split('//')[1];
           const registryConfigData = parse(masterDriverConfig[registryConfigName].data).data;

@@ -31,7 +31,12 @@ export class CurtailmentModel {
       // @ts-ignore
       offset: number;
       value: number;
-      equation: number;
+      equation: {
+        equation_args: string[],
+        operation: string,
+        minimum: number,
+        maximum: number,
+      },
       // [this._curtailmentList.curtailmentSetting.control_method]: string;
       load: number
     }
@@ -41,7 +46,13 @@ export class CurtailmentModel {
       // @ts-ignore
       offset: number;
       value: number;
-      equation: number;
+      equation: {
+        equation_args: string[],
+        operation: string,
+        minimum: number,
+        maximum: number,
+
+      },
       // [this._curtailmentList.curtailmentSetting.control_method]: string;
       load: number
     }
@@ -50,7 +61,7 @@ export class CurtailmentModel {
 
   private _augment: {
     condition: string,
-    device_status_args: string
+    device_status_args: string[]
   }[] = [];
 
   private _augmentSetting: {
@@ -62,6 +73,8 @@ export class CurtailmentModel {
 
   private _showAugmentSection: boolean[] = [];
   private _showAugmentSeetingSection: boolean[] = [];
+
+
 
   get curtailmentList(): any[] {
     return this._curtailmentList;
@@ -84,11 +97,11 @@ export class CurtailmentModel {
     this._building = value;
   }
 
-  get augment(): { condition: string; device_status_args: string } [] {
+  get augment(): { condition: string; device_status_args: string[] } [] {
     return this._augment;
   }
 
-  set augment(value: { condition: string; device_status_args: string } []) {
+  set augment(value: { condition: string; device_status_args: string[] } []) {
     this._augment = value;
   }
 
