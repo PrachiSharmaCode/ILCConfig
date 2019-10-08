@@ -180,9 +180,8 @@ export class PairwiseComponent implements OnInit {
   }
 
   savePairwiseCalculation(i) {
-    const file = new Blob([this.pairwiseList[i].pairwiaseCalculation],
-      {type: 'json'});
-    FileSaver.saveAs(file, this.clusterList[i].pairwise_criteria_file);
+    const file = new Blob([this.pairwiseList[i].pairwiaseCalculation], {type: 'json'});
+    FileSaver.saveAs(file, this.clusterList[i].pairwise_criteria_file + '.json');
   }
 
   pairwiseSort(event: CdkDragDrop<string[]>, i) {

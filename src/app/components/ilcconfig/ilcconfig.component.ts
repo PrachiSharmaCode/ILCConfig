@@ -96,18 +96,65 @@ export class ILCConfigComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    // localStorage.setItem('curl_time', JSON.stringify(this.curtailmentTime));
+    // localStorage.setItem('curl_confrim', JSON.stringify(this.curtailmentConfirm));
+    // localStorage.setItem('curl_break', JSON.stringify(this.curtailmentBreak));
+    // localStorage.setItem('avgBuildingPower', JSON.stringify(this.buildingPowerWindow));
+    //
+    // localStorage.setItem('stage_release', JSON.stringify(this.staggerRelease));
+    // localStorage.setItem('stage_off', JSON.stringify(this.staggerOfftime));
+
+    if (localStorage.getItem('obj') !== null) {
+      const obj = JSON.parse(localStorage.getItem('obj'));
+      console.log(obj);
+
+
+      if (obj.agent_id != null || obj.agent_id !== undefined) {
+        this.agentId = obj.agent_id;
+      } else {
+        this.agentId = this.ilc.agentId;
+      }
+
+      if (obj.demand_limit != null || obj.demand_limit !== undefined) {
+        this.demandLimit = obj.demand_limit;
+      } else {
+        this.demandLimit = this.ilc.demandLimit;
+      }
+
+      if (obj.curtailment_break != null || obj.curtailment_break !== undefined) {
+        this.curtailmentBreak = obj.curtailment_break;
+      } else {
+        this.curtailmentBreak = this.ilc.curtailmentBreak;
+      }
+
+      if (obj.curtailment_confirm != null || obj.curtailment_confirm !== undefined) {
+        this.curtailmentConfirm = obj.curtailment_confirm;
+      } else {
+        this.curtailmentConfirm = this.ilc.curtailmentConfirm;
+      }
+
+      if (obj.curtailment_time != null || obj.curtailment_time !== undefined) {
+        this.curtailmentTime = obj.curtailment_time;
+      } else {
+        this.curtailmentTime = this.ilc.curtailmentTime;
+      }
+
+      if (obj.average_building_power_window != null || obj.average_building_power_window !== undefined) {
+        this.buildingPowerWindow = obj.average_building_power_window;
+      } else {
+        this.buildingPowerWindow = this.ilc.buildingPowerWindow;
+      }
+
+    }
+
+
     this.check = this.ilc.devicesMasterList;
     this.campus = this.ilc.campus;
     this.building = this.ilc.building;
     this.point = this.ilc.point;
     this.demandFormula = this.ilc.demandFormula;
     this.demandformulaAgrsArr = this.ilc.demandFormulaArgs;
-    this.agentId = this.ilc.agentId;
-    this.demandLimit = this.ilc.demandLimit;
-    this.curtailmentTime = this.ilc.curtailmentTime;
-    this.curtailmentConfirm = this.ilc.curtailmentConfirm;
-    this.curtailmentBreak = this.ilc.curtailmentBreak;
-    this.buildingPowerWindow = this.ilc.buildingPowerWindow;
     this.testpaiewiese = this.ilc.pairwiseCriteriaList;
     this.arrlen = this.testpaiewiese.length;
     this.finalCalculation = this.ilc.finalCalcualtion;

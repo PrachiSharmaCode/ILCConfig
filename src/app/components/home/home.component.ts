@@ -178,6 +178,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    localStorage.setItem('key1', 'value1');
   }
 
 }

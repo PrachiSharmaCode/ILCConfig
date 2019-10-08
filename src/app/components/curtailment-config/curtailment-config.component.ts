@@ -169,10 +169,9 @@ export class CurtailmentConfigComponent implements OnInit {
     this.curtailmentModelList[i].curtailmentList[index].device_status.augment.condition =
       this.curtailmentModelList[i].curtailmentList[index].device_status.curtail.condition;
 
-    for (let arg = 0; arg < this.curtailmentModelList[i].curtailmentList[index].device_status.curtail.device_status_args.length; arg++) {
-      this.curtailmentModelList[i].curtailmentList[index].device_status.augment.device_status_args[arg] =
-        this.curtailmentModelList[i].curtailmentList[index].device_status.curtail.device_status_args[arg];
-    }
+
+    this.curtailmentModelList[i].curtailmentList[index].device_status.augment.device_status_args =
+      this.curtailmentModelList[i].curtailmentList[index].device_status.curtail.device_status_args;
 
 
     this.curtailmentModelList[i].showAugmentSeetingSection[index] = true;
@@ -223,9 +222,9 @@ export class CurtailmentConfigComponent implements OnInit {
   }
 
   saveCurtailmentCalculation(i) {
-    const file = new Blob([this.curtailmentModelList[i].curtailmentCalculation],
+    const file = new Blob([this.curtailmentModelList[i].setFinalCalulation()],
       {type: 'json'});
-    FileSaver.saveAs(file, this.clusterList[i].device_control_file);
+    FileSaver.saveAs(file, this.clusterList[i].device_control_file + '.json');
   }
 
   ngOnInit() {

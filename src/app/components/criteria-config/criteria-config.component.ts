@@ -9,6 +9,7 @@ import {StatusCriteriaModel} from '../../model/statusCriteria.model';
 import {MapperCriteriaModel} from '../../model/mapperCriteria.model';
 import {ConstantCriteriaModel} from '../../model/constantCriteria.model';
 import {HistoryCriteriaModel} from '../../model/historyCriteria.model';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-criteria-config',
@@ -263,17 +264,24 @@ export class CriteriaConfigComponent implements OnInit {
     }
   }
 
+  saveCriteriatCalculation(k) {
+    const file = new Blob([this.criteriaModelList[k].setFinalCalulation(this.criteriaList, k, this.devices)],
+      {type: 'json'});
+    FileSaver.saveAs(file, this.clusterList[k].device_criteria_file + '.json');
+  }
+
   OnRefreshButton(k) {
 
     // console.log(this.criteriaModelList[k].formulaModel);
     // console.log(this.criteriaModelList[k].augmentFormulaModel);
     this.criteriaModelList[k].getTestFromformula();
+    console.log(this.devices);
     this.criteriaModelList[k].updateDevceList(this.devices);
     this.ilc.updateILCDevices(this.devices);
     this.criteriaModelList[k].stageName = this.stageName;
     this.criteriaModelList[k].campus = this.campus;
     this.criteriaModelList[k].building = this.building;
-    console.log(this.criteriaModelList[k].setFinalCalulation(this.criteriaList, k));
+    this.criteriaModelList[k].setFinalCalulation(this.criteriaList, k, this.devices);
   }
 
 

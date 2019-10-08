@@ -21,6 +21,9 @@ export class CriteriaModel {
   private _augment = 'augment';
   private operationArgs = 'operation_args';
   private argumentNumber = 0;
+  private mapper = 'mapper';
+  private privateOffice = 'Private Office';
+  private conference = 'Conference Room';
 
   private test: string[] = [];
 
@@ -141,10 +144,14 @@ export class CriteriaModel {
             this.augmentFormulaModel[i] = [];
           }
           this.augmentFormulaModel[i][j] = new FormulaCriteriaModel();
+
           this.augmentFormulaModel[i][j].setoperation_args = this.formulaModel[i][j].getoperation_args;
+          this.augmentFormulaModel[i][j].operationArgsCheck = this.formulaModel[i][j].operationArgsCheck;
+
           this.augmentFormulaModel[i][j].maximun = this.formulaModel[i][j].maximun;
           this.augmentFormulaModel[i][j].mini = this.formulaModel[i][j].mini;
           this.augmentFormulaModel[i][j].getoperation = this.formulaModel[i][j].getoperation;
+          console.log(this.augmentFormulaModel);
         }
 
         if (this.mapperModel[i][j] === null) {
@@ -234,6 +241,7 @@ export class CriteriaModel {
 
   updateDevceList(value: { deviceName: string; devicePoints: string[]; }[][]) {
     this._devices = value;
+    console.log(this._devices);
   }
 
   // tslint:disable-next-line:adjacent-overload-signatures
@@ -283,38 +291,31 @@ export class CriteriaModel {
   getTestFromformula() {
     for (let i = 0; i < this.formulaModel.length; i++) {
       for (let j = 0; j < this.formulaModel.length; j++) {
-        if (this.formulaModel[i][j] !== undefined) {
+        if (this.formulaModel[i][j] !== undefined && this.formulaModel[i][j] != null) {
           this.formulaModel[i][j].getTest();
+        }
+      }
+    }
+
+    for (let i = 0; i < this.augmentFormulaModel.length; i++) {
+      for (let j = 0; j < this.augmentFormulaModel.length; j++) {
+        if (this.augmentFormulaModel[i][j] !== undefined && this.augmentFormulaModel[i][j] != null) {
+          this.augmentFormulaModel[i][j].getTest();
         }
       }
     }
   }
 
 
-  setFinalCalulation(list: string[][], l) {
+  setFinalCalulation(list: string[][], l, devicesCom) {
 
-    console.log(this.campus);
-    console.log(this.building);
+    this.getTestFromformula();
 
-
-    // if (this.formulaModel !== undefined) {
-    //   for (let i = 0; i < this.formulaModel.length; i++) {
-    //     for (let j = 0; j < this.formulaModel[i].length; j++) {
-    //       this.test[i] = this.test[i] +
-    //         this.formulaModel[i][j].operationArgsCheck[this.formulaModel[i][j].operationArgsCheck.length - 1] + ':' +
-    //         this.formulaModel[i][j].getoperation_args[this.formulaModel[i][j].getoperation_args.length - 1];
-    //     }
-    //   }
-    // }
-
-    console.log(this.test);
 
     const jsonObh = {};
 
 
-    for (let j = 0; j < this._devices.length; j++) {
-
-      console.log(this._devices[l][j]);
+    for (let j = 0; j < this._devices[l].length; j++) {
 
       jsonObh[this._devices[l][j].deviceName] = {
         [this._devices[l][j].deviceName]: {
@@ -327,18 +328,6 @@ export class CriteriaModel {
 
       for (let k = 0; k < list[0].length; k++) {
         if (this.formulaModel[j][k] !== null) {
-
-          //  if (this.formulaModel[j][k] !== undefined) {
-          //   this.test = this.test + this.formulaModel[j][k].
-          //       operationArgsCheck[this.formulaModel[j][k].operationArgsCheck[j].length - 1] + ':' + '[' +
-          //     this.formulaModel[j][k].getoperation_args[this.formulaModel[j][k].getoperation_args[j].length - 1] + ']';
-          //   jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]]
-          //     [this.operationArgs] = [this.test];
-          //   console.log(this.argumentNumber);
-          // }
-
-          // jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]]
-          //   = this.formulaModel[j][k];
           console.log(this.formulaModel[j][k]);
           jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]] = {};
           if (this.formulaModel[j][k] !== undefined) {
@@ -354,31 +343,6 @@ export class CriteriaModel {
               .operation_type
               = 'formula';
           }
-
-
-          // delete jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName]
-          //   [this.curtail][list[l][k]]._operationArgsCheck;
-
-          if (this.formulaModel[j][k] !== undefined) {
-            delete this.formulaModel[j][k].getoperatoin_args;
-            delete this.formulaModel[j][k].operationArgsCheck;
-          }
-
-
-          // if (this.formulaModel[j][k] !== undefined) {
-          //   console.log(this.formulaModel[j][k].getoperation_args[this.formulaModel[j][k].operationArgsCheck.length - 1]);
-          //   console.log(this.formulaModel[j][k].getoperation_args[this.formulaModel[j][k].getoperation_args.length - 1]);
-          // }
-
-          //  if (this.formulaModel[j][k] !== undefined && this.formulaModel[j][k].
-          //    operationArgsCheck !== undefined && this.formulaModel[j][k].getoperation_args !== undefined) {
-          //   this.test = this.test + this.formulaModel[j][k].
-          //       operationArgsCheck[this.formulaModel[j][k].operationArgsCheck.length - 1] + ':' + '[' +
-          //     this.formulaModel[j][k].getoperation_args[this.formulaModel[j][k].getoperation_args.length - 1] + ']';
-          //   jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]]
-          //     [this.operationArgs] = [this.test];
-          //   console.log(this.argumentNumber);
-          // }
         }
         if (this.statusModel[j][k] !== null) {
           jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]]
@@ -407,8 +371,23 @@ export class CriteriaModel {
         for (let k = 0; k < list[0].length; k++) {
 
           if (this.augmentFormulaModel[j][k] !== null) {
-            jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]]
-              = this.augmentFormulaModel[j][k];
+            // jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]]
+            //   = this.augmentFormulaModel[j][k];
+
+            jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]] = {};
+            if (this.augmentFormulaModel[j][k] !== undefined) {
+              jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]].operation
+                = this.augmentFormulaModel[j][k].getoperation;
+              jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]].minimum
+                = this.augmentFormulaModel[j][k].mini;
+              jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]].maximum
+                = this.augmentFormulaModel[j][k].maximun;
+              jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]].operation_args
+                = this.augmentFormulaModel[j][k].getoperatoin_args;
+              jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]]
+                .operation_type
+                = 'formula';
+            }
           }
           if (this.augmentStatusModel[j][k] !== null) {
             jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]]
@@ -429,6 +408,15 @@ export class CriteriaModel {
         }
       }
     }
+
+    jsonObh[this.mapper] = {};
+    jsonObh[this.mapper].zone_type = {};
+    jsonObh[this.mapper].zone_type[this.privateOffice] = 1;
+    jsonObh[this.mapper].zone_type.Office = 3;
+    jsonObh[this.mapper].zone_type[this.conference] = 1;
+    jsonObh[this.mapper].zone_type.Lobby = 9;
+    jsonObh[this.mapper].zone_type.RestRoom = 9;
+
 
     const cal = JSON.stringify(jsonObh, null, 4).replace(/\\/g, '').replace('\"obj\": {', '').replace('\"augjson\": {}', '');
 

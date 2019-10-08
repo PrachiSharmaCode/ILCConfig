@@ -151,7 +151,7 @@
                                           </mat-form-field>
                                           <mat-radio-group [(ngModel)]=criteriaModelList[k].formulaModel[index][i].operationArgsCheck[x] aria-label="Select an option">
                                             <mat-radio-button value="always">Always</mat-radio-button>&nbsp;&nbsp;&nbsp;
-                                            <mat-radio-button value="not curtailed">Not Curtailed</mat-radio-button>
+                                            <mat-radio-button value="nc">Not Curtailed</mat-radio-button>
                                           </mat-radio-group>
                                         </ng-container>
                                         <div>
@@ -321,9 +321,9 @@
                                               </div>
                                             </mat-select>
                                           </mat-form-field>
-                                          <mat-radio-group aria-label="Select an option">
+                                          <mat-radio-group [(ngModel)]=criteriaModelList[k].augmentFormulaModel[index][j].operationArgsCheck[x] aria-label="Select an option">
                                             <mat-radio-button value="always">Always</mat-radio-button>&nbsp;&nbsp;&nbsp;
-                                            <mat-radio-button value="not curtailed">Not Curtailed</mat-radio-button>
+                                            <mat-radio-button value="nc">Not Curtailed</mat-radio-button>
                                           </mat-radio-group>
                                         </ng-container>
                                         <div>
@@ -438,7 +438,7 @@
                                                  [(ngModel)]="criteriaModelList[k].augmentHistoryModel[index][j].sethistoryMaximum">
                                         </mat-form-field>
                                         <mat-form-field class="example-full-width">
-                                          <input type="number" matInput placeholder="Maximum"
+                                          <input type="number" matInput placeholder="Minimum"
                                                  [(ngModel)]="criteriaModelList[k].augmentHistoryModel[index][j].sethistoryMinimum">
                                         </mat-form-field>
                                       </div>
@@ -478,7 +478,7 @@
                 <button (click)="OnRefreshButton(k)" class="btn button-size">
                   <i class="material-icons float-left">autorenew</i>Refresh
                 </button>
-                <button href=#finalCal class="btn  button-size"
+                <button href=#finalCal class="btn  button-size" (click)="saveCriteriatCalculation(k)"
                         download="finalCalculation">
                   <i class="material-icons float-left">
                     get_app

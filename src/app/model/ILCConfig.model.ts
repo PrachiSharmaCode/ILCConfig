@@ -321,6 +321,8 @@ export class ILCCongig {
   setILCConfig(campus, building, device, point, demandFormula, demandFormulaArgs, agentId, demandLimit,
                curtailmentTime, curtailmentConfim, curtailmentBreak, buildingPowerWindow, staggerRelease,
                staggerOfftime) {
+
+
     this._campus = campus;
     this._building = building;
     this._device = device;
@@ -338,6 +340,20 @@ export class ILCCongig {
   }
 
   get finalCalcualtion(): string {
+    // localStorage.setItem('campus', this.campus);
+    // localStorage.setItem('demandFormula', this.demandFormula);
+    // localStorage.setItem('agentId', this.agentId);
+    // localStorage.setItem('demandLimit', this.demandLimit);
+    //
+    // localStorage.setItem('curtailment_time', JSON.stringify(this.curtailmentTime));
+    // localStorage.setItem('curtailmentConfirm', JSON.stringify(this.curtailmentConfirm));
+    // localStorage.setItem('curtailmentBreak', JSON.stringify(this.curtailmentBreak));
+    // localStorage.setItem('avgBuildingPower', JSON.stringify(this.buildingPowerWindow));
+    //
+    // localStorage.setItem('stage_release', JSON.stringify(this.staggerRelease));
+    // localStorage.setItem('stage_off', JSON.stringify(this.staggerOfftime));
+    //
+    // localStorage.setItem('cluster', JSON.stringify(this._cluster));
     const obj = {
       campus: this._campus,
       building: this._building,
@@ -361,6 +377,7 @@ export class ILCCongig {
     };
 
 
+
     if (this._showAdvanceOption) {
       const power = 'power_meter';
       const demand = 'demand_formula';
@@ -370,6 +387,7 @@ export class ILCCongig {
       };
     }
     this._finalCalcualtion = JSON.stringify(obj, null, 4);
+    localStorage.setItem('obj', JSON.stringify(obj));
     return this._finalCalcualtion;
   }
 

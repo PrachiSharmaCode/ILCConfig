@@ -49,8 +49,6 @@ export class FormulaCriteriaModel {
   }
 
   getTest() {
-
-
     this.operation_args = '{';
     for (let i = 0; i < this.operationArgsCheck.length; i++) {
       if (this.operationArgsCheck[i] !== undefined
