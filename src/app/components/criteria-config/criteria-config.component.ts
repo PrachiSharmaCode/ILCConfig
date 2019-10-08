@@ -66,7 +66,7 @@ export class CriteriaConfigComponent implements OnInit {
     operation: string,
     minimum: number,
     maximum: number,
-    check: {string: string[]}
+    check: { string: string[] }
   }[] = [];
 
 
@@ -179,6 +179,10 @@ export class CriteriaConfigComponent implements OnInit {
     }
   }
 
+  removeFormulaArg(k, index, i, x) {
+    this.criteriaModelList[k].formulaModel[index][i].getoperation_args.splice(x, 1);
+  }
+
   addAugmentSexction(k, index) {
     if (!this.criteriaModelList[k].showAugmentSection[index]) {
       this.criteriaModelList[k].showAugmentSection[index] = true;
@@ -263,12 +267,12 @@ export class CriteriaConfigComponent implements OnInit {
 
     // console.log(this.criteriaModelList[k].formulaModel);
     // console.log(this.criteriaModelList[k].augmentFormulaModel);
-
+    this.criteriaModelList[k].getTestFromformula();
     this.criteriaModelList[k].updateDevceList(this.devices);
     this.ilc.updateILCDevices(this.devices);
     this.criteriaModelList[k].stageName = this.stageName;
-    this.criteriaModelList[k].campus =  this.campus;
-    this.criteriaModelList[k].building =  this.building;
+    this.criteriaModelList[k].campus = this.campus;
+    this.criteriaModelList[k].building = this.building;
     console.log(this.criteriaModelList[k].setFinalCalulation(this.criteriaList, k));
   }
 
@@ -291,8 +295,8 @@ export class CriteriaConfigComponent implements OnInit {
     this.stageName = this.criteria.stageName;
     this.devices = this.ilc.devices;
     for (let i = 0; i < this.criteriaModelList.length; i++) {
-      this.criteriaModelList[i].campus =  this.campus;
-      this.criteriaModelList[i].building =  this.building;
+      this.criteriaModelList[i].campus = this.campus;
+      this.criteriaModelList[i].building = this.building;
       for (let subCriteria = 0; subCriteria < 3; subCriteria++) {
         if (this.criteriaModelList[i].formulaModel[subCriteria] === undefined) {
           this.criteriaModelList[i].formulaModel[subCriteria] = [];

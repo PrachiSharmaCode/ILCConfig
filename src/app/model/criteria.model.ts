@@ -19,10 +19,10 @@ export class CriteriaModel {
   private _building: string;
   private curtail = 'curtail';
   private _augment = 'augment';
-  private operationArgs = 'check';
+  private operationArgs = 'operation_args';
   private argumentNumber = 0;
 
-  private test = '';
+  private test: string[] = [];
 
   private _showAugmentSection: boolean[] = [];
   private _augmentFormulaModel: FormulaCriteriaModel[][] = [];
@@ -280,13 +280,36 @@ export class CriteriaModel {
     this._criteriaCalculation = value;
   }
 
+  getTestFromformula() {
+    for (let i = 0; i < this.formulaModel.length; i++) {
+      for (let j = 0; j < this.formulaModel.length; j++) {
+        if (this.formulaModel[i][j] !== undefined) {
+          this.formulaModel[i][j].getTest();
+        }
+      }
+    }
+  }
+
 
   setFinalCalulation(list: string[][], l) {
 
     console.log(this.campus);
     console.log(this.building);
 
-    let jsonObh = {};
+
+    // if (this.formulaModel !== undefined) {
+    //   for (let i = 0; i < this.formulaModel.length; i++) {
+    //     for (let j = 0; j < this.formulaModel[i].length; j++) {
+    //       this.test[i] = this.test[i] +
+    //         this.formulaModel[i][j].operationArgsCheck[this.formulaModel[i][j].operationArgsCheck.length - 1] + ':' +
+    //         this.formulaModel[i][j].getoperation_args[this.formulaModel[i][j].getoperation_args.length - 1];
+    //     }
+    //   }
+    // }
+
+    console.log(this.test);
+
+    const jsonObh = {};
 
 
     for (let j = 0; j < this._devices.length; j++) {
@@ -314,9 +337,33 @@ export class CriteriaModel {
           //   console.log(this.argumentNumber);
           // }
 
-          jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]]
-            = this.formulaModel[j][k];
+          // jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]]
+          //   = this.formulaModel[j][k];
           console.log(this.formulaModel[j][k]);
+          jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]] = {};
+          if (this.formulaModel[j][k] !== undefined) {
+            jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]].operation
+              = this.formulaModel[j][k].getoperation;
+            jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]].minimum
+              = this.formulaModel[j][k].mini;
+            jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]].maximum
+              = this.formulaModel[j][k].maximun;
+            jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]].operation_args
+              = this.formulaModel[j][k].getoperatoin_args;
+            jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]]
+              .operation_type
+              = 'formula';
+          }
+
+
+          // delete jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName]
+          //   [this.curtail][list[l][k]]._operationArgsCheck;
+
+          if (this.formulaModel[j][k] !== undefined) {
+            delete this.formulaModel[j][k].getoperatoin_args;
+            delete this.formulaModel[j][k].operationArgsCheck;
+          }
+
 
           // if (this.formulaModel[j][k] !== undefined) {
           //   console.log(this.formulaModel[j][k].getoperation_args[this.formulaModel[j][k].operationArgsCheck.length - 1]);
@@ -383,7 +430,7 @@ export class CriteriaModel {
       }
     }
 
-    let cal = JSON.stringify(jsonObh, null, 4).replace('\"obj\": {', '').replace('\"augjson\": {}', '');
+    const cal = JSON.stringify(jsonObh, null, 4).replace(/\\/g, '').replace('\"obj\": {', '').replace('\"augjson\": {}', '');
 
     console.log(this._result);
     return cal;

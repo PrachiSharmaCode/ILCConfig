@@ -138,6 +138,9 @@
                                         <ng-container
                                           *ngFor="let arg of criteriaModelList[k].formulaModel[index][i].getoperation_args;let x = index;trackBy: trackByIndex;">
                                           <mat-form-field style="width: 100%">
+                                            <i (click)="removeFormulaArg(k, index, i, x)" style="color: red" class="material-icons float-right">
+                                              remove_circle_outline
+                                            </i>
                                             <mat-label>Arguments</mat-label>
                                             <mat-select
                                               [(ngModel)]=criteriaModelList[k].formulaModel[index][i].getoperation_args[x]>
@@ -217,10 +220,10 @@
                                       </div>
 
                                       <div *ngIf="criteriaModelList[k].operationType[index][i] == 'history'">
-<!--                                        <mat-form-field class="example-full-width">-->
-<!--                                          <input matInput placeholder="Comparision Type"-->
-<!--                                                 [(ngModel)]="criteriaModelList[k].historyModel[index][i].setcomparisonType">-->
-<!--                                        </mat-form-field>-->
+                                        <!--                                        <mat-form-field class="example-full-width">-->
+                                        <!--                                          <input matInput placeholder="Comparision Type"-->
+                                        <!--                                                 [(ngModel)]="criteriaModelList[k].historyModel[index][i].setcomparisonType">-->
+                                        <!--                                        </mat-form-field>-->
 
 
                                         <mat-form-field style="width: 100%">
@@ -244,10 +247,10 @@
                                         </mat-form-field>
 
 
-<!--                                        <mat-form-field class="example-full-width">-->
-<!--                                          <input matInput placeholder="Point Name"-->
-<!--                                                 [(ngModel)]="criteriaModelList[k].historyModel[index][i].sethistoryPointName">-->
-<!--                                        </mat-form-field>-->
+                                        <!--                                        <mat-form-field class="example-full-width">-->
+                                        <!--                                          <input matInput placeholder="Point Name"-->
+                                        <!--                                                 [(ngModel)]="criteriaModelList[k].historyModel[index][i].sethistoryPointName">-->
+                                        <!--                                        </mat-form-field>-->
 
 
 
@@ -362,10 +365,10 @@
 
 
 
-<!--                                        <mat-form-field class="example-full-width">-->
-<!--                                          <input matInput placeholder="Point Value"-->
-<!--                                                 [(ngModel)]="criteriaModelList[k].augmentStatusModel[index][j].setpointName">-->
-<!--                                        </mat-form-field>-->
+                                        <!--                                        <mat-form-field class="example-full-width">-->
+                                        <!--                                          <input matInput placeholder="Point Value"-->
+                                        <!--                                                 [(ngModel)]="criteriaModelList[k].augmentStatusModel[index][j].setpointName">-->
+                                        <!--                                        </mat-form-field>-->
                                         <mat-form-field class="example-full-width">
                                           <input type="number" matInput placeholder="On Value"
                                                  [(ngModel)]="criteriaModelList[k].augmentStatusModel[index][j].setonValue">
@@ -405,10 +408,10 @@
                                         </mat-form-field>
 
 
-<!--                                        <mat-form-field class="example-full-width">-->
-<!--                                          <input matInput placeholder="Comparision Type"-->
-<!--                                                 [(ngModel)]="criteriaModelList[k].augmentHistoryModel[index][j].setcomparisonType">-->
-<!--                                        </mat-form-field>-->
+                                        <!--                                        <mat-form-field class="example-full-width">-->
+                                        <!--                                          <input matInput placeholder="Comparision Type"-->
+                                        <!--                                                 [(ngModel)]="criteriaModelList[k].augmentHistoryModel[index][j].setcomparisonType">-->
+                                        <!--                                        </mat-form-field>-->
 
                                         <mat-form-field style="width: 100%">
                                           <mat-label>Point Name</mat-label>
@@ -421,10 +424,10 @@
                                         </mat-form-field>
 
 
-<!--                                        <mat-form-field class="example-full-width">-->
-<!--                                          <input matInput placeholder="Point Name"-->
-<!--                                                 [(ngModel)]="criteriaModelList[k].augmentHistoryModel[index][j].sethistoryPointName">-->
-<!--                                        </mat-form-field>-->
+                                        <!--                                        <mat-form-field class="example-full-width">-->
+                                        <!--                                          <input matInput placeholder="Point Name"-->
+                                        <!--                                                 [(ngModel)]="criteriaModelList[k].augmentHistoryModel[index][j].sethistoryPointName">-->
+                                        <!--                                        </mat-form-field>-->
                                         <mat-form-field class="example-full-width">
                                           <input type="number" matInput placeholder="Previous Time"
                                                  [(ngModel)]="criteriaModelList[k].augmentHistoryModel[index][j].setpreviousTime">
@@ -498,4 +501,3 @@
 <div *ngIf="!showCriteriaConfiguartion" style="text-align: center">
   <h3 style="color: #1BA781; margin-top: 5%">Please Create Cluster !!</h3>
 </div>
-
