@@ -173,7 +173,7 @@ export class CurtailmentConfigComponent implements OnInit {
   onRefreshButton(i) {
     // this.curtailmentModelList[i].updateCurtailmentList(this.curtailmentList);
     this.curtailmentModelList[i].updateDevices(this.devices);
-    this.finalCalculation = this.curtailmentModelList[i].setFinalCalulation();
+    this.finalCalculation = this.curtailmentModelList[i].setFinalCalulation(i);
     console.log(this.finalCalculation);
   }
 
@@ -194,7 +194,7 @@ export class CurtailmentConfigComponent implements OnInit {
   }
 
   saveCurtailmentCalculation(i) {
-    const file = new Blob([this.curtailmentModelList[i].setFinalCalulation()],
+    const file = new Blob([this.curtailmentModelList[i].setFinalCalulation(i)],
       {type: 'json'});
     FileSaver.saveAs(file, this.clusterList[i].device_control_file + '.json');
   }

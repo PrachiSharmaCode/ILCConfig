@@ -75,7 +75,6 @@ export class CurtailmentModel {
   private _showAugmentSeetingSection: boolean[] = [];
 
 
-
   get curtailmentList(): any[] {
     return this._curtailmentList;
   }
@@ -150,10 +149,13 @@ export class CurtailmentModel {
   }
 
 
-  setFinalCalulation() {
+  setFinalCalulation(l) {
     let obj = {};
-    for (let j = 0; j < this.devices.length; j++) {
-      for (let i = 0; i < this.devices[j].length; i++) {
+
+    console.log(this.devices);
+    console.log(l);
+    if (this._devices[l] !== undefined) {
+      for (let i = 0; i < this._devices[l].length; i++) {
         if (this._curtailmentList[i].curtail_setting.control_method === 'offset') {
           delete this._curtailmentList[i].curtail_setting.value;
           delete this._curtailmentList[i].curtail_setting.equation;
@@ -195,10 +197,12 @@ export class CurtailmentModel {
           delete this._curtailmentList[i].augment_setting;
         }
 
-        obj[this.devices[j][i].deviceName] = {};
-        obj[this.devices[j][i].deviceName][this.devices[j][i].deviceName] = this._curtailmentList[i];
+        obj[this.devices[l][i].deviceName] = {};
+        obj[this.devices[l][i].deviceName][this.devices[l][i].deviceName] = this._curtailmentList[i];
       }
     }
+
+
     let cal = JSON.stringify(obj, null, 4);
     return cal;
   }
