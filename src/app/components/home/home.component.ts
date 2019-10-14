@@ -11,10 +11,8 @@ import {ConstantCriteriaModel} from '../../model/constantCriteria.model';
 import {HistoryCriteriaModel} from '../../model/historyCriteria.model';
 import {parse} from 'papaparse';
 import {WrongFileAlertComponent} from '../wrong-file-alert/wrong-file-alert.component';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {errorObject} from 'rxjs/internal-compatibility';
-import {errorHandler} from '@angular/platform-browser/src/browser';
-import {syntaxError} from '@angular/compiler';
+import {MatDialog} from '@angular/material/dialog';
+
 
 // tslint:disable-next-line:class-name
 interface point {
@@ -102,17 +100,14 @@ export class HomeComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(WrongFileAlertComponent, {
-    });
-
+    const dialogRef = this.dialog.open(WrongFileAlertComponent, {});
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log(result);
     });
   }
 
   getMasterDriver(e) {
     const reader = new FileReader();
-    //  const reader = e.target.files;
     // tslint:disable-next-line:only-arrow-functions no-shadowed-variable
     reader.onload = () => {
 
@@ -122,14 +117,10 @@ export class HomeComponent implements OnInit {
       } catch (e) {
         this.openDialog();
       }
-
-      console.log(masterDriverConfig);
       // tslint:disable-next-line:variable-name
       const device_names = Object.keys(masterDriverConfig).filter(key => !(key.endsWith('.csv')));
-      console.log(device_names);
       // tslint:disable-next-line:no-shadowed-variable
       const devices = device_names.map(device => {
-        console.log(devices);
         // const deviceData = JSON.parse(parse(masterDriverConfig[device].data).data.join('\n'));
 
         let deviceData;
@@ -138,7 +129,6 @@ export class HomeComponent implements OnInit {
         } catch (e) {
           this.openDialog();
         }
-
 
         if (deviceData.registry_config) {
           const registryConfigName = deviceData.registry_config.split('//')[1];
@@ -151,11 +141,10 @@ export class HomeComponent implements OnInit {
               } as point;
             }
           });
-          const deviceEntry = {
+          return {
             deviceTopic: device,
             devicePoints: registryConfigEntries
           } as device;
-          return deviceEntry;
         }
       });
       this.showAlert = false;

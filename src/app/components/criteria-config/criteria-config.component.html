@@ -73,7 +73,7 @@
                     <ul style="list-style-type:none;">
                       <li *ngFor="let device of this.deviceAndPoints[k];let d = index;trackBy: trackByIndex;">
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value="device" [checked]=device.checked
+                          <input class="form-check-input" type="checkbox" value="device{{k}}{{d}}" [checked]=this.deviceAndPoints[k][d].checked
                                  (change)="addOrRemove(device.deviceName, $event, d, k)" id="{{device.deviceName}}">
                           <label class="form-check-label" for="{{device.deviceName}}">
                             {{device.deviceName}}

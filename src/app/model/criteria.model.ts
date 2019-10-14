@@ -76,7 +76,7 @@ export class CriteriaModel {
 
   updateaugmentList(index) {
     this._showAugmentSection[index] = true;
-    console.log(this._showAugmentSection);
+
   }
 
   get augmentFormulaModel(): FormulaCriteriaModel[][] {
@@ -151,7 +151,6 @@ export class CriteriaModel {
           this.augmentFormulaModel[i][j].maximun = this.formulaModel[i][j].maximun;
           this.augmentFormulaModel[i][j].mini = this.formulaModel[i][j].mini;
           this.augmentFormulaModel[i][j].getoperation = this.formulaModel[i][j].getoperation;
-          console.log(this.augmentFormulaModel);
         }
 
         if (this.mapperModel[i][j] === null) {
@@ -241,7 +240,6 @@ export class CriteriaModel {
 
   updateDevceList(value: { deviceName: string; devicePoints: string[]; }[][]) {
     this._devices = value;
-    console.log(this._devices);
   }
 
   // tslint:disable-next-line:adjacent-overload-signatures
@@ -289,18 +287,22 @@ export class CriteriaModel {
   }
 
   getTestFromformula() {
-    for (let i = 0; i < this.formulaModel.length; i++) {
-      for (let j = 0; j < this.formulaModel.length; j++) {
-        if (this.formulaModel[i][j] !== undefined && this.formulaModel[i][j] != null) {
-          this.formulaModel[i][j].getTest();
+    if (this.formulaModel !== undefined) {
+      for (let i = 0; i < this.formulaModel.length; i++) {
+        for (let j = 0; j < this.formulaModel.length; j++) {
+          if (this.formulaModel[i][j] !== undefined && this.formulaModel[i][j] != null) {
+            this.formulaModel[i][j].getTest();
+          }
         }
       }
     }
 
-    for (let i = 0; i < this.augmentFormulaModel.length; i++) {
-      for (let j = 0; j < this.augmentFormulaModel.length; j++) {
-        if (this.augmentFormulaModel[i][j] !== undefined && this.augmentFormulaModel[i][j] != null) {
-          this.augmentFormulaModel[i][j].getTest();
+    if (this.formulaModel !== undefined) {
+      for (let i = 0; i < this.augmentFormulaModel.length; i++) {
+        for (let j = 0; j < this.augmentFormulaModel.length; j++) {
+          if (this.augmentFormulaModel[i][j] !== undefined && this.augmentFormulaModel[i][j] != null) {
+            this.augmentFormulaModel[i][j].getTest();
+          }
         }
       }
     }
@@ -315,95 +317,99 @@ export class CriteriaModel {
     const jsonObh = {};
 
 
-    for (let j = 0; j < this._devices[l].length; j++) {
-
-      jsonObh[this._devices[l][j].deviceName] = {
-        [this._devices[l][j].deviceName]: {
-          [this.curtail]: {
-            device_topic: this.campus + '/' + this.building + '/' + this._devices[l][j].deviceName,
-          }
-        }
-      };
+    if (this._devices[l] !== undefined) {
 
 
-      for (let k = 0; k < list[0].length; k++) {
-        if (this.formulaModel[j][k] !== null) {
-          console.log(this.formulaModel[j][k]);
-          jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]] = {};
-          if (this.formulaModel[j][k] !== undefined) {
-            jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]].operation
-              = this.formulaModel[j][k].getoperation;
-            jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]].minimum
-              = this.formulaModel[j][k].mini;
-            jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]].maximum
-              = this.formulaModel[j][k].maximun;
-            jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]].operation_args
-              = this.formulaModel[j][k].getoperatoin_args;
-            jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]]
-              .operation_type
-              = 'formula';
-          }
-        }
-        if (this.statusModel[j][k] !== null) {
-          jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]]
-            = this.statusModel[j][k];
-        }
-        if (this.mapperModel[j][k] !== null) {
-          jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]]
-            = this.mapperModel[j][k];
-        }
-        if (this.constantModel[j][k] !== null) {
-          jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]]
-            = this.constantModel[j][k];
-        }
-        if (this.historyModel[j][k] !== null) {
-          jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]]
-            = this.historyModel[j][k];
-        }
-      }
+      for (let j = 0; j < this._devices[l].length; j++) {
 
-      console.log(this._showAugmentSection);
-      if (this._showAugmentSection[j]) {
-
-        jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment] = {
-          device_topic: this.campus + '/' + this.building + '/' + this._devices[l][j].deviceName
-        };
-        for (let k = 0; k < list[0].length; k++) {
-
-          if (this.augmentFormulaModel[j][k] !== null) {
-            // jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]]
-            //   = this.augmentFormulaModel[j][k];
-
-            jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]] = {};
-            if (this.augmentFormulaModel[j][k] !== undefined) {
-              jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]].operation
-                = this.augmentFormulaModel[j][k].getoperation;
-              jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]].minimum
-                = this.augmentFormulaModel[j][k].mini;
-              jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]].maximum
-                = this.augmentFormulaModel[j][k].maximun;
-              jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]].operation_args
-                = this.augmentFormulaModel[j][k].getoperatoin_args;
-              jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]]
-                .operation_type
-                = 'formula';
+        jsonObh[this._devices[l][j].deviceName] = {
+          [this._devices[l][j].deviceName]: {
+            [this.curtail]: {
+              device_topic: this.campus + '/' + this.building + '/' + this._devices[l][j].deviceName,
             }
           }
-          if (this.augmentStatusModel[j][k] !== null) {
-            jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]]
-              = this.augmentStatusModel[j][k];
+        };
+
+        for (let k = 0; k < list[0].length; k++) {
+          if (this.formulaModel !== undefined) {
+            if (this.formulaModel[j][k] !== null) {
+
+              jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]] = {};
+              if (this.formulaModel[j][k] !== undefined) {
+                jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]].operation
+                  = this.formulaModel[j][k].getoperation;
+                jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]].minimum
+                  = this.formulaModel[j][k].mini;
+                jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]].maximum
+                  = this.formulaModel[j][k].maximun;
+                jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]].operation_args
+                  = this.formulaModel[j][k].getoperatoin_args;
+                jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]]
+                  .operation_type
+                  = 'formula';
+              }
+            }
           }
-          if (this.augmentMapperModel[j][k] !== null) {
-            jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]]
-              = this.augmentMapperModel[j][k];
+          if (this.statusModel[j][k] !== null) {
+            jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]]
+              = this.statusModel[j][k];
           }
-          if (this.augmentConstantModel[j][k] !== null) {
-            jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]]
-              = this.augmentConstantModel[j][k];
+          if (this.mapperModel[j][k] !== null) {
+            jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]]
+              = this.mapperModel[j][k];
           }
-          if (this.augmentHistoryModel[j][k] !== null) {
-            jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]]
-              = this.augmentHistoryModel[j][k];
+          if (this.constantModel[j][k] !== null) {
+            jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]]
+              = this.constantModel[j][k];
+          }
+          if (this.historyModel[j][k] !== null) {
+            jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this.curtail][list[l][k]]
+              = this.historyModel[j][k];
+          }
+        }
+
+        if (this._showAugmentSection[j]) {
+
+          jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment] = {
+            device_topic: this.campus + '/' + this.building + '/' + this._devices[l][j].deviceName
+          };
+          for (let k = 0; k < list[0].length; k++) {
+
+            if (this.augmentFormulaModel[j][k] !== null) {
+              // jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]]
+              //   = this.augmentFormulaModel[j][k];
+
+              jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]] = {};
+              if (this.augmentFormulaModel[j][k] !== undefined) {
+                jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]].operation
+                  = this.augmentFormulaModel[j][k].getoperation;
+                jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]].minimum
+                  = this.augmentFormulaModel[j][k].mini;
+                jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]].maximum
+                  = this.augmentFormulaModel[j][k].maximun;
+                jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]].operation_args
+                  = this.augmentFormulaModel[j][k].getoperatoin_args;
+                jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]]
+                  .operation_type
+                  = 'formula';
+              }
+            }
+            if (this.augmentStatusModel[j][k] !== null) {
+              jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]]
+                = this.augmentStatusModel[j][k];
+            }
+            if (this.augmentMapperModel[j][k] !== null) {
+              jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]]
+                = this.augmentMapperModel[j][k];
+            }
+            if (this.augmentConstantModel[j][k] !== null) {
+              jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]]
+                = this.augmentConstantModel[j][k];
+            }
+            if (this.augmentHistoryModel[j][k] !== null) {
+              jsonObh[this._devices[l][j].deviceName][this._devices[l][j].deviceName][this._augment][list[l][k]]
+                = this.augmentHistoryModel[j][k];
+            }
           }
         }
       }
@@ -420,7 +426,6 @@ export class CriteriaModel {
 
     const cal = JSON.stringify(jsonObh, null, 4).replace(/\\/g, '').replace('\"obj\": {', '').replace('\"augjson\": {}', '');
 
-    console.log(this._result);
     return cal;
   }
 

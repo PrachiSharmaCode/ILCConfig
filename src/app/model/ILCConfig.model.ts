@@ -33,6 +33,9 @@ export class ILCCongig {
     devicePoints: string[]
   }[][] = [];
 
+
+  private obj = {};
+
   private _deviceAndPoint: {
     deviceName: string,
     devicePoints: string[],
@@ -354,7 +357,7 @@ export class ILCCongig {
     // localStorage.setItem('stage_off', JSON.stringify(this.staggerOfftime));
     //
     // localStorage.setItem('cluster', JSON.stringify(this._cluster));
-    const obj = {
+    this.obj = {
       campus: this._campus,
       building: this._building,
       power_meter: {
@@ -377,17 +380,15 @@ export class ILCCongig {
     };
 
 
-
     if (this._showAdvanceOption) {
       const power = 'power_meter';
       const demand = 'demand_formula';
-      obj[power][demand] = {
+      this.obj[power][demand] = {
         operation: this._demandFormula,
         operation_args: this._demandFormulaArgs
       };
     }
-    this._finalCalcualtion = JSON.stringify(obj, null, 4);
-    localStorage.setItem('obj', JSON.stringify(obj));
+    this._finalCalcualtion = JSON.stringify(this.obj, null, 4);
     return this._finalCalcualtion;
   }
 

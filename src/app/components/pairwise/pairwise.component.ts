@@ -35,7 +35,6 @@ export class PairwiseComponent implements OnInit {
   constructor() {
   }
 
-
   showAugmentSection(i) {
     this.pairwiseList[i].showAugmentSection[i] = true;
 
@@ -44,8 +43,6 @@ export class PairwiseComponent implements OnInit {
         this.pairwiseList[i].augmentSliderValue[j][k] = this.pairwiseList[i].sliderValue[j][k];
       }
     }
-
-    // this.pairwiseList[i].augmentSliderValue = this.pairwiseList[i].sliderValue;
   }
 
   remainingList(i: number, num: number): string[] {
@@ -189,11 +186,7 @@ export class PairwiseComponent implements OnInit {
   }
 
   updateSliderColor(critera, main, val) {
-    console.log(val);
-    let slider = document.getElementById(critera + '%' + main);
-    let ring = slider.getElementsByClassName('mat-slider-focus-ring');
-
-    console.log(ring);
+    const slider = document.getElementById(critera + '%' + main);
     if (val.value > 11) {
       slider.style.color = 'green';
     }

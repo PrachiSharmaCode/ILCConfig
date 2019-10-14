@@ -73,7 +73,6 @@ export class PairwiseModel {
   }
 
   setFinalCalculation(i) {
-    console.log(this._sliderValue);
     const jsonObh = {};
     jsonObh[this.curtail] = {};
     let count = 1;
@@ -85,7 +84,7 @@ export class PairwiseModel {
         }
         let val = 1;
         if (this._sliderValue[j][k] > 10) {
-          console.log(this._sliderValue[j][k]);
+
           val = 1 / (this._sliderValue[j][k] - 10);
         } else {
           val = this._sliderValue[j][k];

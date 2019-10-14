@@ -1,4 +1,4 @@
-<div class="accordion" id="accordionExample" style="height: 80%; margin-left: 2%; margin-right: 2%; margin-top: 2%;">
+<div *ngIf="showControlConfiguartion" class="accordion" id="accordionExample" style="height: 80%; margin-left: 2%; margin-right: 2%; margin-top: 2%;">
   <ng-container *ngFor="let cluster of clusterList;let i = index;trackBy: trackByIndex;">
 
     <div class="card" style="margin-bottom: 3%; border: none">
@@ -197,41 +197,53 @@
 
                           <div style="width: 100%" class="example-full-width"
                                *ngIf="curtailmentModelList[i].curtailmentList[index].curtail_setting.control_method == 'equation' ">
-                            <ul class="list-unstyled">
-                              <li
-                                *ngFor="let arg of curtailmentModelList[i].curtailmentList[index].curtail_setting.equation.equation_args; let e = index;trackBy: trackByIndex;">
 
-                                <mat-form-field style="width: 100%">
-                                  <mat-label>Equation Argument</mat-label>
-                                  <mat-select
-                                    [(ngModel)]=curtailmentModelList[i].curtailmentList[index].curtail_setting.equation.equation_args[e]>
-                                    <div *ngFor="let point of devices[i][index].devicePoints">
-                                      <mat-option value="{{point}}">{{point}}</mat-option>
-                                    </div>
-                                  </mat-select>
-                                </mat-form-field>
-                              </li>
-                            </ul>
-                            <a id="addeqation" (click)="addEquatoinArgument(i, index)" class="float-left"
-                               style="color: #1BA781">
-                              <i class="material-icons float-left">add</i> Add Equation Argument
-                            </a>
+                            <div
+                              *ngIf="curtailmentModelList[i].curtailmentList[index].curtail_setting.equation === undefined">
+                              <a id="addeqationts" (click)="addequation(i, index)" class="float-left"
+                                 style="color: #1BA781">
+                                <i class="material-icons float-left">add</i> Add Equation
+                              </a>
+                            </div>
 
-                            <mat-form-field style="width: 100%" class="example-full-width">
-                              <input matInput placeholder="Operation"
-                                     [(ngModel)]="curtailmentModelList[i].curtailmentList[index].curtail_setting.equation.operation">
-                            </mat-form-field>
+                            <div
+                              *ngIf="curtailmentModelList[i].curtailmentList[index].curtail_setting.equation !== undefined">
+                              <ul class="list-unstyled">
+                                <li
+                                  *ngFor="let arg of curtailmentModelList[i].curtailmentList[index].curtail_setting.equation.equation_args; let e = index;trackBy: trackByIndex;">
+
+                                  <mat-form-field style="width: 100%">
+                                    <mat-label>Equation Argument</mat-label>
+                                    <mat-select
+                                      [(ngModel)]=curtailmentModelList[i].curtailmentList[index].curtail_setting.equation.equation_args[e]>
+                                      <div *ngFor="let point of devices[i][index].devicePoints">
+                                        <mat-option value="{{point}}">{{point}}</mat-option>
+                                      </div>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </li>
+                              </ul>
+                              <a id="addeqation" (click)="addEquatoinArgument(i, index)" class="float-left"
+                                 style="color: #1BA781">
+                                <i class="material-icons float-left">add</i> Add Equation Argument
+                              </a>
+
+                              <mat-form-field style="width: 100%" class="example-full-width">
+                                <input matInput placeholder="Operation"
+                                       [(ngModel)]="curtailmentModelList[i].curtailmentList[index].curtail_setting.equation.operation">
+                              </mat-form-field>
 
 
-                            <mat-form-field style="width: 100%" class="example-full-width">
-                              <input type="number" matInput placeholder="minimum"
-                                     [(ngModel)]="curtailmentModelList[i].curtailmentList[index].curtail_setting.equation.minimum">
-                            </mat-form-field>
+                              <mat-form-field style="width: 100%" class="example-full-width">
+                                <input type="number" matInput placeholder="minimum"
+                                       [(ngModel)]="curtailmentModelList[i].curtailmentList[index].curtail_setting.equation.minimum">
+                              </mat-form-field>
 
-                            <mat-form-field style="width: 100%" class="example-full-width">
-                              <input type="number" matInput placeholder="maximum"
-                                     [(ngModel)]="curtailmentModelList[i].curtailmentList[index].curtail_setting.equation.maximum">
-                            </mat-form-field>
+                              <mat-form-field style="width: 100%" class="example-full-width">
+                                <input type="number" matInput placeholder="maximum"
+                                       [(ngModel)]="curtailmentModelList[i].curtailmentList[index].curtail_setting.equation.maximum">
+                              </mat-form-field>
+                            </div>
                           </div>
 
                           <mat-form-field style="width: 100%" class="example-full-width">
@@ -359,8 +371,9 @@
     </div>
   </ng-container>
 </div>
-
-
+<div *ngIf="!showControlConfiguartion" style="text-align: center">
+  <h3 style="color: #1BA781; margin-top: 5%">Please Create Cluster !!</h3>
+</div>
 
 
 

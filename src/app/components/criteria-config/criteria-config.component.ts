@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ILCCongig} from '../../model/ILCConfig.model';
 import {PairwiseModel} from '../../model/pairwise.model';
 import {CriteriaModel} from '../../model/criteria.model';
@@ -29,9 +29,7 @@ export class CriteriaConfigComponent implements OnInit {
   @Input() historyModel: HistoryCriteriaModel[][] = [];
 
   criteriaModelList: CriteriaModel[] = [];
-
   operationVal: string[][] = [];
-
 
   clusterList: {
     cluster_name: string;
@@ -45,7 +43,6 @@ export class CriteriaConfigComponent implements OnInit {
     deviceName: string;
     devicePoints: string[];
   }[][];
-
 
   deviceAndPoints: {
     deviceName: string,
@@ -62,41 +59,8 @@ export class CriteriaConfigComponent implements OnInit {
   getCriteria = false;
   getCriteriaValue: string;
 
-  formula: {
-    argument: string[],
-    operation: string,
-    minimum: number,
-    maximum: number,
-    check: { string: string[] }
-  }[] = [];
-
-
-  status: {
-    pointName: string,
-    onValue: number,
-    OffValue: number
-  }[] = [];
-
-
-  mapper: {
-    mapKey: string,
-    distName: string
-  };
-
   /***constant***/
   value: number;
-  constant: {
-    value: number
-  };
-
-
-  history: {
-    comparison_type: string,
-    point_name: string,
-    previous_time: number,
-    maximum: number,
-    minimum: number,
-  };
 
   addaugment = false;
 
@@ -105,16 +69,11 @@ export class CriteriaConfigComponent implements OnInit {
 
   updateCount(i, index, k, val) {
 
-
-    console.log(k);
     if (val === 'Formula') {
       if (this.criteriaModelList[k].formulaModel[index][i] === undefined) {
         this.criteriaModelList[k].formulaModel[index][i] = new FormulaCriteriaModel();
         this.criteriaModelList[k].augmentFormulaModel[index][i] = new FormulaCriteriaModel();
       }
-      console.log('index' + index);
-      console.log('i' + i);
-      console.log('val' + val);
       this.criteriaModelList[k].formulaModel[index][i] = new FormulaCriteriaModel();
       this.criteriaModelList[k].formulaModel[index][i].getoperation_args.push('');
 
@@ -125,7 +84,6 @@ export class CriteriaConfigComponent implements OnInit {
       this.criteriaModelList[k].formulaModel[index][i] = null;
       this.criteriaModelList[k].augmentFormulaModel[index][i] = null;
     }
-
 
     if (val === 'status') {
       if (this.criteriaModelList[k].statusModel[index][i] === undefined) {
@@ -192,17 +150,14 @@ export class CriteriaConfigComponent implements OnInit {
     } else {
       this.criteriaModelList[k].showAugmentSection[index] = false;
     }
-    console.log(this.criteriaModelList[k].showAugmentSection);
   }
 
   addOrRemove(id, e, d, k) {
 
-    console.log(id, k, d, e);
-    console.log(this.deviceAndPoints);
-
     if (e.target.checked) {
 
       this.deviceAndPoints[k][d].checked = true;
+
 
       const temp: {
         deviceName: string,
@@ -219,18 +174,14 @@ export class CriteriaConfigComponent implements OnInit {
 
       this.criteriaModelList[k].updateDevceList(this.devices);
       this.ilc.updateILCDevices(this.devices);
-      // this.ilc.updateDeviceAndPoints(this.deviceAndPoints[k]);
 
-      console.log(this.devices);
-
-
+      // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.criteriaModelList.length; i++) {
         if (this.criteriaModelList[i].operationType === undefined) {
           this.criteriaModelList[i].operationType = [];
         }
         this.criteriaModelList[i].operationType.push(['', '', '', '', '']);
       }
-      console.log(this.criteriaModelList);
     } else {
       this.deviceAndPoints[k][d].checked = false;
       let count = 0;
@@ -242,6 +193,7 @@ export class CriteriaConfigComponent implements OnInit {
           break;
         }
       }
+      // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.criteriaModelList.length; i++) {
         this.criteriaModelList[i].formulaModel.splice(count, 1);
         this.criteriaModelList[i].statusModel.splice(count, 1);
@@ -259,8 +211,6 @@ export class CriteriaConfigComponent implements OnInit {
         break;
       }
       this.ilc.updateILCDevices(this.devices);
-      // this.ilc.updateDeviceAndPoints(this.deviceAndPoints);
-      console.log(this.criteriaModelList);
     }
   }
 
@@ -272,10 +222,8 @@ export class CriteriaConfigComponent implements OnInit {
 
   OnRefreshButton(k) {
 
-    // console.log(this.criteriaModelList[k].formulaModel);
-    // console.log(this.criteriaModelList[k].augmentFormulaModel);
+
     this.criteriaModelList[k].getTestFromformula();
-    console.log(this.devices);
     this.criteriaModelList[k].updateDevceList(this.devices);
     this.ilc.updateILCDevices(this.devices);
     this.criteriaModelList[k].stageName = this.stageName;
@@ -284,28 +232,41 @@ export class CriteriaConfigComponent implements OnInit {
     this.criteriaModelList[k].setFinalCalulation(this.criteriaList, k, this.devices);
   }
 
-
   ngOnInit() {
-
     this.criteriaModelList = this.mainModel.criteriaModelList;
     this.criteriaList = this.mainModel.paireiseCriteriaList;
     this.clusterList = this.ilc.clusterList;
     for (let i = 0; i < this.clusterList.length; i++) {
-      this.deviceAndPoints[i] = this.ilc.deviceAndPoint;
-      // this.devices = this.criteriaModelList[i].devices;
+      // tslint:disable-next-line:prefer-for-of
+      for (let j = 0; j < this.ilc.deviceAndPoint.length; j++) {
+        const temp: {
+          deviceName: string,
+          devicePoints: string[],
+          checked: boolean
+        } = {
+          deviceName: this.ilc.deviceAndPoint[j].deviceName,
+          devicePoints: this.ilc.deviceAndPoint[j].devicePoints,
+          checked: this.ilc.deviceAndPoint[j].checked
+        };
+
+        if (this.deviceAndPoints[i] === undefined) {
+          this.deviceAndPoints[i] = [];
+        }
+
+        this.deviceAndPoints[i].push(temp);
+      }
     }
-    // this.deviceAndPoints = this.ilc.deviceAndPoint;
+
     this.showCriteriaConfiguartion = this.clusterList.length !== 0;
     this.campus = this.ilc.campus;
     this.building = this.ilc.building;
-    console.log(this.building);
-    console.log(this.campus);
     this.stageName = this.criteria.stageName;
     this.devices = this.ilc.devices;
+    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.criteriaModelList.length; i++) {
       this.criteriaModelList[i].campus = this.campus;
       this.criteriaModelList[i].building = this.building;
-      for (let subCriteria = 0; subCriteria < 3; subCriteria++) {
+      for (let subCriteria = 0; subCriteria < this.ilc.deviceAndPoint.length; subCriteria++) {
         if (this.criteriaModelList[i].formulaModel[subCriteria] === undefined) {
           this.criteriaModelList[i].formulaModel[subCriteria] = [];
         }
@@ -339,7 +300,6 @@ export class CriteriaConfigComponent implements OnInit {
       }
     }
   }
-
 
   trackByIndex(index: number): any {
     return index;
