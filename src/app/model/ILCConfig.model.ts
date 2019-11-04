@@ -90,68 +90,6 @@ export class ILCCongig {
     return this._devicesMasterList;
   }
 
-  setMasterDriver(devices: {
-    deviceTopic: string,
-    devicePoints: {
-      referenceName: string,
-      volttronPointName: string,
-    }[]
-  }[]) {
-    this.devicesMasterList = devices;
-    let devicesLength = this.devicesMasterList.length - 1;
-    while (devicesLength >= 0) {
-      if (this.devicesMasterList[devicesLength] !== undefined) {
-        let i = 0;
-        let count = 0;
-        let start = 0;
-        let end: number;
-        while (count <= 2) {
-          if (this.devicesMasterList[devicesLength].deviceTopic.charAt(i) === '/') {
-            count++;
-            if (count === 1) {
-              start = i;
-            }
-          }
-          i++;
-        }
-        end = i;
-        const str = this.devicesMasterList[devicesLength].deviceTopic.substring(end, this.devicesMasterList[devicesLength].deviceTopic.length);
-        const tempPoint: string[] = [];
-        for (let j = this.devicesMasterList[devicesLength].devicePoints.length - 1; j >= 0; j--) {
-          if (this.devicesMasterList[devicesLength].devicePoints[j] !== undefined) {
-            tempPoint.push(this.devicesMasterList[devicesLength].devicePoints[j].volttronPointName);
-          }
-        }
-        this._devicePoint.push(tempPoint);
-        const temp: {
-          deviceName: string,
-          devicePoints: string[],
-          checked: boolean
-        } = {
-          deviceName: str,
-          devicePoints: tempPoint,
-          checked: false
-        };
-        this._deviceAndPoint.push(temp);
-
-        const campusBuidling = this.devicesMasterList[devicesLength].deviceTopic.substring(start + 1, end - 1);
-
-        let campusbuidlingDetails: string[];
-        campusbuidlingDetails = campusBuidling.split('/');
-
-        if (!this._campusList.includes(campusbuidlingDetails[0])) {
-          this._campusList.push(campusbuidlingDetails[0]);
-        }
-
-        if (!this._buildingList.includes(campusbuidlingDetails[1])) {
-          this._buildingList.push(campusbuidlingDetails[1]);
-        }
-      }
-      devicesLength--;
-    }
-  }
-
-
   // tslint:disable-next-line:adjacent-overload-signatures
   set devicesMasterList(value: {
     deviceTopic: string,
